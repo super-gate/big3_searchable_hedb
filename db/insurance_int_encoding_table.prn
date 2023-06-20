@@ -1,0 +1,5 @@
+age             bmi             children        charges         sex     sex_enc smoker  smoker_eregion  region_enc
+min           18min         1596min         1596min       112187       0       1       0       1       0       1
+max           65max         5313max         5313max      6377042       1       2       1       2       1       2
+                                                                                                       2       3
+                                                                                                       3       4

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libHDB_supergate_lib.a CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate_server.cpp.o CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate_user.cpp.o
+/usr/bin/ranlib libHDB_supergate_lib.a
