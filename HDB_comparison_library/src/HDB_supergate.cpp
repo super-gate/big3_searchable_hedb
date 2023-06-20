@@ -54,37 +54,6 @@ namespace HDB_supergate_ {
         return str;
     }
 
-    void csvToDB(Ctxt_mat& db, string path, vector<string>& headers)
-    {
-        CSVRange reader(*(new ifstream(path)));
-        for (auto& row: reader)
-        {
-            for (int i = 0; i < row.size(); ++i)
-                headers.emplace_back(row[i]);
-            break;
-        }
-        csvToDB(db, reader);  
-    }
-
-    void csvToDB(Ctxt_mat& db, string path)
-    {
-        CSVRange reader(*(new ifstream(path)));
-        csvToDB(db, reader);
-    }
-
-    void csvToDB(Ctxt_mat& db, CSVRange& reader) {
-        for (auto& row: reader)
-        {
-            cout << "row: " << row[0] << ", " 
-                 << "\nrow: " << row[1] << ", " 
-                 << "\nrow: " << row[2] << ", " 
-                 << "\nrow: " << row[3] << ", " 
-                 << "\nrow: " << row[4] << ", " 
-                 << "\nrow: " << row[5] << ", " 
-                 << "\nrow: " << row[6] << endl; 
-        }
-    }
-
     long findNSlots(long p, long m) {
         long phiM = phi_N(m);
         long mulOrd = multOrd(p, m);

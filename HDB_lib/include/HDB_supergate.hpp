@@ -132,9 +132,6 @@ namespace HDB_supergate_{
  
     helib::Context MakeBGVContext(const struct BGV_param);
 
-    void csvToDB(Ctxt_mat&, CSVRange&);
-    void csvToDB(Ctxt_mat&, std::string path);
-    void csvToDB(Ctxt_mat&, std::string path, std::vector<std::string>&);
     long findNSlots(long, long);
 };
 #endif

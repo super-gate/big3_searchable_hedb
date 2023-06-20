@@ -18,9 +18,10 @@ namespace HDB_supergate_user_{
         const helib::EncryptedArray& ea = comparator.m_context.getEA();
         long nslots = ea.size();
         unsigned long p = comparator.m_context.getP();
+        unsigned long exp_len = comparator.m_expansionLen;
         unsigned long ord_p = comparator.m_context.getOrdP();
-        unsigned long numbers_size = comparator.m_context.getNSlots() / comparator.m_expansionLen;
-        unsigned long enc_base = (p+1)>>1; // UNI
+        unsigned long numbers_size = comparator.m_context.getNSlots() / exp_len;
+        unsigned long enc_base = (p + 1) >> 1; // UNI
         unsigned long digit_base = power_long(enc_base, comparator.m_slotDeg);
         double result;
 
@@ -35,7 +36,7 @@ namespace HDB_supergate_user_{
         
         unsigned long max();
 
-        Ctxt Query(int64_t q_id, HDB_supergate_::Q_TYPE_t type);
+        helib::Ctxt Query(int64_t q_id, HDB_supergate_::Q_TYPE_t type);
                     
         void ShowRes(
             std::vector<NTL::ZZX> datas, 
@@ -47,6 +48,16 @@ namespace HDB_supergate_user_{
             unsigned long num_db_category, 
             unsigned long num_db_element, 
             HDB_supergate_::Q_TYPE_t type);
+
+        void csvToDB(HDB_supergate_::Ctxt_mat&, 
+                     HDB_supergate_::CSVRange&);
+
+        void csvToDB(HDB_supergate_::Ctxt_mat&, 
+                     std::string path);
+
+        void csvToDB(HDB_supergate_::Ctxt_mat&, 
+                     std::string path, 
+                     std::vector<std::string>&);
         
         void debug(helib::Ctxt& ctxt, he_cmp::Comparator& comparator, helib::SecKey& sk);
     };

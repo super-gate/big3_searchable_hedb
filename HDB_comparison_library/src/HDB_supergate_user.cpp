@@ -1,5 +1,6 @@
 
 #include<iostream>
+#include <string_view>
 
 #include <helib/debugging.h>
 #include <NTL/mat_ZZ.h>
@@ -598,5 +599,96 @@ namespace HDB_supergate_user_{
 		
         return query;
     };
+
+	
+    void USER::csvToDB(Ctxt_mat& db, string path, vector<string>& headers)
+    {
+        CSVRange reader(*(new ifstream(path)));
+        for (auto& row: reader)
+        {
+            for (int i = 0; i < row.size(); ++i)
+                headers.emplace_back(row[i]);
+            break;
+        }
+        csvToDB(db, reader);  
+    }
+
+    void USER::csvToDB(Ctxt_mat& db, string path)
+    {
+        CSVRange reader(*(new ifstream(path)));
+        csvToDB(db, reader);
+    }
+
+    void USER::csvToDB(Ctxt_mat& db, CSVRange& reader) {
+		int space_bit_size = static_cast<int>(ceil(exp_len * log2(digit_base)));
+		
+		unsigned long input_range = ULONG_MAX;
+		if(space_bit_size < 64)
+		{
+			input_range = power_long(digit_base, exp_len);
+		}
+        
+		long max_per = nslots / exp_len;
+		vector<vector<ZZX>> ptxt_data;
+		ZZX pol_slot;
+		unsigned long input_data;
+        vector<long> decomp_int_data;
+		long counter = 0;
+
+        for (auto& row: reader)
+        {
+			// cout << "for each row" << endl;
+			for (int i = 0; i < row.size(); ++i) 
+			{
+				// cout << "for each column" << endl;
+				if (!counter)
+				{
+					// cout << "!counter" << endl;
+					ptxt_data.emplace_back(*(new vector<ZZX>{nslots}));
+				}
+				// cout << "input data: " << endl;
+				input_data = stol(string{row[i]}) % input_range;
+				// cout << input_data << endl;
+				digit_decomp(decomp_int_data, input_data, digit_base, exp_len);
+				// cout << "digit decomp" << endl;
+
+				for(int l = 0; l < exp_len; ++l)
+				{
+					// cout << "for each l" << endl;
+					comparator.int_to_slot(pol_slot, decomp_int_data[l], enc_base);
+					ptxt_data[i][counter*exp_len + l] = pol_slot;
+				}
+			}
+			// cout << "counter: " << counter << "max_per: " << max_per << endl;
+			counter++;
+			if (counter == max_per)
+			{
+				for (int i = 0; i < row.size(); ++i) 
+				{
+					Ctxt ctxt(comparator.m_pk);
+					ea.encrypt(ctxt, comparator.m_pk, ptxt_data[i]);
+					if (db.size() < ptxt_data.size()) db.emplace_back(*(new vector<Ctxt>()));
+					db[i].push_back(ctxt);
+				}
+				counter = 0;
+				ptxt_data.clear();
+			}
+        }
+		// cout << "counter: " << counter << endl;
+		if (counter > 0) 
+		{
+			// cout << "looping for: " << ptxt_data.size() << endl;
+			for (int i = 0; i < ptxt_data.size(); ++i) 
+			{
+				// cout << "i: " << i << endl;
+				Ctxt ctxt(comparator.m_pk);
+				ea.encrypt(ctxt, comparator.m_pk, ptxt_data[i]);
+				if (db.size() < ptxt_data.size()) db.emplace_back(*(new vector<Ctxt>()));
+				db[i].push_back(ctxt);
+			}
+		}
+		cout << "size: " << db.size()
+			 << "\n[0]size: " << db[0].size() << endl;
+    }
 }
 

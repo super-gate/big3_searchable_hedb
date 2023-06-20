@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	unsigned long d = 3;	  	    // expansion depth. For UNI, max (p+1)/2 -> ((p+1)/2)^d-1
 	unsigned long l = 3;	  	    // expansion length. For UNI, max ((p+1)/2)^d -> (((p+1)/2)^d)^l-1
 	unsigned long scale = 6;  	    // TODO: scale factor, research if time
-	string db_filename = "db.csv";  // db filename
+	string db_filename = "../db/stroke_int_encoded.csv";  // db filename
 
 	bool verbose = false;			// if true lots of debug info
 	bool std128 = false;			// if true, just use HDB_STD128 params, else use the default+user params
@@ -54,16 +54,7 @@ int main(int argc, char* argv[]) {
 	amap.parse(argc, argv);
 
 	const struct BGV_param HDB_Param = std128 ? STD128_HDB : MakeBGVParam(p, d, m, bits, c, l, scale, r);
-	Ctxt_mat mat;
-	vector<string> headers;
-	cout << "HI" << endl;
-	csvToDB(mat, "../db/insurance_int_encoded.csv", headers);
-	for (auto& h:headers)
-		cout << "\nhead: " << h;
-	cout << endl;
-	cout << "BYE" << endl;
-	csvToDB(mat, "../db/insurance_int_encoded.csv");
-	return 1;
+
 	HELIB_NTIMER_START(timer_Context);
     const Context contx = MakeBGVContext(HDB_Param); //TODO: Test Parameters
 	HELIB_NTIMER_STOP(timer_Context);
@@ -116,6 +107,14 @@ int main(int argc, char* argv[]) {
 
 	/*Secret key is contained in this class. Be carefull! */
     USER user = USER(comparator, secret_key); //pass secret key only to user
+
+	Ctxt_mat mat;
+	vector<string> headers;
+	db_filename = "../db/" + db_filename + ".csv";
+	user.csvToDB(mat, db_filename, headers);
+	for (auto& h:headers)
+		cout << "\nhead: " << h;
+	return 1;
 	/*SERVER SIDE */   
     SERVER server = SERVER(comparator);
 
