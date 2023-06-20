@@ -14,6 +14,7 @@ namespace HDB_supergate_user_{
         int _n; /*lattice dim*/
         int _q_log; /*lattice q*/
         uint32_t lambda; /*Security parameter*/
+        HDB_supergate_::PtxtIndexFile ptxt_index_file;
         
         const helib::EncryptedArray& ea = comparator.m_context.getEA();
         long nslots = ea.size();
@@ -35,6 +36,9 @@ namespace HDB_supergate_user_{
         ~USER();          
         
         unsigned long max();
+
+        HDB_supergate_::PtxtIndexFile getPtxtIndexFile() {return ptxt_index_file;}
+        void createPtxtIndexFile(string);
 
         helib::Ctxt Query(int64_t q_id, HDB_supergate_::Q_TYPE_t type);
                     

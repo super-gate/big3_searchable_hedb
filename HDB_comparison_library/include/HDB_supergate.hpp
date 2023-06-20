@@ -76,6 +76,76 @@ namespace HDB_supergate_{
             CSVIterator end()   const {return CSVIterator{};}
     };
 
+    class PtxtIndex
+    {
+        private:
+            std::vector<std::pair<long, std::vector<unsigned long>>> plaintext_index; // [ <key, [uids]> ]
+            std::vector<long> keys;
+
+            int c = 0;
+
+        public:
+            void insert(long k, unsigned long v);
+
+            int R() {return keys.size();}
+            int C() {return c;}
+
+            void printIndex();
+    };
+
+    class PtxtIndexFile
+    {
+        private:
+            std::vector<std::pair<std::string, PtxtIndex>> IndexFile; //[ <colname, PtxtIndex> ]
+            std::vector<std::string> cols;
+
+        public:
+            void insert(std::string col, long k, unsigned long v);
+
+            void printIndex(std::string col);
+
+            void printIndexFile();
+    };
+
+    class CtxtIndex
+    {
+        private:
+            Ctxt_vec enc_key;
+            Ctxt_mat enc_index;
+            
+        public:
+            CtxtIndex() = delete;
+            CtxtIndex(PtxtIndex, 
+                      helib::PubKey, 
+                      unsigned long input_range, 
+                      unsigned long digit_base,
+                      unsigned long enc_base,
+                      unsigned long exp_len,
+                      unsigned long max_per,
+                      );
+    };
+
+    class CtxtIndexFile
+    {
+        private:
+            std::vector<std::string, CtxtIndex> IndexFile; //TODO: for now use string colnames, later encrypt this
+            std::vector<std::string> cols;
+
+        public:
+            CtxtIndexFile() = delete;
+            CtxtIndexFile(PtxtIndexFile,
+                          helib::PubKey, 
+                          unsigned long input_range, 
+                          unsigned long digit_base,
+                          unsigned long enc_base,
+                          unsigned long exp_len,
+                          unsigned long max_per,
+                          );
+                          
+            void insert(std::string, PtxtIndex);
+            void insert(std::string, CtxtIndex);
+    }
+
     typedef std::vector<helib::Ctxt> Ctxt_vec;
 	typedef std::vector<std::vector<helib::Ctxt>> Ctxt_mat;
     

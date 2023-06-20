@@ -600,6 +600,27 @@ namespace HDB_supergate_user_{
         return query;
     };
 
+	void USER::createPtxtIndexFile(string path)
+	{
+		vector<string> headers;
+		CSVRange reader(*(new ifstream(path)));
+		for (auto& row: reader)
+        {
+            for (int i = 0; i < row.size(); ++i)
+                headers.emplace_back(row[i]);
+            break;
+        }
+		int counter = 0;
+		for (auto& row: reader)
+		{
+			for (int i = 0; i < row.size(); ++i) 
+			{
+				ptxt_index_file.insert(headers[i], stol(string{row[i]}), counter);
+			}
+			counter++;
+		}
+	}
+
 	
     void USER::csvToDB(Ctxt_mat& db, string path, vector<string>& headers)
     {

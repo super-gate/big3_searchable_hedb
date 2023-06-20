@@ -76,6 +76,37 @@ namespace HDB_supergate_{
             CSVIterator end()   const {return CSVIterator{};}
     };
 
+    class PtxtIndex
+    {
+        private:
+            std::vector<std::pair<long, std::vector<unsigned long>>> plaintext_index; // [ <key, [uids]> ]
+            std::vector<long> keys;
+
+            int c = 0;
+
+        public:
+            void insert(long k, unsigned long v);
+
+            int R() {return keys.size();}
+            int C() {return c;}
+
+            void printIndex();
+    };
+
+    class PtxtIndexFile
+    {
+        private:
+            std::vector<std::pair<std::string, PtxtIndex>> IndexFile; //[ <colname, PtxtIndex> ]
+            std::vector<std::string> cols;
+
+        public:
+            void insert(std::string col, long k, unsigned long v);
+
+            void printIndex(std::string col);
+
+            void printIndexFile();
+    };
+
     typedef std::vector<helib::Ctxt> Ctxt_vec;
 	typedef std::vector<std::vector<helib::Ctxt>> Ctxt_mat;
     

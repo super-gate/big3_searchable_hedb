@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	unsigned long d = 3;	  	    // expansion depth. For UNI, max (p+1)/2 -> ((p+1)/2)^d-1
 	unsigned long l = 3;	  	    // expansion length. For UNI, max ((p+1)/2)^d -> (((p+1)/2)^d)^l-1
 	unsigned long scale = 6;  	    // TODO: scale factor, research if time
-	string db_filename = "../db/stroke_int_encoded.csv";  // db filename
+	string db_filename = "stroke_int_encoded";  // db filename
 
 	bool verbose = false;			// if true lots of debug info
 	bool std128 = false;			// if true, just use HDB_STD128 params, else use the default+user params
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	amap.arg("scale", scale, "Expansion length, (((p+1)/2)^d)^l (default 6)");
 	amap.arg("db_filename",
 			db_filename,
-			"Qualified name for the database filename");
+			"Qualified name for the csv database filename(default: stroke_int_encoded)");
 	amap.toggle().arg("-v", verbose, "Toggle verbose", "");
 	amap.toggle().arg("-std", std128, "Toggle to just use standard128 params", "");
 	amap.parse(argc, argv);
@@ -111,10 +111,18 @@ int main(int argc, char* argv[]) {
 	Ctxt_mat mat;
 	vector<string> headers;
 	db_filename = "../db/" + db_filename + ".csv";
+	user.createPtxtIndexFile(db_filename);
+	user.getPtxtIndexFile().printIndexFile();
+	cout << "hi" << endl;
 	user.csvToDB(mat, db_filename, headers);
 	for (auto& h:headers)
 		cout << "\nhead: " << h;
-	return 1;
+
+	
+	// create index
+	//encrypt index
+	// construct server with comparator, db, index
+
 	/*SERVER SIDE */   
     SERVER server = SERVER(comparator);
 
