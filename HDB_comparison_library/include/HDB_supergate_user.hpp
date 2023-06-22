@@ -10,22 +10,20 @@ namespace HDB_supergate_user_{
     class USER {
         private:
         he_cmp::Comparator & comparator;
-        helib::SecKey & sk;          
-        int _n; /*lattice dim*/
-        int _q_log; /*lattice q*/
-        uint32_t lambda; /*Security parameter*/
+        helib::SecKey & sk;
+
         HDB_supergate_::PtxtIndexFile ptxt_index_file;
         
         const helib::EncryptedArray& ea = comparator.m_context.getEA();
-        long nslots = ea.size();
         unsigned long p = comparator.m_context.getP();
-        unsigned long exp_len = comparator.m_expansionLen;
         unsigned long ord_p = comparator.m_context.getOrdP();
-        unsigned long numbers_size = comparator.m_context.getNSlots() / exp_len;
+        unsigned long nslots = ea.size();
+        unsigned long exp_len = comparator.m_expansionLen;
+        unsigned long max_packed = nslots / exp_len;
         unsigned long enc_base = (p + 1) >> 1; // UNI
         unsigned long digit_base = power_long(enc_base, comparator.m_slotDeg);
-        double result;
-
+        int space_bit_size = static_cast<int>(ceil(exp_len * log2(digit_base)));
+        unsigned long input_range = space_bit_size < 64 ? power_long(digit_base, exp_len) : ULONG_MAX;
 
         public:
         explicit USER(
@@ -39,6 +37,8 @@ namespace HDB_supergate_user_{
 
         HDB_supergate_::PtxtIndexFile getPtxtIndexFile() {return ptxt_index_file;}
         void createPtxtIndexFile(string);
+
+        void createCtxtIndexFile(HDB_supergate_::CtxtIndexFile&);
 
         helib::Ctxt Query(int64_t q_id, HDB_supergate_::Q_TYPE_t type);
                     
@@ -63,7 +63,8 @@ namespace HDB_supergate_user_{
                      std::string path, 
                      std::vector<std::string>&);
         
-        void debug(helib::Ctxt& ctxt, he_cmp::Comparator& comparator, helib::SecKey& sk);
+        void printDecrypted(helib::Ctxt& ctxt);
+        void printDB(HDB_supergate_::Ctxt_mat);
     };
 };
 

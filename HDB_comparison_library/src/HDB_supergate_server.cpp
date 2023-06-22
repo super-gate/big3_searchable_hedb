@@ -22,7 +22,7 @@ namespace HDB_supergate_server_{
 	void SERVER::Response(Ctxt &query, Q_TYPE_t types, std::vector<long> q_cols){
 		//get columns from q_cols
 		
-		unsigned long cipher_num = _Row/numbers_size;
+		long cipher_num = _Row/numbers_size;
 
 		Ctxt_mat less_mod_ctxt_arr;//less than cipher
 	    less_mod_ctxt_arr.resize(cipher_num);
@@ -61,7 +61,7 @@ namespace HDB_supergate_server_{
 				comparator.extract_mod_p(tmp_vec, z_ctxt_arr[i]);
 				z_ctxt_mat.push_back(tmp_vec);
 				
-				for(long iCoef = 0; iCoef<comparator.m_slotDeg; iCoef++)
+				for(unsigned long iCoef = 0; iCoef<comparator.m_slotDeg; iCoef++)
 				{
 					Ctxt ctxt_tmp = Ctxt(comparator.m_pk);
 					Ctxt ctxt_tmp_eq = Ctxt(comparator.m_pk);
@@ -81,14 +81,14 @@ namespace HDB_supergate_server_{
 				comparator.extract_mod_p(tmp_vec, encrypted_DB[0][i]);
 				data_mod_ctxt_arr.push_back(tmp_vec);
 		
-				for(long iCoef = 0; iCoef < comparator.m_slotDeg; iCoef++)// 1 block for whole for// 1 block: m_slotDeg
+				for(unsigned long iCoef = 0; iCoef < comparator.m_slotDeg; iCoef++)// 1 block for whole for// 1 block: m_slotDeg
 				{	
 					Ctxt ctxt_tmp = Ctxt((encrypted_DB[0][i]).getPubKey());
 					comparator.less_than_bivar(ctxt_tmp, data_mod_ctxt_arr[i][iCoef], q_mod_ctxt_arr[iCoef]);//q_mod_ctxt_arr[i][iCoef]
 					less_mod_ctxt_arr[i].push_back(ctxt_tmp);//1 mod in a less block
 				}
 			
-				for(long iCoef = 0; iCoef<comparator.m_slotDeg; iCoef++)
+				for(unsigned long iCoef = 0; iCoef<comparator.m_slotDeg; iCoef++)
 				{
 					Ctxt ctxt_z = data_mod_ctxt_arr[i][iCoef];
 					ctxt_z -= q_mod_ctxt_arr[iCoef];//q_mod_ctxt_arr[i][iCoef]
@@ -146,9 +146,9 @@ namespace HDB_supergate_server_{
 		std::vector<std::vector<Ctxt>> equal_result;
 		equal_result.resize(_num_db_category);
 
-		for(int i = 0; i< _num_db_category; i++)
+		for(unsigned long i = 0; i< _num_db_category; i++)
 		{	
-			for(int j = 0; j< cipher_num; j++)
+			for(unsigned long j = 0; j< cipher_num; j++)
 			{
 				Ctxt tmp(comparator.m_pk);
 				tmp = encrypted_DB[i][j];
@@ -168,9 +168,9 @@ namespace HDB_supergate_server_{
 
 		less_result.resize(_num_db_category);
 
-        for(int i = 0; i< _num_db_category; i++)
+        for(unsigned long i = 0; i< _num_db_category; i++)
         {
-            for(int j = 0; j< cipher_num; j++)
+            for(unsigned long j = 0; j< cipher_num; j++)
             {
                 Ctxt tmp(comparator.m_pk);
                 tmp = encrypted_DB[i][j];

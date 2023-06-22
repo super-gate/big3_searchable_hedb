@@ -4,7 +4,36 @@
 CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/src/HDB_supergate.cpp
  /usr/include/stdc-predef.h
- /usr/include/c++/7/iostream
+ /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate.hpp
+ /home/smhan/Documents/helib_install/helib_pack/include/helib/helib.h
+ /home/smhan/Documents/helib_install/helib_pack/include/helib/version.h
+ /home/smhan/Documents/helib_install/helib_pack/include/helib/DoubleCRT.h
+ /home/smhan/Documents/helib_install/helib_pack/include/helib/zzX.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/vector.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/tools.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/ctools.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/config.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/mach_desc.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/ALL_FEATURES.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_ALIGNED_ARRAY.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_BUILTIN_CLZL.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_LL_TYPE.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_SSSE3.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AVX.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_PCLMUL.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AVX2.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_FMA.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AVX512F.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_COPY_TRAITS1.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_COPY_TRAITS2.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_CHRONO_TIME.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_MACOS_TIME.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_POSIX_TIME.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AES_NI.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_KMA.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/PackageInfo.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/new.h
+ /usr/include/c++/7/new
  /usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h
  /usr/include/x86_64-linux-gnu/c++/7/bits/os_defines.h
  /usr/include/features.h
@@ -14,6 +43,23 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/c++/7/bits/cpu_defines.h
+ /usr/include/c++/7/exception
+ /usr/include/c++/7/bits/exception.h
+ /usr/include/c++/7/bits/exception_ptr.h
+ /usr/include/c++/7/bits/exception_defines.h
+ /usr/include/c++/7/bits/cxxabi_init_exception.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+ /usr/include/c++/7/typeinfo
+ /usr/include/c++/7/bits/hash_bytes.h
+ /usr/include/c++/7/bits/nested_exception.h
+ /usr/include/c++/7/bits/move.h
+ /usr/include/c++/7/bits/concept_check.h
+ /usr/include/c++/7/type_traits
+ /usr/include/c++/7/utility
+ /usr/include/c++/7/bits/stl_relops.h
+ /usr/include/c++/7/bits/stl_pair.h
+ /usr/include/c++/7/initializer_list
+ /usr/include/c++/7/iostream
  /usr/include/c++/7/ostream
  /usr/include/c++/7/ios
  /usr/include/c++/7/iosfwd
@@ -25,7 +71,6 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
  /usr/include/x86_64-linux-gnu/bits/floatn.h
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
  /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h
@@ -36,25 +81,12 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h
  /usr/include/x86_64-linux-gnu/bits/wchar2.h
- /usr/include/c++/7/exception
- /usr/include/c++/7/bits/exception.h
- /usr/include/c++/7/bits/exception_ptr.h
- /usr/include/c++/7/bits/exception_defines.h
- /usr/include/c++/7/bits/cxxabi_init_exception.h
- /usr/include/c++/7/typeinfo
- /usr/include/c++/7/bits/hash_bytes.h
- /usr/include/c++/7/new
- /usr/include/c++/7/bits/nested_exception.h
- /usr/include/c++/7/bits/move.h
- /usr/include/c++/7/bits/concept_check.h
- /usr/include/c++/7/type_traits
  /usr/include/c++/7/bits/char_traits.h
  /usr/include/c++/7/bits/stl_algobase.h
  /usr/include/c++/7/bits/functexcept.h
  /usr/include/c++/7/bits/cpp_type_traits.h
  /usr/include/c++/7/ext/type_traits.h
  /usr/include/c++/7/ext/numeric_traits.h
- /usr/include/c++/7/bits/stl_pair.h
  /usr/include/c++/7/bits/stl_iterator_base_types.h
  /usr/include/c++/7/bits/stl_iterator_base_funcs.h
  /usr/include/c++/7/debug/assertions.h
@@ -115,7 +147,6 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o
  /usr/include/c++/7/bits/stl_function.h
  /usr/include/c++/7/backward/binders.h
  /usr/include/c++/7/bits/range_access.h
- /usr/include/c++/7/initializer_list
  /usr/include/c++/7/bits/basic_string.h
  /usr/include/c++/7/ext/alloc_traits.h
  /usr/include/c++/7/bits/alloc_traits.h
@@ -176,37 +207,6 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o
  /usr/include/c++/7/bits/ostream.tcc
  /usr/include/c++/7/istream
  /usr/include/c++/7/bits/istream.tcc
- /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate.hpp
- /home/smhan/Documents/helib_install/helib_pack/include/helib/helib.h
- /home/smhan/Documents/helib_install/helib_pack/include/helib/version.h
- /home/smhan/Documents/helib_install/helib_pack/include/helib/DoubleCRT.h
- /home/smhan/Documents/helib_install/helib_pack/include/helib/zzX.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/vector.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/tools.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/ctools.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/config.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/mach_desc.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/ALL_FEATURES.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_ALIGNED_ARRAY.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_BUILTIN_CLZL.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_LL_TYPE.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_SSSE3.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AVX.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_PCLMUL.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AVX2.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_FMA.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AVX512F.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_COPY_TRAITS1.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_COPY_TRAITS2.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_CHRONO_TIME.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_MACOS_TIME.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_POSIX_TIME.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_AES_NI.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/HAVE_KMA.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/PackageInfo.h
- /home/smhan/Documents/helib_install/helib_pack/include/NTL/new.h
- /usr/include/c++/7/utility
- /usr/include/c++/7/bits/stl_relops.h
  /usr/include/c++/7/cmath
  /usr/include/math.h
  /usr/include/x86_64-linux-gnu/bits/math-vector.h
@@ -399,6 +399,14 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate.cpp.o
  /usr/include/c++/7/bits/stl_numeric.h
  /home/smhan/Documents/helib_install/helib_pack/include/helib/PolyMod.h
  /home/smhan/Documents/helib_install/helib_pack/include/helib/PolyModRing.h
+ /usr/include/c++/7/deque
+ /usr/include/c++/7/bits/stl_deque.h
+ /usr/include/c++/7/bits/deque.tcc
+ /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/comparator.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/mat_ZZ.h
+ /home/smhan/Documents/helib_install/helib_pack/include/NTL/vec_vec_ZZ.h
+ /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.h
+ /home/smhan/Documents/helib_install/helib_pack/include/helib/polyEval.h
 
 CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate_server.cpp.o
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/src/HDB_supergate_server.cpp
@@ -800,6 +808,9 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate_server.cpp.o
  /home/smhan/Documents/helib_install/helib_pack/include/helib/PolyMod.h
  /home/smhan/Documents/helib_install/helib_pack/include/helib/PolyModRing.h
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate.hpp
+ /usr/include/c++/7/deque
+ /usr/include/c++/7/bits/stl_deque.h
+ /usr/include/c++/7/bits/deque.tcc
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/comparator.h
  /home/smhan/Documents/helib_install/helib_pack/include/NTL/mat_ZZ.h
  /home/smhan/Documents/helib_install/helib_pack/include/NTL/vec_vec_ZZ.h
@@ -1209,10 +1220,13 @@ CMakeFiles/HDB_supergate_lib.dir/src/HDB_supergate_user.cpp.o
  /home/smhan/Documents/helib_install/helib_pack/include/helib/PolyMod.h
  /home/smhan/Documents/helib_install/helib_pack/include/helib/PolyModRing.h
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate.hpp
- /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate_user.hpp
+ /usr/include/c++/7/deque
+ /usr/include/c++/7/bits/stl_deque.h
+ /usr/include/c++/7/bits/deque.tcc
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/comparator.h
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.h
  /home/smhan/Documents/helib_install/helib_pack/include/helib/polyEval.h
+ /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate_user.hpp
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate.hpp
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/comparator.h
  /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.h

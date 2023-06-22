@@ -1,9 +1,9 @@
-#include <iostream>
-
 #include "HDB_supergate.hpp"
 
 using namespace helib;
 using namespace std;
+using namespace he_cmp;
+using namespace NTL;
 
 namespace HDB_supergate_ {
     struct BGV_param MakeBGVParam(long p, 
@@ -80,6 +80,27 @@ namespace HDB_supergate_ {
         }
     }
 
+    bool PtxtIndex::empty(long key) {
+        auto it = std::find(keys.begin(), keys.end(), key);
+        if (it == keys.end()) 
+        {cout << "key: " << key << endl; throw runtime_error("Cannot find key in index"); }
+
+        last_index = int(it - keys.begin());
+        return plaintext_index[last_index].second.empty();
+    }
+
+    long PtxtIndex::popBack(long key, bool emty)
+    {
+        //should be called with empty=true if empty(long) was called before
+        if (!emty) //if empty was not called
+        {
+            if (empty(key)) return -1;
+        }
+        long val = plaintext_index[last_index].second.back();
+        plaintext_index[last_index].second.pop_back();
+        return val;
+    }
+
     void PtxtIndex::printIndex()
     {
         for (auto& pair :plaintext_index)
@@ -122,6 +143,213 @@ namespace HDB_supergate_ {
             ind.second.printIndex();
             std::cout << "----------------------------------------\n" << std::endl;
         }
+    }
+
+    void setIndexParams(unsigned long R, 
+                        unsigned long C, 
+                        unsigned long nslots, 
+                        unsigned long& X, 
+                        unsigned long& Y)
+    {
+        cout << "R: " << R << ", C: " << C << endl;
+        X = min(R, C);
+        Y = R >= C ? ceil(float(R) / nslots) : ceil(float(C) / nslots);
+    }
+
+    void dataToZZXSlot(unsigned long data,
+                       vector<ZZX>& dest,
+                       unsigned long counter,
+                       unsigned long input_range,
+                       unsigned long digit_base,
+                       unsigned long exp_len,
+                       unsigned long enc_base,
+                       Comparator& comparator
+                       ) 
+    {
+        vector<long> decomp_data;
+        ZZX slot;
+
+        data %= input_range;
+        digit_decomp(decomp_data, data, digit_base, exp_len);
+        for(unsigned long l = 0; l < exp_len; ++l)
+        {
+            comparator.int_to_slot(slot, decomp_data[l], enc_base);
+            dest[counter*exp_len + l] = slot;
+        }
+    }
+
+    void encryptAndInsert(Comparator& comparator,
+                          vector<ZZX>& ptxt,
+                          Ctxt_vec& dest)
+    {
+        Ctxt ctxt(comparator.m_pk);
+        comparator.m_context.getEA().encrypt(ctxt, comparator.m_pk, ptxt);
+        dest.emplace_back(ctxt);
+    }
+
+    void CtxtIndex::encrypt(PtxtIndex ptxt_index, 
+                            Comparator& comparator,
+                            unsigned long input_range, 
+                            unsigned long digit_base,
+                            unsigned long enc_base,
+                            unsigned long exp_len,
+                            unsigned long nslots,
+                            unsigned long max_per
+                            )
+    {
+        unsigned long X, Y;
+        setIndexParams(ptxt_index.R(), ptxt_index.C(), nslots, X, Y);
+        // cout << "key size: " << ptxt_index.getKeys().size() << endl;
+        enc_uid.resize(X);
+        // for (int a = 0; a < ptxt_index.getKeys().size(); ++a) cout << "keykey: " << ptxt_index.getKeys()[a] << ", ";
+        // cout << endl;
+        // for (auto& k: ptxt_index.getKeys()) cout << ", keyyy: " << k;
+        // cout << endl;
+        deque<long> key_queue;
+        for (long k: ptxt_index.getKeys()) key_queue.push_back(k);
+        // for (auto& k: key_queue) cout << ", k: " << k;
+        cout << endl;
+        // cout << "back: " << key_queue.back() << endl;
+        vector<ZZX> ptxt_key;
+        vector<vector<ZZX>> ptxt_uid;
+
+		// long key_data, uid_data;
+        // vector<long> decomp_key_data, decomp_uid_data;
+        // ZZX key_slot, uid_slot;
+		unsigned long counter = 0;
+        // cout << "encrypt" << endl;
+        while (!key_queue.empty())
+        {
+            
+            unsigned long k = key_queue.front();
+            // cout << k << "|";
+            key_queue.pop_front();
+            // cout << key_queue.front() << ",";
+            if (!k) continue; //k == 0
+            
+            if (!counter) //reset at counter == 0
+            {
+                ptxt_key.clear();
+                ptxt_key.resize(nslots);
+                ptxt_uid.clear();
+                ptxt_uid.resize(X);
+                for (auto& row : ptxt_uid) row.resize(nslots);
+            }
+            
+            //encode key
+            dataToZZXSlot(k,
+                          ptxt_key,
+                          counter,
+                          input_range,
+                          digit_base,
+                          exp_len,
+                          enc_base,
+                          comparator);
+            // key_data = k % input_range;
+            // digit_decomp(decomp_key_data, key_data, digit_base, exp_len);
+            // for(unsigned long l = 0; l < exp_len; ++l)
+            // {
+            //     comparator.int_to_slot(key_slot, decomp_key_data[l], enc_base);
+            //     ptxt_key[counter*exp_len + l] = key_slot;
+            // }
+
+            for (unsigned long i = 0; i < X; ++i)
+            {
+                if (ptxt_index.empty(k)) break;
+                unsigned long v = ptxt_index.popBack(k, true);
+                dataToZZXSlot(v,
+                              ptxt_uid[i],
+                              counter,
+                              input_range,
+                              digit_base,
+                              exp_len,
+                              enc_base,
+                              comparator);
+                // place available v[i] to next available slot in enc_uid[i]
+                // if v.empty(), break
+            }
+            counter++;
+            if (counter == max_per)
+			{
+                encryptAndInsert(comparator, ptxt_key, enc_key); //key
+                for (unsigned long i = 0; i < X; ++i)
+                    encryptAndInsert(comparator, ptxt_uid[i], enc_uid[i]); //uids
+
+				counter = 0;
+                ptxt_key.clear();
+				ptxt_uid.clear();
+			}
+            if (!ptxt_index.empty(k))
+            {
+                // cout << "[" << key_queue.back() << ",";
+                while (key_queue.size() < X - 1) key_queue.push_back(long(0));
+                // cout << key_queue.back() << ",";
+                key_queue.push_back(k);
+                // cout << key_queue.back() << "]";
+            }
+            cout << " ";
+        }
+        if (counter < max_per)
+        {
+            encryptAndInsert(comparator, ptxt_key, enc_key); //key
+            for (unsigned long i = 0; i < X; ++i)
+                encryptAndInsert(comparator, ptxt_uid[i], enc_uid[i]); //uids
+        }
+
+        cout << "\nkey size: " << enc_key.size()
+             << "\nindex size: " << enc_uid.size()
+             << "\nindex[0] size: " << enc_uid[0].size() 
+             << "\nX: " << X << ", Y: " << Y << endl;
+    }
+
+    void CtxtIndexFile::encrypt(PtxtIndexFile& ptxt_index_file,
+                                Comparator& comparator,
+                                unsigned long input_range, 
+                                unsigned long digit_base,
+                                unsigned long enc_base,
+                                unsigned long exp_len,
+                                unsigned long nslots,
+                                unsigned long max_per
+                                )
+    {
+        for (auto& pair: ptxt_index_file.getIndexFile())
+            insert(pair.first,
+                   pair.second,
+                   comparator,
+                   input_range,
+                   digit_base,
+                   enc_base,
+                   exp_len,
+                   nslots,
+                   max_per);
+    }
+
+    void CtxtIndexFile::insert(std::string col, 
+                               PtxtIndex& ptxt_index,
+                               Comparator& comparator,
+                               unsigned long input_range, 
+                               unsigned long digit_base,
+                               unsigned long enc_base,
+                               unsigned long exp_len,
+                               unsigned long nslots,
+                               unsigned long max_per
+                               )
+    {
+        CtxtIndex ctxt_index;
+        ctxt_index.encrypt(ptxt_index,
+                           comparator,
+                           input_range,
+                           digit_base,
+                           enc_base,
+                           exp_len,
+                           nslots,
+                           max_per);
+        insert(col, ctxt_index);
+    }
+    
+    void CtxtIndexFile::insert(std::string col, CtxtIndex& ctxt_index)
+    {
+        IndexFile.emplace_back(pair(col, ctxt_index));
     }
 };
 

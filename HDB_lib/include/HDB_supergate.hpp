@@ -3,7 +3,16 @@
 
 #include <helib/helib.h>
 
+#include <iostream>
+#include <deque>
+
+#include "../comp_lib/comparator.h"
+#include "../comp_lib/tools.h"
+
 namespace HDB_supergate_{
+    typedef std::vector<helib::Ctxt> Ctxt_vec;
+	typedef std::vector<std::vector<helib::Ctxt>> Ctxt_mat;
+
     class CSVRow
     {
         public:
@@ -83,13 +92,17 @@ namespace HDB_supergate_{
             std::vector<long> keys;
 
             int c = 0;
+            int last_index;
 
         public:
             void insert(long k, unsigned long v);
 
             int R() {return keys.size();}
             int C() {return c;}
-
+            std::vector<long> getKeys() {return keys;}
+            
+            bool empty(long);
+            long popBack(long, bool emty = false);
             void printIndex();
     };
 
@@ -100,6 +113,7 @@ namespace HDB_supergate_{
             std::vector<std::string> cols;
 
         public:
+            std::vector<std::pair<std::string, PtxtIndex>>& getIndexFile() {return IndexFile;}
             void insert(std::string col, long k, unsigned long v);
 
             void printIndex(std::string col);
@@ -107,8 +121,54 @@ namespace HDB_supergate_{
             void printIndexFile();
     };
 
-    typedef std::vector<helib::Ctxt> Ctxt_vec;
-	typedef std::vector<std::vector<helib::Ctxt>> Ctxt_mat;
+    class CtxtIndex
+    {
+        private:
+            Ctxt_vec enc_key;
+            Ctxt_mat enc_uid;
+            
+        public:
+            void encrypt(PtxtIndex, 
+                         he_cmp::Comparator&,
+                         unsigned long input_range, 
+                         unsigned long digit_base,
+                         unsigned long enc_base,
+                         unsigned long exp_len,
+                         unsigned long nslots,
+                         unsigned long max_per
+                         );
+    };
+
+    class CtxtIndexFile
+    {
+        private:
+            std::vector<std::pair<std::string, CtxtIndex>> IndexFile; //TODO: for now use string colnames, later encrypt this
+            std::vector<std::string> cols;
+
+        public:
+            void encrypt(PtxtIndexFile&,
+                         he_cmp::Comparator&,
+                         unsigned long input_range, 
+                         unsigned long digit_base,
+                         unsigned long enc_base,
+                         unsigned long exp_len,
+                         unsigned long nslots,
+                         unsigned long max_per
+                         );
+                          
+            void insert(std::string, 
+                        PtxtIndex&,
+                        he_cmp::Comparator&,
+                        unsigned long input_range, 
+                        unsigned long digit_base,
+                        unsigned long enc_base,
+                        unsigned long exp_len,
+                        unsigned long nslots,
+                        unsigned long max_per
+                        );
+            void insert(std::string, CtxtIndex&);
+    };
+
     
     /* Query Type */
     enum Q_TYPE_t {
@@ -162,6 +222,26 @@ namespace HDB_supergate_{
     helib::Context MakeBGVContext(long, long, long, long, long, long);
  
     helib::Context MakeBGVContext(const struct BGV_param);
+
+    void setIndexParams(unsigned long, 
+                        unsigned long, 
+                        unsigned long, 
+                        unsigned long&, 
+                        unsigned long&);
+
+    void dataToZZXSlot(unsigned long data,
+                       vector<ZZX>& dest,
+                       unsigned long counter,
+                       unsigned long input_range,
+                       unsigned long digit_base,
+                       unsigned long exp_len,
+                       unsigned long enc_base,
+                       he_cmp::Comparator& comparator
+                       );
+    
+    void encryptAndInsert(he_cmp::Comparator& comparator,
+                          std::vector<NTL::ZZX>& ptxt,
+                          Ctxt_vec& dest);
 
     long findNSlots(long, long);
 };

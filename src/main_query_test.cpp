@@ -112,12 +112,16 @@ int main(int argc, char* argv[]) {
 	vector<string> headers;
 	db_filename = "../db/" + db_filename + ".csv";
 	user.createPtxtIndexFile(db_filename);
-	user.getPtxtIndexFile().printIndexFile();
+	// user.getPtxtIndexFile().printIndexFile();
 	cout << "hi" << endl;
 	user.csvToDB(mat, db_filename, headers);
 	for (auto& h:headers)
 		cout << "\nhead: " << h;
+	cout << endl;
+	// user.printDB(mat);
 
+	CtxtIndexFile indFile;
+	user.createCtxtIndexFile(indFile);
 	
 	// create index
 	//encrypt index
