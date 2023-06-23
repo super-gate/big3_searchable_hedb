@@ -130,12 +130,15 @@ namespace HDB_supergate_{
         public:
             void encrypt(PtxtIndex, 
                          he_cmp::Comparator&,
+                         const helib::Context& contx,
+                         helib::PubKey& pk,
                          unsigned long input_range, 
                          unsigned long digit_base,
                          unsigned long enc_base,
                          unsigned long exp_len,
                          unsigned long nslots,
-                         unsigned long max_per
+                         unsigned long max_per,
+                         bool verbose
                          );
     };
 
@@ -148,33 +151,60 @@ namespace HDB_supergate_{
         public:
             void encrypt(PtxtIndexFile&,
                          he_cmp::Comparator&,
+                         const helib::Context& contx,
+                         helib::PubKey& pk,
                          unsigned long input_range, 
                          unsigned long digit_base,
                          unsigned long enc_base,
                          unsigned long exp_len,
                          unsigned long nslots,
-                         unsigned long max_per
+                         unsigned long max_per,
+                         bool verbose
                          );
                           
             void insert(std::string, 
                         PtxtIndex&,
                         he_cmp::Comparator&,
+                        const helib::Context& contx,
+                        helib::PubKey& pk,
                         unsigned long input_range, 
                         unsigned long digit_base,
                         unsigned long enc_base,
                         unsigned long exp_len,
                         unsigned long nslots,
-                        unsigned long max_per
+                        unsigned long max_per,
+                        bool verbose
                         );
             void insert(std::string, CtxtIndex&);
     };
 
+    class HEQuery {
+        public:
+        unsigned long source; // source column TODO: encrypt this too
+        helib::Ctxt query; // query ctxt
+        std::pair<helib::Ctxt, helib::Ctxt> Q_type; //query type: EQ, LT, LEQ
+        std::vector<unsigned long> dest; // dest column(s) TODO: encrypt this too
+
+        HEQuery(helib::PubKey& pk) : query(pk), Q_type(pair(query, query)) {};
+
+        void insert(unsigned long src,
+                    helib::Ctxt& EQ,
+                    helib::Ctxt& LT,
+                    helib::Ctxt& qry,
+                    std::vector<unsigned long> dst)
+        {
+            source = src;
+            Q_type = std::pair(EQ, LT);
+            query = qry;
+            dest = dst;
+        }
+    };
     
     /* Query Type */
     enum Q_TYPE_t {
         EQ,
         LT,
-		EL,
+		LEQ,
         MIN,
         MAX
     };
@@ -199,7 +229,7 @@ namespace HDB_supergate_{
         167,     // p
         3,     // d
         28057,    // m
-        538,     // nb_primes
+        800,     // nb_primes
         3,      // l
         4,      // c
         6,      // scale
@@ -232,14 +262,14 @@ namespace HDB_supergate_{
     void dataToZZXSlot(unsigned long data,
                        vector<ZZX>& dest,
                        unsigned long counter,
-                       unsigned long input_range,
                        unsigned long digit_base,
                        unsigned long exp_len,
                        unsigned long enc_base,
                        he_cmp::Comparator& comparator
                        );
     
-    void encryptAndInsert(he_cmp::Comparator& comparator,
+    void encryptAndInsert(const helib::Context& contx,
+                          helib::PubKey& pk,
                           std::vector<NTL::ZZX>& ptxt,
                           Ctxt_vec& dest);
 

@@ -34,8 +34,8 @@ int main(int argc, char* argv[]) {
 	unsigned long scale = 6;  	    // TODO: scale factor, research if time
 	string db_filename = "stroke_int_encoded";  // db filename
 
-	bool verbose = false;			// if true lots of debug info
-	bool std128 = false;			// if true, just use HDB_STD128 params, else use the default+user params
+	bool verbose = false;			    // if true lots of debug info
+	bool std128 = false;				// if true, just use HDB_STD128 params, else use the default+user params
 
 	helib::ArgMap amap;
 	amap.arg("m", m, "Cyclotomic polynomial ring (default 131071)");
@@ -50,6 +50,7 @@ int main(int argc, char* argv[]) {
 			db_filename,
 			"Qualified name for the csv database filename(default: stroke_int_encoded)");
 	amap.toggle().arg("-v", verbose, "Toggle verbose", "");
+
 	amap.toggle().arg("-std", std128, "Toggle to just use standard128 params", "");
 	amap.parse(argc, argv);
 
@@ -99,36 +100,42 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_STOP(timer_SecKey);
 
 	// make public key
+	HELIB_NTIMER_START(timer_PubKey);
 	PubKey public_key(secret_key);
+	HELIB_NTIMER_STOP(timer_PubKey);
 	
 	CircuitType type = UNI; //Fixed at UNI
-	
 	Comparator comparator(contx, type, HDB_Param.d, HDB_Param.expansion_len, public_key, false); // secret key deleted. only public key remained
 
 	/*Secret key is contained in this class. Be carefull! */
-    USER user = USER(comparator, secret_key); //pass secret key only to user
+    USER user = USER(comparator, contx, public_key, secret_key, verbose); //pass secret key only to user
 
-	Ctxt_mat mat;
+	Ctxt_mat db;
 	vector<string> headers;
 	db_filename = "../db/" + db_filename + ".csv";
 	user.createPtxtIndexFile(db_filename);
-	// user.getPtxtIndexFile().printIndexFile();
-	cout << "hi" << endl;
-	user.csvToDB(mat, db_filename, headers);
-	for (auto& h:headers)
-		cout << "\nhead: " << h;
-	cout << endl;
-	// user.printDB(mat);
+	if (verbose)
+		user.getPtxtIndexFile().printIndexFile();
+	HELIB_NTIMER_START(timer_Encrypt_DB);
+	user.csvToDB(db, db_filename, headers);
+	HELIB_NTIMER_STOP(timer_Encrypt_DB);
 
+	if (verbose)
+	{
+		for (auto& h:headers)
+			cout << "\nhead: " << h;
+		cout << endl;
+		user.printCtxtMat(db);
+	}
+	
+
+	HELIB_NTIMER_START(timer_IndexFile);
 	CtxtIndexFile indFile;
 	user.createCtxtIndexFile(indFile);
-	
-	// create index
-	//encrypt index
-	// construct server with comparator, db, index
+	HELIB_NTIMER_STOP(timer_IndexFile);
 
 	/*SERVER SIDE */   
-    SERVER server = SERVER(comparator);
+    SERVER server = SERVER(comparator, db, indFile, verbose);
 
 	/*
 	 * 1. readCSV() => reads csv file and populates plaintext DB
@@ -139,73 +146,64 @@ int main(int argc, char* argv[]) {
 	 * 6. USER::decryptResult() => user decrypts result
 	 * 7. Make user in a loop so that we can query multiple times into one server (so that we don't have to instantiate everything for each query)
 	 */
-
-    long unsigned num_db_element;
-    long unsigned num_db_category;
-    long unsigned max_element;
-	std::vector<std::vector<int64_t>> database;
-
-    // server.SetDB(db_filename, num_db_element, max_element, num_db_category);
-	// if (verbose)
-	// 	server.ShowDB();
-
-    /*USER SIDE, Make the query and send it to the server */
-
-    /*0: exact, 1: less then, 2: min */
-    string str;
-
-    Q_TYPE_t types;
-
-
+    Q_TYPE_t queryType;
+	string str;
 	while(true)
 	{
-		cout<<"the type has to be one of (eq, lt, el)."<<endl;
+		cout<<"the type has to be one of (eq, lt, leq)."<<endl;
 		cout<<"input type: ";
 		cin>>str;
 		if(str == "eq")
 		{
-			types = EQ;
+			queryType = EQ;
 			break;
 		}
 		else if(str == "lt")
 		{
-			types = LT;
+			queryType = LT;
 			break;
 		}
-		else if(str == "el")
+		else if(str == "leq")
 		{
-			types = EL;
+			queryType = LEQ;
 			break;
 		}
 	}
 
 	unsigned long max = user.max();
 
-	int64_t query_id;
+	unsigned long input;
 	while(true)
 	{
 		cout<<"maximum int is "<<max - 1<<endl;
 		cout<<"input query: ";
-		cin>>query_id;
+		cin>>input;
 
-		if(query_id < max)
+		if(input < max)
 		{
 			break;
 		}
 	}
 
-	auto ct_query = user.Query(query_id, types);
+	vector<unsigned long> dest = {2};
+	unsigned long source = 1;
+	HEQuery q(public_key);
+	user.ConstructQuery(q, input, queryType, source, dest);
+	Ctxt test = db[0][0];
 
-	/*ct_query_exact is sended to the server. */
-    /*SERVER SIDE, / Exact / Less than /(or min)/ calculation and return to the user  */
-    
-	vector<long> cols;
-	server.Response(ct_query, types, cols);
+	Ctxt_mat result;
+	HELIB_NTIMER_START(timer_Query);
+	server.Query(q, result);
+	HELIB_NTIMER_STOP(timer_Query);
 
-    /*answer is sended to the user */
-    //user.ShowRes(datas, less_vector, equal_vector, equal_result, less_result, Row, Category, Element, types);
+	user.printCtxtMat(result);
 
-    cout << "Test End!! " << endl;
+    helib::printNamedTimer(std::cout << std::endl, "timer_Context");
+    helib::printNamedTimer(std::cout, "timer_SecKey");
+    helib::printNamedTimer(std::cout, "timer_PubKey");
+    helib::printNamedTimer(std::cout, "timer_Encrypt_DB");
+    helib::printNamedTimer(std::cout, "timer_IndexFile");
+	helib::printNamedTimer(std::cout, "timer_Query");
 
     return 0;
 }

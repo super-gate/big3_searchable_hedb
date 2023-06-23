@@ -70,7 +70,7 @@ public:
 //    SecKey m_sk;
 
     // public key
-    PubKey m_pk;
+    PubKey& m_pk;
 
     // elements of F_{p^d} for extraction of F_p elements
     vector<vector<DoubleCRT>> m_extraction_const;
@@ -156,7 +156,7 @@ public:
 	////////////////////////////////////
 //public:
   // constructor
-	Comparator(const Context& context, CircuitType type, unsigned long d, unsigned long expansion_len, const PubKey& pk, bool verbose);
+	Comparator(const Context& context, CircuitType type, unsigned long d, unsigned long expansion_len, PubKey& pk, bool verbose);
 
 	const DoubleCRT& get_mask(double& size, long index) const;
   const ZZX& get_less_than_poly() const;

@@ -19,31 +19,18 @@ using namespace helib;
 
 namespace HDB_supergate_user_{
     /* Construction */
-    USER::USER(Comparator & comparator, SecKey& sk) : comparator(comparator), sk(sk) {};
-
-    /* Destruction */
-    USER::~USER() {};
+    USER::USER(Comparator& comparator, const Context& contx, PubKey& pk, SecKey& sk, bool v) : comparator(comparator), contx(contx), pk(pk), sk(sk), verbose(v) {};
 
 	unsigned long USER::max(){
-		int space_bit_size = static_cast<int>(ceil(comparator.m_expansionLen*log2(digit_base)));
-
-		unsigned long input_range = ULONG_MAX;
-        if(space_bit_size < 64)
-        {
-            input_range = power_long(digit_base, comparator.m_expansionLen);
-        }
 		return input_range;
 	};
 
 	void USER::printDecrypted(Ctxt& ctxt)
     {
-        const EncryptedArray& ea = comparator.m_context.getEA();
-        unsigned long ord_p = comparator.m_context.getOrdP();
-        long nslots = ea.size();
         vector<ZZX> decrypted_cipher(nslots);
-        ea.decrypt(ctxt, sk, decrypted_cipher);
+        contx.getView().decrypt(ctxt, sk, decrypted_cipher);
 
-        for(int i=0; i<nslots; i++)
+        for(unsigned long i=0; i < nslots; i++)
         {
             printZZX(cout, decrypted_cipher[i], ord_p);
             cout << ", ";
@@ -51,7 +38,7 @@ namespace HDB_supergate_user_{
         cout<<endl;
     };
 
-	void USER::printDB(Ctxt_mat db)
+	void USER::printCtxtMat(Ctxt_mat& db)
 	{
 		for (auto& row: db)
 		{
@@ -453,7 +440,7 @@ namespace HDB_supergate_user_{
 			//return dec_less_vec;
 		}
 
-		if(type == EL)
+		if(type == LEQ)
 		{
 	
 			cout<<"less and equal vector"<<endl;
@@ -565,48 +552,39 @@ namespace HDB_supergate_user_{
 		//less final result
 		//dec_less_vec	dec_less_result	  dec_eq_result	  dec_equal_vec
 	};	
-		
-	Ctxt USER::Query(int64_t q_id, Q_TYPE_t type)  
+
+	void USER::EncryptNumber(Ctxt& ctxt, unsigned long input)
 	{
-		Ctxt query(comparator.m_pk);
+		vector<ZZX> poly_input(nslots);
+		input %= input_range;
+		for (unsigned long i = 0; i < max_packed; ++i)
+			dataToZZXSlot(input,
+						  poly_input,
+						  i,
+						  digit_base,
+						  exp_len,
+						  enc_base,
+						  comparator);
+        contx.getView().encrypt(ctxt, pk, poly_input);
+	}
 		
-		// Number should be handled
-        int q_num = 1;
+	void USER::ConstructQuery(HEQuery& q,
+							  unsigned long input,
+					 		  Q_TYPE_t type,
+					 		  unsigned long source,
+							  vector<unsigned long> dest)  
+	{
+		Ctxt query_ctxt(pk);
+		Ctxt eq(pk);
+		Ctxt lt(pk);
 
-		int space_bit_size = static_cast<int>(ceil(comparator.m_expansionLen*log2(digit_base)));
-
-		unsigned long input_range = ULONG_MAX;
-		if(space_bit_size < 64)
-		{
-			input_range = power_long(digit_base, comparator.m_expansionLen);
-		}
-
-		// long min_capacity = 1000;
-		// long capacity;
-
-		vector<ZZX> pol_query(nslots);
-
-		unsigned long input_query;
-		ZZX pol_slot;
-		for(unsigned long i=0; i<max_packed;i++)
-		{
-			input_query = q_id % input_range;
-
-			vector<long> decomp_int_query;
-
-			digit_decomp(decomp_int_query, input_query, digit_base, comparator.m_expansionLen);
-			
-			for(unsigned long j=0; j<comparator.m_expansionLen; j++){
-				comparator.int_to_slot(pol_slot, decomp_int_query[j], enc_base);
-				pol_query[i*comparator.m_expansionLen + j] = pol_slot;
-			}
-		}
-
-		for (int i = 0; i < q_num; i++) {
-            ea.encrypt(query, comparator.m_pk, pol_query);
-        }
+		EncryptNumber(query_ctxt, input);
+		if (type != LT) EncryptNumber(eq, 1);
+		else EncryptNumber(eq, 0);
+		if (type != EQ) EncryptNumber(lt, 1);
+		else EncryptNumber(lt, 0);
 		
-        return query;
+		q.insert(source, eq, lt, query_ctxt, dest);
     };
 
 	void USER::createPtxtIndexFile(string path)
@@ -637,12 +615,15 @@ namespace HDB_supergate_user_{
 	{
 		file.encrypt(ptxt_index_file,
 					 comparator,
+					 contx,
+					 pk,
 					 input_range,
 					 digit_base,
 					 enc_base,
 					 exp_len,
 					 nslots,
-					 max_packed
+					 max_packed,
+					 verbose
 					);
 	}
 
@@ -667,76 +648,48 @@ namespace HDB_supergate_user_{
 
     void USER::csvToDB(Ctxt_mat& db, CSVRange& reader) {
 		vector<vector<ZZX>> ptxt_data;
-		// ZZX pol_slot;
-		// unsigned long input_data;
-        // vector<long> decomp_int_data;
+
 		unsigned long counter = 0;
 
         for (auto& row: reader)
         {
-			// cout << "for each row" << endl;
 			for (unsigned int i = 0; i < row.size(); ++i) 
 			{
-				// cout << "for each column" << endl;
 				if (!counter)
 				{
-					// cout << "!counter" << endl;
 					ptxt_data.emplace_back(*(new vector<ZZX>{nslots}));
 				}
-				// cout << "input data: " << endl;
-				dataToZZXSlot(stol(string{row[i]}),
+				dataToZZXSlot(stol(string{row[i]}) % input_range,
 							  ptxt_data[i],
 							  counter,
-							  input_range,
 							  digit_base,
 							  exp_len,
 							  enc_base,
 							  comparator);
-				// input_data = stol(string{row[i]}) % input_range;
-				// // cout << input_data << endl;
-				// digit_decomp(decomp_int_data, input_data, digit_base, exp_len);
-				// // cout << "digit decomp" << endl;
-
-				// for(unsigned long l = 0; l < exp_len; ++l)
-				// {
-				// 	// cout << "for each l" << endl;
-				// 	comparator.int_to_slot(pol_slot, decomp_int_data[l], enc_base);
-				// 	ptxt_data[i][counter*exp_len + l] = pol_slot;
-				// }
 			}
-			// cout << "counter: " << counter << "max_packed: " << max_packed << endl;
 			counter++;
 			if (counter == max_packed)
 			{
 				for (unsigned int i = 0; i < row.size(); ++i) 
 				{
 					if (db.size() < ptxt_data.size()) db.emplace_back(*(new vector<Ctxt>()));
-					encryptAndInsert(comparator, ptxt_data[i], db[i]);
-					// Ctxt ctxt(comparator.m_pk);
-					// ea.encrypt(ctxt, comparator.m_pk, ptxt_data[i]);
-					// db[i].push_back(ctxt);
+					encryptAndInsert(contx, pk, ptxt_data[i], db[i]);
+
 				}
 				counter = 0;
 				ptxt_data.clear();
 			}
         }
-		// cout << "counter: " << counter << endl;
 		if (counter > 0) 
 		{
-			// cout << "looping for: " << ptxt_data.size() << endl;
 			for (unsigned int i = 0; i < ptxt_data.size(); ++i) 
 			{
-				// cout << "i: " << i << endl;
 				if (db.size() < ptxt_data.size()) db.emplace_back(*(new vector<Ctxt>()));
-				encryptAndInsert(comparator, ptxt_data[i], db[i]);
-				// Ctxt ctxt(comparator.m_pk);
-				// ea.encrypt(ctxt, comparator.m_pk, ptxt_data[i]);
-				
-				// db[i].push_back(ctxt);
+				encryptAndInsert(contx, pk, ptxt_data[i], db[i]);
 			}
 		}
-		cout << "size: " << db.size()
-			 << "\n[0]size: " << db[0].size() << endl;
+		if (verbose)
+			cout << "size: " << db.size() << "\n[0]size: " << db[0].size() << endl;
     }
 }
 

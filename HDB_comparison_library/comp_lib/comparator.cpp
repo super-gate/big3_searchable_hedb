@@ -660,7 +660,7 @@ void Comparator::extract_mod_p(vector<Ctxt>& mod_p_coefs, const Ctxt& ctxt_x) co
 	HELIB_NTIMER_STOP(Extraction);
 }
 
-Comparator::Comparator(const Context& context, CircuitType type, unsigned long d, unsigned long expansion_len, const PubKey& pk, bool verbose): m_context(context), m_type(type), m_slotDeg(d), m_expansionLen(expansion_len), m_pk(pk), m_verbose(verbose)
+Comparator::Comparator(const Context& context, CircuitType type, unsigned long d, unsigned long expansion_len, PubKey& pk, bool verbose): m_context(context), m_type(type), m_slotDeg(d), m_expansionLen(expansion_len), m_pk(pk), m_verbose(verbose)
 {
 	//determine the order of p in (Z/mZ)*
 	unsigned long ord_p = context.getOrdP();
