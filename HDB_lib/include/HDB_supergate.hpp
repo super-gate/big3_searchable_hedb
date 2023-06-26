@@ -126,6 +126,7 @@ namespace HDB_supergate_{
         private:
             Ctxt_vec enc_key;
             Ctxt_mat enc_uid;
+            unsigned long X, Y;
             
         public:
             void encrypt(PtxtIndex, 
@@ -140,6 +141,8 @@ namespace HDB_supergate_{
                          unsigned long max_per,
                          bool verbose
                          );
+            unsigned long getX() {return X;}
+            unsigned long getY() {return Y;}
     };
 
     class CtxtIndexFile
@@ -176,6 +179,10 @@ namespace HDB_supergate_{
                         bool verbose
                         );
             void insert(std::string, CtxtIndex&);
+
+            CtxtIndex& find(unsigned long);
+            CtxtIndex& find(std::string);
+            unsigned long indexOf(std::string);
     };
 
     class HEQuery {

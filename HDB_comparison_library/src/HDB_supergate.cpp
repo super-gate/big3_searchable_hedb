@@ -201,7 +201,6 @@ namespace HDB_supergate_ {
                             bool verbose
                             )
     {
-        unsigned long X, Y;
         setIndexParams(ptxt_index.R(), ptxt_index.C(), nslots, X, Y, verbose);
 
         enc_key.reserve(Y);
@@ -346,6 +345,27 @@ namespace HDB_supergate_ {
     void CtxtIndexFile::insert(std::string col, CtxtIndex& ctxt_index)
     {
         IndexFile.emplace_back(pair(col, ctxt_index));
+    }
+
+    CtxtIndex& CtxtIndexFile::find(unsigned long i)
+    {
+        return IndexFile[i].second;
+    }
+
+    CtxtIndex& CtxtIndexFile::find(string colname)
+    {
+        return IndexFile[indexOf(colname)].second;
+    }
+
+    unsigned long CtxtIndexFile::indexOf(string colname)
+    {
+        auto it = std::find(cols.begin(), cols.end(), colname);
+        if (it == cols.end())
+        {
+            cout << "Cannot find index for the column..." << endl;
+            return cols.size();
+        }
+        return ulong(it - cols.begin());
     }
 };
 

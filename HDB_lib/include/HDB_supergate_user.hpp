@@ -52,17 +52,6 @@ namespace HDB_supergate_user_{
                             HDB_supergate_::Q_TYPE_t,
                             unsigned long, //TODO: change this to query names from just indices maybe?
                             std::vector<unsigned long>);
-                    
-        void ShowRes(
-            std::vector<NTL::ZZX> datas, 
-            HDB_supergate_::Ctxt_vec &less_vector, 
-            HDB_supergate_::Ctxt_vec &equal_vector, 
-            HDB_supergate_::Ctxt_mat &equal_result, 
-            HDB_supergate_::Ctxt_mat &less_result, 
-            unsigned long Row, 
-            unsigned long num_db_category, 
-            unsigned long num_db_element, 
-            HDB_supergate_::Q_TYPE_t type);
 
         void csvToDB(HDB_supergate_::Ctxt_mat&, 
                      HDB_supergate_::CSVRange&);
