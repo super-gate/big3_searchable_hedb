@@ -1,4 +1,4 @@
-# Install script for directory: /home/smhan/Documents/big3_searchable_hedb
+# Install script for directory: /home/hanseun/big3_searchable_hedb
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/smhan/Documents/big3_searchable_hedb/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/hanseun/big3_searchable_hedb/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

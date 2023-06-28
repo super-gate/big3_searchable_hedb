@@ -1,4 +1,4 @@
-/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../HDB_lib/bin/libHDB_supergate_lib.a
-/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../HDB_lib/include/HDB_supergate.hpp
-/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../HDB_lib/include/HDB_supergate_server.hpp
-/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../HDB_lib/include/HDB_supergate_user.hpp
+/home/hanseun/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/bin/libHDB_supergate_lib.a
+/home/hanseun/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate.hpp
+/home/hanseun/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate_server.hpp
+/home/hanseun/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate_user.hpp

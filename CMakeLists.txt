@@ -70,7 +70,7 @@ ADD_EXECUTABLE(searchable_db
 		${MAIN_SOURCES} 
 		)
 
-TARGET_LINK_LIBRARIES(searchable_db ${CMAKE_SOURCE_DIR}/HDB_lib/bin/libHDB_supergate_lib.a)
+TARGET_LINK_LIBRARIES(searchable_db ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 SET_TARGET_PROPERTIES(searchable_db PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # #other

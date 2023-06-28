@@ -81,11 +81,11 @@ ADD_LIBRARY(HDB_supergate_lib STATIC ${SOURCESS})
 
 
 INSTALL(TARGETS HDB_supergate_lib
-    DESTINATION ${CMAKE_SOURCE_DIR}/../HDB_lib/bin
+    DESTINATION ${CMAKE_SOURCE_DIR}/../lib_HDB/bin
 )
 
 INSTALL(FILES ${HEADERSS} 
-    DESTINATION ${CMAKE_SOURCE_DIR}/../HDB_lib/include)
+    DESTINATION ${CMAKE_SOURCE_DIR}/../lib_HDB/include)
 
 #cmake command to build (change PATH below to local helib install directory)
 #cmake -Dhelib_DIR=/home/smhan/Documents/helib_install/helib_pack/share/cmake/helib ..

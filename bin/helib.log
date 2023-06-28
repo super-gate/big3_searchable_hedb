@@ -139,3 +139,45 @@
 [ 16:20:27 ] WARNING: KS-noise-ratio=59.474809
 [ 16:20:27 ] WARNING: KS-noise-ratio=63.901075
 [ 16:20:28 ] WARNING: KS-noise-ratio=1.238510
+[ 18:30:31 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
+[ 19:02:06 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
+[ 19:18:03 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 19:21:24 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:11:02 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:11:13 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:18:07 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:18:13 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:20:20 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:20:45 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:22:46 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:41:18 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:42:39 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:56:40 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:58:01 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 18:58:59 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:09:16 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:11:31 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:20:27 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:20:32 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:21:42 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:22:18 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:23:50 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:28:42 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:34:50 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:35:37 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 20:36:50 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 21:59:37 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 22:35:19 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 22:36:28 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 22:40:45 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 22:48:44 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 22:50:02 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 22:56:36 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 22:58:23 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 23:07:12 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 23:07:13 ] WARNING: Ctxt::bringToSet called with capacity=-1.735260, likely decryption error
+[ 23:07:13 ] WARNING: getSet4Size: no matching IndexSet found, likely decryption error
+[ 23:07:13 ] WARNING: Ctxt::bringToSet called with capacity=-29.528305, likely decryption error
+[ 23:07:13 ] WARNING: Ctxt::bringToSet called with capacity=-2.513478, likely decryption error
+[ 23:07:13 ] WARNING: getSet4Size: no matching IndexSet found, likely decryption error
+[ 23:07:13 ] WARNING: Ctxt::bringToSet called with capacity=-30.531477, likely decryption error

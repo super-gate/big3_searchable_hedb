@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	unsigned long d = 3;	  	    // expansion depth. For UNI, max (p+1)/2 -> ((p+1)/2)^d-1
 	unsigned long l = 3;	  	    // expansion length. For UNI, max ((p+1)/2)^d -> (((p+1)/2)^d)^l-1
 	unsigned long scale = 6;  	    // TODO: scale factor, research if time
-	string db_filename = "stroke_int_encoded";  // db filename
+	string db_filename = "mini";  // db filename
 
 	bool verbose = false;			    // if true lots of debug info
 	bool std128 = false;				// if true, just use HDB_STD128 params, else use the default+user params
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 	amap.toggle().arg("-std", std128, "Toggle to just use standard128 params", "");
 	amap.parse(argc, argv);
 
-	const struct BGV_param HDB_Param = std128 ? STD128_HDB : MakeBGVParam(p, d, m, bits, c, l, scale, r);
+	const struct BGV_param HDB_Param = std128 ? TOY_HDB : MakeBGVParam(p, d, m, bits, c, l, scale, r);
 
 	HELIB_NTIMER_START(timer_Context);
     const Context contx = MakeBGVContext(HDB_Param); //TODO: Test Parameters
@@ -186,14 +186,14 @@ int main(int argc, char* argv[]) {
 	}
 
 	vector<unsigned long> dest = {2};
-	unsigned long source = 1;
+	unsigned long source = 0;
 	HEQuery q(public_key);
 	user.ConstructQuery(q, input, queryType, source, dest);
-	Ctxt test = db[0][0];
 
 	Ctxt_mat result;
 	HELIB_NTIMER_START(timer_Query);
-	server.Query(q, result);
+    server.QueryWithIndex(q, result);
+	// server.Query(q, result);
 	HELIB_NTIMER_STOP(timer_Query);
 
 	user.printCtxtMat(result);

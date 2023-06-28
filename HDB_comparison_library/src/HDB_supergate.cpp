@@ -147,7 +147,7 @@ namespace HDB_supergate_ {
 
     void setIndexParams(unsigned long R, 
                         unsigned long C, 
-                        unsigned long nslots, 
+                        unsigned long max_per, 
                         unsigned long& X, 
                         unsigned long& Y,
                         bool verbose)
@@ -155,7 +155,7 @@ namespace HDB_supergate_ {
         if (verbose)
             cout << "R: " << R << ", C: " << C << endl;
         X = min(R, C);
-        Y = R >= C ? ceil(float(R) / nslots) : ceil(float(C) / nslots);
+        Y = R >= C ? ceil(float(R) / max_per) : ceil(float(C) / max_per);
     }
 
     void dataToZZXSlot(unsigned long data,
@@ -201,7 +201,7 @@ namespace HDB_supergate_ {
                             bool verbose
                             )
     {
-        setIndexParams(ptxt_index.R(), ptxt_index.C(), nslots, X, Y, verbose);
+        setIndexParams(ptxt_index.R(), ptxt_index.C(), max_per, X, Y, verbose);
 
         enc_key.reserve(Y);
         enc_uid.resize(X);
@@ -277,7 +277,7 @@ namespace HDB_supergate_ {
         }
         if (verbose)
         {
-            cout << "\nkey size: " << enc_key.size()
+            cout << "key size: " << enc_key.size()
                  << "\nindex size: " << enc_uid.size()
                  << "\nindex[0] size: " << enc_uid[0].size() 
                  << "\nX: " << X << ", Y: " << Y << endl;
