@@ -119,6 +119,7 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_START(timer_Encrypt_DB);
 	user.csvToDB(db, db_filename, headers);
 	HELIB_NTIMER_STOP(timer_Encrypt_DB);
+    cout << endl;
 
 	if (verbose)
 	{
@@ -185,7 +186,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	vector<unsigned long> dest = {2};
+	vector<unsigned long> dest = {2}; //TODO: try more dest columns
 	unsigned long source = 0;
 	HEQuery q(public_key);
 	user.ConstructQuery(q, input, queryType, source, dest);

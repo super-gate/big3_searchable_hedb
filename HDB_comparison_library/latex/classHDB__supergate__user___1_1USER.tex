@@ -1,0 +1,175 @@
+\hypertarget{classHDB__supergate__user___1_1USER}{}\doxysection{HDB\+\_\+supergate\+\_\+user\+\_\+\+::USER Class Reference}
+\label{classHDB__supergate__user___1_1USER}\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+
+
+Class that simulates the \mbox{\hyperlink{classHDB__supergate__user___1_1USER}{USER}} that queries the DB.  
+
+
+
+
+{\ttfamily \#include $<$HDB\+\_\+supergate\+\_\+user.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}{USER}} (he\+\_\+cmp\+::\+Comparator \&comparator, const helib\+::\+Context \&contx, helib\+::\+Pub\+Key \&pk, helib\+::\+Sec\+Key \&sk, bool)
+\item 
+void \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a6a953bbd435222a7121ab45e8c1c0955}{create\+Ptxt\+Index\+File}} (string filename)
+\begin{DoxyCompactList}\small\item\em parses the csv from filename and constructs a Ptxt\+Index\+File object \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a137beb44c4ae99942f7ab66f09135ff5}{create\+Ctxt\+Index\+File}} (\mbox{\hyperlink{classHDB__supergate___1_1CtxtIndexFile}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}} \&Index\+File)
+\begin{DoxyCompactList}\small\item\em encrypts the Ptxt\+Index\+File into Ctxt\+Index\+File \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a60fd45921aae266d8a2a788babde89d6}{Construct\+Query}} (\mbox{\hyperlink{classHDB__supergate___1_1HEQuery}{HDB\+\_\+supergate\+\_\+\+::\+HEQuery}} \&query, unsigned long input, \mbox{\hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{HDB\+\_\+supergate\+\_\+\+::\+Q\+\_\+\+TYPE\+\_\+t}} type, unsigned long source, std\+::vector$<$ unsigned long $>$ dest)
+\begin{DoxyCompactList}\small\item\em constructs a query object based on parameters \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ad77026234e58b9b8007ea663020c76c9}\label{classHDB__supergate__user___1_1USER_ad77026234e58b9b8007ea663020c76c9}} 
+void {\bfseries csv\+To\+DB} (\mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}} \&DB, \mbox{\hyperlink{classHDB__supergate___1_1CSVRange}{HDB\+\_\+supergate\+\_\+\+::\+CSVRange}} \&range)
+\item 
+void \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}{csv\+To\+DB}} (\mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}} \&DB, std\+::string path)
+\item 
+void \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}{csv\+To\+DB}} (\mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}} \&DB, std\+::string path, std\+::vector$<$ std\+::string $>$ \&headers)
+\item 
+unsigned long \mbox{\hyperlink{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}{max}} ()
+\item 
+\mbox{\hyperlink{classHDB__supergate___1_1PtxtIndexFile}{HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File}} \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}{get\+Ptxt\+Index\+File}} ()
+\item 
+void \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a27dea7a1edb83e156b93a272efaf0055}{print\+Decrypted}} (helib\+::\+Ctxt \&ctxt)
+\item 
+void \mbox{\hyperlink{classHDB__supergate__user___1_1USER_a6534e0a0a3e67140f2278b7793f73027}{print\+Ctxt\+Mat}} (\mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}} \&)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that simulates the \mbox{\hyperlink{classHDB__supergate__user___1_1USER}{USER}} that queries the DB. 
+
+\mbox{\hyperlink{classHDB__supergate__user___1_1USER}{USER}} class simulates the TEE and contains both public and secret keys. It can construct query objects and encrypt plaintext database to send to the SERVER class. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}\label{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!USER@{USER}}
+\index{USER@{USER}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{USER()}{USER()}}
+{\footnotesize\ttfamily HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::\+USER (\begin{DoxyParamCaption}\item[{he\+\_\+cmp\+::\+Comparator \&}]{comparator,  }\item[{const helib\+::\+Context \&}]{contx,  }\item[{helib\+::\+Pub\+Key \&}]{pk,  }\item[{helib\+::\+Sec\+Key \&}]{sk,  }\item[{bool}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Constructor for the \mbox{\hyperlink{classHDB__supergate__user___1_1USER}{USER}} class 
+\begin{DoxyParams}{Parameters}
+{\em comparator} & reference to comparator object \\
+\hline
+{\em contx} & reference to the crypto-\/context \\
+\hline
+{\em pk} & reference to the public key object \\
+\hline
+{\em sk} & reference to the secret key object \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a60fd45921aae266d8a2a788babde89d6}\label{classHDB__supergate__user___1_1USER_a60fd45921aae266d8a2a788babde89d6}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!ConstructQuery@{ConstructQuery}}
+\index{ConstructQuery@{ConstructQuery}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{ConstructQuery()}{ConstructQuery()}}
+{\footnotesize\ttfamily HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::\+Construct\+Query (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHDB__supergate___1_1HEQuery}{HDB\+\_\+supergate\+\_\+\+::\+HEQuery}} \&}]{query,  }\item[{unsigned long}]{input,  }\item[{\mbox{\hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{HDB\+\_\+supergate\+\_\+\+::\+Q\+\_\+\+TYPE\+\_\+t}}}]{type,  }\item[{unsigned long}]{source,  }\item[{std\+::vector$<$ unsigned long $>$}]{dest }\end{DoxyParamCaption})}
+
+
+
+constructs a query object based on parameters 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & reference to the query object to be populated \\
+\hline
+{\em input} & the input integer query \\
+\hline
+{\em type} & the type of the query to be executed in enum Q\+\_\+\+TYPE\+\_\+t \\
+\hline
+{\em source} & the integer index of source column to be queried from \\
+\hline
+{\em dest} & vector of integer indices of destination columns to be queried \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a137beb44c4ae99942f7ab66f09135ff5}\label{classHDB__supergate__user___1_1USER_a137beb44c4ae99942f7ab66f09135ff5}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!createCtxtIndexFile@{createCtxtIndexFile}}
+\index{createCtxtIndexFile@{createCtxtIndexFile}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{createCtxtIndexFile()}{createCtxtIndexFile()}}
+{\footnotesize\ttfamily HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::create\+Ctxt\+Index\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHDB__supergate___1_1CtxtIndexFile}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}} \&}]{Index\+File }\end{DoxyParamCaption})}
+
+
+
+encrypts the Ptxt\+Index\+File into Ctxt\+Index\+File 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Index\+File} & reference to the Ctxt\+Index\+File to be populated \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a6a953bbd435222a7121ab45e8c1c0955}\label{classHDB__supergate__user___1_1USER_a6a953bbd435222a7121ab45e8c1c0955}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!createPtxtIndexFile@{createPtxtIndexFile}}
+\index{createPtxtIndexFile@{createPtxtIndexFile}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{createPtxtIndexFile()}{createPtxtIndexFile()}}
+{\footnotesize\ttfamily HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::create\+Ptxt\+Index\+File (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})}
+
+
+
+parses the csv from filename and constructs a Ptxt\+Index\+File object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & file path to the raw csv data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}\label{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!csvToDB@{csvToDB}}
+\index{csvToDB@{csvToDB}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{csvToDB()}{csvToDB()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::csv\+To\+DB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}} \&}]{DB,  }\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+used to convert csv files without headers 
+\begin{DoxyParams}{Parameters}
+{\em DB} & the referecnce to the Ctxt\+\_\+mat datatype we are saving all ciphertext into \\
+\hline
+{\em path} & file path of the csv file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}\label{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!csvToDB@{csvToDB}}
+\index{csvToDB@{csvToDB}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{csvToDB()}{csvToDB()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::csv\+To\+DB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}} \&}]{DB,  }\item[{std\+::string}]{path,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{headers }\end{DoxyParamCaption})}
+
+used to convert csv files with headers into ciphertext DB 
+\begin{DoxyParams}{Parameters}
+{\em DB} & the referecnce to the Ctxt\+\_\+mat datatype we are saving all ciphertext into \\
+\hline
+{\em path} & file path of the csv file \\
+\hline
+{\em headers} & reference to the container of headers \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}\label{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!getPtxtIndexFile@{getPtxtIndexFile}}
+\index{getPtxtIndexFile@{getPtxtIndexFile}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{getPtxtIndexFile()}{getPtxtIndexFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndexFile}{HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File}} HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::get\+Ptxt\+Index\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the plaintext index file \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}\label{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!max@{max}}
+\index{max@{max}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily unsigned long HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+returns input\+\_\+range \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a6534e0a0a3e67140f2278b7793f73027}\label{classHDB__supergate__user___1_1USER_a6534e0a0a3e67140f2278b7793f73027}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!printCtxtMat@{printCtxtMat}}
+\index{printCtxtMat@{printCtxtMat}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{printCtxtMat()}{printCtxtMat()}}
+{\footnotesize\ttfamily void HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::print\+Ctxt\+Mat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}} \&}]{ }\end{DoxyParamCaption})}
+
+debug function to decrypt and print a Ctxt\+\_\+mat type object \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a27dea7a1edb83e156b93a272efaf0055}\label{classHDB__supergate__user___1_1USER_a27dea7a1edb83e156b93a272efaf0055}} 
+\index{HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}!printDecrypted@{printDecrypted}}
+\index{printDecrypted@{printDecrypted}!HDB\_supergate\_user\_::USER@{HDB\_supergate\_user\_::USER}}
+\doxysubsubsection{\texorpdfstring{printDecrypted()}{printDecrypted()}}
+{\footnotesize\ttfamily void HDB\+\_\+supergate\+\_\+user\+\_\+\+::\+USER\+::print\+Decrypted (\begin{DoxyParamCaption}\item[{helib\+::\+Ctxt \&}]{ctxt }\end{DoxyParamCaption})}
+
+debug function to decrypt and print the ciphertext 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/HDB\+\_\+supergate\+\_\+user.\+hpp\end{DoxyCompactItemize}

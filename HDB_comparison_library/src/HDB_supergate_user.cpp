@@ -186,8 +186,8 @@ namespace HDB_supergate_user_{
 				encryptAndInsert(contx, pk, ptxt_data[i], db[i]);
 			}
 		}
-		if (verbose)
-			cout << "size: " << db.size() << "\n[0]size: " << db[0].size() << endl;
+		// if (verbose)
+		cout << "created db with " << db[0].size() << "rows each with " << db.size() << "ciphertexts." << endl;
     }
 }
 

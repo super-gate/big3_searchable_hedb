@@ -311,6 +311,18 @@ namespace HDB_supergate_ {
                    nslots,
                    max_per,
                    verbose);
+        cout << "Index File create for " << cols.size() << "columns."
+             << "\nStatistics for each index:" << endl;
+        unsigned long counter = 0;
+        for (auto& pair: IndexFile)
+        {
+            unsigned long X = pair.second.getX();
+            unsigned long Y = pair.second.getY();
+            cout << "   Index for column " << pair.first << ": " << X << " rows(X) with " << Y << " ciphertexts(Y) each.\n"
+                 << "       Total: XY + Y = " << (X*Y + Y) << " ciphertexts." << endl;
+            counter += (X*Y+Y);
+        }
+        cout << "\nThis totals " << counter << " ciphertexts for the whole File." << endl;
     }
 
     void CtxtIndexFile::insert(std::string col, 

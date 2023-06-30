@@ -1,0 +1,83 @@
+\hypertarget{classHDB__supergate___1_1PtxtIndex}{}\doxysection{HDB\+\_\+supergate\+\_\+\+::Ptxt\+Index Class Reference}
+\label{classHDB__supergate___1_1PtxtIndex}\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+
+
+class representing a plaintext index  
+
+
+
+
+{\ttfamily \#include $<$HDB\+\_\+supergate.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex_ab20a8fdd29fcbb48772689399929bbdb}{insert}} (long k, unsigned long v)
+\item 
+int \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex_a25639e96fd7fbb05fd2406fa8a9e43de}{R}} ()
+\item 
+int \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex_afea9f7f34f70aa0a1e0360f7c85e44c7}{C}} ()
+\item 
+std\+::vector$<$ long $>$ \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex_a217db4eccb954e6cbc796147bc2370de}{get\+Keys}} ()
+\item 
+bool \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex_ab270127936094cc3206e982bfa6cbac9}{empty}} (long)
+\item 
+long \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex_aaa03f54cc4b9db5e1fc89fb5433f0925}{pop\+Back}} (long, bool emty=false)
+\item 
+void \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex_a29420568bf3ac7857139a72996b8f116}{print\+Index}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class representing a plaintext index 
+
+A plaintext index is a collection of $<$key, \mbox{[}uid\mbox{]}$>$ pairs, so each key is mapped to a list of uids that describe rows in the DB. Key are currently represented as integers. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHDB__supergate___1_1PtxtIndex_afea9f7f34f70aa0a1e0360f7c85e44c7}\label{classHDB__supergate___1_1PtxtIndex_afea9f7f34f70aa0a1e0360f7c85e44c7}} 
+\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}!C@{C}}
+\index{C@{C}!HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+\doxysubsubsection{\texorpdfstring{C()}{C()}}
+{\footnotesize\ttfamily int HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+::C (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns c, the maximum length of values array \mbox{\Hypertarget{classHDB__supergate___1_1PtxtIndex_ab270127936094cc3206e982bfa6cbac9}\label{classHDB__supergate___1_1PtxtIndex_ab270127936094cc3206e982bfa6cbac9}} 
+\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}!empty@{empty}}
+\index{empty@{empty}!HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+::empty (\begin{DoxyParamCaption}\item[{long}]{ }\end{DoxyParamCaption})}
+
+true if queried key does not have any values mapped to it \mbox{\Hypertarget{classHDB__supergate___1_1PtxtIndex_a217db4eccb954e6cbc796147bc2370de}\label{classHDB__supergate___1_1PtxtIndex_a217db4eccb954e6cbc796147bc2370de}} 
+\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}!getKeys@{getKeys}}
+\index{getKeys@{getKeys}!HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+\doxysubsubsection{\texorpdfstring{getKeys()}{getKeys()}}
+{\footnotesize\ttfamily std\+::vector$<$long$>$ HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+::get\+Keys (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the keys vector \mbox{\Hypertarget{classHDB__supergate___1_1PtxtIndex_ab20a8fdd29fcbb48772689399929bbdb}\label{classHDB__supergate___1_1PtxtIndex_ab20a8fdd29fcbb48772689399929bbdb}} 
+\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}!insert@{insert}}
+\index{insert@{insert}!HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+::insert (\begin{DoxyParamCaption}\item[{long}]{k,  }\item[{unsigned long}]{v }\end{DoxyParamCaption})}
+
+inserts value v into key k \mbox{\Hypertarget{classHDB__supergate___1_1PtxtIndex_aaa03f54cc4b9db5e1fc89fb5433f0925}\label{classHDB__supergate___1_1PtxtIndex_aaa03f54cc4b9db5e1fc89fb5433f0925}} 
+\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}!popBack@{popBack}}
+\index{popBack@{popBack}!HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+\doxysubsubsection{\texorpdfstring{popBack()}{popBack()}}
+{\footnotesize\ttfamily long HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+::pop\+Back (\begin{DoxyParamCaption}\item[{long}]{,  }\item[{bool}]{emty = {\ttfamily false} }\end{DoxyParamCaption})}
+
+removes the right-\/most key value from keys vector \mbox{\Hypertarget{classHDB__supergate___1_1PtxtIndex_a29420568bf3ac7857139a72996b8f116}\label{classHDB__supergate___1_1PtxtIndex_a29420568bf3ac7857139a72996b8f116}} 
+\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}!printIndex@{printIndex}}
+\index{printIndex@{printIndex}!HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+\doxysubsubsection{\texorpdfstring{printIndex()}{printIndex()}}
+{\footnotesize\ttfamily void HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+::print\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+debug function to print the index \mbox{\Hypertarget{classHDB__supergate___1_1PtxtIndex_a25639e96fd7fbb05fd2406fa8a9e43de}\label{classHDB__supergate___1_1PtxtIndex_a25639e96fd7fbb05fd2406fa8a9e43de}} 
+\index{HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}!R@{R}}
+\index{R@{R}!HDB\_supergate\_::PtxtIndex@{HDB\_supergate\_::PtxtIndex}}
+\doxysubsubsection{\texorpdfstring{R()}{R()}}
+{\footnotesize\ttfamily int HDB\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+::R (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the number of keys 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/HDB\+\_\+supergate.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,114 @@
+\hypertarget{namespaceHDB__supergate__}{}\doxysection{HDB\+\_\+supergate\+\_\+ Namespace Reference}
+\label{namespaceHDB__supergate__}\index{HDB\_supergate\_@{HDB\_supergate\_}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1CSVRow}{CSVRow}}
+\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1CSVIterator}{CSVIterator}}
+\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1CSVRange}{CSVRange}}
+\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndex}{Ptxt\+Index}}
+\begin{DoxyCompactList}\small\item\em class representing a plaintext index \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1PtxtIndexFile}{Ptxt\+Index\+File}}
+\begin{DoxyCompactList}\small\item\em class representing a collection of Ptxt\+Indexes \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index}}
+\begin{DoxyCompactList}\small\item\em class representing an encrypted ciphertext index \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1CtxtIndexFile}{Ctxt\+Index\+File}}
+\begin{DoxyCompactList}\small\item\em class representing a ciphertext index file \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classHDB__supergate___1_1HEQuery}{HEQuery}}
+\begin{DoxyCompactList}\small\item\em Object representing a query object used to query the HEDB. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structHDB__supergate___1_1BGV__param}{BGV\+\_\+param}}
+\item 
+struct \mbox{\hyperlink{structHDB__supergate___1_1STD128__HDB}{STD128\+\_\+\+HDB}}
+\item 
+struct \mbox{\hyperlink{structHDB__supergate___1_1TOY__HDB}{TOY\+\_\+\+HDB}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ helib\+::\+Ctxt $>$ \mbox{\hyperlink{namespaceHDB__supergate___aa5b91f65c0d938e53bfc1d53c2b16a4e}{Ctxt\+\_\+vec}}
+\item 
+typedef std\+::vector$<$ std\+::vector$<$ helib\+::\+Ctxt $>$ $>$ \mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{Ctxt\+\_\+mat}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{Q\+\_\+\+TYPE\+\_\+t}} \{ \newline
+{\bfseries EQ}
+, {\bfseries LT}
+, {\bfseries LEQ}
+, {\bfseries MIN}
+, \newline
+{\bfseries MAX}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a94aa7ddec2d0c3024e10088793af1d5f}\label{namespaceHDB__supergate___a94aa7ddec2d0c3024e10088793af1d5f}} 
+std\+::istream \& {\bfseries operator$>$$>$} (std\+::istream \&str, \mbox{\hyperlink{classHDB__supergate___1_1CSVRow}{CSVRow}} \&data)
+\item 
+struct \mbox{\hyperlink{structHDB__supergate___1_1BGV__param}{BGV\+\_\+param}} \mbox{\hyperlink{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}{Make\+BGVParam}} (long, long, long, long, long, long, long, long)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}\label{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}} 
+helib\+::\+Context {\bfseries Make\+BGVContext} (long, long, long, long, long, long)
+\item 
+helib\+::\+Context \mbox{\hyperlink{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}{Make\+BGVContext}} (const struct \mbox{\hyperlink{structHDB__supergate___1_1BGV__param}{BGV\+\_\+param}})
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a72f843eae140dad341be8a9e3fc22279}\label{namespaceHDB__supergate___a72f843eae140dad341be8a9e3fc22279}} 
+void {\bfseries set\+Index\+Params} (unsigned long, unsigned long, unsigned long, unsigned long \&, unsigned long \&bool)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a02ca20243e923d4a0c34d8feb4fc4088}\label{namespaceHDB__supergate___a02ca20243e923d4a0c34d8feb4fc4088}} 
+void {\bfseries data\+To\+ZZXSlot} (unsigned long data, vector$<$ ZZX $>$ \&dest, unsigned long counter, unsigned long digit\+\_\+base, unsigned long exp\+\_\+len, unsigned long enc\+\_\+base, he\+\_\+cmp\+::\+Comparator \&comparator)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a6eb55ba8f055d3208533a3bd27ce0dc1}\label{namespaceHDB__supergate___a6eb55ba8f055d3208533a3bd27ce0dc1}} 
+void {\bfseries encrypt\+And\+Insert} (const helib\+::\+Context \&contx, helib\+::\+Pub\+Key \&pk, std\+::vector$<$ NTL\+::\+ZZX $>$ \&ptxt, \mbox{\hyperlink{namespaceHDB__supergate___aa5b91f65c0d938e53bfc1d53c2b16a4e}{Ctxt\+\_\+vec}} \&dest)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a6749e17e945751fdc476b5261fd5cfc4}\label{namespaceHDB__supergate___a6749e17e945751fdc476b5261fd5cfc4}} 
+long {\bfseries find\+NSlots} (long, long)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+main namespace for all utility functions for a HEDB 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}\label{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}} 
+\index{HDB\_supergate\_@{HDB\_supergate\_}!Ctxt\_mat@{Ctxt\_mat}}
+\index{Ctxt\_mat@{Ctxt\_mat}!HDB\_supergate\_@{HDB\_supergate\_}}
+\doxysubsubsection{\texorpdfstring{Ctxt\_mat}{Ctxt\_mat}}
+{\footnotesize\ttfamily typedef std\+::vector$<$std\+::vector$<$helib\+::\+Ctxt$>$ $>$ \mbox{\hyperlink{namespaceHDB__supergate___af72bb68146f7abd4ac67cad6b38662c9}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}}}
+
+a matrix of ciphertexts, Ctxt\+\_\+mat \mbox{\Hypertarget{namespaceHDB__supergate___aa5b91f65c0d938e53bfc1d53c2b16a4e}\label{namespaceHDB__supergate___aa5b91f65c0d938e53bfc1d53c2b16a4e}} 
+\index{HDB\_supergate\_@{HDB\_supergate\_}!Ctxt\_vec@{Ctxt\_vec}}
+\index{Ctxt\_vec@{Ctxt\_vec}!HDB\_supergate\_@{HDB\_supergate\_}}
+\doxysubsubsection{\texorpdfstring{Ctxt\_vec}{Ctxt\_vec}}
+{\footnotesize\ttfamily typedef std\+::vector$<$helib\+::\+Ctxt$>$ \mbox{\hyperlink{namespaceHDB__supergate___aa5b91f65c0d938e53bfc1d53c2b16a4e}{HDB\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+vec}}}
+
+a vector of ciphertexts, Ctxt\+\_\+vec 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}\label{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}} 
+\index{HDB\_supergate\_@{HDB\_supergate\_}!Q\_TYPE\_t@{Q\_TYPE\_t}}
+\index{Q\_TYPE\_t@{Q\_TYPE\_t}!HDB\_supergate\_@{HDB\_supergate\_}}
+\doxysubsubsection{\texorpdfstring{Q\_TYPE\_t}{Q\_TYPE\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{HDB\+\_\+supergate\+\_\+\+::\+Q\+\_\+\+TYPE\+\_\+t}}}
+
+Query Type Enum A query can be equal EQ, less than LT, or less than or equal to LEQ. MIN and MAX queries are not supported yet. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}\label{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}} 
+\index{HDB\_supergate\_@{HDB\_supergate\_}!MakeBGVContext@{MakeBGVContext}}
+\index{MakeBGVContext@{MakeBGVContext}!HDB\_supergate\_@{HDB\_supergate\_}}
+\doxysubsubsection{\texorpdfstring{MakeBGVContext()}{MakeBGVContext()}}
+{\footnotesize\ttfamily helib\+::\+Context HDB\+\_\+supergate\+\_\+\+::\+Make\+BGVContext (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{structHDB__supergate___1_1BGV__param}{BGV\+\_\+param}}}]{ }\end{DoxyParamCaption})}
+
+function to create a helib\+::\+Context given parameters \mbox{\Hypertarget{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}\label{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}} 
+\index{HDB\_supergate\_@{HDB\_supergate\_}!MakeBGVParam@{MakeBGVParam}}
+\index{MakeBGVParam@{MakeBGVParam}!HDB\_supergate\_@{HDB\_supergate\_}}
+\doxysubsubsection{\texorpdfstring{MakeBGVParam()}{MakeBGVParam()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structHDB__supergate___1_1BGV__param}{BGV\+\_\+param}} HDB\+\_\+supergate\+\_\+\+::\+Make\+BGVParam (\begin{DoxyParamCaption}\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{ }\end{DoxyParamCaption})}
+
+function to create BGV\+\_\+\+Param given parameters 
