@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	unsigned long d = 3;	  	    // expansion depth. For UNI, max (p+1)/2 -> ((p+1)/2)^d-1
 	unsigned long l = 3;	  	    // expansion length. For UNI, max ((p+1)/2)^d -> (((p+1)/2)^d)^l-1
 	unsigned long scale = 6;  	    // TODO: scale factor, research if time
-	string db_filename = "mini";  // db filename
+	string db_filename = "insurance_int_encoded";  // db filename
 
 	bool verbose = false;			    // if true lots of debug info
 	bool std128 = false;				// if true, just use HDB_STD128 params, else use the default+user params
@@ -134,10 +134,41 @@ int main(int argc, char* argv[]) {
 	CtxtIndexFile indFile;
 	user.createCtxtIndexFile(indFile);
 	HELIB_NTIMER_STOP(timer_IndexFile);
-
+	// Ctxt test = db[0][0];
+	// for (int neg = -1; neg >= -50; neg--)
+	// {
+	// 	HELIB_NTIMER_START(timer_rotate_neg);
+	// 	shift(test, neg);
+	// 	// user.printDecrypted(test);
+	// 	HELIB_NTIMER_STOP(timer_rotate_neg);
+	// 	cout << "neg: " << neg;
+	// 	helib::printNamedTimer(std::cout, "timer_rotate_neg");
+	// }
+	// HELIB_NTIMER_START(timer_rotate_neg);
+	// shift(test, -3117);
+	// user.printDecrypted(test);
+	// HELIB_NTIMER_STOP(timer_rotate_neg);
+	// helib::printNamedTimer(std::cout, "timer_rotate_neg");
+	// HELIB_NTIMER_START(timer_rotate);
+	// shift(test, 1);
+	// user.printDecrypted(test);
+	// HELIB_NTIMER_STOP(timer_rotate);
+	// HELIB_NTIMER_START(timer_shift);
+	// shift(test, 1);
+	// user.printDecrypted(test);
+	// HELIB_NTIMER_STOP(timer_shift);
+	// HELIB_NTIMER_START(timer_total_sum);
+	// totalSums(test);
+	// user.printDecrypted(test);
+	// HELIB_NTIMER_STOP(timer_total_sum);
+	// helib::printNamedTimer(std::cout, "timer_rotate");
+	// helib::printNamedTimer(std::cout, "timer_shift");
+    // helib::printNamedTimer(std::cout, "timer_total_sum");
+	// return 1;
+	cout << "created index file" << endl;
 	/*SERVER SIDE */   
     SERVER server = SERVER(comparator, db, indFile, verbose);
-
+	cout << "created server" << endl;
 	/*
 	 * 1. readCSV() => reads csv file and populates plaintext DB
 	 * 2. DB is encrypted and stored in server
@@ -193,8 +224,173 @@ int main(int argc, char* argv[]) {
 
 	Ctxt_mat result;
 	HELIB_NTIMER_START(timer_Query);
-    server.QueryWithIndex(q, result);
+    // server.QueryWithIndex(q, result);
 	// server.Query(q, result);
+	CtxtIndex& Index = indFile.find(q.source);
+	unsigned long X = Index.getX();
+	unsigned long Y = Index.getY();
+
+	result.resize(q.dest.size()); // resize result so we have #dest rows
+	for (auto& row: result) row.reserve(Y);
+
+	unsigned long nslots = comparator.m_context.getNSlots();
+	unsigned long exp_len = comparator.m_expansionLen;
+	unsigned long D = comparator.m_slotDeg;
+	unsigned long max_packed = nslots / exp_len;
+
+	Ctxt_vec q_mod_p;
+	comparator.extract_mod_p(q_mod_p, q.query);
+
+	Ctxt_vec intermediates;
+	intermediates.reserve(Y);
+	for (auto& k_ctxt: Index.keys()) {
+		Ctxt_vec ctxt_eq_p;
+		Ctxt_vec k_mod_p;
+		comparator.extract_mod_p(k_mod_p, k_ctxt);
+		for (long iCoef = 0; iCoef < D; iCoef++)
+		{
+			Ctxt eql = q_mod_p[iCoef];
+			eql -= k_mod_p[iCoef];
+			//equality circuit
+			comparator.mapTo01_subfield(eql, 1);
+			eql.negate();
+			eql.addConstant(ZZ(1));
+			ctxt_eq_p.push_back(eql);
+		}
+		Ctxt ctxt_eq = ctxt_eq_p[D-1];
+		for(long iCoef = D - 2; iCoef >= 0; iCoef--)
+			ctxt_eq *= ctxt_eq_p[iCoef];
+		intermediates.emplace_back(ctxt_eq);
+	}
+	cout << "A done" << endl;
+
+	Ctxt_mat UID_extract = Index.uids(); //copy of the uids table
+	for (auto& row: UID_extract)
+	{
+		for (unsigned long c = 0; c < Index.getY(); ++c)
+			row[c] *= intermediates[c];
+	}
+	cout << "B done" << endl;
+	user.printCtxtMat(UID_extract);
+
+	intermediates.clear();
+	intermediates = UID_extract[0];
+	cout << "X: " << X << " Y: " << Y << endl;
+	for (int i = 1; i < X; ++i) //rotate and add
+	{
+		cout << " i: " << i << endl;
+		Ctxt_vec rot = UID_extract[i];
+		cout << "rot.size: " << rot.size() << endl;
+		for (auto& r: rot) 
+		{
+			HELIB_NTIMER_START(timer_rotate);
+			rotate(r, -1 * exp_len * i);
+			HELIB_NTIMER_STOP(timer_rotate);
+		}
+		printNamedTimer(cout, "timer_rotate");
+		cout << "   rotate done" << endl;
+		for (int j = 0; j < Y; ++j)
+			intermediates[j] += rot[j];
+		cout << "   add done" << endl;
+	}
+	cout << "C done" << endl;
+	for (auto& ctxt: intermediates) user.printDecrypted(ctxt);
+
+	for (auto& ctxt: intermediates)
+	{
+		cout << "For each ciphertext..." << endl;
+		Ctxt_vec final_res;
+		for (int i = 0; i < max_packed; ++i) 
+		{
+			HELIB_NTIMER_START(nslot);
+			vector<ZZX> p1_j(nslots);
+			for (int k = 0; k < exp_len; ++k)
+				p1_j[i * exp_len + k] = ZZX(1);
+			HELIB_NTIMER_START(timer_e1j_encrypt);
+			Ctxt e1_j(comparator.m_pk);
+			comparator.m_context.getView().encrypt(e1_j, p1_j);
+			HELIB_NTIMER_STOP(timer_e1j_encrypt);
+			Ctxt extract = e1_j;
+			extract *= ctxt;
+			Ctxt extract_copy = extract;
+			Ctxt TS_1 = extract;
+			for (int j = 1; j < max_packed; ++j)
+			{
+				shift(extract, -1 * exp_len);
+				TS_1 += extract;
+			}
+			// for (int j = i; j >= 0; j--)
+			// {
+			//     shift(extract_copy, -1 * exp_len);
+			//     TS_1 += extract_copy;
+			// }
+			cout << "   Extract and TS1" << endl;
+
+			Ctxt_vec EQ_Extract;
+			EQ_Extract.reserve(q.dest.size());
+			Ctxt_vec ts1_p;
+			comparator.extract_mod_p(ts1_p, TS_1);
+			for (int j = 0; j < db[0].size(); ++j)
+			{
+				Ctxt_vec c_uid_p;
+				Ctxt_vec ctxt_eq_p;
+				comparator.extract_mod_p(c_uid_p, db[0][j]);
+				for (long iCoef = 0; iCoef < D; iCoef++)
+				{
+					Ctxt eql = ts1_p[iCoef];
+					eql -= c_uid_p[iCoef];
+					//equality circuit
+					comparator.mapTo01_subfield(eql, 1);
+					
+					eql.negate();
+					eql.addConstant(ZZ(1));
+					ctxt_eq_p.push_back(eql);
+				}
+				Ctxt ctxt_eq = ctxt_eq_p[D-1];
+				for (long iCoef = D - 2; iCoef >= 0; iCoef--)
+					ctxt_eq *= ctxt_eq_p[iCoef];
+				if(exp_len != 1)
+				{
+					comparator.shift_and_mul(ctxt_eq, 0);
+					comparator.batch_shift_for_mul(ctxt_eq, 0, -1);
+				}
+				for (int k = 0; k < q.dest.size(); ++k)
+				{
+					Ctxt tmp = ctxt_eq;
+					tmp *= db[q.dest[k]][j];
+					if (!j)
+						EQ_Extract.push_back(tmp);
+					else
+						EQ_Extract[k] += tmp;
+				}
+			}
+			cout << "   Equal and Extract" << endl;
+
+			for (int k = 0; k < q.dest.size(); ++k)
+			{
+				Ctxt TS_left = EQ_Extract[k];
+				Ctxt TS_right = EQ_Extract[k];
+				for (int j = 0; j < max_packed - 1; ++j)
+				{
+					shift(TS_left, -1 * exp_len);
+					EQ_Extract[k] += TS_left;
+				}
+				EQ_Extract[k] *= e1_j;
+			}
+			cout << "   TS2 and extract" << endl;
+
+			if (!i) //if first
+				for (auto& ext: EQ_Extract) final_res.push_back(ext);
+			else
+				for (int k = 0; k < q.dest.size(); ++k) final_res[k] += EQ_Extract[k];
+			HELIB_NTIMER_STOP(nslot);
+			helib::printNamedTimer(cout, "nslot");
+			cout << "nslot" << endl;
+		}
+		
+
+		for (int k = 0; k < q.dest.size(); ++k) result[k].push_back(final_res[k]);
+	}
 	HELIB_NTIMER_STOP(timer_Query);
 
 	user.printCtxtMat(result);

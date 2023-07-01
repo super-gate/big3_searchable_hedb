@@ -25,7 +25,7 @@ namespace HDB_supergate_server_{
             size_t Row;                                 /**< represents the number of rows in the DB */
             size_t Col;                                 /**< represents the number of columns in the DB */
 
-            HDB_supergate_::Ctxt_vec v1_j;              /**< ciphertext vector contains all possible E(1)_j */
+            // HDB_supergate_::Ctxt_vec v1_j;              /**< ciphertext vector contains all possible E(1)_j */
         
             bool verbose;                               /**< flag for verbose execution */
 

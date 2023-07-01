@@ -184,6 +184,7 @@ namespace HDB_supergate_ {
                           Ctxt_vec& dest)
     {
         Ctxt ctxt(pk);
+        cout << "       encrypt and insert" << endl;
         contx.getView().encrypt(ctxt, pk, ptxt);
         dest.push_back(ctxt);
     }
@@ -201,6 +202,7 @@ namespace HDB_supergate_ {
                             bool verbose
                             )
     {
+        cout << "   encrypt" << endl;
         setIndexParams(ptxt_index.R(), ptxt_index.C(), max_per, X, Y, verbose);
 
         enc_key.reserve(Y);
@@ -269,19 +271,21 @@ namespace HDB_supergate_ {
                 key_queue.push_back(k);
             }
         }
+        cout << "   encrypt" << endl;
         if (counter < max_per)
         {
+            cout << ptxt_key << endl;
             encryptAndInsert(contx, pk, ptxt_key, enc_key); //key
             for (unsigned long i = 0; i < X; ++i)
                 encryptAndInsert(contx, pk, ptxt_uid[i], enc_uid[i]); //uids
         }
-        if (verbose)
-        {
+        // if (verbose)
+        // {
             cout << "key size: " << enc_key.size()
                  << "\nindex size: " << enc_uid.size()
                  << "\nindex[0] size: " << enc_uid[0].size() 
                  << "\nX: " << X << ", Y: " << Y << endl;
-        }
+        // }
         
     }
 
@@ -311,7 +315,7 @@ namespace HDB_supergate_ {
                    nslots,
                    max_per,
                    verbose);
-        cout << "Index File create for " << cols.size() << "columns."
+        cout << "Index File created for " << cols.size() << "columns."
              << "\nStatistics for each index:" << endl;
         unsigned long counter = 0;
         for (auto& pair: IndexFile)
@@ -322,7 +326,7 @@ namespace HDB_supergate_ {
                  << "       Total: XY + Y = " << (X*Y + Y) << " ciphertexts." << endl;
             counter += (X*Y+Y);
         }
-        cout << "\nThis totals " << counter << " ciphertexts for the whole File." << endl;
+        cout << "\nThis totals " << counter << " ciphertexts for the whole File.\n\n" << endl;
     }
 
     void CtxtIndexFile::insert(std::string col, 
@@ -351,12 +355,14 @@ namespace HDB_supergate_ {
                            nslots,
                            max_per,
                            verbose);
+        cout << "insert" << endl;
         insert(col, ctxt_index);
     }
     
     void CtxtIndexFile::insert(std::string col, CtxtIndex& ctxt_index)
     {
         IndexFile.emplace_back(pair(col, ctxt_index));
+        cols.push_back(col);
     }
 
     CtxtIndex& CtxtIndexFile::find(unsigned long i)

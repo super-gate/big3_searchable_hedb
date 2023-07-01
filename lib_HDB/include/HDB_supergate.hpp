@@ -9,9 +9,13 @@
 #include "../comp_lib/comparator.h"
 #include "../comp_lib/tools.h"
 
+/**
+ * \namespace HDB_supergate_
+ * main namespace for all utility functions for a HEDB
+*/
 namespace HDB_supergate_{
-    typedef std::vector<helib::Ctxt> Ctxt_vec;
-	typedef std::vector<std::vector<helib::Ctxt>> Ctxt_mat;
+    typedef std::vector<helib::Ctxt> Ctxt_vec;                      /**< a vector of ciphertexts, Ctxt_vec */
+	typedef std::vector<std::vector<helib::Ctxt>> Ctxt_mat;         /**< a matrix of ciphertexts, Ctxt_mat */
 
     class CSVRow
     {
@@ -85,52 +89,89 @@ namespace HDB_supergate_{
             CSVIterator end()   const {return CSVIterator{};}
     };
 
+    /**
+     * \class PtxtIndex
+     * \brief class representing a plaintext index
+     * 
+     * A plaintext index is a collection of <key, [uid]> pairs, so each key is mapped to a list of uids that describe
+     * rows in the DB. Key are currently represented as integers.
+    */
     class PtxtIndex
     {
         private:
-            std::vector<std::pair<long, std::vector<unsigned long>>> plaintext_index; // [ <key, [uids]> ]
-            std::vector<long> keys;
+            std::vector<std::pair<long, std::vector<unsigned long>>> plaintext_index;   /**< the plaintext index */
+            std::vector<long> keys;                                                     /**< separate collection of keys for convenience*/
 
-            int c = 0;
-            int last_index;
+            int c = 0;                                                                  /**< value representing the maximum length of [uids] array */
+            int last_index;                                                             /**< value representing the most recently referenced key */
 
         public:
-            void insert(long k, unsigned long v);
+            void insert(long k, unsigned long v);                                       /**< inserts value v into key k */
 
-            int R() {return keys.size();}
-            int C() {return c;}
-            std::vector<long> getKeys() {return keys;}
+            int R() {return keys.size();}                                               /**< returns the number of keys */
+            int C() {return c;}                                                         /**< returns c, the maximum length of values array */
+            std::vector<long> getKeys() {return keys;}                                  /**< returns the keys vector */
             
-            bool empty(long);
-            long popBack(long, bool emty = false);
-            void printIndex();
+            bool empty(long);                                                           /**< true if queried key does not have any values mapped to it*/
+            long popBack(long, bool emty = false);                                      /**< removes the right-most key value from keys vector */
+            void printIndex();                                                          /**< debug function to print the index */
     };
 
+    /**
+     * \class PtxtIndexFile
+     * \brief class representing a collection of PtxtIndexes
+     * 
+     * The plaintext index file is the object representing lots of plaintext indexes. It is represented as a vector of 
+     * <column name, PtxtIndex> pairs, with an index associated with each column of a DB.
+    */
     class PtxtIndexFile
     {
         private:
-            std::vector<std::pair<std::string, PtxtIndex>> IndexFile; //[ <colname, PtxtIndex> ]
-            std::vector<std::string> cols;
+            std::vector<std::pair<std::string, PtxtIndex>> IndexFile;                               /**< The IndexFile */
+            std::vector<std::string> cols;                                                          /**< separate collection of column names */
 
         public:
-            std::vector<std::pair<std::string, PtxtIndex>>& getIndexFile() {return IndexFile;}
-            void insert(std::string col, long k, unsigned long v);
+            std::vector<std::pair<std::string, PtxtIndex>>& getIndexFile() {return IndexFile;}      /**< getter for the IndexFile */
+            void insert(std::string col, long k, unsigned long v);                                  /** inserts for column col, key k, value v */
 
-            void printIndex(std::string col);
-
-            void printIndexFile();
+            void printIndex(std::string col);                                                       /**< debug function for printing a particular index, given column name*/
+            void printIndexFile();                                                                  /**< debug function for printing the entire PtxtIndexFile*/
     };
 
+    /**
+     * \class CtxtIndex
+     * \brief class representing an encrypted ciphertext index
+     * 
+     * A ciphertext index has a Ctxt_vec type of encrypted keys and Ctxt_mat type of encrypted uids.
+     * The encrypted uids has dimension of X rows and Y columns.
+    */
     class CtxtIndex
     {
         private:
-            Ctxt_vec enc_key;
-            Ctxt_mat enc_uid;
-            unsigned long X, Y;
+            Ctxt_vec enc_key;               /**< the encrypted keys as vector of ciphertexts */
+            Ctxt_mat enc_uid;               /**< the encrypted uids as matrix of ciphertexts */
+            unsigned long X;                /**< the number of rows in the enc_uid */
+            unsigned long Y;                /**< size of enc_key / number of columns in enc_uid */
             
         public:
-            void encrypt(PtxtIndex, 
-                         he_cmp::Comparator&,
+            /**
+             * \fn encrypt
+             * \brief encrypts a plaintext index into ciphertext index
+             * 
+             * @param ptIndex the plaintext index
+             * @param comparator reference to comparator class to encode the numbers into compatible format
+             * @param contx crypto context for encryption
+             * @param pk public key for encryption
+             * @param input_range the integer upper bound for input
+             * @param digit_base the modulo base for integer encoding
+             * @param enc_base actual encryption base including d and l
+             * @param exp_len expansion length l
+             * @param nslots number of slots in a single ciphertext
+             * @param max_per number of integers that fit in a single ciphertext
+             * @param verbose verbose toggle
+            */
+            void encrypt(PtxtIndex ptIndex, 
+                         he_cmp::Comparator& comparator,
                          const helib::Context& contx,
                          helib::PubKey& pk,
                          unsigned long input_range, 
@@ -141,21 +182,44 @@ namespace HDB_supergate_{
                          unsigned long max_per,
                          bool verbose
                          );
-            Ctxt_vec& keys() {return enc_key;}
-            Ctxt_mat& uids() {return enc_uid;}
-            unsigned long getX() {return X;}
-            unsigned long getY() {return Y;}
+            Ctxt_vec& keys() {return enc_key;}      /**< getter for enc_key */
+            Ctxt_mat& uids() {return enc_uid;}      /**< getter for enc_uid */
+            unsigned long getX() {return X;}        /**< getter for X value */
+            unsigned long getY() {return Y;}        /**< getter for Y value */
     };
 
+    /**
+     * \class CtxtIndexFile
+     * \brief class representing a ciphertext index file
+     * 
+     * A ciphertext intex file is a collection of CtxtIndexes. It is a collection of <column name, CtxtIndex> pairs, with
+     * the column name and corresponding ciphertext index as a pair.
+    */
     class CtxtIndexFile
     {
         private:
-            std::vector<std::pair<std::string, CtxtIndex>> IndexFile; //TODO: for now use string colnames, later encrypt this
-            std::vector<std::string> cols;
+            std::vector<std::pair<std::string, CtxtIndex>> IndexFile;       /**< The Index File. TODO: should consider encrypting the column names as well. */
+            std::vector<std::string> cols;                                  /**< seperate collection of column names*/
 
         public:
-            void encrypt(PtxtIndexFile&,
-                         he_cmp::Comparator&,
+            /**
+             * \fn encrypt
+             * \brief encrypts a plaintext index file into ciphertext index file
+             * 
+             * @param ptIndexFile reference to the plaintext index file
+             * @param comparator reference to comparator class to encode the numbers into compatible format
+             * @param contx crypto context for encryption
+             * @param pk public key for encryption
+             * @param input_range the integer upper bound for input
+             * @param digit_base the modulo base for integer encoding
+             * @param enc_base actual encryption base including d and l
+             * @param exp_len expansion length l
+             * @param nslots number of slots in a single ciphertext
+             * @param max_per number of integers that fit in a single ciphertext
+             * @param verbose verbose toggle
+            */
+            void encrypt(PtxtIndexFile& ptIndexFile,
+                         he_cmp::Comparator& comparator,
                          const helib::Context& contx,
                          helib::PubKey& pk,
                          unsigned long input_range, 
@@ -166,10 +230,27 @@ namespace HDB_supergate_{
                          unsigned long max_per,
                          bool verbose
                          );
-                          
-            void insert(std::string, 
-                        PtxtIndex&,
-                        he_cmp::Comparator&,
+            
+            /**
+             * \fn insert
+             * \brief encrypts a plaintext index into ciphertext index
+             * 
+             * @param colname the column name to be inserted as
+             * @param ptIndex the plaintext index
+             * @param comparator reference to comparator class to encode the numbers into compatible format
+             * @param contx crypto context for encryption
+             * @param pk public key for encryption
+             * @param input_range the integer upper bound for input
+             * @param digit_base the modulo base for integer encoding
+             * @param enc_base actual encryption base including d and l
+             * @param exp_len expansion length l
+             * @param nslots number of slots in a single ciphertext
+             * @param max_per number of integers that fit in a single ciphertext
+             * @param verbose verbose toggle
+            */
+            void insert(std::string colname, 
+                        PtxtIndex& ptIndex,
+                        he_cmp::Comparator& comparator,
                         const helib::Context& contx,
                         helib::PubKey& pk,
                         unsigned long input_range, 
@@ -180,22 +261,42 @@ namespace HDB_supergate_{
                         unsigned long max_per,
                         bool verbose
                         );
-            void insert(std::string, CtxtIndex&);
+            void insert(std::string colname, CtxtIndex& index);         /**< Inserts CtxtIndex for given colname */
 
-            CtxtIndex& find(unsigned long);
-            CtxtIndex& find(std::string);
-            unsigned long indexOf(std::string);
+            CtxtIndex& find(unsigned long);                             /**< Finds the corresponding CtxtIndex given index of column */
+            CtxtIndex& find(std::string);                               /**< Finds the corresponding CtxtIndex given column name */
+            unsigned long indexOf(std::string);                         /**< Returns the index given the column name */
     };
 
+    /**
+     * \class HEQuery
+     * \brief Object representing a query object used to query the HEDB
+    */
     class HEQuery {
         public:
-        unsigned long source; // source column TODO: encrypt this too
-        helib::Ctxt query; // query ctxt
-        std::pair<helib::Ctxt, helib::Ctxt> Q_type; //query type: EQ, LT, LEQ
-        std::vector<unsigned long> dest; // dest column(s) TODO: encrypt this too
+        unsigned long source;                           /**< The source column index. TODO: encrypt this too */
+        helib::Ctxt query;                              /**< the query ciphertext */
+        std::pair<helib::Ctxt, helib::Ctxt> Q_type;     /**< query type EQ <E(1), E(0)>, LT <E(0), E(1)>, or LEQ <E(1),E(1)> */
+        std::vector<unsigned long> dest;                /**< Collection of destination columns to query. TODO: encrypt these*/
 
+        /**
+         * Constructor of the HEQuery class
+         * 
+         * The constructor takes in the public key to initialize query ciphertext and query type ctxt pair.
+         * @param pk reference to the public key
+        */
         HEQuery(helib::PubKey& pk) : query(pk), Q_type(pair(query, query)) {};
 
+        /**
+         * \fn insert
+         * \brief inserts query information
+         * 
+         * @param src the source column. TODO: encrypt
+         * @param EQ The ciphertext representing EQ type. Either E(1) or E(0)
+         * @param LT The ciphertext representing LT type. Either E(1) or E(0)
+         * @param qry The query ciphertext
+         * @param dst the destination columns. TODO: encrpyt
+        */
         void insert(unsigned long src,
                     helib::Ctxt& EQ,
                     helib::Ctxt& LT,
@@ -209,7 +310,11 @@ namespace HDB_supergate_{
         }
     };
     
-    /* Query Type */
+    /**
+     * Query Type Enum
+     * A query can be equal EQ, less than LT, or less than or equal to LEQ.
+     * MIN and MAX queries are not supported yet.
+    */
     enum Q_TYPE_t {
         EQ,
         LT,
@@ -218,7 +323,11 @@ namespace HDB_supergate_{
         MAX
     };
 
-    /* BGV Context Param*/
+    /**
+     * BGV_param struct
+     * A struct representing all necessary parameters to construct a BGV crypto context
+     * and the necessary comparison logic.
+    */
     struct BGV_param {
         long p;
         long d;
@@ -229,18 +338,14 @@ namespace HDB_supergate_{
         long scale;
         long r;
     };
- 
-/*
-	p: 167, d: 3, m: 28057, nb_primes: 538, c: 4, l: 3, scale: 6, r: 1
-   */
 
     const struct BGV_param STD128_HDB{
         167,     // p
         3,     // d
         28057,    // m
         800,     // nb_primes
-        3,      // l
-        4,      // c
+        2,      // l
+        3,      // c
         6,      // scale
         1,      // r
     };
@@ -250,24 +355,48 @@ namespace HDB_supergate_{
         3,     // d
         300,    // m
         600,     // nb_primes
-        3,      // l
+        4,      // l
         3,      // c
         6,      // scale
         1,      // r
     };
 
-    struct BGV_param MakeBGVParam(long, long, long, long, long, long, long, long);
+    struct BGV_param MakeBGVParam(long, long, long, long, long, long, long, long);  /**< function to create BGV_Param given parameters */
     
-    helib::Context MakeBGVContext(long, long, long, long, long, long);
+    helib::Context MakeBGVContext(long, long, long, long, long, long);              /** function to create a helib::Context given parameters */
  
-    helib::Context MakeBGVContext(const struct BGV_param);
+    helib::Context MakeBGVContext(const struct BGV_param);                          /** function to create a helib::Context given BGV_Param struct */
 
+    /**
+     * \fn setIndexParams
+     * \brief helper function for setting X and Y, parameters needed for creating the encrypted index file
+     * 
+     * @param R the R value
+     * @param C the C value
+     * @param max_per maximum number of integers that fit in one ciphertext
+     * @param X reference to X=min(R,C)
+     * @param Y reference to Y=R >= C ? ceil(R/max_per) : ceil(C/max_per)
+     * @param verbose verbose toggle
+    */
     void setIndexParams(unsigned long, 
                         unsigned long, 
                         unsigned long, 
                         unsigned long&, 
-                        unsigned long&);
+                        unsigned long&,
+                        bool);
 
+    /**
+     * \fn dataToZZXSlot
+     * \brief helper function to encode integer data into a compatible plaintext format
+     * 
+     * @param data the integer data
+     * @param dest reference to the plaintext polynomial vector that the data will be encoded into
+     * @param counter utility variable to count when the data needs to be converted
+     * @param digit_base the modulo base of the system
+     * @param exp_len the expansion length l
+     * @param enc_base the encryption base of the system
+     * @param comparator reference to the comparator for encoding
+    */
     void dataToZZXSlot(unsigned long data,
                        vector<ZZX>& dest,
                        unsigned long counter,
@@ -277,11 +406,28 @@ namespace HDB_supergate_{
                        he_cmp::Comparator& comparator
                        );
     
+    /**
+     * \fn encryptAndInsert
+     * \brief helper function encrypting the plaintext and inserting into the destination ciphertext vector
+     * 
+     * @param contx reference to the crypto context for encryption
+     * @param pk reference to the public key for encryption
+     * @param ptxt reference to the plaintext
+     * @param dest reference to the Ctxt_vec that the plaintext will be inserted into
+    */
     void encryptAndInsert(const helib::Context& contx,
                           helib::PubKey& pk,
                           std::vector<NTL::ZZX>& ptxt,
                           Ctxt_vec& dest);
 
+    /**
+     * \fn findNSlots
+     * \brief utility function of finding the number of slots for a ciphertext given its parameters
+     * 
+     * @param p plaintext modulus
+     * @param m another BGV parameter
+     * @returns the number of slots
+    */
     long findNSlots(long, long);
 };
 #endif

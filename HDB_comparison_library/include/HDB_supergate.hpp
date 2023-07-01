@@ -344,8 +344,8 @@ namespace HDB_supergate_{
         3,     // d
         28057,    // m
         800,     // nb_primes
-        3,      // l
-        4,      // c
+        2,      // l
+        3,      // c
         6,      // scale
         1,      // r
     };
@@ -355,7 +355,7 @@ namespace HDB_supergate_{
         3,     // d
         300,    // m
         600,     // nb_primes
-        3,      // l
+        4,      // l
         3,      // c
         6,      // scale
         1,      // r
@@ -382,7 +382,7 @@ namespace HDB_supergate_{
                         unsigned long, 
                         unsigned long, 
                         unsigned long&, 
-                        unsigned long&
+                        unsigned long&,
                         bool);
 
     /**

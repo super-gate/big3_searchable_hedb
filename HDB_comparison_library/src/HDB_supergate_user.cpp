@@ -187,7 +187,7 @@ namespace HDB_supergate_user_{
 			}
 		}
 		// if (verbose)
-		cout << "created db with " << db[0].size() << "rows each with " << db.size() << "ciphertexts." << endl;
+		cout << "created db with " << db.size() << " rows each with " << db[0].size() << " ciphertexts." << endl;
     }
 }
 
