@@ -10,8 +10,8 @@ namespace HDB_supergate_ {
                                   long d, 
                                   long m, 
                                   long nb_primes, 
-                                  long c, 
                                   long expansion_len, 
+                                  long c, 
                                   long scale, 
                                   long r) 
     {
@@ -184,7 +184,6 @@ namespace HDB_supergate_ {
                           Ctxt_vec& dest)
     {
         Ctxt ctxt(pk);
-        cout << "       encrypt and insert" << endl;
         contx.getView().encrypt(ctxt, pk, ptxt);
         dest.push_back(ctxt);
     }
@@ -202,7 +201,6 @@ namespace HDB_supergate_ {
                             bool verbose
                             )
     {
-        cout << "   encrypt" << endl;
         setIndexParams(ptxt_index.R(), ptxt_index.C(), max_per, X, Y, verbose);
 
         enc_key.reserve(Y);
@@ -218,7 +216,9 @@ namespace HDB_supergate_ {
 		unsigned long counter = 0;
         while (!key_queue.empty())
         {
-            
+            // cout << "key queue: " << key_queue.size() << ", " << key_queue.empty() << endl;
+            // for (long x: key_queue) cout << x << ", ";
+            // cout << endl;
             unsigned long k = key_queue.front();
             key_queue.pop_front();
 
@@ -257,6 +257,9 @@ namespace HDB_supergate_ {
             counter++;
             if (counter == max_per)
 			{
+                // cout << ptxt_key << endl;
+                // cout << "______________________________" << endl;
+                // cout << ptxt_uid << endl;
                 encryptAndInsert(contx, pk, ptxt_key, enc_key); //key
                 for (unsigned long i = 0; i < X; ++i)
                     encryptAndInsert(contx, pk, ptxt_uid[i], enc_uid[i]); //uids
@@ -271,21 +274,19 @@ namespace HDB_supergate_ {
                 key_queue.push_back(k);
             }
         }
-        cout << "   encrypt" << endl;
-        if (counter < max_per)
+        if (counter && counter < max_per)
         {
-            cout << ptxt_key << endl;
             encryptAndInsert(contx, pk, ptxt_key, enc_key); //key
             for (unsigned long i = 0; i < X; ++i)
                 encryptAndInsert(contx, pk, ptxt_uid[i], enc_uid[i]); //uids
         }
-        // if (verbose)
-        // {
+        if (verbose)
+        {
             cout << "key size: " << enc_key.size()
                  << "\nindex size: " << enc_uid.size()
                  << "\nindex[0] size: " << enc_uid[0].size() 
                  << "\nX: " << X << ", Y: " << Y << endl;
-        // }
+        }
         
     }
 
@@ -355,7 +356,6 @@ namespace HDB_supergate_ {
                            nslots,
                            max_per,
                            verbose);
-        cout << "insert" << endl;
         insert(col, ctxt_index);
     }
     

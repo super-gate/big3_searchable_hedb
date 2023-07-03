@@ -217,8 +217,8 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	vector<unsigned long> dest = {2}; //TODO: try more dest columns
-	unsigned long source = 0;
+	vector<unsigned long> dest = {1}; //TODO: try more dest columns
+	unsigned long source = 1;
 	HEQuery q(public_key);
 	user.ConstructQuery(q, input, queryType, source, dest);
 
@@ -226,6 +226,7 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_START(timer_Query);
     // server.QueryWithIndex(q, result);
 	// server.Query(q, result);
+	
 	CtxtIndex& Index = indFile.find(q.source);
 	unsigned long X = Index.getX();
 	unsigned long Y = Index.getY();
@@ -244,26 +245,137 @@ int main(int argc, char* argv[]) {
 	Ctxt_vec intermediates;
 	intermediates.reserve(Y);
 	for (auto& k_ctxt: Index.keys()) {
-		Ctxt_vec ctxt_eq_p;
-		Ctxt_vec k_mod_p;
-		comparator.extract_mod_p(k_mod_p, k_ctxt);
-		for (long iCoef = 0; iCoef < D; iCoef++)
+		// Ctxt_vec ctxt_eq_p;
+		// Ctxt_vec k_mod_p;
+		// comparator.extract_mod_p(k_mod_p, k_ctxt);
+		// for (long iCoef = 0; iCoef < D; iCoef++)
+		// {
+		// 	Ctxt eql = q_mod_p[iCoef];
+		// 	eql -= k_mod_p[iCoef];
+		// 	//equality circuit
+		// 	comparator.mapTo01_subfield(eql, 1);
+		// 	eql.negate();
+		// 	eql.addConstant(ZZ(1));
+		// 	ctxt_eq_p.push_back(eql);
+		// }
+		// Ctxt ctxt_eq = ctxt_eq_p[D-1];
+		// for(long iCoef = D - 2; iCoef >= 0; iCoef--)
+		// 	ctxt_eq *= ctxt_eq_p[iCoef];
+		cout << contx.getNSlots() << endl;
+		// user.printDecrypted(k_ctxt);
+		Ctxt test = k_ctxt;
+		HELIB_NTIMER_START(shift1);
+		rotate(test, 1);
+		// user.printDecrypted(test);
+		HELIB_NTIMER_STOP(shift1);
+		HELIB_NTIMER_START(shift19);
+		rotate(test, contx.getNSlots()-1);
+		// user.printDecrypted(test);
+		HELIB_NTIMER_STOP(shift19);
+		HELIB_NTIMER_START(shift_1);
+		rotate(test, -1);
+		// user.printDecrypted(test);
+		HELIB_NTIMER_STOP(shift_1);
+		HELIB_NTIMER_START(shift_19);
+		rotate(test, -1 * contx.getNSlots() + 1);
+		// user.printDecrypted(test);
+		HELIB_NTIMER_STOP(shift_19);
+		printNamedTimer(cout, "shift1");
+		printNamedTimer(cout, "shift19");
+		printNamedTimer(cout, "shift_1");
+		printNamedTimer(cout, "shift_19");
+		return 0;
+		cout << comparator.m_mulMasksSize << endl;
+		cout << l << endl;
+		Ctxt z_ctxt = k_ctxt;
+		cout << "kctxt: " << endl;
+		user.printDecrypted(k_ctxt);
+		cout << "q.query: " << endl;
+		user.printDecrypted(q.query);
+		Ctxt testshift = k_ctxt;
+		// comparator.shift_and_add(testshift, 0);
+		// cout << "shift_and_add(query)" << endl;
+		// user.printDecrypted(testshift);
+		// testshift = k_ctxt;
+		// comparator.shift_and_mul(testshift, 0);
+		// cout << "shift_and_mul(query)" << endl;
+		// user.printDecrypted(testshift);
+		testshift = k_ctxt;
+		comparator.batch_shift(testshift, 0,1);
+		cout << "batch_shift(query, -1)" << endl;
+		user.printDecrypted(testshift);
+		testshift = k_ctxt;
+		comparator.batch_shift(testshift, 0,2);
+		cout << "batch_shift(query, -2)" << endl;
+		user.printDecrypted(testshift);
+		testshift = k_ctxt;
+		comparator.batch_shift(testshift, 0,3);
+		cout << "batch_shift(query, -3)" << endl;
+		user.printDecrypted(testshift);
+		testshift = k_ctxt;
+		comparator.batch_shift_for_mul(testshift, 0,-1);
+		cout << "batch_shift_for_mul(query, -1)" << endl;
+		user.printDecrypted(testshift);
+		// testshift = k_ctxt;
+		comparator.batch_shift_for_mul(testshift, 0,-2);
+		cout << "batch_shift_for_mul(query, -2)" << endl;
+		user.printDecrypted(testshift);
+		// testshift = k_ctxt;
+		comparator.batch_shift_for_mul(testshift, 0,-3);
+		cout << "batch_shift_for_mul(query, -3)" << endl;
+		user.printDecrypted(testshift);
+		return 1;
+		z_ctxt -= q.query;
+		Ctxt_vec mod_p_coefs;
+		comparator.extract_mod_p(mod_p_coefs, z_ctxt);
+		Ctxt_vec eq_mod_ctxt_arr, less_mod_ctxt_arr;
+		for(unsigned long iCoef = 0; iCoef < comparator.m_slotDeg; ++iCoef)
 		{
-			Ctxt eql = q_mod_p[iCoef];
-			eql -= k_mod_p[iCoef];
-			//equality circuit
-			comparator.mapTo01_subfield(eql, 1);
-			eql.negate();
-			eql.addConstant(ZZ(1));
-			ctxt_eq_p.push_back(eql);
+			Ctxt ctxt_less = Ctxt(comparator.m_pk);
+			Ctxt ctxt_eq = Ctxt(comparator.m_pk);
+			comparator.evaluate_univar_less_poly(ctxt_less, ctxt_eq, mod_p_coefs[iCoef]);
+			less_mod_ctxt_arr.emplace_back(ctxt_less);
+			ctxt_eq.negate();
+			ctxt_eq.addConstant(ZZ(1));
+			eq_mod_ctxt_arr.emplace_back(ctxt_eq);
 		}
-		Ctxt ctxt_eq = ctxt_eq_p[D-1];
-		for(long iCoef = D - 2; iCoef >= 0; iCoef--)
-			ctxt_eq *= ctxt_eq_p[iCoef];
+		Ctxt ctxt_less = less_mod_ctxt_arr[comparator.m_slotDeg - 1];
+		Ctxt ctxt_eq = eq_mod_ctxt_arr[comparator.m_slotDeg - 1];
+		for(long iCoef = comparator.m_slotDeg - 2; iCoef >= 0; iCoef--)
+		{
+			Ctxt tmp = ctxt_eq;
+			tmp *= less_mod_ctxt_arr[iCoef];
+			ctxt_less += tmp;
+
+			ctxt_eq *= eq_mod_ctxt_arr[iCoef];
+		}
+		cout << "	ctxteq: " << endl;
+		user.printDecrypted(ctxt_eq);
+		cout << "	ctxtless: " << endl;
+		user.printDecrypted(ctxt_less);
+		if(comparator.m_expansionLen != 1)
+		{
+			comparator.shift_and_mul(ctxt_eq, 0);
+			cout << "	shift_and_mul: " << endl;
+			user.printDecrypted(ctxt_eq);
+			comparator.batch_shift_for_mul(ctxt_eq, 0, -1);
+			cout << "	batch_shift_for_mul: " << endl;
+			user.printDecrypted(ctxt_eq);
+
+			ctxt_less *= ctxt_eq;
+			cout << "	ctxt_less: " << endl;
+			user.printDecrypted(ctxt_less);
+			comparator.shift_and_add(ctxt_less, 0);
+			cout << "	shift_and_add: " << endl;
+			user.printDecrypted(ctxt_less);
+		}
+		Ctxt less_final = ctxt_less;
+		cout << "	less_final: " << endl;
+		user.printDecrypted(ctxt_less);
 		intermediates.emplace_back(ctxt_eq);
 	}
 	cout << "A done" << endl;
-
+	return 0;
 	Ctxt_mat UID_extract = Index.uids(); //copy of the uids table
 	for (auto& row: UID_extract)
 	{
@@ -278,23 +390,37 @@ int main(int argc, char* argv[]) {
 	cout << "X: " << X << " Y: " << Y << endl;
 	for (int i = 1; i < X; ++i) //rotate and add
 	{
-		cout << " i: " << i << endl;
+		// cout << " i: " << i << endl;
 		Ctxt_vec rot = UID_extract[i];
-		cout << "rot.size: " << rot.size() << endl;
+		// cout << "rot.size: " << rot.size() << endl;
 		for (auto& r: rot) 
 		{
-			HELIB_NTIMER_START(timer_rotate);
+			// HELIB_NTIMER_START(timer_rotate);
 			rotate(r, -1 * exp_len * i);
-			HELIB_NTIMER_STOP(timer_rotate);
+			// HELIB_NTIMER_STOP(timer_rotate);
 		}
-		printNamedTimer(cout, "timer_rotate");
-		cout << "   rotate done" << endl;
+		// printNamedTimer(cout, "timer_rotate");
+		// cout << "   rotate done" << endl;
 		for (int j = 0; j < Y; ++j)
 			intermediates[j] += rot[j];
-		cout << "   add done" << endl;
+		// cout << "   add done" << endl;
 	}
 	cout << "C done" << endl;
 	for (auto& ctxt: intermediates) user.printDecrypted(ctxt);
+	
+	HELIB_NTIMER_START(timer_e1j_encrypt);
+	Ctxt_vec e1_j;
+	for (int i = 0; i < max_packed; ++i) 
+	{
+		vector<ZZX> p1_j(nslots);
+		for (int k = 0; k < exp_len; ++k)
+			p1_j[i * exp_len + k] = ZZX(1);
+		Ctxt e1(comparator.m_pk);
+		comparator.m_context.getView().encrypt(e1, p1_j);
+		e1_j.push_back(e1);
+	}
+	HELIB_NTIMER_STOP(timer_e1j_encrypt);
+	printNamedTimer(cout, "timer_e1j_encrypt");
 
 	for (auto& ctxt: intermediates)
 	{
@@ -303,16 +429,8 @@ int main(int argc, char* argv[]) {
 		for (int i = 0; i < max_packed; ++i) 
 		{
 			HELIB_NTIMER_START(nslot);
-			vector<ZZX> p1_j(nslots);
-			for (int k = 0; k < exp_len; ++k)
-				p1_j[i * exp_len + k] = ZZX(1);
-			HELIB_NTIMER_START(timer_e1j_encrypt);
-			Ctxt e1_j(comparator.m_pk);
-			comparator.m_context.getView().encrypt(e1_j, p1_j);
-			HELIB_NTIMER_STOP(timer_e1j_encrypt);
-			Ctxt extract = e1_j;
+			Ctxt extract = e1_j[i];
 			extract *= ctxt;
-			Ctxt extract_copy = extract;
 			Ctxt TS_1 = extract;
 			for (int j = 1; j < max_packed; ++j)
 			{
@@ -349,11 +467,13 @@ int main(int argc, char* argv[]) {
 				Ctxt ctxt_eq = ctxt_eq_p[D-1];
 				for (long iCoef = D - 2; iCoef >= 0; iCoef--)
 					ctxt_eq *= ctxt_eq_p[iCoef];
+				cout << "	ctxteq: " << endl;
+				user.printDecrypted(ctxt_eq);
 				if(exp_len != 1)
 				{
 					comparator.shift_and_mul(ctxt_eq, 0);
-					comparator.batch_shift_for_mul(ctxt_eq, 0, -1);
 				}
+				user.printDecrypted(ctxt_eq);
 				for (int k = 0; k < q.dest.size(); ++k)
 				{
 					Ctxt tmp = ctxt_eq;
@@ -375,7 +495,7 @@ int main(int argc, char* argv[]) {
 					shift(TS_left, -1 * exp_len);
 					EQ_Extract[k] += TS_left;
 				}
-				EQ_Extract[k] *= e1_j;
+				EQ_Extract[k] *= e1_j[i];
 			}
 			cout << "   TS2 and extract" << endl;
 
@@ -391,6 +511,7 @@ int main(int argc, char* argv[]) {
 
 		for (int k = 0; k < q.dest.size(); ++k) result[k].push_back(final_res[k]);
 	}
+	
 	HELIB_NTIMER_STOP(timer_Query);
 
 	user.printCtxtMat(result);

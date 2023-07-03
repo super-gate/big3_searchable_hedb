@@ -20,8 +20,8 @@ namespace HDB_supergate_server_{
 					bool v) : comparator(comparator), 
 							  DB(db), 
 							  IndexFile(indFile),
-							  Col(db.size()),
-							  Row(db[0].size()),
+							  Row(db.size()),
+							  Col(db[0].size()),
 							  verbose(v)
     {
         unsigned long nslots = comparator.m_context.getNSlots();
@@ -44,15 +44,15 @@ namespace HDB_supergate_server_{
 	void SERVER::Query(HEQuery& q, Ctxt_mat& res)
 	{
 		res.resize(q.dest.size()); // resize result so we have #dest rows
-		for (auto& row: res) row.reserve(Row);
+		for (auto& row: res) row.reserve(Col);
 
 		Ctxt_mat less_mod_ctxt_arr, eq_mod_ctxt_arr;
-		less_mod_ctxt_arr.resize(Row);
-		eq_mod_ctxt_arr.resize(Row);
+		less_mod_ctxt_arr.resize(Col);
+		eq_mod_ctxt_arr.resize(Col);
 		for (auto& row: less_mod_ctxt_arr) row.reserve(comparator.m_slotDeg);
 		for (auto& row: eq_mod_ctxt_arr) row.reserve(comparator.m_slotDeg);
 
-		for (unsigned long i = 0; i < Row; ++i)
+		for (unsigned long i = 0; i < Col; ++i)
 		{
 			//UNI
 			Ctxt z_ctxt = DB[q.source][i];

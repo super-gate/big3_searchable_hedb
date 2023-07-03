@@ -129,12 +129,26 @@ searchable_db/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/build
 .PHONY : searchable_db/fast
 
+#=============================================================================
+# Target rules for targets named TS
+
+# Build rule for target.
+TS: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TS
+.PHONY : TS
+
+# fast build rule for target.
+TS/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/build
+.PHONY : TS/fast
+
 HDB_comparison_library/comp_lib/comparator.o: HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.o
 
 # target to build an object file
 HDB_comparison_library/comp_lib/comparator.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.o
 
 HDB_comparison_library/comp_lib/comparator.i: HDB_comparison_library/comp_lib/comparator.cpp.i
@@ -143,6 +157,7 @@ HDB_comparison_library/comp_lib/comparator.i: HDB_comparison_library/comp_lib/co
 # target to preprocess a source file
 HDB_comparison_library/comp_lib/comparator.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.i
 
 HDB_comparison_library/comp_lib/comparator.s: HDB_comparison_library/comp_lib/comparator.cpp.s
@@ -151,6 +166,7 @@ HDB_comparison_library/comp_lib/comparator.s: HDB_comparison_library/comp_lib/co
 # target to generate assembly for a file
 HDB_comparison_library/comp_lib/comparator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.s
 
 HDB_comparison_library/comp_lib/tools.o: HDB_comparison_library/comp_lib/tools.cpp.o
@@ -159,6 +175,7 @@ HDB_comparison_library/comp_lib/tools.o: HDB_comparison_library/comp_lib/tools.c
 # target to build an object file
 HDB_comparison_library/comp_lib/tools.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.o
 
 HDB_comparison_library/comp_lib/tools.i: HDB_comparison_library/comp_lib/tools.cpp.i
@@ -167,6 +184,7 @@ HDB_comparison_library/comp_lib/tools.i: HDB_comparison_library/comp_lib/tools.c
 # target to preprocess a source file
 HDB_comparison_library/comp_lib/tools.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.i
 
 HDB_comparison_library/comp_lib/tools.s: HDB_comparison_library/comp_lib/tools.cpp.s
@@ -175,7 +193,32 @@ HDB_comparison_library/comp_lib/tools.s: HDB_comparison_library/comp_lib/tools.c
 # target to generate assembly for a file
 HDB_comparison_library/comp_lib/tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.s
+
+src/TS_test.o: src/TS_test.cpp.o
+.PHONY : src/TS_test.o
+
+# target to build an object file
+src/TS_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/src/TS_test.cpp.o
+.PHONY : src/TS_test.cpp.o
+
+src/TS_test.i: src/TS_test.cpp.i
+.PHONY : src/TS_test.i
+
+# target to preprocess a source file
+src/TS_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/src/TS_test.cpp.i
+.PHONY : src/TS_test.cpp.i
+
+src/TS_test.s: src/TS_test.cpp.s
+.PHONY : src/TS_test.s
+
+# target to generate assembly for a file
+src/TS_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/src/TS_test.cpp.s
+.PHONY : src/TS_test.cpp.s
 
 src/main_query_test.o: src/main_query_test.cpp.o
 .PHONY : src/main_query_test.o
@@ -209,6 +252,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... TS"
 	@echo "... searchable_db"
 	@echo "... HDB_comparison_library/comp_lib/comparator.o"
 	@echo "... HDB_comparison_library/comp_lib/comparator.i"
@@ -216,6 +260,9 @@ help:
 	@echo "... HDB_comparison_library/comp_lib/tools.o"
 	@echo "... HDB_comparison_library/comp_lib/tools.i"
 	@echo "... HDB_comparison_library/comp_lib/tools.s"
+	@echo "... src/TS_test.o"
+	@echo "... src/TS_test.i"
+	@echo "... src/TS_test.s"
 	@echo "... src/main_query_test.o"
 	@echo "... src/main_query_test.i"
 	@echo "... src/main_query_test.s"

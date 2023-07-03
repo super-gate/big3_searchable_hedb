@@ -73,15 +73,15 @@ ADD_EXECUTABLE(searchable_db
 TARGET_LINK_LIBRARIES(searchable_db ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 SET_TARGET_PROPERTIES(searchable_db PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# #other
-# SET(UTIL ${CMAKE_SOURCE_DIR}/src/util.cpp)
-# ADD_EXECUTABLE(util 
-# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
-# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
-# 		${UTIL} 
-# 		)
+#TS_test
+SET(TS ${CMAKE_SOURCE_DIR}/src/TS_test.cpp)
+ADD_EXECUTABLE(TS 
+		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
+		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
+		${TS} 
+		)
 
-# TARGET_LINK_LIBRARIES(util ${CMAKE_SOURCE_DIR}/HDB_lib/bin/libHDB_supergate_lib.a)
-# SET_TARGET_PROPERTIES(util PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+TARGET_LINK_LIBRARIES(TS ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+SET_TARGET_PROPERTIES(TS PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #cmake -Dhelib_DIR=/home/smhan/Documents/helib_install/helib_pack/share/cmake/helib ..

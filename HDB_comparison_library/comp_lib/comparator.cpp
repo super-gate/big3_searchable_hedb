@@ -726,8 +726,8 @@ void Comparator::batch_shift(Ctxt& ctxt, long start, long shift) const
 	ea.rotate(ctxt, shift);
 
 	// masking elements shifted out of batch
-	long index = static_cast<long>(intlog(2, -shift));
-	//cout << "Mask index: " << index << endl;
+	long index = static_cast<long>(intlog(2, shift));
+	cout << "Mask index: " << index << "shift: " << shift << endl;
 	double size;
 	DoubleCRT mask = get_mask(size, index);
 	ctxt.multByConstant(mask, size);
