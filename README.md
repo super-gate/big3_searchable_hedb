@@ -31,4 +31,4 @@ cd build
 then run cmake and make as above. Compiled binary will be in ./big3_searchable_hedb/bin
 
 # API
-Can be found in the ./html directory. Open index.js to access the API documentation.
+Can be found in the ./html directory. Open index.html to access the API documentation.
