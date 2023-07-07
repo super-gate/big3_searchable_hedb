@@ -25,9 +25,18 @@ namespace HDB_supergate_server_{
             size_t Row;                                 /**< represents the number of rows in the DB */
             size_t Col;                                 /**< represents the number of columns in the DB */
 
-            // HDB_supergate_::Ctxt_vec v1_j;              /**< ciphertext vector contains all possible E(1)_j */
+            vector<helib::DoubleCRT> extractionMask;    /**< vector of all extraction masks to extract certain position's data */
+            vector<double> extractionMaskSize;          /**< vector of extraction mask sizes */
         
             bool verbose;                               /**< flag for verbose execution */
+
+            unsigned long nslots;
+            unsigned long exp_len;
+            unsigned long max_packed;
+            unsigned long D;
+
+            void create_all_extraction_masks();
+            void create_extraction_mask(int);
 
         public:
             /**

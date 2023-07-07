@@ -22,24 +22,33 @@ namespace HDB_supergate_server_{
 							  IndexFile(indFile),
 							  Row(db.size()),
 							  Col(db[0].size()),
-							  verbose(v)
+							  verbose(v),
+                              nslots(comparator.m_context.getNSlots()),
+                              exp_len(comparator.m_expansionLen),
+                              max_packed(nslots / exp_len),
+                              D(comparator.m_slotDeg)
     {
-        unsigned long nslots = comparator.m_context.getNSlots();
-        unsigned long exp_len = comparator.m_expansionLen;
-        unsigned long max_packed = nslots / exp_len;
-        // for (int i = 0; i < max_packed; ++i)
-        // {
-        //     vector<ZZX> p1_j(nslots);
-        //     for (int k = 0; k < exp_len; ++k)
-        //         p1_j[i * exp_len + k] = ZZX(1);
-        //     HELIB_NTIMER_START(timer_e1j_encrypt);
-        //     Ctxt e1_j(comparator.m_pk);
-        //     comparator.m_context.getView().encrypt(e1_j, p1_j);
-        //     HELIB_NTIMER_STOP(timer_e1j_encrypt);
-        //     v1_j.push_back(e1_j);
-        // }
-        // helib::printNamedTimer(cout, "timer_e1j_encrypt");
+        create_all_extraction_masks();
     };
+
+    void SERVER::create_all_extraction_masks() {
+        for (int i = 0; i < max_packed; ++i)
+            create_extraction_mask(i * exp_len);
+    }
+
+    void SERVER::create_extraction_mask(int position)
+    {
+        vector<long> mask_long(nslots);
+        for (int i = 0; i < exp_len; ++i)
+            mask_long[position + i] = (long) 1;
+        ZZX mask_zzx;
+        comparator.m_context.getView().encode(mask_zzx, mask_long);
+
+        double size = conv<double>(embeddingLargestCoeff(mask_zzx, comparator.m_context.getZMStar()));
+        DoubleCRT mask_crt = DoubleCRT(mask_zzx, comparator.m_context, comparator.m_context.allPrimes());
+        extractionMask.push_back(mask_crt);
+        extractionMaskSize.push_back(size);
+    }
 					
 	void SERVER::Query(HEQuery& q, Ctxt_mat& res)
 	{
@@ -81,6 +90,17 @@ namespace HDB_supergate_server_{
 				ctxt_eq *= eq_mod_ctxt_arr[i][iCoef];
 			}
 			Ctxt eq_final = ctxt_eq;
+            long sft = 1;
+            while (sft < comparator.m_expansionLen)
+			{
+				Ctxt pos_shift = eq_final;
+				comparator.batch_shift_for_mul(pos_shift, 0, sft);
+				eq_final *= pos_shift;
+				Ctxt neg_shift = eq_final;
+				comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+				eq_final *= neg_shift;
+				sft <<= 1;
+			}
 
 			if(comparator.m_expansionLen != 1)
 			{
@@ -110,23 +130,20 @@ namespace HDB_supergate_server_{
 	void SERVER::QueryWithIndex(HEQuery& q, Ctxt_mat& res)
 	{
 		CtxtIndex& Index = IndexFile.find(q.source);
-		unsigned long X = Index.getX();
-		unsigned long Y = Index.getY();
+        unsigned long X = Index.getX();
+        unsigned long Y = Index.getY();
 
-		res.resize(q.dest.size()); // resize result so we have #dest rows
-		for (auto& row: res) row.reserve(Y);
-
-        unsigned long nslots = comparator.m_context.getNSlots();
-        unsigned long exp_len = comparator.m_expansionLen;
-        unsigned long D = comparator.m_slotDeg;
-        unsigned long max_packed = nslots / exp_len;
-
+        res.resize(q.dest.size()); // resize result so we have #dest rows
+        for (auto& row: res) row.reserve(Y);
+        
         Ctxt_vec q_mod_p;
-	    comparator.extract_mod_p(q_mod_p, q.query);
+        comparator.extract_mod_p(q_mod_p, q.query);
 
-		Ctxt_vec intermediates;
-		intermediates.reserve(Y);
-		for (auto& k_ctxt: Index.keys()) {
+        Ctxt_vec extracted_UIDs;
+        long sft = 1;
+        for (unsigned long i = 0; i < Y; ++i) {
+            Ctxt k_ctxt = Index.keys()[i];
+            sft = 1;
             Ctxt_vec ctxt_eq_p;
             Ctxt_vec k_mod_p;
             comparator.extract_mod_p(k_mod_p, k_ctxt);
@@ -143,69 +160,47 @@ namespace HDB_supergate_server_{
             Ctxt ctxt_eq = ctxt_eq_p[D-1];
             for(long iCoef = D - 2; iCoef >= 0; iCoef--)
                 ctxt_eq *= ctxt_eq_p[iCoef];
-            intermediates.emplace_back(ctxt_eq);
-	    }
-        cout << "A done" << endl;
 
-        Ctxt_mat UID_extract = Index.uids(); //copy of the uids table
-        for (auto& row: UID_extract)
-        {
-            for (unsigned long c = 0; c < Index.getY(); ++c)
-                row[c] *= intermediates[c];
-        }
-        cout << "B done" << endl;
-
-        intermediates.clear();
-        intermediates = UID_extract[0];
-        cout << "X: " << X << " Y: " << Y << endl;
-        for (int i = 1; i < X; ++i) //rotate and add
-        {
-            cout << " i: " << i << endl;
-            Ctxt_vec rot = UID_extract[i];
-            cout << "rot.size: " << rot.size() << endl;
-            for (auto& r: rot) 
+            if (exp_len != 1)
             {
-                HELIB_NTIMER_START(timer_rotate);
-                rotate(r, -1 * exp_len * i);
-                HELIB_NTIMER_STOP(timer_rotate);
+                while (sft < exp_len)
+                {
+                    Ctxt pos_shift = ctxt_eq;
+                    comparator.batch_shift_for_mul(pos_shift, 0, sft);
+                    ctxt_eq *= pos_shift;
+                    Ctxt neg_shift = ctxt_eq;
+                    comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+                    ctxt_eq *= neg_shift;
+                    sft <<= 1;
+                }
             }
-            printNamedTimer(cout, "timer_rotate");
-            cout << "   rotate done" << endl;
-            for (int j = 0; j < Y; ++j)
-                intermediates[j] += rot[j];
-            cout << "   add done" << endl;
+            Ctxt UID_extract = Index.uids()[0][i];
+            UID_extract *= ctxt_eq;
+            for (int j = 1; j < X; ++j)
+            {
+                Ctxt uid = Index.uids()[j][i];
+                uid *= ctxt_eq;
+                rotate(uid, -exp_len * j);
+                UID_extract += uid;
+            }
+            extracted_UIDs.push_back(UID_extract);
         }
-        cout << "C done" << endl;
-
-        for (auto& ctxt: intermediates)
+        
+        for (auto& ctxt: extracted_UIDs)
         {
             cout << "For each ciphertext..." << endl;
             Ctxt_vec final_res;
             for (int i = 0; i < max_packed; ++i) 
             {
                 HELIB_NTIMER_START(nslot);
-                vector<ZZX> p1_j(nslots);
-                for (int k = 0; k < exp_len; ++k)
-                    p1_j[i * exp_len + k] = ZZX(1);
-                HELIB_NTIMER_START(timer_e1j_encrypt);
-                Ctxt e1_j(comparator.m_pk);
-                comparator.m_context.getView().encrypt(e1_j, p1_j);
-                HELIB_NTIMER_STOP(timer_e1j_encrypt);
-                Ctxt extract = e1_j;
-                extract *= ctxt;
-                Ctxt extract_copy = extract;
+                Ctxt extract = ctxt;
+                extract.multByConstant(extractionMask[i], extractionMaskSize[i]);
                 Ctxt TS_1 = extract;
                 for (int j = 1; j < max_packed; ++j)
                 {
-                    shift(extract, -1 * exp_len);
+                    rotate(extract, -exp_len);
                     TS_1 += extract;
                 }
-                // for (int j = i; j >= 0; j--)
-                // {
-                //     shift(extract_copy, -1 * exp_len);
-                //     TS_1 += extract_copy;
-                // }
-                cout << "   Extract and TS1" << endl;
 
                 Ctxt_vec EQ_Extract;
                 EQ_Extract.reserve(q.dest.size());
@@ -213,6 +208,7 @@ namespace HDB_supergate_server_{
                 comparator.extract_mod_p(ts1_p, TS_1);
                 for (int j = 0; j < DB[0].size(); ++j)
                 {
+                    sft = 1;
                     Ctxt_vec c_uid_p;
                     Ctxt_vec ctxt_eq_p;
                     comparator.extract_mod_p(c_uid_p, DB[0][j]);
@@ -230,10 +226,15 @@ namespace HDB_supergate_server_{
                     Ctxt ctxt_eq = ctxt_eq_p[D-1];
                     for (long iCoef = D - 2; iCoef >= 0; iCoef--)
                         ctxt_eq *= ctxt_eq_p[iCoef];
-                    if(exp_len != 1)
+                    while (sft < exp_len)
                     {
-                        comparator.shift_and_mul(ctxt_eq, 0);
-                        comparator.batch_shift_for_mul(ctxt_eq, 0, -1);
+                        Ctxt pos_shift = ctxt_eq;
+                        comparator.batch_shift_for_mul(pos_shift, 0, sft);
+                        ctxt_eq *= pos_shift;
+                        Ctxt neg_shift = ctxt_eq;
+                        comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+                        ctxt_eq *= neg_shift;
+                        sft <<= 1;
                     }
                     for (int k = 0; k < q.dest.size(); ++k)
                     {
@@ -245,29 +246,26 @@ namespace HDB_supergate_server_{
                             EQ_Extract[k] += tmp;
                     }
                 }
-                cout << "   Equal and Extract" << endl;
 
                 for (int k = 0; k < q.dest.size(); ++k)
                 {
-                    Ctxt TS_left = EQ_Extract[k];
-                    Ctxt TS_right = EQ_Extract[k];
+                    Ctxt TS_2 = EQ_Extract[k];
                     for (int j = 0; j < max_packed - 1; ++j)
                     {
-                        shift(TS_left, -1 * exp_len);
-                        EQ_Extract[k] += TS_left;
+                        rotate(TS_2, -exp_len);
+                        EQ_Extract[k] += TS_2;
                     }
-                    EQ_Extract[k] *= e1_j;
+                    EQ_Extract[k].multByConstant(extractionMask[i], extractionMaskSize[i]);
                 }
-                cout << "   TS2 and extract" << endl;
 
                 if (!i) //if first
-                    for (auto& ext: EQ_Extract) final_res.push_back(ext);
+                    final_res = EQ_Extract;
                 else
                     for (int k = 0; k < q.dest.size(); ++k) final_res[k] += EQ_Extract[k];
                 HELIB_NTIMER_STOP(nslot);
-                helib::printNamedTimer(cout, "nslot");
-                cout << "nslot" << endl;
+                // helib::printNamedTimer(cout, "nslot");
             }
+            helib::printNamedTimer(cout, "nslot");
             
 
             for (int k = 0; k < q.dest.size(); ++k) res[k].push_back(final_res[k]);

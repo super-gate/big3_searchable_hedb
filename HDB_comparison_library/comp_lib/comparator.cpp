@@ -170,10 +170,13 @@ void Comparator::create_all_shift_masks()
 	long shift = 1;
 	while (shift < m_expansionLen)
 	{
-		double size;
-	    DoubleCRT mask_ptxt = create_shift_mask(size, -shift);
-	    m_mulMasks.push_back(mask_ptxt);
-	    m_mulMasksSize.push_back(size);
+		double size_pos, size_neg;
+	    DoubleCRT mask_ptxt_pos = create_shift_mask(size_pos, shift);
+		DoubleCRT mask_ptxt_neg = create_shift_mask(size_neg, -shift);
+	    m_mulMasks.push_back(mask_ptxt_pos);
+	    m_mulMasksSize.push_back(size_pos);
+		m_mulMasks.push_back(mask_ptxt_neg);
+	    m_mulMasksSize.push_back(size_neg);
 
 	    shift <<=1;
 	}
@@ -726,8 +729,8 @@ void Comparator::batch_shift(Ctxt& ctxt, long start, long shift) const
 	ea.rotate(ctxt, shift);
 
 	// masking elements shifted out of batch
-	long index = static_cast<long>(intlog(2, shift));
-	cout << "Mask index: " << index << "shift: " << shift << endl;
+	long index = shift < 0 ? static_cast<long>(intlog(2, -shift)) * 2 + 1 : static_cast<long>(intlog(2, shift)) * 2;
+	// cout << "Mask index: " << index << "shift: " << shift << endl;
 	double size;
 	DoubleCRT mask = get_mask(size, index);
 	ctxt.multByConstant(mask, size);
@@ -746,7 +749,7 @@ void Comparator::batch_shift_for_mul(Ctxt& ctxt, long start, long shift) const
 	// left cyclic rotation
 	ea.rotate(ctxt, shift);
 	
-	long index = static_cast<long>(intlog(2, -shift));
+	long index = shift < 0 ? static_cast<long>(intlog(2, -shift)) * 2 + 1 : static_cast<long>(intlog(2, shift)) * 2;
 	//cout << "Mask index: " << index << endl;
 	double mask_size;
 	DoubleCRT mask = get_mask(mask_size, index);

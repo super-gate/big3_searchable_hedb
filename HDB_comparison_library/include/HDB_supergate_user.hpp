@@ -19,7 +19,7 @@ namespace HDB_supergate_user_{
      * and encrypt plaintext database to send to the SERVER class. 
     */
     class USER {
-        private:
+        public:
         he_cmp::Comparator& comparator;                                                     /**< comparator object */
         const helib::Context& contx;                                                        /**< crypto-context */
         helib::PubKey& pk;                                                                  /**< public key */

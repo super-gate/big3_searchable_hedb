@@ -74,10 +74,26 @@ namespace HDB_supergate_ {
         }
         else 
         {
-            plaintext_index[int(it - keys.begin())].second.emplace_back(v);
-            int size = plaintext_index[int(it - keys.begin())].second.size();
+            int index = int(it - keys.begin());
+            plaintext_index[index].second.emplace_back(v);
+            int size = plaintext_index[index].second.size();
             if (size > c) c = size;
         }
+    }
+
+    // void PtxtIndex::sortKeys()
+    // {
+    //     // sort(keys.begin(), keys.end(), [](long k1, long k2)
+    //     //                                 {
+    //     //                                     return this.getSize(k1) > this.getSize(k2);
+    //     //                                 });
+    //     return;
+    // }
+
+    long PtxtIndex::getSize(long key)
+    {
+        if (empty(key)) return 0;
+        return plaintext_index[last_index].second.size();
     }
 
     bool PtxtIndex::empty(long key) {
@@ -152,9 +168,9 @@ namespace HDB_supergate_ {
                         unsigned long& Y,
                         bool verbose)
     {
-        if (verbose)
-            cout << "R: " << R << ", C: " << C << endl;
-        X = min(R, C);
+        if (!verbose)
+            cout << "R: " << R << ", C: " << C << ", max_per: " << max_per << endl;
+        X = min(min(R, C), max_per);
         Y = R >= C ? ceil(float(R) / max_per) : ceil(float(C) / max_per);
     }
 
@@ -201,14 +217,28 @@ namespace HDB_supergate_ {
                             bool verbose
                             )
     {
-        setIndexParams(ptxt_index.R(), ptxt_index.C(), max_per, X, Y, verbose);
+        deque<long> key_queue;
+        vector<long> sizes;
+        for (long k: ptxt_index.getKeys()) 
+        {
+            key_queue.push_back(k);
+            sizes.push_back(ptxt_index.getSize(k));
+        }
+        sort(key_queue.begin(), key_queue.end(), [&ptxt_index](long k1, long k2)
+                                                    {
+                                                        return ptxt_index.getSize(k1) > ptxt_index.getSize(k2);
+                                                    });
+        unsigned long sum = 0;
+        for_each(sizes.begin(), sizes.end(), [&](auto& i) {sum += ceil(float(i) / max_per);});
+        
 
+        X = min(min(ptxt_index.R(), ptxt_index.C()), (int) max_per);
+        Y = ceil(float(sum) / max_per);
+        
         enc_key.reserve(Y);
         enc_uid.resize(X);
         for (auto& uid: enc_uid) uid.reserve(Y);
-
-        deque<long> key_queue;
-        for (long k: ptxt_index.getKeys()) key_queue.push_back(k);
+        
 
         vector<ZZX> ptxt_key;
         vector<vector<ZZX>> ptxt_uid;
@@ -222,7 +252,7 @@ namespace HDB_supergate_ {
             unsigned long k = key_queue.front();
             key_queue.pop_front();
 
-            if (!k) continue; //k == 0
+            // if (!k) continue; //k == 0
             
             if (!counter) //reset at counter == 0
             {
@@ -241,11 +271,9 @@ namespace HDB_supergate_ {
                           exp_len,
                           enc_base,
                           comparator);
-
             for (unsigned long i = 0; i < X; ++i)
             {
-                if (ptxt_index.empty(k)) break;
-                unsigned long v = ptxt_index.popBack(k, true);
+                unsigned long v = k ? (!ptxt_index.empty(k) ? ptxt_index.popBack(k, true) : 0) : 0;
                 dataToZZXSlot(v % input_range,
                               ptxt_uid[i],
                               counter,
@@ -268,10 +296,17 @@ namespace HDB_supergate_ {
                 ptxt_key.clear();
 				ptxt_uid.clear();
 			}
+            if (!k) continue;
             if (!ptxt_index.empty(k))
             {
                 while (key_queue.size() < X - 1) key_queue.push_back(long(0));
-                key_queue.push_back(k);
+                auto it = key_queue.begin() + X - 1;
+                while (it != key_queue.end())
+                {
+                    if (ptxt_index.getSize(*it) <= ptxt_index.getSize(k)) break;
+                    it++;
+                }
+                key_queue.insert(it, k);
             }
         }
         if (counter && counter < max_per)
@@ -279,6 +314,15 @@ namespace HDB_supergate_ {
             encryptAndInsert(contx, pk, ptxt_key, enc_key); //key
             for (unsigned long i = 0; i < X; ++i)
                 encryptAndInsert(contx, pk, ptxt_uid[i], enc_uid[i]); //uids
+        }
+        if (enc_key.size() < Y)
+        {
+            // encrypt more to fill up Y
+            ptxt_key.clear();
+            ptxt_key.resize(nslots);
+            encryptAndInsert(contx, pk, ptxt_key, enc_key); //key
+            for (unsigned long i = 0; i < X; ++i)
+                encryptAndInsert(contx, pk, ptxt_key, enc_uid[i]); //uids
         }
         if (verbose)
         {

@@ -112,7 +112,9 @@ namespace HDB_supergate_{
             int C() {return c;}                                                         /**< returns c, the maximum length of values array */
             std::vector<long> getKeys() {return keys;}                                  /**< returns the keys vector */
             
+            // void sortKeys();                                                            /**< sorts the keys vector according to size of plaintext index vector in descending order */
             bool empty(long);                                                           /**< true if queried key does not have any values mapped to it*/
+            long getSize(long);                                                         /**< gets the size of index vector for given key */
             long popBack(long, bool emty = false);                                      /**< removes the right-most key value from keys vector */
             void printIndex();                                                          /**< debug function to print the index */
     };
