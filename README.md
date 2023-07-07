@@ -1,4 +1,4 @@
-# 실행방법
+# HOW TO RUN
 
 Searchable DB Library Install
 ```bash
@@ -7,25 +7,28 @@ rm -r build
 mkdir build
 cd build
 ```
-HElib이 library install 되어있다면
+If HElib is installed as a library...
 ```bash
 cmake ..
 ```
-local install이라면
+If HElib is locally installed...
 ```bash
 cmake -Dhelib_DIR=/{PATH}/helib_install/helib_pack/share/cmake/helib ..
 ```
-이후
+then
 ```bash
-make
+make install
 ```
-하면 comparison library install 완료.
+installs the HDB library in the folder ./big3_searchable_hedb/lib_HDB
 
-main코드를 돌리고 싶으면
+To run main code...
 ```bash
 cd ./big3_searchable_hedb
 rm -r build
 mkdir build
 cd build
 ```
-위에와 똑같이 cmake를 돌려주면 된다. 이후 컴파일된 binary는 './big3_searchable_hedb/bin/' 폴더안에 생성.
+then run cmake and make as above. Compiled binary will be in ./big3_searchable_hedb/bin
+
+# API
+Can be found in the ./html directory. Open index.js to access the API documentation.

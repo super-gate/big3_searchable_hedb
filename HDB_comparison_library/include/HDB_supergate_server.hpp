@@ -30,13 +30,13 @@ namespace HDB_supergate_server_{
         
             bool verbose;                               /**< flag for verbose execution */
 
-            unsigned long nslots;
-            unsigned long exp_len;
-            unsigned long max_packed;
-            unsigned long D;
+            unsigned long nslots;                       /**< number of slots per ciphertext */
+            unsigned long exp_len;                      /**< expansion length l*/
+            unsigned long max_packed;                   /**< maximum numbers packed per ciphertext */
+            unsigned long D;                            /**< expansion degree d*/
 
-            void create_all_extraction_masks();
-            void create_extraction_mask(int);
+            void create_all_extraction_masks();         /**< function creates all extraciton masks*/
+            void create_extraction_mask(int);           /**< function creates one extraction mask e1_j given position j*/
 
         public:
             /**
