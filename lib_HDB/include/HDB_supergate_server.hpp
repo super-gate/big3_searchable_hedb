@@ -30,13 +30,14 @@ namespace HDB_supergate_server_{
         
             bool verbose;                               /**< flag for verbose execution */
 
-            unsigned long nslots;
-            unsigned long exp_len;
-            unsigned long max_packed;
-            unsigned long D;
+            unsigned long nslots;                       /**< number of slots per ciphertext */
+            unsigned long exp_len;                      /**< expansion length l*/
+            unsigned long max_packed;                   /**< maximum numbers packed per ciphertext */
+            unsigned long D;                            /**< expansion degree d*/
 
-            void create_all_extraction_masks();
-            void create_extraction_mask(int);
+            void create_all_extraction_masks();         /**< function creates all extraciton masks*/
+            void create_extraction_mask(int);           /**< function creates one extraction mask e1_j given position j*/
+            void totalSums(Ctxt&, unsigned long, unsigned long); /**< function for total sum with exp_len */
 
         public:
             /**
@@ -80,6 +81,8 @@ namespace HDB_supergate_server_{
              * @return void
             */
             void QueryWithIndex(HDB_supergate_::HEQuery& query, HDB_supergate_::Ctxt_mat& result);
+
+            void testTS(Ctxt&); /**< debugging function for SERVER::totalSums */
     };
 };
 

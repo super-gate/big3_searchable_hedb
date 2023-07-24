@@ -229,10 +229,9 @@ namespace HDB_supergate_ {
                                                         return ptxt_index.getSize(k1) > ptxt_index.getSize(k2);
                                                     });
         unsigned long sum = 0;
-        for_each(sizes.begin(), sizes.end(), [&](auto& i) {sum += ceil(float(i) / max_per);});
-        
 
-        X = min(min(ptxt_index.R(), ptxt_index.C()), (int) max_per);
+        X = max_per < ptxt_index.C() ? max_per : min(ptxt_index.R(), ptxt_index.C());
+        for_each(sizes.begin(), sizes.end(), [&](auto& i) {sum += ceil(float(i) / X);});
         Y = ceil(float(sum) / max_per);
         
         enc_key.reserve(Y);

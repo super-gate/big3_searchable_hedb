@@ -37,6 +37,7 @@ namespace HDB_supergate_server_{
 
             void create_all_extraction_masks();         /**< function creates all extraciton masks*/
             void create_extraction_mask(int);           /**< function creates one extraction mask e1_j given position j*/
+            void totalSums(Ctxt&, unsigned long, unsigned long); /**< function for total sum with exp_len */
 
         public:
             /**
@@ -80,6 +81,8 @@ namespace HDB_supergate_server_{
              * @return void
             */
             void QueryWithIndex(HDB_supergate_::HEQuery& query, HDB_supergate_::Ctxt_mat& result);
+
+            void testTS(Ctxt&); /**< debugging function for SERVER::totalSums */
     };
 };
 

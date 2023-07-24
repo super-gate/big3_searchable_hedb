@@ -49,6 +49,7 @@ namespace HDB_supergate_user_{
          * @param i integer to be inserted
         */
         void EncryptNumber(helib::Ctxt& ctxt, unsigned long i);
+        void EncryptNumberPerSlot(helib::Ctxt& ctxt, unsigned long i);
 
         public:
         /**
@@ -128,8 +129,11 @@ namespace HDB_supergate_user_{
         unsigned long max();                                                            /**< returns input_range */
 
         HDB_supergate_::PtxtIndexFile getPtxtIndexFile() {return ptxt_index_file;}      /**< returns the plaintext index file */
-        void printDecrypted(helib::Ctxt& ctxt);                                         /**< debug function to decrypt and print the ciphertext*/
-        void printCtxtMat(HDB_supergate_::Ctxt_mat&);                                   /**< debug function to decrypt and print a Ctxt_mat type object*/
+        void printZZXasINT(vector<ZZX>);
+        void printDecryptedINT(helib::Ctxt& ctxt);                                         /**< debug function to decrypt and print the ciphertext*/
+        void printDecryptedZZX(helib::Ctxt& ctxt);
+        void printCtxtMatINT(HDB_supergate_::Ctxt_mat&);                                   /**< debug function to decrypt and print a Ctxt_mat type object*/
+        void printCtxtMatZZX(HDB_supergate_::Ctxt_mat&);
     };
 };
 

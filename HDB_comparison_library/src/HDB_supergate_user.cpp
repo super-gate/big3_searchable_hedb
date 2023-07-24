@@ -25,33 +25,82 @@ namespace HDB_supergate_user_{
 		return input_range;
 	};
 
-	void USER::printDecrypted(Ctxt& ctxt)
+	void USER::printZZXasINT(vector<ZZX> decrypted)
+	{
+		ZZ data = ZZ(0);
+		cout << "Enc( ";
+		for (unsigned long i = 0; i < nslots; ++i)
+		{
+			unsigned long mod = i % exp_len;
+			vec_ZZ polyRep = decrypted[i].rep;
+			for (unsigned long j = 0; j < polyRep.length(); ++j)
+			{
+				unsigned long exp = mod * comparator.m_slotDeg + j;
+				ZZ elem = polyRep[j];
+				elem *= pow(enc_base, exp);
+				data += elem;
+			}
+			if (mod == exp_len - 1)
+			{
+				cout << "[" << data << "], ";
+				data = ZZ(0);
+			}
+		}
+		cout << "), ";
+	}
+
+	void USER::printDecryptedZZX(Ctxt& ctxt)
+    {
+        vector<ZZX> decrypted_cipher(nslots);
+        contx.getView().decrypt(ctxt, sk, decrypted_cipher);
+		
+		cout << "Enc( ";
+		for (auto & zzx: decrypted_cipher)
+        	printZZX(cout, zzx, ord_p);
+		cout << " ), ";
+    };
+
+
+	void USER::printDecryptedINT(Ctxt& ctxt)
     {
         vector<ZZX> decrypted_cipher(nslots);
         contx.getView().decrypt(ctxt, sk, decrypted_cipher);
 
-        for(unsigned long i=0; i < nslots; i++)
-        {
-            printZZX(cout, decrypted_cipher[i], ord_p);
-            cout << ", ";
-        }
-        cout<<endl;
+        printZZXasINT(decrypted_cipher);
     };
 
-	void USER::printCtxtMat(Ctxt_mat& db)
+	void USER::printCtxtMatZZX(Ctxt_mat& db)
 	{
 		for (auto& row: db)
 		{
-			cout << "Row" << endl;
+			cout << "Row\n";
 			for (auto& elem: row)
-			{
-				printDecrypted(elem);
-				cout << "________________________________________________________" << endl;
-			}
+				printDecryptedZZX(elem);
+			cout << endl;
 		}
 	}
 
-	void USER::EncryptNumber(Ctxt& ctxt, unsigned long input)
+	void USER::printCtxtMatINT(Ctxt_mat& db)
+	{
+		for (auto& row: db)
+		{
+			cout << "Row\n";
+			for (auto& elem: row)
+				printDecryptedINT(elem);
+			cout << endl;
+		}
+	}
+
+	void USER::EncryptNumberPerSlot(Ctxt& ctxt, unsigned long input)
+	{
+		vector<ZZX> poly_input(nslots);
+		input %= input_range;
+		for (unsigned long i = 0; i < nslots; ++i)
+			poly_input[i] = ZZX(input);
+        contx.getView().encrypt(ctxt, pk, poly_input);
+	}
+
+	void USER::EncryptNumber(Ctxt& ctxt, unsigned long input) 
 	{
 		vector<ZZX> poly_input(nslots);
 		input %= input_range;
@@ -77,10 +126,10 @@ namespace HDB_supergate_user_{
 		Ctxt lt(pk);
 
 		EncryptNumber(query_ctxt, input);
-		if (type != LT) EncryptNumber(eq, 1);
-		else EncryptNumber(eq, 0);
-		if (type != EQ) EncryptNumber(lt, 1);
-		else EncryptNumber(lt, 0);
+		if (type != LT) EncryptNumberPerSlot(eq, 1);
+		else EncryptNumberPerSlot(eq, 0);
+		if (type != EQ) EncryptNumberPerSlot(lt, 1);
+		else EncryptNumberPerSlot(lt, 0);
 		
 		q.insert(source, eq, lt, query_ctxt, dest);
     };
@@ -107,6 +156,7 @@ namespace HDB_supergate_user_{
 			}
 			counter++;
 		}
+		cout << "created ptxtIndexFile" << endl;
 	}
 
 	void USER::createCtxtIndexFile(HDB_supergate_::CtxtIndexFile& file)
@@ -151,6 +201,7 @@ namespace HDB_supergate_user_{
 
         for (auto& row: reader)
         {
+			// cout << "for each row..." << endl;
 			for (unsigned int i = 0; i < row.size(); ++i) 
 			{
 				if (!counter)

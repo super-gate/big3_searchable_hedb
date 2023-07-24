@@ -84,4 +84,15 @@ ADD_EXECUTABLE(TS
 TARGET_LINK_LIBRARIES(TS ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 SET_TARGET_PROPERTIES(TS PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
+#Nslots
+SET(nslots ${CMAKE_SOURCE_DIR}/src/nslots_test.cpp)
+ADD_EXECUTABLE(nslots 
+		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
+		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
+		${nslots} 
+		)
+
+TARGET_LINK_LIBRARIES(nslots ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+SET_TARGET_PROPERTIES(nslots PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
 #cmake -Dhelib_DIR=/home/smhan/Documents/helib_install/helib_pack/share/cmake/helib ..

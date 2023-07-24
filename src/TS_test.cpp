@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
 		for (auto& h:headers)
 			cout << "\nhead: " << h;
 		cout << endl;
-		user.printCtxtMat(db);
+		user.printCtxtMatINT(db);
 	}
 	cout << contx.getView().getPAlgebra().numOfGens() << endl;
 	return 1;
@@ -169,27 +169,27 @@ int main(int argc, char* argv[]) {
 	// {
 	// 	HELIB_NTIMER_START(timer_rotate_neg);
 	// 	shift(test, neg);
-	// 	// user.printDecrypted(test);
+	// 	// user.printDecryptedINT(test);
 	// 	HELIB_NTIMER_STOP(timer_rotate_neg);
 	// 	cout << "neg: " << neg;
 	// 	helib::printNamedTimer(std::cout, "timer_rotate_neg");
 	// }
 	// HELIB_NTIMER_START(timer_rotate_neg);
 	// shift(test, -3117);
-	// user.printDecrypted(test);
+	// user.printDecryptedINT(test);
 	// HELIB_NTIMER_STOP(timer_rotate_neg);
 	// helib::printNamedTimer(std::cout, "timer_rotate_neg");
 	// HELIB_NTIMER_START(timer_rotate);
 	// shift(test, 1);
-	// user.printDecrypted(test);
+	// user.printDecryptedINT(test);
 	// HELIB_NTIMER_STOP(timer_rotate);
 	// HELIB_NTIMER_START(timer_shift);
 	// shift(test, 1);
-	// user.printDecrypted(test);
+	// user.printDecryptedINT(test);
 	// HELIB_NTIMER_STOP(timer_shift);
 	Ctxt rot = test;
 	Ctxt custom = test;
-	user.printDecrypted(test);
+	user.printDecryptedINT(test);
 	HELIB_NTIMER_START(timer_custom_TS);
 	for (int i = 1; i < contx.getNSlots(); ++i)
 	{
@@ -200,13 +200,13 @@ int main(int argc, char* argv[]) {
 		HELIB_NTIMER_STOP(rotate);
 		custom += rot;
 	}
-	user.printDecrypted(custom);
+	user.printDecryptedINT(custom);
 	HELIB_NTIMER_STOP(timer_custom_TS);
 	helib::printNamedTimer(std::cout, "timer_custom_TS");
 	Ctxt test_copy = test;
 	HELIB_NTIMER_START(timer_total_sum);
 	totalSums(test_copy);
-	user.printDecrypted(test_copy);
+	user.printDecryptedINT(test_copy);
 	HELIB_NTIMER_STOP(timer_total_sum);
 	// helib::printNamedTimer(std::cout, "timer_rotate");
 	// helib::printNamedTimer(std::cout, "timer_shift");

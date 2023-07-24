@@ -105,10 +105,16 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_STOP(timer_PubKey);
 	
 	CircuitType type = UNI; //Fixed at UNI
+	HELIB_NTIMER_START(timer_comparator);
 	Comparator comparator(contx, type, HDB_Param.d, HDB_Param.expansion_len, public_key, false); // secret key deleted. only public key remained
+	HELIB_NTIMER_STOP(timer_comparator);
+	cout << "comparator created" << endl;
 
 	/*Secret key is contained in this class. Be carefull! */
+	HELIB_NTIMER_START(timer_user);
     USER user = USER(comparator, contx, public_key, secret_key, verbose); //pass secret key only to user
+	HELIB_NTIMER_STOP(timer_user);
+	cout << "user created" << endl;
 
 	Ctxt_mat db;
 	vector<string> headers;
@@ -126,7 +132,8 @@ int main(int argc, char* argv[]) {
 		for (auto& h:headers)
 			cout << "\nhead: " << h;
 		cout << endl;
-		user.printCtxtMat(db);
+		user.printCtxtMatINT(db);
+		user.printCtxtMatZZX(db);
 	}
 	
 
@@ -136,8 +143,10 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_STOP(timer_IndexFile);
 	
 	cout << "created index file" << endl;
-	/*SERVER SIDE */   
+	/*SERVER SIDE */
+	HELIB_NTIMER_START(timer_server);
     SERVER server = SERVER(comparator, db, indFile, verbose);
+	HELIB_NTIMER_STOP(timer_server);
 	cout << "created server" << endl;
 	/*
 	 * 1. readCSV() => reads csv file and populates plaintext DB
@@ -187,7 +196,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	vector<unsigned long> dest = {0,1}; //TODO: try more dest columns
+	vector<unsigned long> dest = {0,2,7}; //TODO: try more dest columns
 	unsigned long source = 0;
 	HEQuery q(public_key);
 	user.ConstructQuery(q, input, queryType, source, dest);
@@ -198,11 +207,15 @@ int main(int argc, char* argv[]) {
 	// server.Query(q, result);	      //uncomment for regular search
 	HELIB_NTIMER_STOP(timer_Query);
 
-	user.printCtxtMat(result);
+	user.printCtxtMatINT(result);
+	// user.printCtxtMatZZX(result);
 
     helib::printNamedTimer(std::cout << std::endl, "timer_Context");
     helib::printNamedTimer(std::cout, "timer_SecKey");
     helib::printNamedTimer(std::cout, "timer_PubKey");
+	helib::printNamedTimer(std::cout, "timer_comparator");
+	helib::printNamedTimer(std::cout, "timer_user");
+	helib::printNamedTimer(std::cout, "timer_server");
     helib::printNamedTimer(std::cout, "timer_Encrypt_DB");
     helib::printNamedTimer(std::cout, "timer_IndexFile");
 	helib::printNamedTimer(std::cout, "nslot");

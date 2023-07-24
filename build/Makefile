@@ -142,6 +142,19 @@ TS/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/build
 .PHONY : TS/fast
 
+#=============================================================================
+# Target rules for targets named nslots
+
+# Build rule for target.
+nslots: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nslots
+.PHONY : nslots
+
+# fast build rule for target.
+nslots/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/build
+.PHONY : nslots/fast
+
 HDB_comparison_library/comp_lib/comparator.o: HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.o
 
@@ -149,6 +162,7 @@ HDB_comparison_library/comp_lib/comparator.o: HDB_comparison_library/comp_lib/co
 HDB_comparison_library/comp_lib/comparator.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.o
 
 HDB_comparison_library/comp_lib/comparator.i: HDB_comparison_library/comp_lib/comparator.cpp.i
@@ -158,6 +172,7 @@ HDB_comparison_library/comp_lib/comparator.i: HDB_comparison_library/comp_lib/co
 HDB_comparison_library/comp_lib/comparator.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.i
 
 HDB_comparison_library/comp_lib/comparator.s: HDB_comparison_library/comp_lib/comparator.cpp.s
@@ -167,6 +182,7 @@ HDB_comparison_library/comp_lib/comparator.s: HDB_comparison_library/comp_lib/co
 HDB_comparison_library/comp_lib/comparator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.s
 
 HDB_comparison_library/comp_lib/tools.o: HDB_comparison_library/comp_lib/tools.cpp.o
@@ -176,6 +192,7 @@ HDB_comparison_library/comp_lib/tools.o: HDB_comparison_library/comp_lib/tools.c
 HDB_comparison_library/comp_lib/tools.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.o
 
 HDB_comparison_library/comp_lib/tools.i: HDB_comparison_library/comp_lib/tools.cpp.i
@@ -185,6 +202,7 @@ HDB_comparison_library/comp_lib/tools.i: HDB_comparison_library/comp_lib/tools.c
 HDB_comparison_library/comp_lib/tools.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.i
 
 HDB_comparison_library/comp_lib/tools.s: HDB_comparison_library/comp_lib/tools.cpp.s
@@ -194,6 +212,7 @@ HDB_comparison_library/comp_lib/tools.s: HDB_comparison_library/comp_lib/tools.c
 HDB_comparison_library/comp_lib/tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.s
 
 src/TS_test.o: src/TS_test.cpp.o
@@ -244,6 +263,30 @@ src/main_query_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/src/main_query_test.cpp.s
 .PHONY : src/main_query_test.cpp.s
 
+src/nslots_test.o: src/nslots_test.cpp.o
+.PHONY : src/nslots_test.o
+
+# target to build an object file
+src/nslots_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/src/nslots_test.cpp.o
+.PHONY : src/nslots_test.cpp.o
+
+src/nslots_test.i: src/nslots_test.cpp.i
+.PHONY : src/nslots_test.i
+
+# target to preprocess a source file
+src/nslots_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/src/nslots_test.cpp.i
+.PHONY : src/nslots_test.cpp.i
+
+src/nslots_test.s: src/nslots_test.cpp.s
+.PHONY : src/nslots_test.s
+
+# target to generate assembly for a file
+src/nslots_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/src/nslots_test.cpp.s
+.PHONY : src/nslots_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -253,6 +296,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... TS"
+	@echo "... nslots"
 	@echo "... searchable_db"
 	@echo "... HDB_comparison_library/comp_lib/comparator.o"
 	@echo "... HDB_comparison_library/comp_lib/comparator.i"
@@ -266,6 +310,9 @@ help:
 	@echo "... src/main_query_test.o"
 	@echo "... src/main_query_test.i"
 	@echo "... src/main_query_test.s"
+	@echo "... src/nslots_test.o"
+	@echo "... src/nslots_test.i"
+	@echo "... src/nslots_test.s"
 .PHONY : help
 
 
