@@ -26,11 +26,17 @@ using namespace he_cmp;
 using namespace NTL;
 
 int main() {
+	long ns;
+	cout << "input ns: " << endl;
+	cin >> ns;
 	while (true)
 	{
 		long p;
 		cout << "input p: " << endl;
 		cin >> p;
+		long o;
+		cout << "input o: " << endl;
+		cin >> o;
 		stringstream ss;
 		ss << "nslots_" << to_string(p) << ".txt";
 		string s = ss.str();
@@ -38,9 +44,11 @@ int main() {
 		for (long m = 10000; m < 150000; ++m)
 		{
 			if (GCD(p, m) != 1) continue;
+			long ord = multOrd(p, m);
+			if (ord < o) continue;
 			long nslots = findNSlots(p, m);
-			if (nslots < 100) continue;
-			fout << "m: " << m << " nslots: " << nslots << "\n";
+			if (nslots < ns) continue;
+			fout << "m: " << m << " ord: " << ord << " nslots: " << nslots << "\n";
 		}
 		fout.close();
 	}

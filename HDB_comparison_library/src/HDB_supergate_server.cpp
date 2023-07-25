@@ -88,11 +88,6 @@ namespace HDB_supergate_server_{
 		res.resize(q.dest.size()); // resize result so we have #dest rows
 		for (auto& row: res) row.reserve(Col);
 
-		// Ctxt_mat less_mod_ctxt_arr, eq_mod_ctxt_arr;
-		// less_mod_ctxt_arr.resize(Col);
-		// eq_mod_ctxt_arr.resize(Col);
-		// for (auto& row: less_mod_ctxt_arr) row.reserve(comparator.m_slotDeg);
-		// for (auto& row: eq_mod_ctxt_arr) row.reserve(comparator.m_slotDeg);
 
 		for (unsigned long i = 0; i < Col; ++i)
 		{
@@ -102,26 +97,6 @@ namespace HDB_supergate_server_{
 			vector<Ctxt> mod_p_coefs;
 			comparator.extract_mod_p(mod_p_coefs, z_ctxt);
 			
-			// for(unsigned long iCoef = 0; iCoef < comparator.m_slotDeg; ++iCoef)
-			// {
-			// 	Ctxt ctxt_less = Ctxt(comparator.m_pk);
-			// 	Ctxt ctxt_eq = Ctxt(comparator.m_pk);
-			// 	comparator.evaluate_univar_less_poly(ctxt_less, ctxt_eq, mod_p_coefs[iCoef]);
-			// 	less_mod_ctxt_arr[i].emplace_back(ctxt_less);
-			// 	ctxt_eq.negate();
-			// 	ctxt_eq.addConstant(ZZ(1));
-			// 	eq_mod_ctxt_arr[i].emplace_back(ctxt_eq);
-			// }
-			// Ctxt ctxt_less = less_mod_ctxt_arr[i][comparator.m_slotDeg - 1];
-			// Ctxt ctxt_eq = eq_mod_ctxt_arr[i][comparator.m_slotDeg - 1];
-			// for(long iCoef = comparator.m_slotDeg - 2; iCoef >= 0; iCoef--)
-			// {
-			// 	Ctxt tmp = ctxt_eq;
-			// 	tmp *= less_mod_ctxt_arr[i][iCoef];
-			// 	ctxt_less += tmp;
-
-			// 	ctxt_eq *= eq_mod_ctxt_arr[i][iCoef];
-			// }
             Ctxt ctxt_less = Ctxt(comparator.m_pk);
             Ctxt ctxt_eq = Ctxt(comparator.m_pk);
             for (long iCoef = D - 1; iCoef >= 0; --iCoef)

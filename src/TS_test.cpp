@@ -3,6 +3,7 @@
 
 #include <helib/helib.h>
 #include <helib/ArgMap.h>
+#include <helib/debugging.h>
 
 #include "../HDB_comparison_library/comp_lib/comparator.h"
 #include "HDB_supergate.hpp"
@@ -54,7 +55,7 @@ int main(int argc, char* argv[]) {
 	amap.toggle().arg("-std", std128, "Toggle to just use standard128 params", "");
 	amap.parse(argc, argv);
 
-	const struct BGV_param HDB_Param = std128 ? STD128_HDB : MakeBGVParam(p, d, m, bits, c, l, scale, r);
+	const struct BGV_param HDB_Param = std128 ? TOY_HDB : MakeBGVParam(p, d, m, bits, c, l, scale, r);
 
 	HELIB_NTIMER_START(timer_Context);
     const Context contx = MakeBGVContext(HDB_Param); //TODO: Test Parameters
@@ -105,114 +106,133 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_STOP(timer_PubKey);
 	
 	CircuitType type = UNI; //Fixed at UNI
+	HELIB_NTIMER_START(timer_comparator);
 	Comparator comparator(contx, type, HDB_Param.d, HDB_Param.expansion_len, public_key, false); // secret key deleted. only public key remained
+	HELIB_NTIMER_STOP(timer_comparator);
+	helib::printNamedTimer(cout, "timer_comparator");
 
-	/*Secret key is contained in this class. Be carefull! */
-    USER user = USER(comparator, contx, public_key, secret_key, verbose); //pass secret key only to user
+	// /*Secret key is contained in this class. Be carefull! */
+    // USER user = USER(comparator, contx, public_key, secret_key, verbose); //pass secret key only to user
 
-	Ctxt_mat db;
-	vector<string> headers;
-	db_filename = "../db/" + db_filename + ".csv";
-	user.createPtxtIndexFile(db_filename);
-	if (verbose)
-		user.getPtxtIndexFile().printIndexFile();
-	HELIB_NTIMER_START(timer_Encrypt_DB);
-	user.csvToDB(db, db_filename, headers);
-	HELIB_NTIMER_STOP(timer_Encrypt_DB);
-    cout << endl;
+	// Ctxt_mat db;
+	// vector<string> headers;
+	// db_filename = "../db/" + db_filename + ".csv";
+	// user.createPtxtIndexFile(db_filename);
+	// if (verbose)
+	// 	user.getPtxtIndexFile().printIndexFile();
+	// HELIB_NTIMER_START(timer_Encrypt_DB);
+	// user.csvToDB(db, db_filename, headers);
+	// HELIB_NTIMER_STOP(timer_Encrypt_DB);
+    // cout << endl;
 
-	if (verbose)
-	{
-		for (auto& h:headers)
-			cout << "\nhead: " << h;
-		cout << endl;
-		user.printCtxtMatINT(db);
-	}
-	cout << contx.getView().getPAlgebra().numOfGens() << endl;
-	return 1;
+	// if (verbose)
+	// {
+	// 	for (auto& h:headers)
+	// 		cout << "\nhead: " << h;
+	// 	cout << endl;
+	// 	user.printCtxtMatINT(db);
+	// }
 	
 
-	HELIB_NTIMER_START(timer_IndexFile);
-	CtxtIndexFile indFile;
-	user.createCtxtIndexFile(indFile);
-	HELIB_NTIMER_STOP(timer_IndexFile);
-	Ctxt test = db[0][0];
-	long n = contx.getView().size();
-	cout << "n: " << n << endl;
+	// HELIB_NTIMER_START(timer_IndexFile);
+	// CtxtIndexFile indFile;
+	// user.createCtxtIndexFile(indFile);
+	// HELIB_NTIMER_STOP(timer_IndexFile);
+	ZZX test1 = ZZX(INIT_MONO, 0, 0);
+	ZZX test2 = ZZX(INIT_MONO, 0, 0);
+	for (int i =0; i < 4; ++i) 
+		test1 += ZZX(INIT_MONO, i, 1);
+	for (int i =0; i < 30; ++i) 
+		test2 += ZZX(INIT_MONO, i, 1);
+	
+	vector<ZZX> test11ptxt(contx.getNSlots());
+	vector<ZZX> test12ptxt(contx.getNSlots());
+	vector<ZZX> test21ptxt(contx.getNSlots());
+	vector<ZZX> test22ptxt(contx.getNSlots());
+	test11ptxt[0] = test1;
+	test21ptxt[0] = test2;
+	for (auto& z: test12ptxt) z = test1;
+	for (auto& z: test22ptxt) z = test2;
 
-	Ctxt orig = test;
+	Ctxt test11ctxt(public_key);
+	Ctxt test12ctxt(public_key);
+	Ctxt test21ctxt(public_key);
+	Ctxt test22ctxt(public_key);
+	contx.getView().encrypt(test11ctxt, test11ptxt);
+	contx.getView().encrypt(test12ctxt, test12ptxt);
+	contx.getView().encrypt(test21ctxt, test21ptxt);
+	contx.getView().encrypt(test22ctxt, test22ptxt);
 
-	long k = NTL::NumBits(n);
-	cout << "k: " << k << endl;
-	long e = -1;
-
-	for (long i = k - 2; i >= 0; i--) {
-		cout << "	e: " << e << endl;
-		cout << "	i: " << i << endl;
-		cout << " 	bit(n,i): " << NTL::bit(n, i) << endl;
-		Ctxt tmp1 = test;
-		rotate(tmp1, e);
-		test += tmp1; // ctxt = ctxt + (ctxt >>> e)
-		e = 2 * e;
-
-		if (NTL::bit(n, i)) {
-			Ctxt tmp2 = orig;
-			rotate(tmp2, e);
-			test += tmp2; // ctxt = ctxt + (orig >>> e)
-							// NOTE: we could have also computed
-							// ctxt =  (ctxt >>> e) + orig, however,
-							// this would give us greater depth/noise
-			e -= 1;
-		}
+	ofstream test11file;
+	test11file.open("test11file", std::ios::out);
+	if (test11file.is_open()) {
+		// Write the context to a file
+		test11ctxt.writeTo(test11file);
+		// Close the ofstream
+		test11file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'test11file'.");
 	}
-	// for (int neg = -1; neg >= -50; neg--)
-	// {
-	// 	HELIB_NTIMER_START(timer_rotate_neg);
-	// 	shift(test, neg);
-	// 	// user.printDecryptedINT(test);
-	// 	HELIB_NTIMER_STOP(timer_rotate_neg);
-	// 	cout << "neg: " << neg;
-	// 	helib::printNamedTimer(std::cout, "timer_rotate_neg");
-	// }
-	// HELIB_NTIMER_START(timer_rotate_neg);
-	// shift(test, -3117);
-	// user.printDecryptedINT(test);
-	// HELIB_NTIMER_STOP(timer_rotate_neg);
-	// helib::printNamedTimer(std::cout, "timer_rotate_neg");
-	// HELIB_NTIMER_START(timer_rotate);
-	// shift(test, 1);
-	// user.printDecryptedINT(test);
-	// HELIB_NTIMER_STOP(timer_rotate);
-	// HELIB_NTIMER_START(timer_shift);
-	// shift(test, 1);
-	// user.printDecryptedINT(test);
-	// HELIB_NTIMER_STOP(timer_shift);
-	Ctxt rot = test;
-	Ctxt custom = test;
-	user.printDecryptedINT(test);
-	HELIB_NTIMER_START(timer_custom_TS);
-	for (int i = 1; i < contx.getNSlots(); ++i)
-	{
-		if (i%100 == 0) 
-			{cout << i << endl; printNamedTimer(cout, "rotate");}
-		HELIB_NTIMER_START(rotate);
-		rotate(rot, -1);
-		HELIB_NTIMER_STOP(rotate);
-		custom += rot;
+
+	ofstream test12file;
+	test12file.open("test12file", std::ios::out);
+	if (test12file.is_open()) {
+		// Write the context to a file
+		test12ctxt.writeTo(test12file);
+		// Close the ofstream
+		test12file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'test12file'.");
 	}
-	user.printDecryptedINT(custom);
-	HELIB_NTIMER_STOP(timer_custom_TS);
-	helib::printNamedTimer(std::cout, "timer_custom_TS");
-	Ctxt test_copy = test;
-	HELIB_NTIMER_START(timer_total_sum);
-	totalSums(test_copy);
-	user.printDecryptedINT(test_copy);
-	HELIB_NTIMER_STOP(timer_total_sum);
-	// helib::printNamedTimer(std::cout, "timer_rotate");
-	// helib::printNamedTimer(std::cout, "timer_shift");
-    helib::printNamedTimer(std::cout, "timer_total_sum");
-    return 0;
+
+	ofstream test21file;
+	test21file.open("test21file", std::ios::out);
+	if (test21file.is_open()) {
+		// Write the context to a file
+		test21ctxt.writeTo(test21file);
+		// Close the ofstream
+		test21file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'test21file'.");
+	}
+
+	ofstream test22file;
+	test22file.open("test22file", std::ios::out);
+	if (test22file.is_open()) {
+		// Write the context to a file
+		test22ctxt.writeTo(test22file);
+		// Close the ofstream
+		test22file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'test22file'.");
+	}
+
+	// vector<ZZX> decrypted_cipher(contx.getNSlots());
+	// contx.getView().decrypt(test11ctxt, secret_key, decrypted_cipher);
+	// cout << "Enc( ";
+	// for (auto & zzx: decrypted_cipher)
+	// 	printZZX(cout, zzx);
+	// cout << " ), " << endl;
+
+	// decrypted_cipher.clear();
+	// contx.getView().decrypt(test12ctxt, secret_key, decrypted_cipher);
+	// cout << "Enc( ";
+	// for (auto & zzx: decrypted_cipher)
+	// 	printZZX(cout, zzx);
+	// cout << " ), " << endl;
+
+	// decrypted_cipher.clear();
+	// contx.getView().decrypt(test21ctxt, secret_key, decrypted_cipher);
+	// cout << "Enc( ";
+	// for (auto & zzx: decrypted_cipher)
+	// 	printZZX(cout, zzx);
+	// cout << " ), " << endl;
+
+	// decrypted_cipher.clear();
+	// contx.getView().decrypt(test22ctxt, secret_key, decrypted_cipher);
+	// cout << "Enc( ";
+	// for (auto & zzx: decrypted_cipher)
+	// 	printZZX(cout, zzx);
+	// cout << " ), " << endl;
+	return 1;
 }
-
-
-
