@@ -127,7 +127,7 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_STOP(timer_Encrypt_DB);
     cout << endl;
 
-	if (verbose)
+	if (!verbose)
 	{
 		for (auto& h:headers)
 			cout << "\nhead: " << h;
@@ -196,19 +196,20 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	vector<unsigned long> dest = {0,2,7}; //TODO: try more dest columns
-	unsigned long source = 0;
+	vector<unsigned long> dest = {0,2};//,7}; //TODO: try more dest columns
+	unsigned long source = 1;
 	HEQuery q(public_key);
 	user.ConstructQuery(q, input, queryType, source, dest);
 
 	Ctxt_mat result;
 	HELIB_NTIMER_START(timer_Query);
-    server.QueryWithIndex(q, result); //uncomment for index search
+    // server.QueryWithIndex(q, result); //uncomment for index search
+	server.QueryExtensionField(q, result);
 	// server.Query(q, result);	      //uncomment for regular search
 	HELIB_NTIMER_STOP(timer_Query);
 
-	user.printCtxtMatINT(result);
-	// user.printCtxtMatZZX(result);
+	// user.printCtxtMatINT(result);
+	user.printCtxtMatZZX(result);
 
     helib::printNamedTimer(std::cout << std::endl, "timer_Context");
     helib::printNamedTimer(std::cout, "timer_SecKey");

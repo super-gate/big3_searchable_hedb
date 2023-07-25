@@ -157,6 +157,89 @@ namespace HDB_supergate_server_{
 		}
 	}
 
+    void SERVER::QueryExtensionField(HEQuery& q, Ctxt_mat& res)
+	{
+		res.resize(q.dest.size()); // resize result so we have #dest rows
+        unsigned long ordP = comparator.m_context.getOrdP();
+        unsigned long maxPerSlot = floor(float(ordP) / D);
+        unsigned long reducedCol = ceil(float(Col) / maxPerSlot);
+        cout << "mperslot: " << maxPerSlot << " reduced: " << reducedCol << endl;
+        for (auto& row: res)
+            for (int i = 0; i < reducedCol; ++i) row.emplace_back(comparator.m_pk);
+		
+
+		for (unsigned long i = 0; i < Col; ++i)
+		{
+			//UNI
+			Ctxt z_ctxt = DB[q.source][i];
+			z_ctxt -= q.query;
+			vector<Ctxt> mod_p_coefs;
+			comparator.extract_mod_p(mod_p_coefs, z_ctxt);
+			
+            Ctxt ctxt_less = Ctxt(comparator.m_pk);
+            Ctxt ctxt_eq = Ctxt(comparator.m_pk);
+            for (long iCoef = D - 1; iCoef >= 0; --iCoef)
+            {
+                Ctxt tmp_less = Ctxt(comparator.m_pk);
+                Ctxt tmp_eq = Ctxt(comparator.m_pk);
+                comparator.evaluate_univar_less_poly(tmp_less, tmp_eq, mod_p_coefs[iCoef]);
+                tmp_eq.negate();
+                tmp_eq.addConstant(ZZ(1));
+                if (iCoef == D - 1) 
+                {
+                    ctxt_less = tmp_less;
+                    ctxt_eq = tmp_eq;
+                }
+                else
+                {
+                    Ctxt tmp = ctxt_eq;
+                    tmp *= tmp_less;
+                    ctxt_less += tmp;
+
+                    ctxt_eq *= tmp_eq;
+                }
+            }
+			Ctxt eq_final = ctxt_eq;
+            long sft = 1;
+            while (sft < comparator.m_expansionLen)
+			{
+				Ctxt pos_shift = eq_final;
+				comparator.batch_shift_for_mul(pos_shift, 0, sft);
+				eq_final *= pos_shift;
+				Ctxt neg_shift = eq_final;
+				comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+				eq_final *= neg_shift;
+				sft <<= 1;
+			}
+
+			if(comparator.m_expansionLen != 1)
+			{
+				comparator.shift_and_mul(ctxt_eq, 0);
+				comparator.batch_shift_for_mul(ctxt_eq, 0, -1);
+
+				ctxt_less *= ctxt_eq;
+				comparator.shift_and_add(ctxt_less, 0);
+			}
+			Ctxt less_final = ctxt_less;
+			eq_final *= q.Q_type.first;
+			less_final *= q.Q_type.second;
+
+			Ctxt query_final = eq_final;
+			query_final += less_final;
+
+            int ind = i / maxPerSlot;
+            unsigned long k = i % maxPerSlot;
+			for (unsigned long j = 0; j < q.dest.size(); ++j)
+			{
+                Ctxt res_final = query_final;
+                res_final *= DB[q.dest[j]][i];
+                res_final.multByConstant(ZZX(INIT_MONO, D*k, 1));
+				
+				res[j][ind] += res_final;
+			}
+		}
+	}
+
 	//can only do EQ query right now
 	void SERVER::QueryWithIndex(HEQuery& q, Ctxt_mat& res)
 	{

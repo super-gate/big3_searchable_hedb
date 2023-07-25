@@ -56,7 +56,7 @@ namespace HDB_supergate_user_{
 		
 		cout << "Enc( ";
 		for (auto & zzx: decrypted_cipher)
-        	printZZX(cout, zzx, ord_p);
+        	printZZX(cout, zzx);
 		cout << " ), ";
     };
 

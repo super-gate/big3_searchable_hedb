@@ -67,6 +67,8 @@ namespace HDB_supergate_server_{
             */
             void Query(HDB_supergate_::HEQuery& query, HDB_supergate_::Ctxt_mat& result);
 
+            void QueryExtensionField(HDB_supergate_::HEQuery& query, HDB_supergate_::Ctxt_mat& result);
+
             /**
              * \fn QueryWithIndex
              * \brief queries the DB using the index file and sends result back.
