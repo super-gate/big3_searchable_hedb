@@ -1,0 +1,147 @@
+\hypertarget{namespaceHDB__supergate__}{}\section{H\+D\+B\+\_\+supergate\+\_\+ Namespace Reference}
+\label{namespaceHDB__supergate__}\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param}
+\item 
+class \hyperlink{classHDB__supergate___1_1CSVIterator}{C\+S\+V\+Iterator}
+\item 
+class \hyperlink{classHDB__supergate___1_1CSVRange}{C\+S\+V\+Range}
+\item 
+class \hyperlink{classHDB__supergate___1_1CSVRow}{C\+S\+V\+Row}
+\item 
+class \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index}
+\begin{DoxyCompactList}\small\item\em class representing an encrypted ciphertext index \end{DoxyCompactList}\item 
+class \hyperlink{classHDB__supergate___1_1CtxtIndexFile}{Ctxt\+Index\+File}
+\begin{DoxyCompactList}\small\item\em class representing a ciphertext index file \end{DoxyCompactList}\item 
+class \hyperlink{classHDB__supergate___1_1HEQuery}{H\+E\+Query}
+\begin{DoxyCompactList}\small\item\em Object representing a query object used to query the H\+E\+DB. \end{DoxyCompactList}\item 
+class \hyperlink{classHDB__supergate___1_1PtxtIndex}{Ptxt\+Index}
+\begin{DoxyCompactList}\small\item\em class representing a plaintext index \end{DoxyCompactList}\item 
+class \hyperlink{classHDB__supergate___1_1PtxtIndexFile}{Ptxt\+Index\+File}
+\begin{DoxyCompactList}\small\item\em class representing a collection of Ptxt\+Indexes \end{DoxyCompactList}\item 
+struct \hyperlink{structHDB__supergate___1_1STD128__HDB}{S\+T\+D128\+\_\+\+H\+DB}
+\item 
+struct \hyperlink{structHDB__supergate___1_1TOY__HDB}{T\+O\+Y\+\_\+\+H\+DB}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ helib\+::\+Ctxt $>$ \hyperlink{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}{Ctxt\+\_\+vec}
+\item 
+typedef std\+::vector$<$ std\+::vector$<$ helib\+::\+Ctxt $>$ $>$ \hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{Ctxt\+\_\+mat}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{Q\+\_\+\+T\+Y\+P\+E\+\_\+t} \{ \newline
+{\bfseries EQ}, 
+{\bfseries LT}, 
+{\bfseries L\+EQ}, 
+{\bfseries M\+IN}, 
+\newline
+{\bfseries M\+AX}, 
+{\bfseries EQ}, 
+{\bfseries LT}, 
+{\bfseries L\+EQ}, 
+\newline
+{\bfseries M\+IN}, 
+{\bfseries M\+AX}
+ \}
+\item 
+enum \hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{Q\+\_\+\+T\+Y\+P\+E\+\_\+t} \{ \newline
+{\bfseries EQ}, 
+{\bfseries LT}, 
+{\bfseries L\+EQ}, 
+{\bfseries M\+IN}, 
+\newline
+{\bfseries M\+AX}, 
+{\bfseries EQ}, 
+{\bfseries LT}, 
+{\bfseries L\+EQ}, 
+\newline
+{\bfseries M\+IN}, 
+{\bfseries M\+AX}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a6f4d992f1677f3406407ad6090818211}\label{namespaceHDB__supergate___a6f4d992f1677f3406407ad6090818211}} 
+std\+::istream \& {\bfseries operator$>$$>$} (std\+::istream \&str, \hyperlink{classHDB__supergate___1_1CSVRow}{C\+S\+V\+Row} \&data)
+\item 
+struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param} \hyperlink{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}{Make\+B\+G\+V\+Param} (long, long, long, long, long, long, long, long)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}\label{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}} 
+helib\+::\+Context {\bfseries Make\+B\+G\+V\+Context} (long, long, long, long, long, long)
+\item 
+helib\+::\+Context \hyperlink{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}{Make\+B\+G\+V\+Context} (const struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param})
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a0891908122d714a0a40533f348800b64}\label{namespaceHDB__supergate___a0891908122d714a0a40533f348800b64}} 
+void {\bfseries set\+Index\+Params} (unsigned long, unsigned long, unsigned long, unsigned long \&, unsigned long \&, bool)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a02ca20243e923d4a0c34d8feb4fc4088}\label{namespaceHDB__supergate___a02ca20243e923d4a0c34d8feb4fc4088}} 
+void {\bfseries data\+To\+Z\+Z\+X\+Slot} (unsigned long data, vector$<$ Z\+ZX $>$ \&dest, unsigned long counter, unsigned long digit\+\_\+base, unsigned long exp\+\_\+len, unsigned long enc\+\_\+base, \hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \&comparator)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a6eb55ba8f055d3208533a3bd27ce0dc1}\label{namespaceHDB__supergate___a6eb55ba8f055d3208533a3bd27ce0dc1}} 
+void {\bfseries encrypt\+And\+Insert} (const helib\+::\+Context \&contx, helib\+::\+Pub\+Key \&pk, std\+::vector$<$ N\+T\+L\+::\+Z\+ZX $>$ \&ptxt, \hyperlink{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}{Ctxt\+\_\+vec} \&dest)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a6749e17e945751fdc476b5261fd5cfc4}\label{namespaceHDB__supergate___a6749e17e945751fdc476b5261fd5cfc4}} 
+long {\bfseries find\+N\+Slots} (long, long)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___ac56b9dc7cd1fdf4bd57aae660839d1b8}\label{namespaceHDB__supergate___ac56b9dc7cd1fdf4bd57aae660839d1b8}} 
+istream \& {\bfseries operator$>$$>$} (istream \&str, \hyperlink{classHDB__supergate___1_1CSVRow}{C\+S\+V\+Row} \&data)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a287bd0316c75a81e2b7c8efb5b7d662b}\label{namespaceHDB__supergate___a287bd0316c75a81e2b7c8efb5b7d662b}} 
+void {\bfseries encrypt\+And\+Insert} (const Context \&contx, Pub\+Key \&pk, vector$<$ Z\+ZX $>$ \&ptxt, \hyperlink{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}{Ctxt\+\_\+vec} \&dest)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+main namespace for all utility functions for a H\+E\+DB 
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}\label{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Ctxt\+\_\+mat@{Ctxt\+\_\+mat}}
+\index{Ctxt\+\_\+mat@{Ctxt\+\_\+mat}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{Ctxt\+\_\+mat}{Ctxt\_mat}}
+{\footnotesize\ttfamily typedef std\+::vector$<$ std\+::vector$<$ helib\+::\+Ctxt $>$ $>$ \hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat}}
+
+a matrix of ciphertexts, Ctxt\+\_\+mat \mbox{\Hypertarget{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}\label{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Ctxt\+\_\+vec@{Ctxt\+\_\+vec}}
+\index{Ctxt\+\_\+vec@{Ctxt\+\_\+vec}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{Ctxt\+\_\+vec}{Ctxt\_vec}}
+{\footnotesize\ttfamily typedef std\+::vector$<$ helib\+::\+Ctxt $>$ \hyperlink{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+vec}}
+
+a vector of ciphertexts, Ctxt\+\_\+vec 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}\label{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Q\+\_\+\+T\+Y\+P\+E\+\_\+t@{Q\+\_\+\+T\+Y\+P\+E\+\_\+t}}
+\index{Q\+\_\+\+T\+Y\+P\+E\+\_\+t@{Q\+\_\+\+T\+Y\+P\+E\+\_\+t}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{Q\+\_\+\+T\+Y\+P\+E\+\_\+t}{Q\_TYPE\_t}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Q\+\_\+\+T\+Y\+P\+E\+\_\+t}}
+
+Query Type Enum A query can be equal EQ, less than LT, or less than or equal to L\+EQ. M\+IN and M\+AX queries are not supported yet. \mbox{\Hypertarget{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}\label{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Q\+\_\+\+T\+Y\+P\+E\+\_\+t@{Q\+\_\+\+T\+Y\+P\+E\+\_\+t}}
+\index{Q\+\_\+\+T\+Y\+P\+E\+\_\+t@{Q\+\_\+\+T\+Y\+P\+E\+\_\+t}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{Q\+\_\+\+T\+Y\+P\+E\+\_\+t}{Q\_TYPE\_t}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Q\+\_\+\+T\+Y\+P\+E\+\_\+t}}
+
+Query Type Enum A query can be equal EQ, less than LT, or less than or equal to L\+EQ. M\+IN and M\+AX queries are not supported yet. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}\label{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Make\+B\+G\+V\+Context@{Make\+B\+G\+V\+Context}}
+\index{Make\+B\+G\+V\+Context@{Make\+B\+G\+V\+Context}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{Make\+B\+G\+V\+Context()}{MakeBGVContext()}}
+{\footnotesize\ttfamily helib\+::\+Context H\+D\+B\+\_\+supergate\+\_\+\+::\+Make\+B\+G\+V\+Context (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param}}]{ }\end{DoxyParamCaption})}
+
+function to create a helib\+::\+Context given parameters \mbox{\Hypertarget{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}\label{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Make\+B\+G\+V\+Param@{Make\+B\+G\+V\+Param}}
+\index{Make\+B\+G\+V\+Param@{Make\+B\+G\+V\+Param}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{Make\+B\+G\+V\+Param()}{MakeBGVParam()}}
+{\footnotesize\ttfamily struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param} H\+D\+B\+\_\+supergate\+\_\+\+::\+Make\+B\+G\+V\+Param (\begin{DoxyParamCaption}\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{ }\end{DoxyParamCaption})}
+
+function to create B\+G\+V\+\_\+\+Param given parameters 

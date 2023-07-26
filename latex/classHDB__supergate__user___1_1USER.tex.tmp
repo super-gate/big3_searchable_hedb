@@ -1,0 +1,428 @@
+\hypertarget{classHDB__supergate__user___1_1USER}{}\section{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+:\+:U\+S\+ER Class Reference}
+\label{classHDB__supergate__user___1_1USER}\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+
+
+Class that simulates the \hyperlink{classHDB__supergate__user___1_1USER}{U\+S\+ER} that queries the DB.  
+
+
+
+
+{\ttfamily \#include $<$H\+D\+B\+\_\+supergate\+\_\+user.\+hpp$>$}
+
+
+
+Collaboration diagram for H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+:\+:U\+S\+ER\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a7c8065a7593d03d5593e82a4a0dfb4c4}\label{classHDB__supergate__user___1_1USER_a7c8065a7593d03d5593e82a4a0dfb4c4}} 
+void {\bfseries Encrypt\+Number} (helib\+::\+Ctxt \&ctxt, unsigned long i)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a787652acc1dfc19151e5e3d21dbb8a92}\label{classHDB__supergate__user___1_1USER_a787652acc1dfc19151e5e3d21dbb8a92}} 
+void {\bfseries Encrypt\+Number\+Per\+Slot} (helib\+::\+Ctxt \&ctxt, unsigned long i)
+\item 
+\hyperlink{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}{U\+S\+ER} (\hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \&\hyperlink{classHDB__supergate__user___1_1USER_a94e5d9e4e2599190208ab26c490ec72d}{comparator}, const helib\+::\+Context \&\hyperlink{classHDB__supergate__user___1_1USER_a07ff6da0c27f060e33302322935de1e8}{contx}, helib\+::\+Pub\+Key \&\hyperlink{classHDB__supergate__user___1_1USER_a8d5422c038403189c8c7e6a58cedca5a}{pk}, helib\+::\+Sec\+Key \&\hyperlink{classHDB__supergate__user___1_1USER_afb2121f582eed6fcc5259dac04786c6a}{sk}, bool)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_abe650a725b6a1ddbd5cdb1a8bb7c959f}\label{classHDB__supergate__user___1_1USER_abe650a725b6a1ddbd5cdb1a8bb7c959f}} 
+void {\bfseries create\+Ptxt\+Index\+File} (string filename)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a85b294c0f548300d2b9bde8046a13f98}\label{classHDB__supergate__user___1_1USER_a85b294c0f548300d2b9bde8046a13f98}} 
+void {\bfseries create\+Ctxt\+Index\+File} (\hyperlink{classHDB__supergate___1_1CtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File} \&Index\+File)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_af748e2445d357335757526025f866635}\label{classHDB__supergate__user___1_1USER_af748e2445d357335757526025f866635}} 
+void {\bfseries Construct\+Query} (\hyperlink{classHDB__supergate___1_1HEQuery}{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query} \&query, unsigned long input, \hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Q\+\_\+\+T\+Y\+P\+E\+\_\+t} type, unsigned long source, std\+::vector$<$ unsigned long $>$ dest)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ad77026234e58b9b8007ea663020c76c9}\label{classHDB__supergate__user___1_1USER_ad77026234e58b9b8007ea663020c76c9}} 
+void {\bfseries csv\+To\+DB} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&DB, \hyperlink{classHDB__supergate___1_1CSVRange}{H\+D\+B\+\_\+supergate\+\_\+\+::\+C\+S\+V\+Range} \&range)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}{csv\+To\+DB} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&DB, std\+::string path)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}{csv\+To\+DB} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&DB, std\+::string path, std\+::vector$<$ std\+::string $>$ \&headers)
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}{max} ()
+\item 
+\hyperlink{classHDB__supergate___1_1PtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File} \hyperlink{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}{get\+Ptxt\+Index\+File} ()
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a0595a991f5cc6622d695f3ae966ce8af}{print\+Z\+Z\+Xas\+I\+NT} (vector$<$ Z\+ZX $>$)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a5e6f79327875c256586d8b5c93b35b4a}{print\+Packed\+Z\+Z\+Xas\+I\+NT} (vector$<$ Z\+ZX $>$)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a9188f2904eb4feb39701b1b009a66c08}{print\+Decrypted\+I\+NT} (helib\+::\+Ctxt \&ctxt, bool zzx\+\_\+packed=false)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a8e96e4d10959e4e39b21b0aba490635a}{print\+Decrypted\+Z\+ZX} (helib\+::\+Ctxt \&ctxt)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a16362739e76a60ebaf150c4d0bfc6ef2}{print\+Ctxt\+Mat\+I\+NT} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&, bool zzx\+\_\+packed=false)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_ae536fabef474f74916b70386426e0c54}{print\+Ctxt\+Mat\+Z\+ZX} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a7c8065a7593d03d5593e82a4a0dfb4c4}\label{classHDB__supergate__user___1_1USER_a7c8065a7593d03d5593e82a4a0dfb4c4}} 
+void {\bfseries Encrypt\+Number} (helib\+::\+Ctxt \&ctxt, unsigned long i)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a787652acc1dfc19151e5e3d21dbb8a92}\label{classHDB__supergate__user___1_1USER_a787652acc1dfc19151e5e3d21dbb8a92}} 
+void {\bfseries Encrypt\+Number\+Per\+Slot} (helib\+::\+Ctxt \&ctxt, unsigned long i)
+\item 
+\hyperlink{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}{U\+S\+ER} (\hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \&\hyperlink{classHDB__supergate__user___1_1USER_a94e5d9e4e2599190208ab26c490ec72d}{comparator}, const helib\+::\+Context \&\hyperlink{classHDB__supergate__user___1_1USER_a07ff6da0c27f060e33302322935de1e8}{contx}, helib\+::\+Pub\+Key \&\hyperlink{classHDB__supergate__user___1_1USER_a8d5422c038403189c8c7e6a58cedca5a}{pk}, helib\+::\+Sec\+Key \&\hyperlink{classHDB__supergate__user___1_1USER_afb2121f582eed6fcc5259dac04786c6a}{sk}, bool)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_abe650a725b6a1ddbd5cdb1a8bb7c959f}\label{classHDB__supergate__user___1_1USER_abe650a725b6a1ddbd5cdb1a8bb7c959f}} 
+void {\bfseries create\+Ptxt\+Index\+File} (string filename)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a85b294c0f548300d2b9bde8046a13f98}\label{classHDB__supergate__user___1_1USER_a85b294c0f548300d2b9bde8046a13f98}} 
+void {\bfseries create\+Ctxt\+Index\+File} (\hyperlink{classHDB__supergate___1_1CtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File} \&Index\+File)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_af748e2445d357335757526025f866635}\label{classHDB__supergate__user___1_1USER_af748e2445d357335757526025f866635}} 
+void {\bfseries Construct\+Query} (\hyperlink{classHDB__supergate___1_1HEQuery}{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query} \&query, unsigned long input, \hyperlink{namespaceHDB__supergate___a1d92aed09c83a1692f702cbaa85757e2}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Q\+\_\+\+T\+Y\+P\+E\+\_\+t} type, unsigned long source, std\+::vector$<$ unsigned long $>$ dest)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ad77026234e58b9b8007ea663020c76c9}\label{classHDB__supergate__user___1_1USER_ad77026234e58b9b8007ea663020c76c9}} 
+void {\bfseries csv\+To\+DB} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&DB, \hyperlink{classHDB__supergate___1_1CSVRange}{H\+D\+B\+\_\+supergate\+\_\+\+::\+C\+S\+V\+Range} \&range)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}{csv\+To\+DB} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&DB, std\+::string path)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}{csv\+To\+DB} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&DB, std\+::string path, std\+::vector$<$ std\+::string $>$ \&headers)
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}{max} ()
+\item 
+\hyperlink{classHDB__supergate___1_1PtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File} \hyperlink{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}{get\+Ptxt\+Index\+File} ()
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a0595a991f5cc6622d695f3ae966ce8af}\label{classHDB__supergate__user___1_1USER_a0595a991f5cc6622d695f3ae966ce8af}} 
+void {\bfseries print\+Z\+Z\+Xas\+I\+NT} (vector$<$ Z\+ZX $>$)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a5e6f79327875c256586d8b5c93b35b4a}\label{classHDB__supergate__user___1_1USER_a5e6f79327875c256586d8b5c93b35b4a}} 
+void {\bfseries print\+Packed\+Z\+Z\+Xas\+I\+NT} (vector$<$ Z\+ZX $>$)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a9188f2904eb4feb39701b1b009a66c08}{print\+Decrypted\+I\+NT} (helib\+::\+Ctxt \&ctxt, bool zzx\+\_\+packed=false)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a8e96e4d10959e4e39b21b0aba490635a}\label{classHDB__supergate__user___1_1USER_a8e96e4d10959e4e39b21b0aba490635a}} 
+void {\bfseries print\+Decrypted\+Z\+ZX} (helib\+::\+Ctxt \&ctxt)
+\item 
+void \hyperlink{classHDB__supergate__user___1_1USER_a16362739e76a60ebaf150c4d0bfc6ef2}{print\+Ctxt\+Mat\+I\+NT} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&, bool zzx\+\_\+packed=false)
+\item 
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ae536fabef474f74916b70386426e0c54}\label{classHDB__supergate__user___1_1USER_ae536fabef474f74916b70386426e0c54}} 
+void {\bfseries print\+Ctxt\+Mat\+Z\+ZX} (\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \& \hyperlink{classHDB__supergate__user___1_1USER_a94e5d9e4e2599190208ab26c490ec72d}{comparator}
+\item 
+const helib\+::\+Context \& \hyperlink{classHDB__supergate__user___1_1USER_a07ff6da0c27f060e33302322935de1e8}{contx}
+\item 
+helib\+::\+Pub\+Key \& \hyperlink{classHDB__supergate__user___1_1USER_a8d5422c038403189c8c7e6a58cedca5a}{pk}
+\item 
+helib\+::\+Sec\+Key \& \hyperlink{classHDB__supergate__user___1_1USER_afb2121f582eed6fcc5259dac04786c6a}{sk}
+\item 
+\hyperlink{classHDB__supergate___1_1PtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File} \hyperlink{classHDB__supergate__user___1_1USER_ae5077c34a79ae6ed82f96d98500538be}{ptxt\+\_\+index\+\_\+file}
+\item 
+const helib\+::\+Encrypted\+Array \& \hyperlink{classHDB__supergate__user___1_1USER_a709db927fcfb1ecdfc7e6b04dc051ccf}{ea} = contx.\+get\+View()
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_a49198cf3f4f8a79d20427e1a66aee440}{p} = contx.\+getP()
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_a6a71b997d1548844a6c033806f09680b}{ord\+\_\+p} = contx.\+get\+OrdP()
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_a9daab45db6cd0549741db642e2bd0d9e}{D} = comparator.\+m\+\_\+slot\+Deg
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_ace96501e02fbb0bf56ba288ab785e263}{nslots} = contx.\+get\+N\+Slots()
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}{exp\+\_\+len} = comparator.\+m\+\_\+expansion\+Len
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_a9c46f3106b774075ab85997f402a87bb}{max\+\_\+packed} = \hyperlink{classHDB__supergate__user___1_1USER_ace96501e02fbb0bf56ba288ab785e263}{nslots} / \hyperlink{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}{exp\+\_\+len}
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_ac17b72dc57f2305b2f75229dde21e180}{enc\+\_\+base} = (\hyperlink{classHDB__supergate__user___1_1USER_a49198cf3f4f8a79d20427e1a66aee440}{p} + 1) $>$$>$ 1
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_ab6f7b3ace37c45a772e54e19621a74ec}{digit\+\_\+base} = power\+\_\+long(\hyperlink{classHDB__supergate__user___1_1USER_ac17b72dc57f2305b2f75229dde21e180}{enc\+\_\+base}, comparator.\+m\+\_\+slot\+Deg)
+\item 
+int \hyperlink{classHDB__supergate__user___1_1USER_a2af52e03179f03c2dc4083984bf72254}{space\+\_\+bit\+\_\+size} = static\+\_\+cast$<$int$>$(ceil(\hyperlink{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}{exp\+\_\+len} $\ast$ log2(\hyperlink{classHDB__supergate__user___1_1USER_ab6f7b3ace37c45a772e54e19621a74ec}{digit\+\_\+base})))
+\item 
+unsigned long \hyperlink{classHDB__supergate__user___1_1USER_ab63e7f113574e6b5d533441045cc39c1}{input\+\_\+range}
+\item 
+bool \hyperlink{classHDB__supergate__user___1_1USER_ac1366a085994e88d72f19754e79d714c}{verbose}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that simulates the \hyperlink{classHDB__supergate__user___1_1USER}{U\+S\+ER} that queries the DB. 
+
+\hyperlink{classHDB__supergate__user___1_1USER}{U\+S\+ER} class simulates the T\+EE and contains both public and secret keys. It can construct query objects and encrypt plaintext database to send to the S\+E\+R\+V\+ER class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}\label{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!U\+S\+ER@{U\+S\+ER}}
+\index{U\+S\+ER@{U\+S\+ER}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{U\+S\+E\+R()}{USER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::\+U\+S\+ER (\begin{DoxyParamCaption}\item[{\hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \&}]{comparator,  }\item[{const helib\+::\+Context \&}]{contx,  }\item[{helib\+::\+Pub\+Key \&}]{pk,  }\item[{helib\+::\+Sec\+Key \&}]{sk,  }\item[{bool}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Constructor for the \hyperlink{classHDB__supergate__user___1_1USER}{U\+S\+ER} class 
+\begin{DoxyParams}{Parameters}
+{\em comparator} & reference to comparator object \\
+\hline
+{\em contx} & reference to the crypto-\/context \\
+\hline
+{\em pk} & reference to the public key object \\
+\hline
+{\em sk} & reference to the secret key object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}\label{classHDB__supergate__user___1_1USER_a549604fdaba898518239243dd9af1d25}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!U\+S\+ER@{U\+S\+ER}}
+\index{U\+S\+ER@{U\+S\+ER}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{U\+S\+E\+R()}{USER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::\+U\+S\+ER (\begin{DoxyParamCaption}\item[{\hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \&}]{comparator,  }\item[{const helib\+::\+Context \&}]{contx,  }\item[{helib\+::\+Pub\+Key \&}]{pk,  }\item[{helib\+::\+Sec\+Key \&}]{sk,  }\item[{bool}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Constructor for the \hyperlink{classHDB__supergate__user___1_1USER}{U\+S\+ER} class 
+\begin{DoxyParams}{Parameters}
+{\em comparator} & reference to comparator object \\
+\hline
+{\em contx} & reference to the crypto-\/context \\
+\hline
+{\em pk} & reference to the public key object \\
+\hline
+{\em sk} & reference to the secret key object \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}\label{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!csv\+To\+DB@{csv\+To\+DB}}
+\index{csv\+To\+DB@{csv\+To\+DB}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{csv\+To\+D\+B()}{csvToDB()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::csv\+To\+DB (\begin{DoxyParamCaption}\item[{\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&}]{DB,  }\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+used to convert csv files without headers 
+\begin{DoxyParams}{Parameters}
+{\em DB} & the referecnce to the Ctxt\+\_\+mat datatype we are saving all ciphertext into \\
+\hline
+{\em path} & file path of the csv file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}\label{classHDB__supergate__user___1_1USER_a6f2b3da65df29d2cd21fa15ce9a8fa08}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!csv\+To\+DB@{csv\+To\+DB}}
+\index{csv\+To\+DB@{csv\+To\+DB}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{csv\+To\+D\+B()}{csvToDB()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::csv\+To\+DB (\begin{DoxyParamCaption}\item[{\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&}]{DB,  }\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+used to convert csv files without headers 
+\begin{DoxyParams}{Parameters}
+{\em DB} & the referecnce to the Ctxt\+\_\+mat datatype we are saving all ciphertext into \\
+\hline
+{\em path} & file path of the csv file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}\label{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!csv\+To\+DB@{csv\+To\+DB}}
+\index{csv\+To\+DB@{csv\+To\+DB}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{csv\+To\+D\+B()}{csvToDB()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::csv\+To\+DB (\begin{DoxyParamCaption}\item[{\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&}]{DB,  }\item[{std\+::string}]{path,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{headers }\end{DoxyParamCaption})}
+
+used to convert csv files with headers into ciphertext DB 
+\begin{DoxyParams}{Parameters}
+{\em DB} & the referecnce to the Ctxt\+\_\+mat datatype we are saving all ciphertext into \\
+\hline
+{\em path} & file path of the csv file \\
+\hline
+{\em headers} & reference to the container of headers \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}\label{classHDB__supergate__user___1_1USER_a2c56505bbdd276d8b3d7cb1170a6e24b}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!csv\+To\+DB@{csv\+To\+DB}}
+\index{csv\+To\+DB@{csv\+To\+DB}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{csv\+To\+D\+B()}{csvToDB()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::csv\+To\+DB (\begin{DoxyParamCaption}\item[{\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&}]{DB,  }\item[{std\+::string}]{path,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{headers }\end{DoxyParamCaption})}
+
+used to convert csv files with headers into ciphertext DB 
+\begin{DoxyParams}{Parameters}
+{\em DB} & the referecnce to the Ctxt\+\_\+mat datatype we are saving all ciphertext into \\
+\hline
+{\em path} & file path of the csv file \\
+\hline
+{\em headers} & reference to the container of headers \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}\label{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!get\+Ptxt\+Index\+File@{get\+Ptxt\+Index\+File}}
+\index{get\+Ptxt\+Index\+File@{get\+Ptxt\+Index\+File}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{get\+Ptxt\+Index\+File()}{getPtxtIndexFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{classHDB__supergate___1_1PtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File} H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::get\+Ptxt\+Index\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the plaintext index file \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}\label{classHDB__supergate__user___1_1USER_a215efee0ca10cac1aca743eae83f0544}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!get\+Ptxt\+Index\+File@{get\+Ptxt\+Index\+File}}
+\index{get\+Ptxt\+Index\+File@{get\+Ptxt\+Index\+File}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{get\+Ptxt\+Index\+File()}{getPtxtIndexFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{classHDB__supergate___1_1PtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File} H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::get\+Ptxt\+Index\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the plaintext index file \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}\label{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!max@{max}}
+\index{max@{max}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{max()}{max()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+returns input\+\_\+range \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}\label{classHDB__supergate__user___1_1USER_af456610f0d08f5ab933fb0653bc556c2}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!max@{max}}
+\index{max@{max}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{max()}{max()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+returns input\+\_\+range \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a16362739e76a60ebaf150c4d0bfc6ef2}\label{classHDB__supergate__user___1_1USER_a16362739e76a60ebaf150c4d0bfc6ef2}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Ctxt\+Mat\+I\+NT@{print\+Ctxt\+Mat\+I\+NT}}
+\index{print\+Ctxt\+Mat\+I\+NT@{print\+Ctxt\+Mat\+I\+NT}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Ctxt\+Mat\+I\+N\+T()}{printCtxtMatINT()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Ctxt\+Mat\+I\+NT (\begin{DoxyParamCaption}\item[{\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&}]{,  }\item[{bool}]{zzx\+\_\+packed = {\ttfamily false} }\end{DoxyParamCaption})}
+
+debug function to decrypt and print a Ctxt\+\_\+mat type object \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a16362739e76a60ebaf150c4d0bfc6ef2}\label{classHDB__supergate__user___1_1USER_a16362739e76a60ebaf150c4d0bfc6ef2}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Ctxt\+Mat\+I\+NT@{print\+Ctxt\+Mat\+I\+NT}}
+\index{print\+Ctxt\+Mat\+I\+NT@{print\+Ctxt\+Mat\+I\+NT}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Ctxt\+Mat\+I\+N\+T()}{printCtxtMatINT()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Ctxt\+Mat\+I\+NT (\begin{DoxyParamCaption}\item[{\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&}]{db,  }\item[{bool}]{zzx\+\_\+packed = {\ttfamily false} }\end{DoxyParamCaption})}
+
+debug function to decrypt and print a Ctxt\+\_\+mat type object as integer \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ae536fabef474f74916b70386426e0c54}\label{classHDB__supergate__user___1_1USER_ae536fabef474f74916b70386426e0c54}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Ctxt\+Mat\+Z\+ZX@{print\+Ctxt\+Mat\+Z\+ZX}}
+\index{print\+Ctxt\+Mat\+Z\+ZX@{print\+Ctxt\+Mat\+Z\+ZX}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Ctxt\+Mat\+Z\+Z\+X()}{printCtxtMatZZX()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Ctxt\+Mat\+Z\+ZX (\begin{DoxyParamCaption}\item[{\hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+\_\+mat} \&}]{db }\end{DoxyParamCaption})}
+
+debug function to decrypt and print a Ctxt\+\_\+mat type object as Z\+ZX \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a9188f2904eb4feb39701b1b009a66c08}\label{classHDB__supergate__user___1_1USER_a9188f2904eb4feb39701b1b009a66c08}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Decrypted\+I\+NT@{print\+Decrypted\+I\+NT}}
+\index{print\+Decrypted\+I\+NT@{print\+Decrypted\+I\+NT}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Decrypted\+I\+N\+T()}{printDecryptedINT()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Decrypted\+I\+NT (\begin{DoxyParamCaption}\item[{helib\+::\+Ctxt \&}]{ctxt,  }\item[{bool}]{zzx\+\_\+packed = {\ttfamily false} }\end{DoxyParamCaption})}
+
+debug function to decrypt and print the ciphertext as integer \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a9188f2904eb4feb39701b1b009a66c08}\label{classHDB__supergate__user___1_1USER_a9188f2904eb4feb39701b1b009a66c08}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Decrypted\+I\+NT@{print\+Decrypted\+I\+NT}}
+\index{print\+Decrypted\+I\+NT@{print\+Decrypted\+I\+NT}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Decrypted\+I\+N\+T()}{printDecryptedINT()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Decrypted\+I\+NT (\begin{DoxyParamCaption}\item[{helib\+::\+Ctxt \&}]{ctxt,  }\item[{bool}]{zzx\+\_\+packed = {\ttfamily false} }\end{DoxyParamCaption})}
+
+debug function to decrypt and print the ciphertext \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a8e96e4d10959e4e39b21b0aba490635a}\label{classHDB__supergate__user___1_1USER_a8e96e4d10959e4e39b21b0aba490635a}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Decrypted\+Z\+ZX@{print\+Decrypted\+Z\+ZX}}
+\index{print\+Decrypted\+Z\+ZX@{print\+Decrypted\+Z\+ZX}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Decrypted\+Z\+Z\+X()}{printDecryptedZZX()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Decrypted\+Z\+ZX (\begin{DoxyParamCaption}\item[{helib\+::\+Ctxt \&}]{ctxt }\end{DoxyParamCaption})}
+
+debug function to decrypt and print ciphertext as Z\+ZX \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a5e6f79327875c256586d8b5c93b35b4a}\label{classHDB__supergate__user___1_1USER_a5e6f79327875c256586d8b5c93b35b4a}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Packed\+Z\+Z\+Xas\+I\+NT@{print\+Packed\+Z\+Z\+Xas\+I\+NT}}
+\index{print\+Packed\+Z\+Z\+Xas\+I\+NT@{print\+Packed\+Z\+Z\+Xas\+I\+NT}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Packed\+Z\+Z\+Xas\+I\+N\+T()}{printPackedZZXasINT()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Packed\+Z\+Z\+Xas\+I\+NT (\begin{DoxyParamCaption}\item[{vector$<$ Z\+ZX $>$}]{decrypted }\end{DoxyParamCaption})}
+
+debug function to print extension field packed Z\+ZX as integers \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a0595a991f5cc6622d695f3ae966ce8af}\label{classHDB__supergate__user___1_1USER_a0595a991f5cc6622d695f3ae966ce8af}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!print\+Z\+Z\+Xas\+I\+NT@{print\+Z\+Z\+Xas\+I\+NT}}
+\index{print\+Z\+Z\+Xas\+I\+NT@{print\+Z\+Z\+Xas\+I\+NT}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{print\+Z\+Z\+Xas\+I\+N\+T()}{printZZXasINT()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::print\+Z\+Z\+Xas\+I\+NT (\begin{DoxyParamCaption}\item[{vector$<$ Z\+ZX $>$}]{decrypted }\end{DoxyParamCaption})}
+
+debug function to print Z\+ZX type as integer 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a94e5d9e4e2599190208ab26c490ec72d}\label{classHDB__supergate__user___1_1USER_a94e5d9e4e2599190208ab26c490ec72d}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!comparator@{comparator}}
+\index{comparator@{comparator}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{comparator}{comparator}}
+{\footnotesize\ttfamily \hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \& H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::comparator}
+
+comparator object \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a07ff6da0c27f060e33302322935de1e8}\label{classHDB__supergate__user___1_1USER_a07ff6da0c27f060e33302322935de1e8}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!contx@{contx}}
+\index{contx@{contx}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{contx}{contx}}
+{\footnotesize\ttfamily const helib\+::\+Context \& H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::contx}
+
+crypto-\/context \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a9daab45db6cd0549741db642e2bd0d9e}\label{classHDB__supergate__user___1_1USER_a9daab45db6cd0549741db642e2bd0d9e}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!D@{D}}
+\index{D@{D}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{D}{D}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::D = comparator.\+m\+\_\+slot\+Deg}
+
+extension field degree \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ab6f7b3ace37c45a772e54e19621a74ec}\label{classHDB__supergate__user___1_1USER_ab6f7b3ace37c45a772e54e19621a74ec}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!digit\+\_\+base@{digit\+\_\+base}}
+\index{digit\+\_\+base@{digit\+\_\+base}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{digit\+\_\+base}{digit\_base}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::digit\+\_\+base = power\+\_\+long(\hyperlink{classHDB__supergate__user___1_1USER_ac17b72dc57f2305b2f75229dde21e180}{enc\+\_\+base}, comparator.\+m\+\_\+slot\+Deg)}
+
+the actual digit base after d \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a709db927fcfb1ecdfc7e6b04dc051ccf}\label{classHDB__supergate__user___1_1USER_a709db927fcfb1ecdfc7e6b04dc051ccf}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!ea@{ea}}
+\index{ea@{ea}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{ea}{ea}}
+{\footnotesize\ttfamily const helib\+::\+Encrypted\+Array \& H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::ea = contx.\+get\+View()}
+
+encrypted array class used to encrypt and decrypt ciphertexts \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ac17b72dc57f2305b2f75229dde21e180}\label{classHDB__supergate__user___1_1USER_ac17b72dc57f2305b2f75229dde21e180}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!enc\+\_\+base@{enc\+\_\+base}}
+\index{enc\+\_\+base@{enc\+\_\+base}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{enc\+\_\+base}{enc\_base}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::enc\+\_\+base = (\hyperlink{classHDB__supergate__user___1_1USER_a49198cf3f4f8a79d20427e1a66aee440}{p} + 1) $>$$>$ 1}
+
+encryption base. (p+1)/2 for univariate circuit \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}\label{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!exp\+\_\+len@{exp\+\_\+len}}
+\index{exp\+\_\+len@{exp\+\_\+len}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{exp\+\_\+len}{exp\_len}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::exp\+\_\+len = comparator.\+m\+\_\+expansion\+Len}
+
+the expansion length l \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ab63e7f113574e6b5d533441045cc39c1}\label{classHDB__supergate__user___1_1USER_ab63e7f113574e6b5d533441045cc39c1}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!input\+\_\+range@{input\+\_\+range}}
+\index{input\+\_\+range@{input\+\_\+range}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{input\+\_\+range}{input\_range}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::input\+\_\+range}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \hyperlink{classHDB__supergate__user___1_1USER_a2af52e03179f03c2dc4083984bf72254}{space\_bit\_size} < 64 ? power\_long(\hyperlink{classHDB__supergate__user___1_1USER_ab6f7b3ace37c45a772e54e19621a74ec}{digit\_base}, \hyperlink{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}{exp\_len})
+                                                        : ULONG\_MAX
+\end{DoxyCode}
+the maximum input current context can handle \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a9c46f3106b774075ab85997f402a87bb}\label{classHDB__supergate__user___1_1USER_a9c46f3106b774075ab85997f402a87bb}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!max\+\_\+packed@{max\+\_\+packed}}
+\index{max\+\_\+packed@{max\+\_\+packed}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{max\+\_\+packed}{max\_packed}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::max\+\_\+packed = \hyperlink{classHDB__supergate__user___1_1USER_ace96501e02fbb0bf56ba288ab785e263}{nslots} / \hyperlink{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}{exp\+\_\+len}}
+
+number of data that can be packed in a single ciphertext \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ace96501e02fbb0bf56ba288ab785e263}\label{classHDB__supergate__user___1_1USER_ace96501e02fbb0bf56ba288ab785e263}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!nslots@{nslots}}
+\index{nslots@{nslots}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{nslots}{nslots}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::nslots = contx.\+get\+N\+Slots()}
+
+number of slots for this context \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a6a71b997d1548844a6c033806f09680b}\label{classHDB__supergate__user___1_1USER_a6a71b997d1548844a6c033806f09680b}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!ord\+\_\+p@{ord\+\_\+p}}
+\index{ord\+\_\+p@{ord\+\_\+p}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{ord\+\_\+p}{ord\_p}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::ord\+\_\+p = contx.\+get\+OrdP()}
+
+multiplicative order of p mod m \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a49198cf3f4f8a79d20427e1a66aee440}\label{classHDB__supergate__user___1_1USER_a49198cf3f4f8a79d20427e1a66aee440}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!p@{p}}
+\index{p@{p}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{p}{p}}
+{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::p = contx.\+getP()}
+
+plaintext modulus p \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a8d5422c038403189c8c7e6a58cedca5a}\label{classHDB__supergate__user___1_1USER_a8d5422c038403189c8c7e6a58cedca5a}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!pk@{pk}}
+\index{pk@{pk}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{pk}{pk}}
+{\footnotesize\ttfamily helib\+::\+Pub\+Key \& H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::pk}
+
+public key \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ae5077c34a79ae6ed82f96d98500538be}\label{classHDB__supergate__user___1_1USER_ae5077c34a79ae6ed82f96d98500538be}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!ptxt\+\_\+index\+\_\+file@{ptxt\+\_\+index\+\_\+file}}
+\index{ptxt\+\_\+index\+\_\+file@{ptxt\+\_\+index\+\_\+file}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{ptxt\+\_\+index\+\_\+file}{ptxt\_index\_file}}
+{\footnotesize\ttfamily \hyperlink{classHDB__supergate___1_1PtxtIndexFile}{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File} H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::ptxt\+\_\+index\+\_\+file}
+
+the plaintext index file \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_afb2121f582eed6fcc5259dac04786c6a}\label{classHDB__supergate__user___1_1USER_afb2121f582eed6fcc5259dac04786c6a}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!sk@{sk}}
+\index{sk@{sk}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{sk}{sk}}
+{\footnotesize\ttfamily helib\+::\+Sec\+Key \& H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::sk}
+
+secret key \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_a2af52e03179f03c2dc4083984bf72254}\label{classHDB__supergate__user___1_1USER_a2af52e03179f03c2dc4083984bf72254}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!space\+\_\+bit\+\_\+size@{space\+\_\+bit\+\_\+size}}
+\index{space\+\_\+bit\+\_\+size@{space\+\_\+bit\+\_\+size}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{space\+\_\+bit\+\_\+size}{space\_bit\_size}}
+{\footnotesize\ttfamily int H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::space\+\_\+bit\+\_\+size = static\+\_\+cast$<$int$>$(ceil(\hyperlink{classHDB__supergate__user___1_1USER_ab5ad29c788e4f45192188540a21053f3}{exp\+\_\+len} $\ast$ log2(\hyperlink{classHDB__supergate__user___1_1USER_ab6f7b3ace37c45a772e54e19621a74ec}{digit\+\_\+base})))}
+
+the bit size of the current context \mbox{\Hypertarget{classHDB__supergate__user___1_1USER_ac1366a085994e88d72f19754e79d714c}\label{classHDB__supergate__user___1_1USER_ac1366a085994e88d72f19754e79d714c}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}!verbose@{verbose}}
+\index{verbose@{verbose}!H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER@{H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}}
+\subsubsection{\texorpdfstring{verbose}{verbose}}
+{\footnotesize\ttfamily bool H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+E\+R\+::verbose}
+
+verbose flag 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+H\+D\+B\+\_\+comparison\+\_\+library/include/H\+D\+B\+\_\+supergate\+\_\+user.\+hpp\item 
+H\+D\+B\+\_\+comparison\+\_\+library/src/H\+D\+B\+\_\+supergate\+\_\+user.\+cpp\end{DoxyCompactItemize}

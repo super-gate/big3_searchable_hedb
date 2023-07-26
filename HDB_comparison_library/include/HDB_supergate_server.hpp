@@ -67,6 +67,19 @@ namespace HDB_supergate_server_{
             */
             void Query(HDB_supergate_::HEQuery& query, HDB_supergate_::Ctxt_mat& result);
 
+            /**
+             * \fn QueryExtensionField
+             * \brief queries the DB and uses the extension field method to send result back
+             * 
+             * This function queries the database using the extension fields to compress the ciphertext data as
+             * much as possible. Supports EQ/LT/LEQ queries. The result is compressed by a factor of 
+             * ordP / D
+             * 
+             * @param query the query object of type HDB_supergate_::HEQuery
+             * @param result the result of the query as type Ctxt_mat
+             * 
+             * @return void
+            */
             void QueryExtensionField(HDB_supergate_::HEQuery& query, HDB_supergate_::Ctxt_mat& result);
 
             /**

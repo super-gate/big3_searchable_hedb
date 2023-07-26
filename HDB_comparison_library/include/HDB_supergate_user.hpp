@@ -130,12 +130,12 @@ namespace HDB_supergate_user_{
         unsigned long max();                                                            /**< returns input_range */
 
         HDB_supergate_::PtxtIndexFile getPtxtIndexFile() {return ptxt_index_file;}      /**< returns the plaintext index file */
-        void printZZXasINT(vector<ZZX>);
-        void printPackedZZXasINT(vector<ZZX>);
-        void printDecryptedINT(helib::Ctxt& ctxt, bool zzx_packed = false);             /**< debug function to decrypt and print the ciphertext*/
-        void printDecryptedZZX(helib::Ctxt& ctxt);
-        void printCtxtMatINT(HDB_supergate_::Ctxt_mat&, bool zzx_packed = false);       /**< debug function to decrypt and print a Ctxt_mat type object*/
-        void printCtxtMatZZX(HDB_supergate_::Ctxt_mat&);
+        void printZZXasINT(vector<ZZX>);                                                /**< debug function to print ZZX type as integer */
+        void printPackedZZXasINT(vector<ZZX>);                                          /**< debug function to print extension field packed ZZX as integers*/
+        void printDecryptedINT(helib::Ctxt& ctxt, bool zzx_packed = false);             /**< debug function to decrypt and print the ciphertext as integer*/
+        void printDecryptedZZX(helib::Ctxt& ctxt);                                      /**< debug function to decrypt and print ciphertext as ZZX*/
+        void printCtxtMatINT(HDB_supergate_::Ctxt_mat&, bool zzx_packed = false);       /**< debug function to decrypt and print a Ctxt_mat type object as integer*/
+        void printCtxtMatZZX(HDB_supergate_::Ctxt_mat&);                                /**< debug function to decrypt and print a Ctxt_mat type object as ZZX*/
     };
 };
 
