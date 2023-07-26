@@ -1,0 +1,186 @@
+\begin{theindex}
+
+  \item {C}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{21, 22}
+  \item {Ctxt\+\_\+mat}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+}, \hyperpage{8}
+  \item {Ctxt\+\_\+vec}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+}, \hyperpage{8}
+
+  \indexspace
+
+  \item {dest}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}, 
+		\hyperpage{20}
+
+  \indexspace
+
+  \item {empty}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{22}
+
+  \indexspace
+
+  \item {find}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}, 
+		\hyperpage{17}
+
+  \indexspace
+
+  \item {get\+Index\+File}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File}, 
+		\hyperpage{25}
+  \item {get\+Keys}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{22}
+  \item {get\+Size}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{22}
+  \item {getX}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}, 
+		\hyperpage{15}
+  \item {getY}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}, 
+		\hyperpage{15}
+
+  \indexspace
+
+  \item {H\+D\+B\+\_\+supergate\+\_\+}, \hyperpage{7}
+    \subitem {Ctxt\+\_\+mat}, \hyperpage{8}
+    \subitem {Ctxt\+\_\+vec}, \hyperpage{8}
+    \subitem {Make\+B\+G\+V\+Context}, \hyperpage{9}
+    \subitem {Make\+B\+G\+V\+Param}, \hyperpage{9}
+    \subitem {Q\+\_\+\+T\+Y\+P\+E\+\_\+t}, \hyperpage{8}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+B\+G\+V\+\_\+param}, 
+		\hyperpage{11}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+C\+S\+V\+Iterator}, 
+		\hyperpage{13}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+C\+S\+V\+Range}, 
+		\hyperpage{14}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+C\+S\+V\+Row}, 
+		\hyperpage{14}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}, \hyperpage{14}
+    \subitem {getX}, \hyperpage{15}
+    \subitem {getY}, \hyperpage{15}
+    \subitem {keys}, \hyperpage{15}
+    \subitem {uids}, \hyperpage{15, 16}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}, 
+		\hyperpage{16}
+    \subitem {find}, \hyperpage{17}
+    \subitem {index\+Of}, \hyperpage{17}
+    \subitem {insert}, \hyperpage{17, 18}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}, \hyperpage{18}
+    \subitem {dest}, \hyperpage{20}
+    \subitem {H\+E\+Query}, \hyperpage{19, 20}
+    \subitem {Q\+\_\+type}, \hyperpage{20}
+    \subitem {query}, \hyperpage{20}
+    \subitem {source}, \hyperpage{20}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, \hyperpage{21}
+    \subitem {C}, \hyperpage{21, 22}
+    \subitem {empty}, \hyperpage{22}
+    \subitem {get\+Keys}, \hyperpage{22}
+    \subitem {get\+Size}, \hyperpage{22}
+    \subitem {insert}, \hyperpage{23}
+    \subitem {pop\+Back}, \hyperpage{23}
+    \subitem {print\+Index}, \hyperpage{23}
+    \subitem {R}, \hyperpage{24}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File}, 
+		\hyperpage{24}
+    \subitem {get\+Index\+File}, \hyperpage{25}
+    \subitem {print\+Index}, \hyperpage{25}
+    \subitem {print\+Index\+File}, \hyperpage{25}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+S\+T\+D128\+\_\+\+H\+DB}, 
+		\hyperpage{27}
+  \item {H\+D\+B\+\_\+supergate\+\_\+\+::\+T\+O\+Y\+\_\+\+H\+DB}, 
+		\hyperpage{28}
+  \item {H\+D\+B\+\_\+supergate\+\_\+server\+\_\+}, \hyperpage{9}
+  \item {H\+D\+B\+\_\+supergate\+\_\+server\+\_\+\+::\+S\+E\+R\+V\+ER}, 
+		\hyperpage{26}
+    \subitem {S\+E\+R\+V\+ER}, \hyperpage{26, 27}
+    \subitem {test\+TS}, \hyperpage{27}
+  \item {H\+D\+B\+\_\+supergate\+\_\+user\+\_\+}, \hyperpage{10}
+  \item {H\+D\+B\+\_\+supergate\+\_\+user\+\_\+\+::\+U\+S\+ER}, 
+		\hyperpage{28}
+  \item {H\+E\+Query}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}, 
+		\hyperpage{19, 20}
+  \item {he\+\_\+cmp\+::\+Comparator}, \hyperpage{12}
+
+  \indexspace
+
+  \item {index\+Of}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}, 
+		\hyperpage{17}
+  \item {insert}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}, 
+		\hyperpage{17, 18}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{23}
+
+  \indexspace
+
+  \item {keys}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}, 
+		\hyperpage{15}
+
+  \indexspace
+
+  \item {Make\+B\+G\+V\+Context}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+}, \hyperpage{9}
+  \item {Make\+B\+G\+V\+Param}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+}, \hyperpage{9}
+
+  \indexspace
+
+  \item {pop\+Back}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{23}
+  \item {print\+Index}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{23}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File}, 
+		\hyperpage{25}
+  \item {print\+Index\+File}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index\+File}, 
+		\hyperpage{25}
+
+  \indexspace
+
+  \item {Q\+\_\+\+T\+Y\+P\+E\+\_\+t}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+}, \hyperpage{8}
+  \item {Q\+\_\+type}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}, 
+		\hyperpage{20}
+  \item {query}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}, 
+		\hyperpage{20}
+
+  \indexspace
+
+  \item {R}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ptxt\+Index}, 
+		\hyperpage{24}
+
+  \indexspace
+
+  \item {S\+E\+R\+V\+ER}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+server\+\_\+\+::\+S\+E\+R\+V\+ER}, 
+		\hyperpage{26, 27}
+  \item {source}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}, 
+		\hyperpage{20}
+
+  \indexspace
+
+  \item {test\+TS}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+server\+\_\+\+::\+S\+E\+R\+V\+ER}, 
+		\hyperpage{27}
+
+  \indexspace
+
+  \item {uids}
+    \subitem {H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}, 
+		\hyperpage{15, 16}
+
+\end{theindex}
