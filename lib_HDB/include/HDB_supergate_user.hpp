@@ -30,6 +30,7 @@ namespace HDB_supergate_user_{
         const helib::EncryptedArray& ea = contx.getView();                                  /**< encrypted array class used to encrypt and decrypt ciphertexts*/
         unsigned long p = contx.getP();                                                     /**< plaintext modulus p */
         unsigned long ord_p = contx.getOrdP();                                              /**< multiplicative order of p mod m */
+        unsigned long D = comparator.m_slotDeg;                                             /**< extension field degree*/
         unsigned long nslots = contx.getNSlots();                                           /**< number of slots for this context */
         unsigned long exp_len = comparator.m_expansionLen;                                  /**< the expansion length l */
         unsigned long max_packed = nslots / exp_len;                                        /**< number of data that can be packed in a single ciphertext */
@@ -130,9 +131,10 @@ namespace HDB_supergate_user_{
 
         HDB_supergate_::PtxtIndexFile getPtxtIndexFile() {return ptxt_index_file;}      /**< returns the plaintext index file */
         void printZZXasINT(vector<ZZX>);
-        void printDecryptedINT(helib::Ctxt& ctxt);                                         /**< debug function to decrypt and print the ciphertext*/
+        void printPackedZZXasINT(vector<ZZX>);
+        void printDecryptedINT(helib::Ctxt& ctxt, bool zzx_packed = false);             /**< debug function to decrypt and print the ciphertext*/
         void printDecryptedZZX(helib::Ctxt& ctxt);
-        void printCtxtMatINT(HDB_supergate_::Ctxt_mat&);                                   /**< debug function to decrypt and print a Ctxt_mat type object*/
+        void printCtxtMatINT(HDB_supergate_::Ctxt_mat&, bool zzx_packed = false);       /**< debug function to decrypt and print a Ctxt_mat type object*/
         void printCtxtMatZZX(HDB_supergate_::Ctxt_mat&);
     };
 };

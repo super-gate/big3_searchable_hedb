@@ -28,14 +28,13 @@ namespace HDB_supergate_user_{
 	void USER::printZZXasINT(vector<ZZX> decrypted)
 	{
 		ZZ data = ZZ(0);
-		cout << "Enc( ";
 		for (unsigned long i = 0; i < nslots; ++i)
 		{
 			unsigned long mod = i % exp_len;
 			vec_ZZ polyRep = decrypted[i].rep;
 			for (unsigned long j = 0; j < polyRep.length(); ++j)
 			{
-				unsigned long exp = mod * comparator.m_slotDeg + j;
+				unsigned long exp = mod * D + j;
 				ZZ elem = polyRep[j];
 				elem *= pow(enc_base, exp);
 				data += elem;
@@ -46,7 +45,30 @@ namespace HDB_supergate_user_{
 				data = ZZ(0);
 			}
 		}
-		cout << "), ";
+	}
+
+	void USER::printPackedZZXasINT(vector<ZZX> decrypted)
+	{
+		vector<ZZ> data(ord_p/D, ZZ(0));
+		for (unsigned long i = 0; i < nslots; ++i)
+		{
+			for (auto& d: data) d = ZZ(0);
+			vec_ZZ polyRep = decrypted[i].rep;
+			for (unsigned long j = 0; j < polyRep.length(); ++j)
+			{
+				unsigned long exp = j % D;
+				ZZ elem = polyRep[j];
+				elem *= pow(enc_base, exp);
+				data[j/D] += elem;
+			}
+			cout << "[";
+			for (auto & d: data) 
+			{
+				if (d == ZZ(0)) continue;
+				cout << d << ", ";
+			}
+			cout << "]";
+		}
 	}
 
 	void USER::printDecryptedZZX(Ctxt& ctxt)
@@ -56,17 +78,20 @@ namespace HDB_supergate_user_{
 		
 		cout << "Enc( ";
 		for (auto & zzx: decrypted_cipher)
-        	printZZX(cout, zzx, ord_p);
+        	printZZX(cout, zzx);
 		cout << " ), ";
     };
 
 
-	void USER::printDecryptedINT(Ctxt& ctxt)
+	void USER::printDecryptedINT(Ctxt& ctxt, bool zzx_packed)
     {
         vector<ZZX> decrypted_cipher(nslots);
         contx.getView().decrypt(ctxt, sk, decrypted_cipher);
 
-        printZZXasINT(decrypted_cipher);
+		cout << "Enc( ";
+        if (zzx_packed) printPackedZZXasINT(decrypted_cipher);
+		else printZZXasINT(decrypted_cipher);
+		cout << " ), ";
     };
 
 	void USER::printCtxtMatZZX(Ctxt_mat& db)
@@ -80,13 +105,13 @@ namespace HDB_supergate_user_{
 		}
 	}
 
-	void USER::printCtxtMatINT(Ctxt_mat& db)
+	void USER::printCtxtMatINT(Ctxt_mat& db, bool zzx_packed)
 	{
 		for (auto& row: db)
 		{
 			cout << "Row\n";
 			for (auto& elem: row)
-				printDecryptedINT(elem);
+				printDecryptedINT(elem, zzx_packed);
 			cout << endl;
 		}
 	}
