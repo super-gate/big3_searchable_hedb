@@ -167,9 +167,17 @@ namespace HDB_supergate_server_{
         for (auto& row: res)
             for (int i = 0; i < reducedCol; ++i) row.emplace_back(comparator.m_pk);
 		
+        vector<PtxtArray> mask(maxPerSlot, PtxtArray(comparator.m_context));
+        for (int i = 0; i < mask.size(); ++i)
+        {
+            ZZX msk(INIT_MONO, D*i, 1);
+            mask[i].load(msk);
+        }
+        // for (auto& m: mask) cout << m << endl;
 
 		for (unsigned long i = 0; i < Col; ++i)
 		{
+            HELIB_NTIMER_START(timer_ForEachCol);
 			//UNI
 			Ctxt z_ctxt = DB[q.source][i];
 			z_ctxt -= q.query;
@@ -226,6 +234,7 @@ namespace HDB_supergate_server_{
 
 			Ctxt query_final = eq_final;
 			query_final += less_final;
+            // cout << "Capacity: " << query_final.bitCapacity() << " OK: " << query_final.isCorrect() << endl;
 
             int ind = i / maxPerSlot;
             unsigned long k = i % maxPerSlot;
@@ -233,10 +242,12 @@ namespace HDB_supergate_server_{
 			{
                 Ctxt res_final = query_final;
                 res_final *= DB[q.dest[j]][i];
-                res_final.multByConstant(ZZX(INIT_MONO, D*k, 1));
+                res_final *= mask[k];
 				
 				res[j][ind] += res_final;
 			}
+            HELIB_NTIMER_STOP(timer_ForEachCol);
+            printNamedTimer(cout, "timer_ForEachCol");
 		}
 	}
 

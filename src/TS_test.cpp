@@ -142,14 +142,14 @@ int main(int argc, char* argv[]) {
 	ZZX test2 = ZZX(INIT_MONO, 0, 0);
 	for (int i =0; i < 4; ++i) 
 		test1 += ZZX(INIT_MONO, i, 1);
-	for (int i =0; i < 30; ++i) 
+	for (int i =0; i < 15; ++i) 
 		test2 += ZZX(INIT_MONO, i, 1);
 	
 	vector<ZZX> test11ptxt(contx.getNSlots());
 	vector<ZZX> test12ptxt(contx.getNSlots());
 	vector<ZZX> test21ptxt(contx.getNSlots());
 	vector<ZZX> test22ptxt(contx.getNSlots());
-	test11ptxt[0] = test1;
+	test11ptxt[1] = test1;
 	test21ptxt[0] = test2;
 	for (auto& z: test12ptxt) z = test1;
 	for (auto& z: test22ptxt) z = test2;
@@ -162,6 +162,42 @@ int main(int argc, char* argv[]) {
 	contx.getView().encrypt(test12ctxt, test12ptxt);
 	contx.getView().encrypt(test21ctxt, test21ptxt);
 	contx.getView().encrypt(test22ctxt, test22ptxt);
+
+	Ctxt add = test11ctxt;
+	vector<ZZX> decrypted_cipher(contx.getNSlots());
+	contx.getView().decrypt(test12ctxt, secret_key, decrypted_cipher);
+	cout << "Enc( ";
+	for (auto & zzx: decrypted_cipher)
+		printZZX(cout, zzx);
+	cout << " ), " << endl;
+
+	ZZX mask_zzx = ZZX(INIT_MONO, 1, 1);
+	vector<ZZX> maskvec(contx.getNSlots());
+	for (auto& z: maskvec) z = mask_zzx;
+	// Ctxt maskctxt(public_key);
+	// contx.getView().encrypt(maskvec, maskctxt);
+	PtxtArray maskptxt(contx);
+	maskptxt.load(mask_zzx);
+	cout << maskptxt << endl;
+	cout << "HERE" << endl;
+	
+	// test12ctxt *= maskctxt;
+	test12ctxt *= maskptxt;
+	decrypted_cipher.clear();
+	contx.getView().decrypt(test12ctxt, secret_key, decrypted_cipher);
+	cout << "Enc( ";
+	for (auto & zzx: decrypted_cipher)
+		printZZX(cout, zzx);
+	cout << " ), " << endl;
+
+	add += test11ctxt;
+	decrypted_cipher.clear();
+	contx.getView().decrypt(add, secret_key, decrypted_cipher);
+	cout << "Enc( ";
+	for (auto & zzx: decrypted_cipher)
+		printZZX(cout, zzx);
+	cout << " ), " << endl;
+	return 1;
 
 	ofstream test11file;
 	test11file.open("test11file", std::ios::out);

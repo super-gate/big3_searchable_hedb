@@ -127,7 +127,7 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_STOP(timer_Encrypt_DB);
     cout << endl;
 
-	if (!verbose)
+	if (verbose)
 	{
 		for (auto& h:headers)
 			cout << "\nhead: " << h;
@@ -139,7 +139,7 @@ int main(int argc, char* argv[]) {
 
 	HELIB_NTIMER_START(timer_IndexFile);
 	CtxtIndexFile indFile;
-	user.createCtxtIndexFile(indFile);
+	// user.createCtxtIndexFile(indFile);
 	HELIB_NTIMER_STOP(timer_IndexFile);
 	
 	cout << "created index file" << endl;
@@ -157,70 +157,136 @@ int main(int argc, char* argv[]) {
 	 * 6. USER::decryptResult() => user decrypts result
 	 * 7. Make user in a loop so that we can query multiple times into one server (so that we don't have to instantiate everything for each query)
 	 */
-    Q_TYPE_t queryType;
-	string str;
+	
 	while(true)
 	{
-		cout<<"the type has to be one of (eq, lt, leq)."<<endl;
-		cout<<"input type: ";
-		cin>>str;
-		if(str == "eq")
+		cout << "\nSELECT (DEST) \nFROM (SOURCE) \nWHERE (SOURCE) (QUERYTYPE) (INPUT)\n" << endl;
+		Q_TYPE_t queryType;
+		string str;
+		while(true)
 		{
-			queryType = EQ;
-			break;
+			cout<<"Select Query Type (eq, lt, leq):";
+			cin>>str;
+			if(str == "eq")
+			{
+				queryType = EQ;
+				str = "=";
+				break;
+			}
+			else if(str == "lt")
+			{
+				queryType = LT;
+				str = "<";
+				break;
+			}
+			else if(str == "leq")
+			{
+				queryType = LEQ;
+				str = "<=";
+				break;
+			}
 		}
-		else if(str == "lt")
+		cout << "\nSELECT (DEST) \nFROM (SOURCE) \nWHERE (SOURCE) " << str << " (INPUT)\n" << endl;
+
+		unsigned long max = user.max();
+		unsigned long input;
+		while(true)
 		{
-			queryType = LT;
-			break;
+			cout << "Input Query integer: ";
+			cin>>input;
+			if(input < max)
+			{
+				break;
+			}
 		}
-		else if(str == "leq")
+		cout << "\nSELECT (DEST) \nFROM (SOURCE) \nWHERE (SOURCE) " << str << " " << input << "\n" << endl;
+
+		cout << "Columns:" << endl;
+		for (int h = 0; h < headers.size(); ++h) cout << "[" << h << "]: " << headers[h] << endl;
+		cout << endl;
+
+		vector<unsigned long> dest; //TODO: try more dest columns
+		unsigned long source;
+		
+		while(true)
 		{
-			queryType = LEQ;
-			break;
+			cout << "Input source column index: ";
+			cin >> source;
+			if (source < headers.size()) break;
+		}
+		cout << "\nSELECT (DEST) \nFROM " << headers[source] << "\nWHERE " << headers[source] << " " << str << " " << input << "\n" << endl;
+
+		string sdest;
+		while(true)
+		{
+			cout << "Choose DEST column indexes (* for all, enter 'b' to break): ";
+			cin >> sdest;
+			if (sdest == "b")
+			{
+				if (!dest.empty()) break;
+				continue;
+			}
+			if (!dest.empty() && sdest == "*") 
+			{
+				for (int h = 0; h < headers.size(); ++h) dest.push_back(h);
+				break;
+			}
+			int destind = stoi(sdest);
+			if (destind >= headers.size()) continue;
+			dest.push_back(destind);
+		}
+		cout << "Final Query:" << endl;
+		cout << "\nSELECT ";
+		for (auto& d : dest) cout << headers[d] << ", ";
+		cout << "\nFROM " << headers[source] << "\nWHERE " << headers[source] << " " << str << " " << input << endl;
+		cout << endl;
+
+		HEQuery q(public_key);
+		user.ConstructQuery(q, input, queryType, source, dest);
+		string qtype;
+		while(true)
+		{
+			cout << "Choose query type: \n[0]: Regular Query\n[1]: ExtensionField Query\n[2]: Index Query" << endl;
+			cin >> qtype;
+			Ctxt_mat result;
+			HELIB_NTIMER_START(timer_Query);
+			switch(stoi(qtype))
+			{
+				case 0:
+					server.Query(q, result);
+					break;
+				case 1:
+					server.QueryExtensionField(q, result);
+					break;
+				case 2:
+					server.QueryWithIndex(q, result);
+					break;
+				default:
+					cout << "Invalid" << endl;
+					break;
+			}
+			HELIB_NTIMER_STOP(timer_Query);
+
+			cout <<"\nResults: " << endl;
+			user.printCtxtMatINT(result, true);
+			// user.printCtxtMatZZX(result);
+
+			helib::printNamedTimer(std::cout << std::endl, "timer_Context");
+			helib::printNamedTimer(std::cout, "timer_SecKey");
+			helib::printNamedTimer(std::cout, "timer_PubKey");
+			helib::printNamedTimer(std::cout, "timer_comparator");
+			helib::printNamedTimer(std::cout, "timer_user");
+			helib::printNamedTimer(std::cout, "timer_server");
+			helib::printNamedTimer(std::cout, "timer_Encrypt_DB");
+			helib::printNamedTimer(std::cout, "timer_IndexFile");
+			helib::printNamedTimer(std::cout, "nslot");
+			helib::printNamedTimer(std::cout, "timer_Query");
+			cout << "\nPerform another query? (y/n)" << endl;
+			string s;
+			cin >> s;
+			if (s == "n") break;
 		}
 	}
-
-	unsigned long max = user.max();
-
-	unsigned long input;
-	while(true)
-	{
-		cout<<"maximum int is "<<max - 1<<endl;
-		cout<<"input query: ";
-		cin>>input;
-
-		if(input < max)
-		{
-			break;
-		}
-	}
-
-	vector<unsigned long> dest = {0,2};//,7}; //TODO: try more dest columns
-	unsigned long source = 1;
-	HEQuery q(public_key);
-	user.ConstructQuery(q, input, queryType, source, dest);
-
-	Ctxt_mat result;
-	HELIB_NTIMER_START(timer_Query);
-    // server.QueryWithIndex(q, result); //uncomment for index search
-	server.QueryExtensionField(q, result);
-	// server.Query(q, result);	      //uncomment for regular search
-	HELIB_NTIMER_STOP(timer_Query);
-
-	// user.printCtxtMatINT(result);
-	user.printCtxtMatZZX(result);
-
-    helib::printNamedTimer(std::cout << std::endl, "timer_Context");
-    helib::printNamedTimer(std::cout, "timer_SecKey");
-    helib::printNamedTimer(std::cout, "timer_PubKey");
-	helib::printNamedTimer(std::cout, "timer_comparator");
-	helib::printNamedTimer(std::cout, "timer_user");
-	helib::printNamedTimer(std::cout, "timer_server");
-    helib::printNamedTimer(std::cout, "timer_Encrypt_DB");
-    helib::printNamedTimer(std::cout, "timer_IndexFile");
-	helib::printNamedTimer(std::cout, "nslot");
-	helib::printNamedTimer(std::cout, "timer_Query");
 
     return 0;
 }
