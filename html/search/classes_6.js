@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['user',['USER',['../classHDB__supergate__user___1_1USER.html',1,'HDB_supergate_user_']]]
+  ['toy_5fhdb',['TOY_HDB',['../structHDB__supergate___1_1TOY__HDB.html',1,'HDB_supergate_']]]
 ];

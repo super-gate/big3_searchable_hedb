@@ -20,11 +20,22 @@ void {\bfseries insert} (std\+::string colname, \hyperlink{classHDB__supergate__
 \item 
 void \hyperlink{classHDB__supergate___1_1CtxtIndexFile_ab581d8e3c893b29a80b18413b1c45412}{insert} (std\+::string colname, \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \&index)
 \item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_a8bb51b5beedb6d43770a6d248b61e2d3}\label{classHDB__supergate___1_1CtxtIndexFile_a8bb51b5beedb6d43770a6d248b61e2d3}} 
+std\+::vector$<$ std\+::pair$<$ std\+::string, \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} $>$ $>$ {\bfseries get\+Index\+File} ()
+\item 
 \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \& \hyperlink{classHDB__supergate___1_1CtxtIndexFile_a52792f06177d60f6580a664f24b706ee}{find} (unsigned long)
 \item 
 \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \& \hyperlink{classHDB__supergate___1_1CtxtIndexFile_aa579ec2799b316a65f426356ca76efd8}{find} (std\+::string)
 \item 
 unsigned long \hyperlink{classHDB__supergate___1_1CtxtIndexFile_abbc89b8e64ca3bcfe104c2371336bd9f}{index\+Of} (std\+::string)
+\item 
+void \hyperlink{classHDB__supergate___1_1CtxtIndexFile_a056ff9214e26089299c1873ac01cca77}{write\+\_\+raw\+\_\+index\+\_\+file} (std\+::ostream \&os)
+\item 
+void \hyperlink{classHDB__supergate___1_1CtxtIndexFile_ae29e9a0c167adc7835adc20769f14a99}{read\+\_\+raw\+\_\+index\+\_\+file} (std\+::istream \&is, helib\+::\+Pub\+Key \&)
+\item 
+void \hyperlink{classHDB__supergate___1_1CtxtIndexFile_a77cbe7cc6a4ebb0831786a2fa4864857}{write\+To} (std\+::ostream \&os)
+\item 
+void \hyperlink{classHDB__supergate___1_1CtxtIndexFile_aadb472b58b9f21f2220f1150d05270af}{read} (std\+::istream \&is, helib\+::\+Pub\+Key \&)
 \item 
 \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_a36979271995370a2e2376877cff9cf29}\label{classHDB__supergate___1_1CtxtIndexFile_a36979271995370a2e2376877cff9cf29}} 
 void {\bfseries encrypt} (\hyperlink{classHDB__supergate___1_1PtxtIndexFile}{Ptxt\+Index\+File} \&pt\+Index\+File, \hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \&comparator, const helib\+::\+Context \&contx, helib\+::\+Pub\+Key \&pk, unsigned long input\+\_\+range, unsigned long digit\+\_\+base, unsigned long enc\+\_\+base, unsigned long exp\+\_\+len, unsigned long nslots, unsigned long max\+\_\+per, bool verbose)
@@ -34,11 +45,35 @@ void {\bfseries insert} (std\+::string colname, \hyperlink{classHDB__supergate__
 \item 
 void \hyperlink{classHDB__supergate___1_1CtxtIndexFile_ab581d8e3c893b29a80b18413b1c45412}{insert} (std\+::string colname, \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \&index)
 \item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_a8bb51b5beedb6d43770a6d248b61e2d3}\label{classHDB__supergate___1_1CtxtIndexFile_a8bb51b5beedb6d43770a6d248b61e2d3}} 
+std\+::vector$<$ std\+::pair$<$ std\+::string, \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} $>$ $>$ {\bfseries get\+Index\+File} ()
+\item 
 \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \& \hyperlink{classHDB__supergate___1_1CtxtIndexFile_a22e64dc85f8e2ec050ee00820d31d083}{find} (unsigned long)
 \item 
 \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \& \hyperlink{classHDB__supergate___1_1CtxtIndexFile_aa579ec2799b316a65f426356ca76efd8}{find} (std\+::string)
 \item 
 unsigned long \hyperlink{classHDB__supergate___1_1CtxtIndexFile_abbc89b8e64ca3bcfe104c2371336bd9f}{index\+Of} (std\+::string)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_a056ff9214e26089299c1873ac01cca77}\label{classHDB__supergate___1_1CtxtIndexFile_a056ff9214e26089299c1873ac01cca77}} 
+void {\bfseries write\+\_\+raw\+\_\+index\+\_\+file} (std\+::ostream \&os)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_ae29e9a0c167adc7835adc20769f14a99}\label{classHDB__supergate___1_1CtxtIndexFile_ae29e9a0c167adc7835adc20769f14a99}} 
+void {\bfseries read\+\_\+raw\+\_\+index\+\_\+file} (std\+::istream \&is, helib\+::\+Pub\+Key \&)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_a77cbe7cc6a4ebb0831786a2fa4864857}\label{classHDB__supergate___1_1CtxtIndexFile_a77cbe7cc6a4ebb0831786a2fa4864857}} 
+void {\bfseries write\+To} (std\+::ostream \&os)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_aadb472b58b9f21f2220f1150d05270af}\label{classHDB__supergate___1_1CtxtIndexFile_aadb472b58b9f21f2220f1150d05270af}} 
+void {\bfseries read} (std\+::istream \&is, helib\+::\+Pub\+Key \&)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_aa5b36e915d70e24d8de0f3fc3e64634d}\label{classHDB__supergate___1_1CtxtIndexFile_aa5b36e915d70e24d8de0f3fc3e64634d}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classHDB__supergate___1_1CtxtIndexFile}{Ctxt\+Index\+File} \&)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_aa5b36e915d70e24d8de0f3fc3e64634d}\label{classHDB__supergate___1_1CtxtIndexFile_aa5b36e915d70e24d8de0f3fc3e64634d}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classHDB__supergate___1_1CtxtIndexFile}{Ctxt\+Index\+File} \&)
 \end{DoxyCompactItemize}
 
 
@@ -96,7 +131,31 @@ Inserts \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} for given co
 \subsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File\+::insert (\begin{DoxyParamCaption}\item[{std\+::string}]{colname,  }\item[{\hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \&}]{index }\end{DoxyParamCaption})}
 
-Inserts \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} for given colname 
+Inserts \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} for given colname \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_aadb472b58b9f21f2220f1150d05270af}\label{classHDB__supergate___1_1CtxtIndexFile_aadb472b58b9f21f2220f1150d05270af}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}!read@{read}}
+\index{read@{read}!H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File\+::read (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is,  }\item[{helib\+::\+Pub\+Key \&}]{ }\end{DoxyParamCaption})}
+
+binary deserialization \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_ae29e9a0c167adc7835adc20769f14a99}\label{classHDB__supergate___1_1CtxtIndexFile_ae29e9a0c167adc7835adc20769f14a99}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}!read\+\_\+raw\+\_\+index\+\_\+file@{read\+\_\+raw\+\_\+index\+\_\+file}}
+\index{read\+\_\+raw\+\_\+index\+\_\+file@{read\+\_\+raw\+\_\+index\+\_\+file}!H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}}
+\subsubsection{\texorpdfstring{read\+\_\+raw\+\_\+index\+\_\+file()}{read\_raw\_index\_file()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File\+::read\+\_\+raw\+\_\+index\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is,  }\item[{helib\+::\+Pub\+Key \&}]{ }\end{DoxyParamCaption})}
+
+binary deserialization of std\+::vector$<$std\+::pair$<$std\+::string, Ctxt\+Index$>$$>$ object \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_a056ff9214e26089299c1873ac01cca77}\label{classHDB__supergate___1_1CtxtIndexFile_a056ff9214e26089299c1873ac01cca77}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}!write\+\_\+raw\+\_\+index\+\_\+file@{write\+\_\+raw\+\_\+index\+\_\+file}}
+\index{write\+\_\+raw\+\_\+index\+\_\+file@{write\+\_\+raw\+\_\+index\+\_\+file}!H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}}
+\subsubsection{\texorpdfstring{write\+\_\+raw\+\_\+index\+\_\+file()}{write\_raw\_index\_file()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File\+::write\+\_\+raw\+\_\+index\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption})}
+
+binary serialization of std\+::vector$<$std\+::pair$<$std\+::string, Ctxt\+Index$>$$>$ object \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_a77cbe7cc6a4ebb0831786a2fa4864857}\label{classHDB__supergate___1_1CtxtIndexFile_a77cbe7cc6a4ebb0831786a2fa4864857}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}!write\+To@{write\+To}}
+\index{write\+To@{write\+To}!H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File}}
+\subsubsection{\texorpdfstring{write\+To()}{writeTo()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+File\+::write\+To (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption})}
+
+binary serialization 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

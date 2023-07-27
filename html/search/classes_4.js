@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['server',['SERVER',['../classHDB__supergate__server___1_1SERVER.html',1,'HDB_supergate_server_']]],
-  ['std128_5fhdb',['STD128_HDB',['../structHDB__supergate___1_1STD128__HDB.html',1,'HDB_supergate_']]]
+  ['ptxtindex',['PtxtIndex',['../classHDB__supergate___1_1PtxtIndex.html',1,'HDB_supergate_']]],
+  ['ptxtindexfile',['PtxtIndexFile',['../classHDB__supergate___1_1PtxtIndexFile.html',1,'HDB_supergate_']]]
 ];

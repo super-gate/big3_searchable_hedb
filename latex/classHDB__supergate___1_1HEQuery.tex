@@ -14,24 +14,43 @@ Object representing a query object used to query the H\+E\+DB.
 \item 
 \hyperlink{classHDB__supergate___1_1HEQuery_aa860d9296f75ed1c4c39e81564108f18}{H\+E\+Query} (helib\+::\+Pub\+Key \&pk)
 \item 
-\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_ad9aba25ac1b662292759221d7edb9acb}\label{classHDB__supergate___1_1HEQuery_ad9aba25ac1b662292759221d7edb9acb}} 
-void {\bfseries insert} (unsigned long src, helib\+::\+Ctxt \&EQ, helib\+::\+Ctxt \&LT, helib\+::\+Ctxt \&qry, std\+::vector$<$ unsigned long $>$ dst)
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a593fd6ab75058588ed2c2124b2614959}\label{classHDB__supergate___1_1HEQuery_a593fd6ab75058588ed2c2124b2614959}} 
+void {\bfseries insert} (long src, helib\+::\+Ctxt \&EQ, helib\+::\+Ctxt \&LT, helib\+::\+Ctxt \&qry, std\+::vector$<$ long $>$ dst)
+\item 
+void \hyperlink{classHDB__supergate___1_1HEQuery_a0270625cebd3b53388242368593e3587}{write\+To} (std\+::ostream \&os) const
+\item 
+void \hyperlink{classHDB__supergate___1_1HEQuery_a6f143e5569cf9edd5f16fb3042c955a1}{read} (std\+::istream \&is)
 \item 
 \hyperlink{classHDB__supergate___1_1HEQuery_aa860d9296f75ed1c4c39e81564108f18}{H\+E\+Query} (helib\+::\+Pub\+Key \&pk)
 \item 
-\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_ad9aba25ac1b662292759221d7edb9acb}\label{classHDB__supergate___1_1HEQuery_ad9aba25ac1b662292759221d7edb9acb}} 
-void {\bfseries insert} (unsigned long src, helib\+::\+Ctxt \&EQ, helib\+::\+Ctxt \&LT, helib\+::\+Ctxt \&qry, std\+::vector$<$ unsigned long $>$ dst)
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a593fd6ab75058588ed2c2124b2614959}\label{classHDB__supergate___1_1HEQuery_a593fd6ab75058588ed2c2124b2614959}} 
+void {\bfseries insert} (long src, helib\+::\+Ctxt \&EQ, helib\+::\+Ctxt \&LT, helib\+::\+Ctxt \&qry, std\+::vector$<$ long $>$ dst)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a0270625cebd3b53388242368593e3587}\label{classHDB__supergate___1_1HEQuery_a0270625cebd3b53388242368593e3587}} 
+void {\bfseries write\+To} (std\+::ostream \&os) const
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a6f143e5569cf9edd5f16fb3042c955a1}\label{classHDB__supergate___1_1HEQuery_a6f143e5569cf9edd5f16fb3042c955a1}} 
+void {\bfseries read} (std\+::istream \&is)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-unsigned long \hyperlink{classHDB__supergate___1_1HEQuery_ad838cd0c6b56ca367effa1f1756e3fe5}{source}
+long \hyperlink{classHDB__supergate___1_1HEQuery_aebda8c020d4bd15f7da4128a7b5028bc}{source}
 \item 
 helib\+::\+Ctxt \hyperlink{classHDB__supergate___1_1HEQuery_a4f6c52dc14ce033598e3ee9a7411fa75}{query}
 \item 
 std\+::pair$<$ helib\+::\+Ctxt, helib\+::\+Ctxt $>$ \hyperlink{classHDB__supergate___1_1HEQuery_a21c317527c7f5873d4ca2880c944611d}{Q\+\_\+type}
 \item 
-std\+::vector$<$ unsigned long $>$ \hyperlink{classHDB__supergate___1_1HEQuery_a1c1b7da0abf2fcee00f97e0b4d39c705}{dest}
+std\+::vector$<$ long $>$ \hyperlink{classHDB__supergate___1_1HEQuery_a5b5a2943869cb69980d62390203aac33}{dest}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a63440ce52ff551d8717927fd957e11f9}\label{classHDB__supergate___1_1HEQuery_a63440ce52ff551d8717927fd957e11f9}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classHDB__supergate___1_1HEQuery}{H\+E\+Query} \&)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a63440ce52ff551d8717927fd957e11f9}\label{classHDB__supergate___1_1HEQuery_a63440ce52ff551d8717927fd957e11f9}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classHDB__supergate___1_1HEQuery}{H\+E\+Query} \&)
 \end{DoxyCompactItemize}
 
 
@@ -67,12 +86,27 @@ The constructor takes in the public key to initialize query ciphertext and query
 \end{DoxyParams}
 
 
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a6f143e5569cf9edd5f16fb3042c955a1}\label{classHDB__supergate___1_1HEQuery_a6f143e5569cf9edd5f16fb3042c955a1}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}!read@{read}}
+\index{read@{read}!H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query\+::read (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is }\end{DoxyParamCaption})}
+
+binary serialization \mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a0270625cebd3b53388242368593e3587}\label{classHDB__supergate___1_1HEQuery_a0270625cebd3b53388242368593e3587}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}!write\+To@{write\+To}}
+\index{write\+To@{write\+To}!H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}}
+\subsubsection{\texorpdfstring{write\+To()}{writeTo()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query\+::write\+To (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption}) const}
+
+binary serialization 
+
 \subsection{Member Data Documentation}
-\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a1c1b7da0abf2fcee00f97e0b4d39c705}\label{classHDB__supergate___1_1HEQuery_a1c1b7da0abf2fcee00f97e0b4d39c705}} 
+\mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a5b5a2943869cb69980d62390203aac33}\label{classHDB__supergate___1_1HEQuery_a5b5a2943869cb69980d62390203aac33}} 
 \index{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}!dest@{dest}}
 \index{dest@{dest}!H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}}
 \subsubsection{\texorpdfstring{dest}{dest}}
-{\footnotesize\ttfamily std\+::vector$<$ unsigned long $>$ H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query\+::dest}
+{\footnotesize\ttfamily std\+::vector$<$ long $>$ H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query\+::dest}
 
 Collection of destination columns to query. T\+O\+DO\+: encrypt these \mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_a21c317527c7f5873d4ca2880c944611d}\label{classHDB__supergate___1_1HEQuery_a21c317527c7f5873d4ca2880c944611d}} 
 \index{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}!Q\+\_\+type@{Q\+\_\+type}}
@@ -86,11 +120,11 @@ query type EQ $<$E(1), E(0)$>$, LT $<$E(0), E(1)$>$, or L\+EQ $<$E(1),E(1)$>$ \m
 \subsubsection{\texorpdfstring{query}{query}}
 {\footnotesize\ttfamily helib\+::\+Ctxt H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query\+::query}
 
-the query ciphertext \mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_ad838cd0c6b56ca367effa1f1756e3fe5}\label{classHDB__supergate___1_1HEQuery_ad838cd0c6b56ca367effa1f1756e3fe5}} 
+the query ciphertext \mbox{\Hypertarget{classHDB__supergate___1_1HEQuery_aebda8c020d4bd15f7da4128a7b5028bc}\label{classHDB__supergate___1_1HEQuery_aebda8c020d4bd15f7da4128a7b5028bc}} 
 \index{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}!source@{source}}
 \index{source@{source}!H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query@{H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query}}
 \subsubsection{\texorpdfstring{source}{source}}
-{\footnotesize\ttfamily unsigned long H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query\+::source}
+{\footnotesize\ttfamily long H\+D\+B\+\_\+supergate\+\_\+\+::\+H\+E\+Query\+::source}
 
 The source column index. T\+O\+DO\+: encrypt this too 
 

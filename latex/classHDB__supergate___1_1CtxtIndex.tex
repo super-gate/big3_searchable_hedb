@@ -23,6 +23,10 @@ unsigned long \hyperlink{classHDB__supergate___1_1CtxtIndex_ad3ee6eaf8a48319e153
 \item 
 unsigned long \hyperlink{classHDB__supergate___1_1CtxtIndex_a1982acce75987d7a292341d5af81f1fd}{getY} ()
 \item 
+void \hyperlink{classHDB__supergate___1_1CtxtIndex_a8766dc2600531ae78e8434df581eb42d}{write\+To} (std\+::ostream \&os) const
+\item 
+void \hyperlink{classHDB__supergate___1_1CtxtIndex_a07894a32a19b27cae1f189dc74353565}{read} (std\+::istream \&is, helib\+::\+Pub\+Key \&)
+\item 
 \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a6ace7831c4e9481a6d3e4c3a7af2c680}\label{classHDB__supergate___1_1CtxtIndex_a6ace7831c4e9481a6d3e4c3a7af2c680}} 
 void {\bfseries encrypt} (\hyperlink{classHDB__supergate___1_1PtxtIndex}{Ptxt\+Index} pt\+Index, \hyperlink{classhe__cmp_1_1Comparator}{he\+\_\+cmp\+::\+Comparator} \&comparator, const helib\+::\+Context \&contx, helib\+::\+Pub\+Key \&pk, unsigned long input\+\_\+range, unsigned long digit\+\_\+base, unsigned long enc\+\_\+base, unsigned long exp\+\_\+len, unsigned long nslots, unsigned long max\+\_\+per, bool verbose)
 \item 
@@ -33,6 +37,21 @@ void {\bfseries encrypt} (\hyperlink{classHDB__supergate___1_1PtxtIndex}{Ptxt\+I
 unsigned long \hyperlink{classHDB__supergate___1_1CtxtIndex_ad3ee6eaf8a48319e153f30a6914dc6a9}{getX} ()
 \item 
 unsigned long \hyperlink{classHDB__supergate___1_1CtxtIndex_a1982acce75987d7a292341d5af81f1fd}{getY} ()
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a8766dc2600531ae78e8434df581eb42d}\label{classHDB__supergate___1_1CtxtIndex_a8766dc2600531ae78e8434df581eb42d}} 
+void {\bfseries write\+To} (std\+::ostream \&os) const
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a07894a32a19b27cae1f189dc74353565}\label{classHDB__supergate___1_1CtxtIndex_a07894a32a19b27cae1f189dc74353565}} 
+void {\bfseries read} (std\+::istream \&is, helib\+::\+Pub\+Key \&)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069142df1254f3fcc00}\label{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069142df1254f3fcc00}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \&)
+\item 
+\mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069142df1254f3fcc00}\label{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069142df1254f3fcc00}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \&)
 \end{DoxyCompactItemize}
 
 
@@ -78,7 +97,13 @@ getter for enc\+\_\+key \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_aa
 \subsubsection{\texorpdfstring{keys()}{keys()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \hyperlink{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}{Ctxt\+\_\+vec}\& H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+::keys (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-getter for enc\+\_\+key \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a928f500292b531aac98d86fb4e3511ec}\label{classHDB__supergate___1_1CtxtIndex_a928f500292b531aac98d86fb4e3511ec}} 
+getter for enc\+\_\+key \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a07894a32a19b27cae1f189dc74353565}\label{classHDB__supergate___1_1CtxtIndex_a07894a32a19b27cae1f189dc74353565}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}!read@{read}}
+\index{read@{read}!H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+::read (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is,  }\item[{helib\+::\+Pub\+Key \&}]{ }\end{DoxyParamCaption})}
+
+binary deserialization \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a928f500292b531aac98d86fb4e3511ec}\label{classHDB__supergate___1_1CtxtIndex_a928f500292b531aac98d86fb4e3511ec}} 
 \index{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}!uids@{uids}}
 \index{uids@{uids}!H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}}
 \subsubsection{\texorpdfstring{uids()}{uids()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -90,7 +115,13 @@ getter for enc\+\_\+uid \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a9
 \subsubsection{\texorpdfstring{uids()}{uids()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \hyperlink{namespaceHDB__supergate___a46a3fb2b98c95dc7615203376c4ad0c8}{Ctxt\+\_\+mat}\& H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+::uids (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-getter for enc\+\_\+uid 
+getter for enc\+\_\+uid \mbox{\Hypertarget{classHDB__supergate___1_1CtxtIndex_a8766dc2600531ae78e8434df581eb42d}\label{classHDB__supergate___1_1CtxtIndex_a8766dc2600531ae78e8434df581eb42d}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}!write\+To@{write\+To}}
+\index{write\+To@{write\+To}!H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index@{H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index}}
+\subsubsection{\texorpdfstring{write\+To()}{writeTo()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::\+Ctxt\+Index\+::write\+To (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption}) const}
+
+binary serialization 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

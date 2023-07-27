@@ -73,10 +73,17 @@ std\+::istream \& {\bfseries operator$>$$>$} (std\+::istream \&str, \hyperlink{c
 \item 
 struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param} \hyperlink{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}{Make\+B\+G\+V\+Param} (long, long, long, long, long, long, long, long)
 \item 
-\mbox{\Hypertarget{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}\label{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}} 
-helib\+::\+Context {\bfseries Make\+B\+G\+V\+Context} (long, long, long, long, long, long)
+helib\+::\+Context \hyperlink{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}{Make\+B\+G\+V\+Context} (long, long, long, long, long, long)
 \item 
 helib\+::\+Context \hyperlink{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}{Make\+B\+G\+V\+Context} (const struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param})
+\item 
+void \hyperlink{namespaceHDB__supergate___a6ebfab3d5f8458069f6bed7956c54375}{write\+\_\+raw\+\_\+string} (std\+::ostream \&os, std\+::string \&s)
+\item 
+void \hyperlink{namespaceHDB__supergate___aaabeba84821bf0d2f399f7c69863924e}{write\+\_\+raw\+\_\+string\+\_\+vector} (std\+::ostream \&os, std\+::vector$<$ std\+::string $>$ \&sv)
+\item 
+std\+::string \hyperlink{namespaceHDB__supergate___a4dd1c2683249c24f76d7cf36a0606f5c}{read\+\_\+raw\+\_\+string} (std\+::istream \&is)
+\item 
+void \hyperlink{namespaceHDB__supergate___aec06d53ce9e30396768961aecd9a3a1a}{read\+\_\+raw\+\_\+string\+\_\+vector} (std\+::istream \&is, std\+::vector$<$ std\+::string $>$ \&sv)
 \item 
 \mbox{\Hypertarget{namespaceHDB__supergate___a0891908122d714a0a40533f348800b64}\label{namespaceHDB__supergate___a0891908122d714a0a40533f348800b64}} 
 void {\bfseries set\+Index\+Params} (unsigned long, unsigned long, unsigned long, unsigned long \&, unsigned long \&, bool)
@@ -95,6 +102,15 @@ istream \& {\bfseries operator$>$$>$} (istream \&str, \hyperlink{classHDB__super
 \item 
 \mbox{\Hypertarget{namespaceHDB__supergate___a287bd0316c75a81e2b7c8efb5b7d662b}\label{namespaceHDB__supergate___a287bd0316c75a81e2b7c8efb5b7d662b}} 
 void {\bfseries encrypt\+And\+Insert} (const Context \&contx, Pub\+Key \&pk, vector$<$ Z\+ZX $>$ \&ptxt, \hyperlink{namespaceHDB__supergate___ade0781b5973aae08b689ed72b30511fb}{Ctxt\+\_\+vec} \&dest)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a9b8b804a1eb356975c2f32bbb5291765}\label{namespaceHDB__supergate___a9b8b804a1eb356975c2f32bbb5291765}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \hyperlink{classHDB__supergate___1_1CtxtIndex}{Ctxt\+Index} \&ci)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a1f620bd252adb314c9872a073d05ea08}\label{namespaceHDB__supergate___a1f620bd252adb314c9872a073d05ea08}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \hyperlink{classHDB__supergate___1_1CtxtIndexFile}{Ctxt\+Index\+File} \&file)
+\item 
+\mbox{\Hypertarget{namespaceHDB__supergate___a2c8edacbe85eb58fd25383ff7a1e099e}\label{namespaceHDB__supergate___a2c8edacbe85eb58fd25383ff7a1e099e}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \hyperlink{classHDB__supergate___1_1HEQuery}{H\+E\+Query} \&q)
 \end{DoxyCompactItemize}
 
 
@@ -132,11 +148,19 @@ Query Type Enum A query can be equal EQ, less than LT, or less than or equal to 
 Query Type Enum A query can be equal EQ, less than LT, or less than or equal to L\+EQ. M\+IN and M\+AX queries are not supported yet. 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}\label{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}} 
+\mbox{\Hypertarget{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}\label{namespaceHDB__supergate___a25f457f93b50fef2dcdb25e044d6cd7c}} 
 \index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Make\+B\+G\+V\+Context@{Make\+B\+G\+V\+Context}}
 \index{Make\+B\+G\+V\+Context@{Make\+B\+G\+V\+Context}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
-\subsubsection{\texorpdfstring{Make\+B\+G\+V\+Context()}{MakeBGVContext()}}
+\subsubsection{\texorpdfstring{Make\+B\+G\+V\+Context()}{MakeBGVContext()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily helib\+::\+Context H\+D\+B\+\_\+supergate\+\_\+\+::\+Make\+B\+G\+V\+Context (\begin{DoxyParamCaption}\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{ }\end{DoxyParamCaption})}
+
+function to create a helib\+::\+Context given parameters \mbox{\Hypertarget{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}\label{namespaceHDB__supergate___a8a0616d8c5b340d3ff4b663fa841fc51}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Make\+B\+G\+V\+Context@{Make\+B\+G\+V\+Context}}
+\index{Make\+B\+G\+V\+Context@{Make\+B\+G\+V\+Context}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{Make\+B\+G\+V\+Context()}{MakeBGVContext()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily helib\+::\+Context H\+D\+B\+\_\+supergate\+\_\+\+::\+Make\+B\+G\+V\+Context (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param}}]{ }\end{DoxyParamCaption})}
+
+function to create a helib\+::\+Context given B\+G\+V\+\_\+\+Param struct
 
 function to create a helib\+::\+Context given parameters \mbox{\Hypertarget{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}\label{namespaceHDB__supergate___affa422b55e184c2fd69134364e309fbb}} 
 \index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!Make\+B\+G\+V\+Param@{Make\+B\+G\+V\+Param}}
@@ -144,4 +168,30 @@ function to create a helib\+::\+Context given parameters \mbox{\Hypertarget{name
 \subsubsection{\texorpdfstring{Make\+B\+G\+V\+Param()}{MakeBGVParam()}}
 {\footnotesize\ttfamily struct \hyperlink{structHDB__supergate___1_1BGV__param}{B\+G\+V\+\_\+param} H\+D\+B\+\_\+supergate\+\_\+\+::\+Make\+B\+G\+V\+Param (\begin{DoxyParamCaption}\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{,  }\item[{long}]{ }\end{DoxyParamCaption})}
 
-function to create B\+G\+V\+\_\+\+Param given parameters 
+function to create B\+G\+V\+\_\+\+Param given parameters \mbox{\Hypertarget{namespaceHDB__supergate___a4dd1c2683249c24f76d7cf36a0606f5c}\label{namespaceHDB__supergate___a4dd1c2683249c24f76d7cf36a0606f5c}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!read\+\_\+raw\+\_\+string@{read\+\_\+raw\+\_\+string}}
+\index{read\+\_\+raw\+\_\+string@{read\+\_\+raw\+\_\+string}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{read\+\_\+raw\+\_\+string()}{read\_raw\_string()}}
+{\footnotesize\ttfamily std\+::string H\+D\+B\+\_\+supergate\+\_\+\+::read\+\_\+raw\+\_\+string (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is }\end{DoxyParamCaption})}
+
+binary deserialization of string \mbox{\Hypertarget{namespaceHDB__supergate___aec06d53ce9e30396768961aecd9a3a1a}\label{namespaceHDB__supergate___aec06d53ce9e30396768961aecd9a3a1a}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!read\+\_\+raw\+\_\+string\+\_\+vector@{read\+\_\+raw\+\_\+string\+\_\+vector}}
+\index{read\+\_\+raw\+\_\+string\+\_\+vector@{read\+\_\+raw\+\_\+string\+\_\+vector}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{read\+\_\+raw\+\_\+string\+\_\+vector()}{read\_raw\_string\_vector()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::read\+\_\+raw\+\_\+string\+\_\+vector (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{sv }\end{DoxyParamCaption})}
+
+binary deserialization of string vector \mbox{\Hypertarget{namespaceHDB__supergate___a6ebfab3d5f8458069f6bed7956c54375}\label{namespaceHDB__supergate___a6ebfab3d5f8458069f6bed7956c54375}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!write\+\_\+raw\+\_\+string@{write\+\_\+raw\+\_\+string}}
+\index{write\+\_\+raw\+\_\+string@{write\+\_\+raw\+\_\+string}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{write\+\_\+raw\+\_\+string()}{write\_raw\_string()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::write\+\_\+raw\+\_\+string (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::string \&}]{s }\end{DoxyParamCaption})}
+
+binary serialization of string
+
+function to create a helib\+::\+Context given B\+G\+V\+\_\+\+Param struct \mbox{\Hypertarget{namespaceHDB__supergate___aaabeba84821bf0d2f399f7c69863924e}\label{namespaceHDB__supergate___aaabeba84821bf0d2f399f7c69863924e}} 
+\index{H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}!write\+\_\+raw\+\_\+string\+\_\+vector@{write\+\_\+raw\+\_\+string\+\_\+vector}}
+\index{write\+\_\+raw\+\_\+string\+\_\+vector@{write\+\_\+raw\+\_\+string\+\_\+vector}!H\+D\+B\+\_\+supergate\+\_\+@{H\+D\+B\+\_\+supergate\+\_\+}}
+\subsubsection{\texorpdfstring{write\+\_\+raw\+\_\+string\+\_\+vector()}{write\_raw\_string\_vector()}}
+{\footnotesize\ttfamily void H\+D\+B\+\_\+supergate\+\_\+\+::write\+\_\+raw\+\_\+string\+\_\+vector (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{sv }\end{DoxyParamCaption})}
+
+binary serialization of string vector 

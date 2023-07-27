@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2023.7.26)  26 JUL 2023 17:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2023.7.26)  27 JUL 2023 14:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1112,6 +1112,10 @@ LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndex_a6ace7831c4e9481a6d3e4
 c3a7af2c680' multiply defined.
 
 
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069142df
+1254f3fcc00' multiply defined.
+
+
 LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndex_ad3ee6eaf8a48319e153f3
 0a6914dc6a9' multiply defined.
 
@@ -1124,8 +1128,16 @@ LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndex_aab60ebde906ebfbf292fc
 c301168a54a' multiply defined.
 
 
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndex_a07894a32a19b27cae1f18
+9dc74353565' multiply defined.
+
+
 LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndex_a928f500292b531aac98d8
 6fb4e3511ec' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndex_a8766dc2600531ae78e843
+4df581eb42d' multiply defined.
 
 
 LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_a36979271995370a2e
@@ -1134,6 +1146,14 @@ LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_a36979271995370a2e
 
 LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_af5316d579090faa78
 72b4f00b5b55bdf' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_a8bb51b5beedb6d437
+70a6d248b61e2d3' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_aa5b36e915d70e24d8
+de0f3fc3e64634d' multiply defined.
 
 
 LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_aa579ec2799b316a65
@@ -1148,12 +1168,40 @@ LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_ab581d8e3c893b29a8
 0b18413b1c45412' multiply defined.
 
 
-LaTeX Warning: Label `classHDB__supergate___1_1HEQuery_ad9aba25ac1b662292759221
-d7edb9acb' multiply defined.
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_aadb472b58b9f21f22
+20f1150d05270af' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_ae29e9a0c167adc783
+5adc20769f14a99' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_a056ff9214e2608929
+9c1873ac01cca77' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1CtxtIndexFile_a77cbe7cc6a4ebb083
+1786a2fa4864857' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1HEQuery_a593fd6ab75058588ed2c212
+4b2614959' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1HEQuery_a63440ce52ff551d8717927f
+d957e11f9' multiply defined.
 
 
 LaTeX Warning: Label `classHDB__supergate___1_1HEQuery_aa860d9296f75ed1c4c39e81
 564108f18' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1HEQuery_a6f143e5569cf9edd5f16fb3
+042c955a1' multiply defined.
+
+
+LaTeX Warning: Label `classHDB__supergate___1_1HEQuery_a0270625cebd3b5338824236
+8593e3587' multiply defined.
 
 
 LaTeX Warning: Label `classHDB__supergate___1_1PtxtIndex_afea9f7f34f70aa0a1e036
@@ -1464,33 +1512,34 @@ LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 6.29996pt on input line 19.
  [7]
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 8.99994pt on input line 108.
+(Font)              scaled to size 8.99994pt on input line 124.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 7.19995pt on input line 123.
+(Font)              scaled to size 7.19995pt on input line 139.
 
 
 LaTeX Font Warning: Font shape `T1/pcr/bc/n' undefined
-(Font)              using `T1/pcr/m/n' instead on input line 123.
+(Font)              using `T1/pcr/m/n' instead on input line 139.
 
-[8pdfTeX warning (ext4): destination with the same identifier (name{namespaceHD
-B__supergate___a1d92aed09c83a1692f702cbaa85757e2}) has been already used, dupli
-cate ignored
+[8]
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 155.
+ [9pdfTeX warning (ext4): destination with the same identifier (name{namespaceH
+DB__supergate___a1d92aed09c83a1692f702cbaa85757e2}) has been already used, dupl
+icate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.138 ...e\+B\+G\+V\+Context()}{MakeBGVContext()}}
-                                                  ]
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 139.
-)
+l.180 ...\+vector()}{read\_raw\_string\_vector()}}
+                                                  ])
 (./namespaceHDB__supergate__server__.tex)
-(./namespaceHDB__supergate__user__.tex) [9] [10]
-Chapter 5.
-(./structHDB__supergate___1_1BGV__param.tex) (./classhe__cmp_1_1Comparator.tex
-[11
+(./namespaceHDB__supergate__user__.tex) [10] [11] [12
 
-] [12]) (./classHDB__supergate___1_1CSVIterator.tex)
-(./classHDB__supergate___1_1CSVRange.tex [13pdfTeX warning (ext4): destination 
+]
+Chapter 5.
+(./structHDB__supergate___1_1BGV__param.tex) (./structhelib_1_1Binio.tex)
+(./classhe__cmp_1_1Comparator.tex [13] [14])
+(./classHDB__supergate___1_1CSVIterator.tex)
+(./classHDB__supergate___1_1CSVRange.tex [15pdfTeX warning (ext4): destination 
 with the same identifier (name{classHDB__supergate___1_1CSVIterator_a0c208bb9b2
 dac061e45a1ffff4d62dd\ETC.}) has been already used, duplicate ignored
 
@@ -1587,189 +1636,285 @@ y used, duplicate ignored
 l.9 \mbox
          {\Hypertarget{classHDB__supergate___1_1CSVRange_a1dc5c2c997da371367...
 ]) (./classHDB__supergate___1_1CSVRow.tex)
-(./classHDB__supergate___1_1CtxtIndex.tex [14pdfTeX warning (ext4): destination
+(./classHDB__supergate___1_1CtxtIndex.tex [16pdfTeX warning (ext4): destination
  with the same identifier (name{classHDB__supergate___1_1CSVRange_a4c2fa86201de
 65f0bbeadd40f8f9af2e}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 \subsection
-                {Member Function Documentation}pdfTeX warning (ext4): destinati
-on with the same identifier (name{classHDB__supergate___1_1CSVRange_a1dc5c2c997
-da3713670f28d63fafc0fa}) has been already used, duplicate ignored
+l.53 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1CSVRange_a1dc5c2c997da3713670f28d63fafc0fa}) has been already used,
+ duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 \subsection
-                {Member Function Documentation}pdfTeX warning (ext4): destinati
-on with the same identifier (name{classHDB__supergate___1_1CSVRange_a14f94a53f3
-4d5cad0f677e3c862e8039}) has been already used, duplicate ignored
+l.53 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1CSVRange_a14f94a53f34d5cad0f677e3c862e8039}) has been already used,
+ duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 \subsection
-                {Member Function Documentation}pdfTeX warning (ext4): destinati
-on with the same identifier (name{classHDB__supergate___1_1CSVRow_ad53893676cba
-b556654c9a2f30514620}) has been already used, duplicate ignored
+l.53 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1CSVRow_ad53893676cbab556654c9a2f30514620}) has been already used, d
+uplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 \subsection
-                {Member Function Documentation}pdfTeX warning (ext4): destinati
-on with the same identifier (name{classHDB__supergate___1_1CSVRow_afe26c84aa24a
-18cd027219b17556ffc8}) has been already used, duplicate ignored
+l.53 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1CSVRow_afe26c84aa24a18cd027219b17556ffc8}) has been already used, d
+uplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 \subsection
-                {Member Function Documentation}pdfTeX warning (ext4): destinati
-on with the same identifier (name{classHDB__supergate___1_1CSVRow_ae2aeeac10b08
-811b18e4457af578cc00}) has been already used, duplicate ignored
+l.53 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1CSVRow_ae2aeeac10b08811b18e4457af578cc00}) has been already used, d
+uplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 \subsection
-                {Member Function Documentation}pdfTeX warning (ext4): destinati
-on with the same identifier (name{classHDB__supergate___1_1CtxtIndex_a6ace7831c
-4e9481a6d3e4c3a7af2c680}) has been already used, duplicate ignored
+l.53 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1CtxtIndex_a6ace7831c4e9481a6d3e4c3a7af2c680}) has been already used
+, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 \subsection
-                {Member Function Documentation}] [15pdfTeX warning (ext4): dest
-ination with the same identifier (name{classHDB__supergate___1_1CtxtIndex_ad3ee
-6eaf8a48319e153f30a6914dc6a9}) has been already used, duplicate ignored
+l.53 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndex_aaaf1a78c02078069...
+]pdfTeX warning (ext4): destination with the same identifier (name{classHDB__su
+pergate___1_1CtxtIndex_a07894a32a19b27cae1f189dc74353565}) has been already use
+d, duplicate ignored
+<to be read again> 
+                   \relax 
+l.100 ...Index_a07894a32a19b27cae1f189dc74353565}}
+                                                   [17pdfTeX warning (ext4): de
+stination with the same identifier (name{classHDB__supergate___1_1CtxtIndex_aaa
+f1a78c02078069142df1254f3fcc00}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.97 ..._\+supergate.\+hpp\end{DoxyCompactItemize}
+l.109 ...ace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{classHDB__supergate___1_1CtxtIndex_ad3ee6e
+af8a48319e153f30a6914dc6a9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.109 ...ace{0.1cm}{\footnotesize\ttfamily [1/2]}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{classHDB__supergate___1_1CtxtIndex_a1982ac
 ce75987d7a292341d5af81f1fd}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.97 ..._\+supergate.\+hpp\end{DoxyCompactItemize}
+l.109 ...ace{0.1cm}{\footnotesize\ttfamily [1/2]}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{classHDB__supergate___1_1CtxtIndex_aab60eb
 de906ebfbf292fcc301168a54a}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.97 ..._\+supergate.\+hpp\end{DoxyCompactItemize}
-                                                  ])
-(./classHDB__supergate___1_1CtxtIndexFile.tex [16pdfTeX warning (ext4): destina
+l.109 ...ace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+                                                  ]pdfTeX warning (ext4): desti
+nation with the same identifier (name{classHDB__supergate___1_1CtxtIndex_a8766d
+c2600531ae78e8434df581eb42d}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.118 ...Index_a8766dc2600531ae78e8434df581eb42d}}
+                                                  )
+(./classHDB__supergate___1_1CtxtIndexFile.tex [18pdfTeX warning (ext4): destina
 tion with the same identifier (name{classHDB__supergate___1_1CtxtIndex_a928f500
 292b531aac98d86fb4e3511ec}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.57 F
-      inds the corresponding \hyperlink{classHDB__supergate___1_1CtxtIndex}{...
-pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
-ergate___1_1CtxtIndexFile_a36979271995370a2e2376877cff9c\ETC.}) has been alread
-y used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.57 F
-      inds the corresponding \hyperlink{classHDB__supergate___1_1CtxtIndex}{...
-pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
-ergate___1_1CtxtIndexFile_af5316d579090faa7872b4f00b5b55\ETC.}) has been alread
-y used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.57 F
-      inds the corresponding \hyperlink{classHDB__supergate___1_1CtxtIndex}{...
-] [17pdfTeX warning (ext4): destination with the same identifier (name{classHDB
-__supergate___1_1CtxtIndexFile_aa579ec2799b316a65f426356ca76e\ETC.}) has been a
+l.43 \mbox
+          {\Hypertarget{classHDB__supergate___1_1CtxtIndexFile_af5316d579090...
+] [19pdfTeX warning (ext4): destination with the same identifier (name{classHDB
+__supergate___1_1CtxtIndexFile_a36979271995370a2e2376877cff9c\ETC.}) has been a
 lready used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.101 T
-       he documentation for this class was generated from the following file...
-pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
-ergate___1_1CtxtIndexFile_abbc89b8e64ca3bcfe104c2371336b\ETC.}) has been alread
-y used, duplicate ignored
+l.97 
+     pdfTeX warning (ext4): destination with the same identifier (name{classHDB
+__supergate___1_1CtxtIndexFile_af5316d579090faa7872b4f00b5b55\ETC.}) has been a
+lready used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.101 T
-       he documentation for this class was generated from the following file...
-]) (./classHDB__supergate___1_1HEQuery.tex [18pdfTeX warning (ext4): destinatio
-n with the same identifier (name{classHDB__supergate___1_1CtxtIndexFile_ab581d8
-e3c893b29a80b18413b1c45\ETC.}) has been already used, duplicate ignored
+l.97 
+     pdfTeX warning (ext4): destination with the same identifier (name{classHDB
+__supergate___1_1CtxtIndexFile_a8bb51b5beedb6d43770a6d248b61e\ETC.}) has been a
+lready used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.54 \end{DoxyParams}
-                     pdfTeX warning (ext4): destination with the same identifie
-r (name{classHDB__supergate___1_1HEQuery_ad9aba25ac1b662292759221d7edb9acb}) ha
-s been already used, duplicate ignored
+l.97 
+     pdfTeX warning (ext4): destination with the same identifier (name{classHDB
+__supergate___1_1CtxtIndexFile_aa5b36e915d70e24d8de0f3fc3e646\ETC.}) has been a
+lready used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.54 \end{DoxyParams}
-                     ] [19]pdfTeX warning (ext4): destination with the same ide
-ntifier (name{classHDB__supergate___1_1HEQuery_aa860d9296f75ed1c4c39e81564108f1
-8}) has been already used, duplicate ignored
+l.97 
+     ]pdfTeX warning (ext4): destination with the same identifier (name{classHD
+B__supergate___1_1CtxtIndexFile_aadb472b58b9f21f2220f1150d0527\ETC.}) has been 
+already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.55 ...EQuery_aa860d9296f75ed1c4c39e81564108f18}}
-                                                  )
-(./classHDB__supergate___1_1PtxtIndex.tex [20] [21] [22pdfTeX warning (ext4): d
-estination with the same identifier (name{classHDB__supergate___1_1PtxtIndex_af
-ea9f7f34f70aa0a1e0360f7c85e44c7}) has been already used, duplicate ignored
+l.134 ...xFile_aadb472b58b9f21f2220f1150d05270af}}
+                                                   [20pdfTeX warning (ext4): de
+stination with the same identifier (name{classHDB__supergate___1_1CtxtIndexFile
+_aa579ec2799b316a65f426356ca76e\ETC.}) has been already used, duplicate ignored
+
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.114 
+l.139 
       pdfTeX warning (ext4): destination with the same identifier (name{classHD
-B__supergate___1_1PtxtIndex_ab270127936094cc3206e982bfa6cbac9}) has been alread
-y used, duplicate ignored
+B__supergate___1_1CtxtIndexFile_abbc89b8e64ca3bcfe104c2371336b\ETC.}) has been 
+already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.114 
+l.139 
+      pdfTeX warning (ext4): destination with the same identifier (name{classHD
+B__supergate___1_1CtxtIndexFile_ab581d8e3c893b29a80b18413b1c45\ETC.}) has been 
+already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.139 
+      ]pdfTeX warning (ext4): destination with the same identifier (name{classH
+DB__supergate___1_1CtxtIndexFile_ae29e9a0c167adc7835adc20769f14\ETC.}) has been
+ already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.140 ...xFile_ae29e9a0c167adc7835adc20769f14a99}}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{classHDB__supergate___1_1CtxtIndexFile_a05
+6ff9214e26089299c1873ac01cc\ETC.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.146 ...xFile_a056ff9214e26089299c1873ac01cca77}}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{classHDB__supergate___1_1CtxtIndexFile_a77
+cbe7cc6a4ebb0831786a2fa4864\ETC.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.152 ...xFile_a77cbe7cc6a4ebb0831786a2fa4864857}}
+                                                  )
+(./structhelib_1_1EyeCatcher.tex [21]) (./classHDB__supergate___1_1HEQuery.tex
+[22pdfTeX warning (ext4): destination with the same identifier (name{classHDB__
+supergate___1_1HEQuery_a593fd6ab75058588ed2c2124b2614959}) has been already use
+d, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.64 \subsubsection
+                   {\texorpdfstring{H\+E\+Query()}{HEQuery()}\hspace{0.1cm}{...
+]pdfTeX warning (ext4): destination with the same identifier (name{classHDB__su
+pergate___1_1HEQuery_a6f143e5569cf9edd5f16fb3042c955a1}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.90 ...EQuery_a6f143e5569cf9edd5f16fb3042c955a1}}
+                                                   [23pdfTeX warning (ext4): de
+stination with the same identifier (name{classHDB__supergate___1_1HEQuery_a6344
+0ce52ff551d8717927fd957e11f9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.96 b
+      inary serialization \mbox{\Hypertarget{classHDB__supergate___1_1HEQuer...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1HEQuery_aa860d9296f75ed1c4c39e81564108f18}) has been already used, 
+duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.96 b
+      inary serialization \mbox{\Hypertarget{classHDB__supergate___1_1HEQuer...
+]pdfTeX warning (ext4): destination with the same identifier (name{classHDB__su
+pergate___1_1HEQuery_a0270625cebd3b53388242368593e3587}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.96 ...EQuery_a0270625cebd3b53388242368593e3587}}
+                                                  )
+(./classHDB__supergate___1_1PtxtIndex.tex [24] [25pdfTeX warning (ext4): destin
+ation with the same identifier (name{classHDB__supergate___1_1PtxtIndex_afea9f7
+f34f70aa0a1e0360f7c85e44c7}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.79 t
+      rue if queried key does not have any values mapped to it \mbox{\Hypert...
+] [26pdfTeX warning (ext4): destination with the same identifier (name{classHDB
+__supergate___1_1PtxtIndex_ab270127936094cc3206e982bfa6cbac9}) has been already
+ used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.120 
       pdfTeX warning (ext4): destination with the same identifier (name{classHD
 B__supergate___1_1PtxtIndex_a217db4eccb954e6cbc796147bc2370de}) has been alread
 y used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.114 
+l.120 
       pdfTeX warning (ext4): destination with the same identifier (name{classHD
 B__supergate___1_1PtxtIndex_a9ca061073c7fc410b21460cccc0ef839}) has been alread
 y used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.114 
-      ] [23pdfTeX warning (ext4): destination with the same identifier (name{cl
-assHDB__supergate___1_1PtxtIndex_ab20a8fdd29fcbb48772689399929bbdb}) has been a
-lready used, duplicate ignored
+l.120 
+      pdfTeX warning (ext4): destination with the same identifier (name{classHD
+B__supergate___1_1PtxtIndex_ab20a8fdd29fcbb48772689399929bbdb}) has been alread
+y used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.151 r
-       eturns the number of keyspdfTeX warning (ext4): destination with the sam
-e identifier (name{classHDB__supergate___1_1PtxtIndex_aaa03f54cc4b9db5e1fc89fb5
-433f0925}) has been already used, duplicate ignored
+l.120 
+      ]) (./classHDB__supergate___1_1PtxtIndexFile.tex [27pdfTeX warning (ext4)
+: destination with the same identifier (name{classHDB__supergate___1_1PtxtIndex
+_aaa03f54cc4b9db5e1fc89fb5433f0925}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.151 r
-       eturns the number of keyspdfTeX warning (ext4): destination with the sam
-e identifier (name{classHDB__supergate___1_1PtxtIndex_a29420568bf3ac7857139a729
-96b8f116}) has been already used, duplicate ignored
+l.17 \mbox
+          {\Hypertarget{classHDB__supergate___1_1PtxtIndexFile_a479f0f980177...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1PtxtIndex_a29420568bf3ac7857139a72996b8f116}) has been already used
+, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.151 r
-       eturns the number of keys])
-(./classHDB__supergate___1_1PtxtIndexFile.tex
+l.17 \mbox
+          {\Hypertarget{classHDB__supergate___1_1PtxtIndexFile_a479f0f980177...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1PtxtIndex_a25639e96fd7fbb05fd2406fa8a9e43de}) has been already used
+, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.17 \mbox
+          {\Hypertarget{classHDB__supergate___1_1PtxtIndexFile_a479f0f980177...
+]
 Underfull \hbox (badness 10000) in paragraph at lines 45--46
 \T1/pcr/bc/n/8 std[]::vector$\OML/cmm/m/it/8 <$\T1/pcr/bc/n/8 std[]::pair$\OML/
 cmm/m/it/8 <$\T1/pcr/bc/n/8 std[]::string, [][]Ptxt[]Index[][]$\OML/cmm/m/it/8 
@@ -1785,106 +1930,113 @@ cmm/m/it/8 <$\T1/pcr/bc/n/8 std[]::string, [][]Ptxt[]Index[][]$\OML/cmm/m/it/8
 []Index[]File
  []
 
-[24pdfTeX warning (ext4): destination with the same identifier (name{classHDB__
-supergate___1_1PtxtIndex_a25639e96fd7fbb05fd2406fa8a9e43de}) has been already u
-sed, duplicate ignored
+[28pdfTeX warning (ext4): destination with the same identifier (name{classHDB__
+supergate___1_1PtxtIndexFile_a479f0f9801773e79eb4423c838373\ETC.}) has been alr
+eady used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.52 
-     pdfTeX warning (ext4): destination with the same identifier (name{classHDB
-__supergate___1_1PtxtIndexFile_a479f0f9801773e79eb4423c838373\ETC.}) has been a
-lready used, duplicate ignored
+l.71 d
+      ebug function for printing the entire \hyperlink{classHDB__supergate__...
+pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
+ergate___1_1PtxtIndexFile_a8244f5f9995a99571e048cd0d5145\ETC.}) has been alread
+y used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.52 
-     ]) (./classHDB__supergate__server___1_1SERVER.tex [25pdfTeX warning (ext4)
-: destination with the same identifier (name{classHDB__supergate___1_1PtxtIndex
-File_a8244f5f9995a99571e048cd0d5145\ETC.}) has been already used, duplicate ign
-ored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.20 \mbox
-          {\Hypertarget{classHDB__supergate__server___1_1SERVER_a188dcd9aa93...
+l.71 d
+      ebug function for printing the entire \hyperlink{classHDB__supergate__...
 pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
 ergate___1_1PtxtIndexFile_a6c493079e987b2813891087a8e7ee\ETC.}) has been alread
 y used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.20 \mbox
-          {\Hypertarget{classHDB__supergate__server___1_1SERVER_a188dcd9aa93...
-pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
-ergate___1_1PtxtIndexFile_ae67b7aec347663f4f47841f20788e\ETC.}) has been alread
-y used, duplicate ignored
+l.71 d
+      ebug function for printing the entire \hyperlink{classHDB__supergate__...
+]) (./structhelib_1_1SerializeHeader.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+[29pdfTeX warning (ext4): destination with the same identifier (name{classHDB__
+supergate___1_1PtxtIndexFile_ae67b7aec347663f4f47841f20788e\ETC.}) has been alr
+eady used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.20 \mbox
-          {\Hypertarget{classHDB__supergate__server___1_1SERVER_a188dcd9aa93...
-]
+l.55 ...orpdfstring{helib\+Version}{helibVersion}}
+                                                  ])
+(./classHDB__supergate__server___1_1SERVER.tex
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 53.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [26pdfTeX warning (ext4): destination with the same identifier (name{classHDB_
+ [30pdfTeX warning (ext4): destination with the same identifier (name{classHDB_
 _supergate__server___1_1SERVER_a531add9c79f48572fa08f0461abf\ETC.}) has been al
 ready used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.69 \subsubsection
-                   {\texorpdfstring{S\+E\+R\+V\+E\+R()}{SERVER()}\hspace{0.1...
-pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
-ergate__server___1_1SERVER_a188dcd9aa9335e639516b32b01d6\ETC.}) has been alread
-y used, duplicate ignored
+l.54 
+     pdfTeX warning (ext4): destination with the same identifier (name{classHDB
+__supergate__server___1_1SERVER_a188dcd9aa9335e639516b32b01d6\ETC.}) has been a
+lready used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.69 \subsubsection
-                   {\texorpdfstring{S\+E\+R\+V\+E\+R()}{SERVER()}\hspace{0.1...
-pdfTeX warning (ext4): destination with the same identifier (name{classHDB__sup
-ergate__server___1_1SERVER_ae404dee7ba0db1e12420edecbab2\ETC.}) has been alread
-y used, duplicate ignored
+l.54 
+     pdfTeX warning (ext4): destination with the same identifier (name{classHDB
+__supergate__server___1_1SERVER_ae404dee7ba0db1e12420edecbab2\ETC.}) has been a
+lready used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.69 \subsubsection
-                   {\texorpdfstring{S\+E\+R\+V\+E\+R()}{SERVER()}\hspace{0.1...
+l.54 
+     ]
+Underfull \vbox (badness 1389) has occurred while \output is active []
+
+ [31pdfTeX warning (ext4): destination with the same identifier (name{classHDB_
+_supergate__server___1_1SERVER_ab8168d1e8d3ee76b908eca8422cf\ETC.}) has been al
+ready used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.89 \subsubsection
+                   {\texorpdfstring{test\+T\+S()}{testTS()}\hspace{0.1cm}{\f...
 ]) (./structHDB__supergate___1_1STD128__HDB.tex)
 (./structHDB__supergate___1_1TOY__HDB.tex)
-(./classHDB__supergate__user___1_1USER.tex [27pdfTeX warning (ext4): destinatio
-n with the same identifier (name{classHDB__supergate__server___1_1SERVER_ab8168
-d1e8d3ee76b908eca8422cf\ETC.}) has been already used, duplicate ignored
+(./classHDB__supergate__user___1_1USER.tex) [32pdfTeX warning (ext4): destinati
+on with the same identifier (name{classHDB__supergate__server___1_1SERVER_a4b60
+51325021088c25ad409b302c\ETC.}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1 ...\+user\+\_\+\+:\+:U\+S\+ER Class Reference}
-                                                  pdfTeX warning (ext4): destin
-ation with the same identifier (name{classHDB__supergate__server___1_1SERVER_a4
-b6051325021088c25ad409b302c\ETC.}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1 ...\+user\+\_\+\+:\+:U\+S\+ER Class Reference}
-                                                  ]) [28] (./refman.ind
-[29
+l.174 \backmatter
+                 ] (./refman.ind [33
 
 
 
-] [30
+] [34
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 178.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 178.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 181.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 181.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 178.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 178.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 181.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 181.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 3868A95327E2D24A68219A07D763E6A2;21150.
+(rerunfilecheck)             Checksum: 86985932FC2254085DCEA527CD74A352;25733.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1892,31 +2044,32 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 178.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 181.
  ) 
 Here is how much of TeX's memory you used:
- 15388 strings out of 494923
- 232694 string characters out of 6180742
- 322478 words of memory out of 5000000
- 18112 multiletter control sequences out of 15000+600000
- 67655 words of font info for 86 fonts, out of 8000000 for 9000
+ 15550 strings out of 494923
+ 239757 string characters out of 6180742
+ 331346 words of memory out of 5000000
+ 18187 multiletter control sequences out of 15000+600000
+ 69413 words of font info for 93 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 53i,16n,92p,1740b,628s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,16n,92p,1740b,561s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/cour
-ier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (36 pages, 173652 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/uc
+rr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (40 pages, 196253 bytes).
 PDF statistics:
- 1257 PDF objects out of 1440 (max. 8388607)
- 1196 compressed objects within 12 object streams
- 306 named destinations out of 1000 (max. 500000)
- 801 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1514 PDF objects out of 1728 (max. 8388607)
+ 1445 compressed objects within 15 object streams
+ 385 named destinations out of 1000 (max. 500000)
+ 961 words of extra memory for PDF output out of 10000 (max. 10000000)
 
