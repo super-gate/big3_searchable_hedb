@@ -188,6 +188,11 @@ namespace HDB_supergate_{
             Ctxt_mat& uids() {return enc_uid;}      /**< getter for enc_uid */
             unsigned long getX() {return X;}        /**< getter for X value */
             unsigned long getY() {return Y;}        /**< getter for Y value */
+
+            void writeTo(std::ostream& os) const;
+            void read(std::istream& is, helib::PubKey&);
+
+            friend std::ostream& operator<<(std::ostream&, const CtxtIndex&);
     };
 
     /**
@@ -265,9 +270,17 @@ namespace HDB_supergate_{
                         );
             void insert(std::string colname, CtxtIndex& index);         /**< Inserts CtxtIndex for given colname */
 
+            std::vector<std::pair<std::string, CtxtIndex>> getIndexFile() {return IndexFile;}
+
             CtxtIndex& find(unsigned long);                             /**< Finds the corresponding CtxtIndex given index of column */
             CtxtIndex& find(std::string);                               /**< Finds the corresponding CtxtIndex given column name */
             unsigned long indexOf(std::string);                         /**< Returns the index given the column name */
+            void write_raw_index_file(std::ostream& os);
+            void read_raw_index_file(std::istream& is, helib::PubKey&);
+            void writeTo(std::ostream& os);
+            void read(std::istream& is, helib::PubKey&);
+
+            friend std::ostream& operator<<(std::ostream&, const CtxtIndexFile&);
     };
 
     /**
@@ -276,10 +289,10 @@ namespace HDB_supergate_{
     */
     class HEQuery {
         public:
-        unsigned long source;                           /**< The source column index. TODO: encrypt this too */
+        long source;                           /**< The source column index. TODO: encrypt this too */
         helib::Ctxt query;                              /**< the query ciphertext */
         std::pair<helib::Ctxt, helib::Ctxt> Q_type;     /**< query type EQ <E(1), E(0)>, LT <E(0), E(1)>, or LEQ <E(1),E(1)> */
-        std::vector<unsigned long> dest;                /**< Collection of destination columns to query. TODO: encrypt these*/
+        std::vector<long> dest;                /**< Collection of destination columns to query. TODO: encrypt these*/
 
         /**
          * Constructor of the HEQuery class
@@ -299,17 +312,21 @@ namespace HDB_supergate_{
          * @param qry The query ciphertext
          * @param dst the destination columns. TODO: encrpyt
         */
-        void insert(unsigned long src,
+        void insert(long src,
                     helib::Ctxt& EQ,
                     helib::Ctxt& LT,
                     helib::Ctxt& qry,
-                    std::vector<unsigned long> dst)
+                    std::vector<long> dst)
         {
             source = src;
             Q_type = std::pair(EQ, LT);
             query = qry;
             dest = dst;
         }
+
+        friend std::ostream& operator<<(std::ostream&, const HEQuery&);
+        void writeTo(std::ostream& os) const;
+        void read(std::istream& is);
     };
     
     /**
@@ -368,6 +385,11 @@ namespace HDB_supergate_{
     helib::Context MakeBGVContext(long, long, long, long, long, long);              /** function to create a helib::Context given parameters */
  
     helib::Context MakeBGVContext(const struct BGV_param);                          /** function to create a helib::Context given BGV_Param struct */
+
+    void write_raw_string(std::ostream& os, std::string& s);
+    void write_raw_string_vector(std::ostream& os, std::vector<std::string>& sv);
+    std::string read_raw_string(std::istream& is);
+    void read_raw_string_vector(std::istream& is, std::vector<std::string>& sv);
 
     /**
      * \fn setIndexParams

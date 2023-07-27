@@ -94,13 +94,24 @@ namespace HDB_supergate_user_{
 		cout << " ), ";
     };
 
+	void USER::printCtxtVecINT(Ctxt_vec& v, bool zzx_packed)
+	{
+		for (auto& elem: v)
+			printDecryptedINT(elem, zzx_packed);
+	}
+
+	void USER::printCtxtVecZZX(Ctxt_vec& v)
+	{
+		for (auto& elem: v)
+			printDecryptedZZX(elem);
+	}
+
 	void USER::printCtxtMatZZX(Ctxt_mat& db)
 	{
 		for (auto& row: db)
 		{
 			cout << "Row\n";
-			for (auto& elem: row)
-				printDecryptedZZX(elem);
+			printCtxtVecZZX(row);
 			cout << endl;
 		}
 	}
@@ -110,13 +121,12 @@ namespace HDB_supergate_user_{
 		for (auto& row: db)
 		{
 			cout << "Row\n";
-			for (auto& elem: row)
-				printDecryptedINT(elem, zzx_packed);
+			printCtxtVecINT(row, zzx_packed);
 			cout << endl;
 		}
 	}
 
-	void USER::EncryptNumberPerSlot(Ctxt& ctxt, unsigned long input)
+	void USER::EncryptNumberPerSlot(Ctxt& ctxt, long input)
 	{
 		vector<ZZX> poly_input(nslots);
 		input %= input_range;
@@ -143,8 +153,8 @@ namespace HDB_supergate_user_{
 	void USER::ConstructQuery(HEQuery& q,
 							  unsigned long input,
 					 		  Q_TYPE_t type,
-					 		  unsigned long source,
-							  vector<unsigned long> dest)  
+					 		  long source,
+							  vector<long> dest)  
 	{
 		Ctxt query_ctxt(pk);
 		Ctxt eq(pk);

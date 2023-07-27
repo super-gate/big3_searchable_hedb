@@ -1,4 +1,5 @@
 #include "HDB_supergate.hpp"
+#include "binio.h"
 
 using namespace helib;
 using namespace std;
@@ -330,7 +331,44 @@ namespace HDB_supergate_ {
                  << "\nindex[0] size: " << enc_uid[0].size() 
                  << "\nX: " << X << ", Y: " << Y << endl;
         }
-        
+    }
+
+    void CtxtIndex::writeTo(ostream& os) const
+    {
+        write_raw_int(os, X);
+        write_raw_int(os, Y);
+        write_raw_vector(os, enc_key);
+        write_raw_int(os, enc_uid.size());
+        for (auto& eu: enc_uid) write_raw_vector(os, eu);
+    }
+
+    void CtxtIndex::read(istream& is, PubKey& pk)
+    {
+        X = read_raw_int(is);
+        Y = read_raw_int(is);
+        Ctxt c(pk);
+        read_raw_vector(is, enc_key, c);
+        long size = read_raw_int(is);
+        enc_uid.resize(size);
+        for (auto& eu: enc_uid) read_raw_vector(is, eu, c);
+    }
+
+    ostream& operator<<(ostream& os, const CtxtIndex& ci)
+    {
+        os << "X: " << ci.X
+           << ", Y: " << ci.Y << "\n";
+        //ciphertexts are omitted
+        return os;
+    }
+    
+    ostream& operator<<(ostream& os, const CtxtIndexFile& file)
+    {
+        for (auto& ci: file.IndexFile)
+        {
+            os << "Column Name: " << ci.first
+               << "\n    Dimensions: " << ci.second;
+        }
+        return os;
     }
 
     void CtxtIndexFile::encrypt(PtxtIndexFile& ptxt_index_file,
@@ -427,6 +465,94 @@ namespace HDB_supergate_ {
             return cols.size();
         }
         return ulong(it - cols.begin());
+    }
+
+    void CtxtIndexFile::write_raw_index_file(ostream& os)
+    {
+        write_raw_int(os, IndexFile.size());
+        for (auto& file: IndexFile)
+        {
+            write_raw_string(os, file.first);
+            file.second.writeTo(os);
+        }
+    }
+
+    void CtxtIndexFile::read_raw_index_file(istream& is, PubKey& pk)
+    {
+        long size = read_raw_int(is);
+        while (size-- > 0)
+        {
+            string col = read_raw_string(is);
+            CtxtIndex ci;
+            ci.read(is, pk);
+            IndexFile.emplace_back(col, ci);
+        }
+    }
+
+    void CtxtIndexFile::writeTo(ostream& os) 
+    {
+        write_raw_string_vector(os, cols);
+        write_raw_index_file(os);
+    }
+    void CtxtIndexFile::read(istream& is, PubKey& pk)
+    {
+        read_raw_string_vector(is, cols);
+        read_raw_index_file(is, pk);
+    }
+
+    void write_raw_string(std::ostream& os, std::string& s)
+    {
+        write_raw_int(os, s.length());
+        os << s;
+    }
+
+    void write_raw_string_vector(std::ostream& os, std::vector<std::string>& sv)
+    {
+        write_raw_int(os, sv.size());
+        for (auto& s: sv) write_raw_string(os, s);
+    }
+
+    std::string read_raw_string(std::istream& is)
+    {
+        long l = read_raw_int(is);
+        char c[l];
+        is.read(c, l);
+        string s(c);
+        return s;
+    }
+
+    void read_raw_string_vector(std::istream& is, std::vector<std::string>& sv)
+    {
+        long size = read_raw_int(is);
+        sv.resize(size);
+        for (auto& s: sv) s = read_raw_string(is);
+    }
+
+    ostream& operator<<(ostream& os, const HEQuery& q)
+    {
+        os << "Source Column: " << q.source
+           << "\nDest Columns: ";
+        for (auto& d: q.dest) os << d << ", ";
+        //Ctxt needs to be decrypted, so omit
+        return os;
+    }
+
+    void HEQuery::writeTo(ostream& os) const
+    {
+        write_raw_int(os, source);
+        write_raw_vector(os, dest);
+        query.writeTo(os);
+        Q_type.first.writeTo(os);
+        Q_type.second.writeTo(os);
+    }
+
+    void HEQuery::read(istream& is)
+    {
+        source = read_raw_int(is);
+        read_raw_vector(is, dest);
+        query.read(is);
+        Q_type.first.read(is);
+        Q_type.second.read(is);
     }
 };
 

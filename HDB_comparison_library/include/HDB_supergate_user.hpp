@@ -50,7 +50,7 @@ namespace HDB_supergate_user_{
          * @param i integer to be inserted
         */
         void EncryptNumber(helib::Ctxt& ctxt, unsigned long i);
-        void EncryptNumberPerSlot(helib::Ctxt& ctxt, unsigned long i);
+        void EncryptNumberPerSlot(helib::Ctxt& ctxt, long i);
 
         public:
         /**
@@ -96,8 +96,8 @@ namespace HDB_supergate_user_{
         void ConstructQuery(HDB_supergate_::HEQuery& query,
                             unsigned long input,
                             HDB_supergate_::Q_TYPE_t type,
-                            unsigned long source, //TODO: change this to query names from just indices maybe?
-                            std::vector<unsigned long> dest);
+                            long source, //TODO: change this to query names from just indices maybe?
+                            std::vector<long> dest);
 
         /**
          * \fn csvToDB
@@ -134,6 +134,8 @@ namespace HDB_supergate_user_{
         void printPackedZZXasINT(vector<ZZX>);                                          /**< debug function to print extension field packed ZZX as integers*/
         void printDecryptedINT(helib::Ctxt& ctxt, bool zzx_packed = false);             /**< debug function to decrypt and print the ciphertext as integer*/
         void printDecryptedZZX(helib::Ctxt& ctxt);                                      /**< debug function to decrypt and print ciphertext as ZZX*/
+        void printCtxtVecINT(HDB_supergate_::Ctxt_vec&, bool zzx_packed = false);       /**< debug function to decrypt and print Ctxt_vec type object as integer*/
+        void printCtxtVecZZX(HDB_supergate_::Ctxt_vec&);                                /**< debug function to decrypt and print Ctxt_vec type object as ZZX*/
         void printCtxtMatINT(HDB_supergate_::Ctxt_mat&, bool zzx_packed = false);       /**< debug function to decrypt and print a Ctxt_mat type object as integer*/
         void printCtxtMatZZX(HDB_supergate_::Ctxt_mat&);                                /**< debug function to decrypt and print a Ctxt_mat type object as ZZX*/
     };

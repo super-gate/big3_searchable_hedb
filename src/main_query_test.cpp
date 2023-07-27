@@ -189,7 +189,7 @@ int main(int argc, char* argv[]) {
 		cout << "\nSELECT (DEST) \nFROM (SOURCE) \nWHERE (SOURCE) " << str << " (INPUT)\n" << endl;
 
 		unsigned long max = user.max();
-		unsigned long input;
+		long input;
 		while(true)
 		{
 			cout << "Input Query integer: ";
@@ -205,8 +205,8 @@ int main(int argc, char* argv[]) {
 		for (int h = 0; h < headers.size(); ++h) cout << "[" << h << "]: " << headers[h] << endl;
 		cout << endl;
 
-		vector<unsigned long> dest; //TODO: try more dest columns
-		unsigned long source;
+		vector<long> dest; //TODO: try more dest columns
+		long source;
 		
 		while(true)
 		{

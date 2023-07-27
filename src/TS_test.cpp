@@ -111,19 +111,60 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_STOP(timer_comparator);
 	helib::printNamedTimer(cout, "timer_comparator");
 
-	// /*Secret key is contained in this class. Be carefull! */
-    // USER user = USER(comparator, contx, public_key, secret_key, verbose); //pass secret key only to user
+	
+
+	/*Secret key is contained in this class. Be carefull! */
+    USER user = USER(comparator, contx, public_key, secret_key, verbose); //pass secret key only to user
+	HEQuery q1(public_key);
+	user.ConstructQuery(q1, 15, EQ, 0, {0, 1, 2});
+
+
+	/************************* HE QUERY SERIALIZATION
+	ofstream q1file;
+	q1file.open("q1file", std::ios::out);
+	if (q1file.is_open()) {
+		// Write the context to a file
+		q1.writeTo(q1file);
+		// Close the ofstream
+		q1file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'q1file'.");
+	}
+	cout << q1 << endl;
+	user.printDecryptedINT(q1.query);
+	user.printDecryptedINT(q1.Q_type.first);
+	user.printDecryptedINT(q1.Q_type.second);
+	cout << endl;
+
+	ifstream q2file;
+	HEQuery q2(public_key);
+	q2file.open("q1file");
+	if (q2file.is_open()) {
+		// Read in the context from the file
+		q2.read(q2file);
+		// Close the ifstream
+		q2file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'q1file'.");
+	}
+	cout << q2 << endl;
+	user.printDecryptedINT(q2.query);
+	user.printDecryptedINT(q2.Q_type.first);
+	user.printDecryptedINT(q2.Q_type.second);
+	return 0;
+	***************************HE QUERY SERIALIZATION END */
 
 	// Ctxt_mat db;
 	// vector<string> headers;
-	// db_filename = "../db/" + db_filename + ".csv";
-	// user.createPtxtIndexFile(db_filename);
+	db_filename = "../db/" + db_filename + ".csv";
+	user.createPtxtIndexFile(db_filename);
 	// if (verbose)
 	// 	user.getPtxtIndexFile().printIndexFile();
 	// HELIB_NTIMER_START(timer_Encrypt_DB);
 	// user.csvToDB(db, db_filename, headers);
 	// HELIB_NTIMER_STOP(timer_Encrypt_DB);
     // cout << endl;
+	
 
 	// if (verbose)
 	// {
@@ -135,9 +176,55 @@ int main(int argc, char* argv[]) {
 	
 
 	// HELIB_NTIMER_START(timer_IndexFile);
-	// CtxtIndexFile indFile;
-	// user.createCtxtIndexFile(indFile);
+	CtxtIndexFile indFile;
+	user.createCtxtIndexFile(indFile);
+	
 	// HELIB_NTIMER_STOP(timer_IndexFile);
+
+	/**************************INDEXFILE SERIALIZATION******************/
+	ofstream q1file;
+	q1file.open("q1file", std::ios::out);
+	if (q1file.is_open()) {
+		// Write the context to a file
+		indFile.writeTo(q1file);
+		// Close the ofstream
+		q1file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'q1file'.");
+	}
+	cout << indFile << endl;
+	for (auto& pair: indFile.getIndexFile())
+	{
+		cout << "Colname: " << pair.first << endl;
+		user.printCtxtVecINT(pair.second.keys());
+		user.printCtxtMatINT(pair.second.uids());
+		cout << endl;
+	}
+	cout << endl;
+
+	ifstream q2file;
+	CtxtIndexFile outFile;
+	q2file.open("q1file");
+	if (q2file.is_open()) {
+		// Read in the context from the file
+		outFile.read(q2file, public_key);
+		// Close the ifstream
+		q2file.close();
+	} else {
+		throw std::runtime_error("Could not open file 'q1file'.");
+	}
+	cout << outFile << endl;
+	for (auto& pair: outFile.getIndexFile())
+	{
+		cout << "Colname: " << pair.first << endl;
+		user.printCtxtVecINT(pair.second.keys());
+		user.printCtxtMatINT(pair.second.uids());
+		cout << endl;
+	}
+	cout << endl;
+	return 0;
+	/**************************INDEXFILE SERIALIZATION END******************/
+
 	ZZX test1 = ZZX(INIT_MONO, 0, 0);
 	ZZX test2 = ZZX(INIT_MONO, 0, 0);
 	for (int i =0; i < 4; ++i) 
