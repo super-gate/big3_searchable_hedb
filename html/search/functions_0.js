@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['c',['C',['../classHDB__supergate___1_1PtxtIndex.html#afea9f7f34f70aa0a1e0360f7c85e44c7',1,'HDB_supergate_::PtxtIndex::C()'],['../classHDB__supergate___1_1PtxtIndex.html#afea9f7f34f70aa0a1e0360f7c85e44c7',1,'HDB_supergate_::PtxtIndex::C()']]],
-  ['csvtodb',['csvToDB',['../classHDB__supergate__user___1_1USER.html#a6f2b3da65df29d2cd21fa15ce9a8fa08',1,'HDB_supergate_user_::USER::csvToDB(HDB_supergate_::Ctxt_mat &amp;DB, std::string path)'],['../classHDB__supergate__user___1_1USER.html#a2c56505bbdd276d8b3d7cb1170a6e24b',1,'HDB_supergate_user_::USER::csvToDB(HDB_supergate_::Ctxt_mat &amp;DB, std::string path, std::vector&lt; std::string &gt; &amp;headers)'],['../classHDB__supergate__user___1_1USER.html#a6f2b3da65df29d2cd21fa15ce9a8fa08',1,'HDB_supergate_user_::USER::csvToDB(HDB_supergate_::Ctxt_mat &amp;DB, std::string path)'],['../classHDB__supergate__user___1_1USER.html#a2c56505bbdd276d8b3d7cb1170a6e24b',1,'HDB_supergate_user_::USER::csvToDB(HDB_supergate_::Ctxt_mat &amp;DB, std::string path, std::vector&lt; std::string &gt; &amp;headers)']]]
-];
