@@ -20,10 +20,11 @@ namespace HDB_supergate_user_{
     */
     class USER {
         public:
-        he_cmp::Comparator& comparator;                                                     /**< comparator object */
-        const helib::Context& contx;                                                        /**< crypto-context */
-        helib::PubKey& pk;                                                                  /**< public key */
-        helib::SecKey& sk;                                                                  /**< secret key */
+        std::unique_ptr<he_cmp::Comparator> Comp;                                                     /**< comparator object */
+        std::unique_ptr<helib::Context> Contx;                                                        /**< crypto-context */
+        std::unique_ptr<helib::PubKey> PublicKey;                                                                  /**< public key */
+        std::unique_ptr<helib::SecKey> SecretKey;                                                                  /**< secret key */
+        HDB_supergate_::BGV_param currParam;
 
         HDB_supergate_::PtxtIndexFile ptxt_index_file;                                      /**< the plaintext index file*/
         
@@ -60,12 +61,11 @@ namespace HDB_supergate_user_{
          * @param pk reference to the public key object
          * @param sk reference to the secret key object
         */
-        explicit USER(
-            he_cmp::Comparator& comparator,
-            const helib::Context& contx,
-            helib::PubKey& pk,
-            helib::SecKey& sk,
-            bool
+        USER(he_cmp::Comparator& comparator,
+             helib::Context& contx,
+             helib::PubKey& pk,
+             helib::SecKey& sk,
+             bool
         );
 
         /**
@@ -126,6 +126,8 @@ namespace HDB_supergate_user_{
         void csvToDB(HDB_supergate_::Ctxt_mat& DB, 
                      std::string path, 
                      std::vector<std::string>& headers);
+
+        void saveInfo(std::string pathname);                                            /**< serializes contx, pubkey, seckey */
         
         unsigned long max();                                                            /**< returns input_range */
 

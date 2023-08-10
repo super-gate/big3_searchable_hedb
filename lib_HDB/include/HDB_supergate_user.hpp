@@ -21,7 +21,7 @@ namespace HDB_supergate_user_{
     class USER {
         public:
         he_cmp::Comparator& comparator;                                                     /**< comparator object */
-        const helib::Context& contx;                                                        /**< crypto-context */
+        helib::Context& contx;                                                        /**< crypto-context */
         helib::PubKey& pk;                                                                  /**< public key */
         helib::SecKey& sk;                                                                  /**< secret key */
 
@@ -60,12 +60,11 @@ namespace HDB_supergate_user_{
          * @param pk reference to the public key object
          * @param sk reference to the secret key object
         */
-        explicit USER(
-            he_cmp::Comparator& comparator,
-            const helib::Context& contx,
-            helib::PubKey& pk,
-            helib::SecKey& sk,
-            bool
+        USER(he_cmp::Comparator& comparator,
+             helib::Context& contx,
+             helib::PubKey& pk,
+             helib::SecKey& sk,
+             bool
         );
 
         /**
@@ -126,6 +125,9 @@ namespace HDB_supergate_user_{
         void csvToDB(HDB_supergate_::Ctxt_mat& DB, 
                      std::string path, 
                      std::vector<std::string>& headers);
+
+        void saveInfo(std::string pathname);                                            /**< serializes contx, pubkey, seckey */
+        void loadInfo(std::string pathname);                                            /**< deserializes contx, pubkey, seckey, and other information needed for USER*/
         
         unsigned long max();                                                            /**< returns input_range */
 
