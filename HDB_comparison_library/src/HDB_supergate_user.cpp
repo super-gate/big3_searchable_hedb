@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include <string_view>
 
 #include <helib/debugging.h>
@@ -9,7 +9,10 @@
 #include "HDB_supergate_user.hpp"
 #include "../comp_lib/comparator.h"
 #include "../comp_lib/tools.h"
+#include "binio.h"
 #include <time.h>
+#include <filesystem>
+#include <fstream>
 
 using namespace NTL;
 using namespace std;
@@ -17,9 +20,42 @@ using namespace he_cmp;
 using namespace HDB_supergate_;
 using namespace helib;
 
+namespace fs = std::filesystem;
+
 namespace HDB_supergate_user_{
     /* Construction */
-    USER::USER(Comparator& comparator, const Context& contx, PubKey& pk, SecKey& sk, bool v) : comparator(comparator), contx(contx), pk(pk), sk(sk), verbose(v) {};
+    USER::USER(Comparator& comparator, Context& contx, PubKey& pk, SecKey& sk, bool v) : comparator(comparator), contx(contx), pk(pk), sk(sk), verbose(v) {};
+
+	void USER::saveInfo(string pathname)
+	{
+		string filepath = "./TEE_INFO/" + pathname;
+        fs::create_directory(filepath);
+
+		ofstream metadata;
+		string meta_filename = filepath + "/meta";
+		metadata.open(meta_filename, ios::out);
+		if (metadata.is_open())
+		{
+			write_raw_int(metadata, p);
+			write_raw_int(metadata, D);
+			write_raw_int(metadata, exp_len);
+			metadata.close();
+		} else {
+            throw std::runtime_error("Could not open file 'meta'.");
+        }
+
+		ofstream outContextFile;
+        string context_filename = filepath + "/context";
+        serialize_to_file(outContextFile, context_filename, contx);
+
+		ofstream outPubKeyFile;
+        string pk_filename = filepath + "/pk";
+        serialize_to_file(outPubKeyFile, pk_filename, pk);
+
+		ofstream outSecKeyFile;
+        string sk_filename = filepath + "/sk";
+        serialize_to_file(outSecKeyFile, sk_filename, sk);
+	}
 
 	unsigned long USER::max(){
 		return input_range;

@@ -1,10 +1,16 @@
-#include<stdio.h>
-#include<iostream>
+#include <stdio.h>
+#include <iostream>
 
 #include <helib/debugging.h>
 #include "HDB_supergate_server.hpp"
 #include "../comp_lib/comparator.h"
 #include "../comp_lib/tools.h"
+
+#include <filesystem>
+#include <fstream>
+#include <sstream>
+
+namespace fs = std::filesystem;
 
 using namespace HDB_supergate_;
 using namespace helib;
@@ -13,39 +19,43 @@ using namespace he_cmp;
 using namespace NTL;
 
 namespace HDB_supergate_server_{
-    /* Construction */
-    SERVER::SERVER (Comparator& comparator,
-					Ctxt_mat& db,
-					CtxtIndexFile& indFile,
-					bool v) : comparator(comparator), 
-							  DB(db), 
-							  IndexFile(indFile),
-							  Row(db.size()),
-							  Col(db[0].size()),
-							  verbose(v),
-                              nslots(comparator.m_context.getNSlots()),
-                              exp_len(comparator.m_expansionLen),
-                              max_packed(nslots / exp_len),
-                              D(comparator.m_slotDeg)
-    {
-        create_all_extraction_masks();
-    };
+    /* @deprecated Construction used only for simulation */
+    // SERVER::SERVER (Comparator& comparator,
+	// 				Ctxt_mat& db,
+	// 				CtxtIndexFile& indFile,
+	// 				bool v) : comparator(comparator), 
+	// 						  DB(db), 
+	// 						  IndexFile(indFile),
+	// 						  Row(db.size()),
+	// 						  Col(db[0].size()),
+	// 						  verbose(v),
+    //                           nslots(Comp->m_context.getNSlots()),
+    //                           exp_len(exp_len),
+    //                           max_packed(nslots / exp_len),
+    //                           D(Comp->m_slotDeg)
+    // {
+    //     create_all_extraction_masks();
+    // };
+
+    /* Constructor */
+    SERVER::SERVER(bool v) : verbose(v) {};
 
     void SERVER::create_all_extraction_masks() {
-        for (int i = 0; i < max_packed; ++i)
+        for (unsigned long i = 0; i < max_packed; ++i)
             create_extraction_mask(i * exp_len);
     }
 
     void SERVER::create_extraction_mask(int position)
     {
+        // only works if contx contains value
         vector<long> mask_long(nslots);
-        for (int i = 0; i < exp_len; ++i)
+        for (unsigned long i = 0; i < exp_len; ++i)
             mask_long[position + i] = (long) 1;
         ZZX mask_zzx;
-        comparator.m_context.getView().encode(mask_zzx, mask_long);
+        Contx->getView().encode(mask_zzx, mask_long);
 
-        double size = conv<double>(embeddingLargestCoeff(mask_zzx, comparator.m_context.getZMStar()));
-        DoubleCRT mask_crt = DoubleCRT(mask_zzx, comparator.m_context, comparator.m_context.allPrimes());
+        double size = conv<double>(embeddingLargestCoeff(mask_zzx, Contx->getZMStar()));
+        DoubleCRT mask_crt = DoubleCRT(mask_zzx, *Contx, Contx->allPrimes());
         extractionMask.push_back(mask_crt);
         extractionMaskSize.push_back(size);
     }
@@ -82,6 +92,196 @@ namespace HDB_supergate_server_{
     {
         totalSums(ctxt, max_packed, exp_len);
     }
+    
+    void SERVER::constructDBPath(string db_name, BGV_param param, string& db_path)
+    {
+        stringstream full_path;
+        full_path << "./HEDB/" 
+                  << param.p << "_" << param.m << "_" << param.nb_primes << "_" << param.c << "_" << param.r << "_" << param.scale << "_" << param.d << "_" << param.expansion_len << "/"
+                  << db_name;
+        db_path = full_path.str();
+    }
+
+    void SERVER::SaveDB(string db_name, BGV_param param, Context& contx, PubKey& pk, Ctxt_mat& db, optional<CtxtIndexFile>& indFile)
+    {
+        string db_path;
+        constructDBPath(db_name, param, db_path);
+        fs::create_directories(db_path);
+
+        string context_filename = db_path + "/context";
+        serialize_to_file(context_filename, contx);
+
+        string  pubkey_filename = db_path + "/pubkey";
+        serialize_to_file(pubkey_filename, pk);
+
+        ofstream outDBFile;
+        outDBFile.open(db_path + "/db", ios::out);
+        if (outDBFile.is_open()) {
+            // Write the context to a file
+            write_raw_ctxt_mat(outDBFile, db);
+            // Close the ofstream
+            outDBFile.close();
+        } else {
+            throw std::runtime_error("Could not open file 'db'.");
+        }
+
+        if (indFile)
+        {
+            ofstream outIndFile;
+            outIndFile.open(db_path + "/indFile", ios::out);
+            if (outIndFile.is_open())
+            {
+                indFile.value().write_raw_index_file(outIndFile);
+                outIndFile.close();
+            } else {
+                throw std::runtime_error("Could not open file 'indFile'.");
+            }
+        }
+    }
+
+    int8_t SERVER::loadContext(string db_path)
+    {
+        if (verbose) cout << "Loading Context...\n";
+        ifstream inContextFile;
+        string context_filename = db_path + "/context";
+        inContextFile.open(context_filename);
+        if (!inContextFile.is_open()) {
+            cerr << "Could not open file 'context'." << endl;
+            return -1;
+        }
+        Context* contx = Context::readPtrFrom(inContextFile);
+        inContextFile.close();
+        Contx.reset(contx);
+        return 0;
+    }
+
+    int8_t SERVER::loadPubKey(string db_path)
+    {
+        if (verbose) cout << "Loading Public Key...\n";
+        ifstream inPubKeyFile;
+        string pubkey_filename = db_path + "/pubkey";
+        inPubKeyFile.open(pubkey_filename);
+        if (!inPubKeyFile.is_open()) {
+            cerr << "Could not open file 'context'." << endl;
+            return -1;
+        }
+        PubKey pk = PubKey::readFrom(inPubKeyFile, *Contx);
+        inPubKeyFile.close();
+        PublicKey.reset(&pk);
+        return 0;
+    }
+
+    int8_t SERVER::loadComparator(BGV_param param)
+    {
+        if (verbose) cout << "Loading Comparator ...\n";
+        Comparator* newComp = new Comparator(*Contx, UNI, param.d, param.expansion_len, *PublicKey, verbose);
+        Comp.reset(newComp);
+        return 0;
+    }
+
+    int8_t SERVER::loadDB(string db_path)
+    {
+        if (verbose) cout << "Loading DB...\n";
+        (*Database).clear();
+        ifstream inDBFile;
+        string db_filename = db_path + "/db";
+        inDBFile.open(db_filename);
+        Ctxt_mat db;
+        if (inDBFile.is_open()) {
+            // Read in the context from the file
+            read_raw_ctxt_mat(inDBFile, db, *PublicKey);
+            // Close the ifstream
+            inDBFile.close();
+        } else {
+            cerr << "Could not open file 'db'." << endl;
+            return -1;
+        }
+        Database.reset(&db);
+        return 0;
+    }
+    int8_t SERVER::loadIndexFile(string db_path)
+    {
+        if (verbose) cout << "Loading Index File...\n";
+        (*IndexFile).clear();
+        ifstream inIndexFile;
+        string ind_filename = db_path + "/indFile";
+        inIndexFile.open(ind_filename);
+        CtxtIndexFile indFile;
+        if (inIndexFile.is_open()) {
+            // Read in the context from the file
+            indFile.read_raw_index_file(inIndexFile, *PublicKey);
+            // Close the ifstream
+            inIndexFile.close();
+        } else {
+            cerr << "Could not find or open file 'indFile'." << endl;
+            return -1;
+        }
+        IndexFile.reset(&indFile);
+        return 0;
+    }
+
+    void SERVER::loadRest(string db_name, BGV_param param)
+    {
+        currDBName = db_name;
+        currParam = param;
+        Row = (*Database).size();
+        Col = (*Database)[0].size();
+        nslots = Contx->getNSlots();
+        exp_len = Comp->m_expansionLen;
+        max_packed = nslots / exp_len;
+        D = Comp->m_slotDeg;
+        extractionMask.clear();
+        extractionMaskSize.clear();
+        create_all_extraction_masks();
+    }
+
+    int8_t SERVER::LoadData(string db_name, BGV_param param, bool index)
+    {
+        string db_path;
+        constructDBPath(db_name, param, db_path);
+        if (!fs::exists(db_path))
+        {
+            cerr << "Path: " << db_path << " does not exist." << endl;
+            return -1;
+        }
+
+        if (loadContext(db_path) == -1) return -1;
+        if (loadPubKey(db_path) == -1) return -1;
+        if (loadComparator(param) == -1) return -1;
+        if (loadDB(db_path) == -1) return -1;
+        if (index && loadIndexFile(db_path) == -1) return -1;
+        loadRest(db_path, param);
+
+        return 0;
+    }
+
+    HEQuery SERVER::deserializeQuery(istream& is)
+    {
+        HEQuery query(*PublicKey);
+        query.read(is);
+        return query;
+    }
+
+    int8_t SERVER::ProcessQuery(string db_name, BGV_param param, Q_MODE mode, HEQuery& query, Ctxt_mat& result)
+    {
+        if (currDBName.compare(db_name) || !(currParam == param)) //if not currently loaded
+            if (LoadData(db_name, param, mode == IND) == -1) return -1;
+        switch(mode)
+        {
+            case NORMAL:
+                Query(query, result);
+                break;
+            case EXTF:
+                QueryExtensionField(query, result);
+                break;
+            case IND:
+                QueryWithIndex(query, result);
+                break;
+            default:
+                break;
+        }
+        return 0;
+    }
 					
 	void SERVER::Query(HEQuery& q, Ctxt_mat& res)
 	{
@@ -92,18 +292,18 @@ namespace HDB_supergate_server_{
 		for (unsigned long i = 0; i < Col; ++i)
 		{
 			//UNI
-			Ctxt z_ctxt = DB[q.source][i];
+			Ctxt z_ctxt = (*Database)[q.source][i];
 			z_ctxt -= q.query;
 			vector<Ctxt> mod_p_coefs;
-			comparator.extract_mod_p(mod_p_coefs, z_ctxt);
+			Comp->extract_mod_p(mod_p_coefs, z_ctxt);
 			
-            Ctxt ctxt_less = Ctxt(comparator.m_pk);
-            Ctxt ctxt_eq = Ctxt(comparator.m_pk);
-            for (long iCoef = D - 1; iCoef >= 0; --iCoef)
+            Ctxt ctxt_less = Ctxt(*PublicKey);
+            Ctxt ctxt_eq = Ctxt(*PublicKey);
+            for (unsigned long iCoef = D - 1; iCoef >= 0; --iCoef)
             {
-                Ctxt tmp_less = Ctxt(comparator.m_pk);
-                Ctxt tmp_eq = Ctxt(comparator.m_pk);
-                comparator.evaluate_univar_less_poly(tmp_less, tmp_eq, mod_p_coefs[iCoef]);
+                Ctxt tmp_less = Ctxt(*PublicKey);
+                Ctxt tmp_eq = Ctxt(*PublicKey);
+                Comp->evaluate_univar_less_poly(tmp_less, tmp_eq, mod_p_coefs[iCoef]);
                 tmp_eq.negate();
                 tmp_eq.addConstant(ZZ(1));
                 if (iCoef == D - 1) 
@@ -121,25 +321,25 @@ namespace HDB_supergate_server_{
                 }
             }
 			Ctxt eq_final = ctxt_eq;
-            long sft = 1;
-            while (sft < comparator.m_expansionLen)
+            unsigned long sft = 1;
+            while (sft < exp_len)
 			{
 				Ctxt pos_shift = eq_final;
-				comparator.batch_shift_for_mul(pos_shift, 0, sft);
+				Comp->batch_shift_for_mul(pos_shift, 0, sft);
 				eq_final *= pos_shift;
 				Ctxt neg_shift = eq_final;
-				comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+				Comp->batch_shift_for_mul(neg_shift, 0, -sft);
 				eq_final *= neg_shift;
 				sft <<= 1;
 			}
 
-			if(comparator.m_expansionLen != 1)
+			if(exp_len != 1)
 			{
-				comparator.shift_and_mul(ctxt_eq, 0);
-				comparator.batch_shift_for_mul(ctxt_eq, 0, -1);
+				Comp->shift_and_mul(ctxt_eq, 0);
+				Comp->batch_shift_for_mul(ctxt_eq, 0, -1);
 
 				ctxt_less *= ctxt_eq;
-				comparator.shift_and_add(ctxt_less, 0);
+				Comp->shift_and_add(ctxt_less, 0);
 			}
 			Ctxt less_final = ctxt_less;
 			eq_final *= q.Q_type.first;
@@ -151,7 +351,7 @@ namespace HDB_supergate_server_{
 			for (unsigned long j = 0; j < q.dest.size(); ++j)
 			{
 				Ctxt res_final = query_final;
-				res_final *= DB[q.dest[j]][i];
+				res_final *= (*Database)[q.dest[j]][i];
 				res[j].emplace_back(res_final);
 			}
 		}
@@ -160,15 +360,15 @@ namespace HDB_supergate_server_{
     void SERVER::QueryExtensionField(HEQuery& q, Ctxt_mat& res)
 	{
 		res.resize(q.dest.size()); // resize result so we have #dest rows
-        unsigned long ordP = comparator.m_context.getOrdP();
+        unsigned long ordP = Comp->m_context.getOrdP();
         unsigned long maxPerSlot = floor(float(ordP) / D);
         unsigned long reducedCol = ceil(float(Col) / maxPerSlot);
         cout << "mperslot: " << maxPerSlot << " reduced: " << reducedCol << endl;
         for (auto& row: res)
-            for (int i = 0; i < reducedCol; ++i) row.emplace_back(comparator.m_pk);
+            for (uint i = 0; i < reducedCol; ++i) row.emplace_back(*PublicKey);
 		
-        vector<PtxtArray> mask(maxPerSlot, PtxtArray(comparator.m_context));
-        for (int i = 0; i < mask.size(); ++i)
+        vector<PtxtArray> mask(maxPerSlot, PtxtArray(Comp->m_context));
+        for (uint i = 0; i < mask.size(); ++i)
         {
             ZZX msk(INIT_MONO, D*i, 1);
             mask[i].load(msk);
@@ -179,18 +379,18 @@ namespace HDB_supergate_server_{
 		{
             HELIB_NTIMER_START(timer_ForEachCol);
 			//UNI
-			Ctxt z_ctxt = DB[q.source][i];
+			Ctxt z_ctxt = (*Database)[q.source][i];
 			z_ctxt -= q.query;
 			vector<Ctxt> mod_p_coefs;
-			comparator.extract_mod_p(mod_p_coefs, z_ctxt);
+			Comp->extract_mod_p(mod_p_coefs, z_ctxt);
 			
-            Ctxt ctxt_less = Ctxt(comparator.m_pk);
-            Ctxt ctxt_eq = Ctxt(comparator.m_pk);
-            for (long iCoef = D - 1; iCoef >= 0; --iCoef)
+            Ctxt ctxt_less = Ctxt(*PublicKey);
+            Ctxt ctxt_eq = Ctxt(*PublicKey);
+            for (unsigned long iCoef = D - 1; iCoef >= 0; --iCoef)
             {
-                Ctxt tmp_less = Ctxt(comparator.m_pk);
-                Ctxt tmp_eq = Ctxt(comparator.m_pk);
-                comparator.evaluate_univar_less_poly(tmp_less, tmp_eq, mod_p_coefs[iCoef]);
+                Ctxt tmp_less = Ctxt(*PublicKey);
+                Ctxt tmp_eq = Ctxt(*PublicKey);
+                Comp->evaluate_univar_less_poly(tmp_less, tmp_eq, mod_p_coefs[iCoef]);
                 tmp_eq.negate();
                 tmp_eq.addConstant(ZZ(1));
                 if (iCoef == D - 1) 
@@ -208,25 +408,25 @@ namespace HDB_supergate_server_{
                 }
             }
 			Ctxt eq_final = ctxt_eq;
-            long sft = 1;
-            while (sft < comparator.m_expansionLen)
+            unsigned long sft = 1;
+            while (sft < exp_len)
 			{
 				Ctxt pos_shift = eq_final;
-				comparator.batch_shift_for_mul(pos_shift, 0, sft);
+				Comp->batch_shift_for_mul(pos_shift, 0, sft);
 				eq_final *= pos_shift;
 				Ctxt neg_shift = eq_final;
-				comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+				Comp->batch_shift_for_mul(neg_shift, 0, -sft);
 				eq_final *= neg_shift;
 				sft <<= 1;
 			}
 
-			if(comparator.m_expansionLen != 1)
+			if(exp_len != 1)
 			{
-				comparator.shift_and_mul(ctxt_eq, 0);
-				comparator.batch_shift_for_mul(ctxt_eq, 0, -1);
+				Comp->shift_and_mul(ctxt_eq, 0);
+				Comp->batch_shift_for_mul(ctxt_eq, 0, -1);
 
 				ctxt_less *= ctxt_eq;
-				comparator.shift_and_add(ctxt_less, 0);
+				Comp->shift_and_add(ctxt_less, 0);
 			}
 			Ctxt less_final = ctxt_less;
 			eq_final *= q.Q_type.first;
@@ -241,7 +441,7 @@ namespace HDB_supergate_server_{
 			for (unsigned long j = 0; j < q.dest.size(); ++j)
 			{
                 Ctxt res_final = query_final;
-                res_final *= DB[q.dest[j]][i];
+                res_final *= (*Database)[q.dest[j]][i];
                 res_final *= mask[k];
 				
 				res[j][ind] += res_final;
@@ -254,7 +454,7 @@ namespace HDB_supergate_server_{
 	//can only do EQ query right now
 	void SERVER::QueryWithIndex(HEQuery& q, Ctxt_mat& res)
 	{
-		CtxtIndex& Index = IndexFile.find(q.source);
+		CtxtIndex& Index = IndexFile->find(q.source);
         unsigned long X = Index.getX();
         unsigned long Y = Index.getY();
 
@@ -262,27 +462,27 @@ namespace HDB_supergate_server_{
         for (auto& row: res) row.reserve(Y);
         
         Ctxt_vec q_mod_p;
-        comparator.extract_mod_p(q_mod_p, q.query);
+        Comp->extract_mod_p(q_mod_p, q.query);
 
         Ctxt_vec extracted_UIDs;
-        long sft = 1;
+        unsigned long sft = 1;
         for (unsigned long i = 0; i < Y; ++i) {
             // cout << "extract UID" << endl;
             Ctxt k_ctxt = Index.keys()[i];
             sft = 1;
             // Ctxt_vec ctxt_eq_p;
             Ctxt_vec k_mod_p;
-            comparator.extract_mod_p(k_mod_p, k_ctxt);
+            Comp->extract_mod_p(k_mod_p, k_ctxt);
 
-            Ctxt ctxt_eq(comparator.m_pk);
-            // for (long iCoef = 0; iCoef < D; iCoef++)
-            for (long iCoef = D-1; iCoef >= 0; iCoef--)
+            Ctxt ctxt_eq(*PublicKey);
+            // for (unsigned long iCoef = 0; iCoef < D; iCoef++)
+            for (unsigned long iCoef = D-1; iCoef >= 0; iCoef--)
             {
                 // cout << "iCoef: " << iCoef << endl;
                 Ctxt eql = q_mod_p[iCoef];
                 eql -= k_mod_p[iCoef];
                 //equality circuit
-                comparator.mapTo01_subfield(eql, 1);
+                Comp->mapTo01_subfield(eql, 1);
                 eql.negate();
                 eql.addConstant(ZZ(1));
                 // ctxt_eq_p.push_back(eql);
@@ -290,7 +490,7 @@ namespace HDB_supergate_server_{
                 else ctxt_eq *= eql;
             }
             // Ctxt ctxt_eq = ctxt_eq_p[D-1];
-            // for(long iCoef = D - 2; iCoef >= 0; iCoef--)
+            // for(unsigned long iCoef = D - 2; iCoef >= 0; iCoef--)
             //     ctxt_eq *= ctxt_eq_p[iCoef];
 
             if (exp_len != 1)
@@ -299,17 +499,17 @@ namespace HDB_supergate_server_{
                 {
                     // cout << "sft: " << sft << endl;
                     Ctxt pos_shift = ctxt_eq;
-                    comparator.batch_shift_for_mul(pos_shift, 0, sft);
+                    Comp->batch_shift_for_mul(pos_shift, 0, sft);
                     ctxt_eq *= pos_shift;
                     Ctxt neg_shift = ctxt_eq;
-                    comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+                    Comp->batch_shift_for_mul(neg_shift, 0, -sft);
                     ctxt_eq *= neg_shift;
                     sft <<= 1;
                 }
             }
             Ctxt UID_extract = Index.uids()[0][i];
             UID_extract *= ctxt_eq;
-            for (int j = 1; j < X; ++j)
+            for (uint j = 1; j < X; ++j)
             {
                 Ctxt uid = Index.uids()[j][i];
                 uid *= ctxt_eq;
@@ -324,7 +524,7 @@ namespace HDB_supergate_server_{
         {
             cout << "For each ciphertext..." << endl;
             Ctxt_vec final_res;
-            for (int i = 0; i < max_packed; ++i) 
+            for (uint i = 0; i < max_packed; ++i) 
             {
                 HELIB_NTIMER_START(nslot);
                 Ctxt extract = ctxt;
@@ -344,24 +544,24 @@ namespace HDB_supergate_server_{
                 Ctxt_vec DEST_Extract;
                 DEST_Extract.reserve(q.dest.size());
                 Ctxt_vec ext_p;
-                comparator.extract_mod_p(ext_p, extract);
-                for (int j = 0; j < DB[0].size(); ++j)
+                Comp->extract_mod_p(ext_p, extract);
+                for (uint j = 0; j < (*Database)[0].size(); ++j)
                 { //for each ctxt in a row,
                     sft = 1;
                     Ctxt_vec c_uid_p;
                     // Ctxt_vec ctxt_eq_p;
 
-                    comparator.extract_mod_p(c_uid_p, DB[0][j]);
+                    Comp->extract_mod_p(c_uid_p, (*Database)[0][j]);
 
                     //process first one
-                    Ctxt ctxt_eq(comparator.m_pk);
-                    // for (long iCoef = 0; iCoef < D; iCoef++)
-                    for (long iCoef = D-1; iCoef >= 0; iCoef--)
+                    Ctxt ctxt_eq(*PublicKey);
+                    // for (unsigned long iCoef = 0; iCoef < D; iCoef++)
+                    for (unsigned long iCoef = D-1; iCoef >= 0; iCoef--)
                     {
                         Ctxt eql = ext_p[iCoef];
                         eql -= c_uid_p[iCoef];
                         //equality circuit
-                        comparator.mapTo01_subfield(eql, 1);
+                        Comp->mapTo01_subfield(eql, 1);
                         
                         eql.negate();
                         eql.addConstant(ZZ(1));
@@ -369,22 +569,22 @@ namespace HDB_supergate_server_{
                         else ctxt_eq *= eql;
                     }
                     // Ctxt ctxt_eq = ctxt_eq_p[D-1];
-                    // for (long iCoef = D - 2; iCoef >= 0; iCoef--)
+                    // for (unsigned long iCoef = D - 2; iCoef >= 0; iCoef--)
                     //     ctxt_eq *= ctxt_eq_p[iCoef];
                     while (sft < exp_len)
                     {
                         Ctxt pos_shift = ctxt_eq;
-                        comparator.batch_shift_for_mul(pos_shift, 0, sft);
+                        Comp->batch_shift_for_mul(pos_shift, 0, sft);
                         ctxt_eq *= pos_shift;
                         Ctxt neg_shift = ctxt_eq;
-                        comparator.batch_shift_for_mul(neg_shift, 0, -sft);
+                        Comp->batch_shift_for_mul(neg_shift, 0, -sft);
                         ctxt_eq *= neg_shift;
                         sft <<= 1;
                     }
-                    for (int k = 0; k < q.dest.size(); ++k)
+                    for (uint k = 0; k < q.dest.size(); ++k)
                     {
                         Ctxt tmp = ctxt_eq;
-                        tmp *= DB[q.dest[k]][j];
+                        tmp *= (*Database)[q.dest[k]][j];
                         if (!j)
                             DEST_Extract.push_back(tmp);
                         else
@@ -392,7 +592,7 @@ namespace HDB_supergate_server_{
                     }
                 }
 
-                for (int k = 0; k < q.dest.size(); ++k)
+                for (uint k = 0; k < q.dest.size(); ++k)
                 {
                     totalSums(DEST_Extract[k], max_packed, exp_len);
                     DEST_Extract[k].multByConstant(extractionMask[i], extractionMaskSize[i]);
@@ -401,7 +601,7 @@ namespace HDB_supergate_server_{
                 if (!i) //if first
                     final_res = DEST_Extract;
                 else
-                    for (int k = 0; k < q.dest.size(); ++k) final_res[k] += DEST_Extract[k];
+                    for (uint k = 0; k < q.dest.size(); ++k) final_res[k] += DEST_Extract[k];
                 cout << "  capacity: " << final_res[0].bitCapacity() << ", iscorrect: " << final_res[0].isCorrect() << endl;
                 HELIB_NTIMER_STOP(nslot);
                 helib::printNamedTimer(cout, "nslot");
@@ -409,7 +609,7 @@ namespace HDB_supergate_server_{
             // helib::printNamedTimer(cout, "nslot");
             
 
-            for (int k = 0; k < q.dest.size(); ++k) res[k].push_back(final_res[k]);
+            for (uint k = 0; k < q.dest.size(); ++k) res[k].push_back(final_res[k]);
         }
     }
 } 

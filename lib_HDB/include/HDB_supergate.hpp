@@ -189,8 +189,8 @@ namespace HDB_supergate_{
             unsigned long getX() {return X;}        /**< getter for X value */
             unsigned long getY() {return Y;}        /**< getter for Y value */
 
-            void writeTo(std::ostream& os) const;
-            void read(std::istream& is, helib::PubKey&);
+            void writeTo(std::ostream& os) const;                                       /**< binary serialization */
+            void read(std::istream& is, helib::PubKey&);                                /**< binary deserialization */
 
             friend std::ostream& operator<<(std::ostream&, const CtxtIndex&);
     };
@@ -272,15 +272,17 @@ namespace HDB_supergate_{
 
             std::vector<std::pair<std::string, CtxtIndex>> getIndexFile() {return IndexFile;}
 
-            CtxtIndex& find(unsigned long);                             /**< Finds the corresponding CtxtIndex given index of column */
-            CtxtIndex& find(std::string);                               /**< Finds the corresponding CtxtIndex given column name */
-            unsigned long indexOf(std::string);                         /**< Returns the index given the column name */
-            void write_raw_index_file(std::ostream& os);
-            void read_raw_index_file(std::istream& is, helib::PubKey&);
-            void writeTo(std::ostream& os);
-            void read(std::istream& is, helib::PubKey&);
+            CtxtIndex& find(unsigned long);                                         /**< Finds the corresponding CtxtIndex given index of column */
+            CtxtIndex& find(std::string);                                           /**< Finds the corresponding CtxtIndex given column name */
+            unsigned long indexOf(std::string);                                     /**< Returns the index given the column name */
+            void write_raw_index_file(std::ostream& os);                            /**< binary serialization of std::vector<std::pair<std::string, CtxtIndex>> object */
+            void read_raw_index_file(std::istream& is, helib::PubKey&);             /**< binary deserialization of std::vector<std::pair<std::string, CtxtIndex>> object */
+            void writeTo(std::ostream& os);                                         /**< binary serialization */
+            void read(std::istream& is, helib::PubKey&);                            /**< binary deserialization */
+            int size() {return IndexFile.size();}                                   /**< returns the current size of indexFile*/
+            void clear();                                                           /**< clears out the indexfile*/
 
-            friend std::ostream& operator<<(std::ostream&, const CtxtIndexFile&);
+            friend std::ostream& operator<<(std::ostream&, const CtxtIndexFile&);   /**< custom serialization*/
     };
 
     /**
@@ -289,10 +291,10 @@ namespace HDB_supergate_{
     */
     class HEQuery {
         public:
-        long source;                           /**< The source column index. TODO: encrypt this too */
+        long source;                                    /**< The source column index. TODO: encrypt this too */
         helib::Ctxt query;                              /**< the query ciphertext */
         std::pair<helib::Ctxt, helib::Ctxt> Q_type;     /**< query type EQ <E(1), E(0)>, LT <E(0), E(1)>, or LEQ <E(1),E(1)> */
-        std::vector<long> dest;                /**< Collection of destination columns to query. TODO: encrypt these*/
+        std::vector<long> dest;                         /**< Collection of destination columns to query. TODO: encrypt these*/
 
         /**
          * Constructor of the HEQuery class
@@ -300,7 +302,7 @@ namespace HDB_supergate_{
          * The constructor takes in the public key to initialize query ciphertext and query type ctxt pair.
          * @param pk reference to the public key
         */
-        HEQuery(helib::PubKey& pk) : query(pk), Q_type(pair(query, query)) {};
+        HEQuery(helib::PubKey& pk) : query(pk), Q_type(std::pair<helib::Ctxt, helib::Ctxt>(query, query)) {};
 
         /**
          * \fn insert
@@ -319,14 +321,25 @@ namespace HDB_supergate_{
                     std::vector<long> dst)
         {
             source = src;
-            Q_type = std::pair(EQ, LT);
+            Q_type = std::pair<helib::Ctxt, helib::Ctxt>(EQ, LT);
             query = qry;
             dest = dst;
         }
 
-        friend std::ostream& operator<<(std::ostream&, const HEQuery&);
-        void writeTo(std::ostream& os) const;
-        void read(std::istream& is);
+        friend std::ostream& operator<<(std::ostream&, const HEQuery&);     /**< custom serialization*/
+        void writeTo(std::ostream& os) const;                               /**< binary serialization */
+        void read(std::istream& is);                                        /**< binary serialization */
+    };
+
+    /**
+     * Query Mode Enum
+     * Either normal query, query with extension field, or with indexfile
+     * can be specified with the enum
+    */
+    enum Q_MODE {
+        NORMAL,
+        EXTF,
+        IND
     };
     
     /**
@@ -382,14 +395,22 @@ namespace HDB_supergate_{
 
     struct BGV_param MakeBGVParam(long, long, long, long, long, long, long, long);  /**< function to create BGV_Param given parameters */
     
-    helib::Context MakeBGVContext(long, long, long, long, long, long);              /** function to create a helib::Context given parameters */
+    helib::Context MakeBGVContext(long, long, long, long, long, long);              /**< function to create a helib::Context given parameters */
  
-    helib::Context MakeBGVContext(const struct BGV_param);                          /** function to create a helib::Context given BGV_Param struct */
+    helib::Context MakeBGVContext(const struct BGV_param);                          /**< function to create a helib::Context given BGV_Param struct */
 
-    void write_raw_string(std::ostream& os, std::string& s);
-    void write_raw_string_vector(std::ostream& os, std::vector<std::string>& sv);
-    std::string read_raw_string(std::istream& is);
-    void read_raw_string_vector(std::istream& is, std::vector<std::string>& sv);
+    template<typename T>
+    void serialize_to_file(std::ofstream& of, std::string filename, T& s);
+
+    void write_raw_ctxt_mat(std::ostream& os, Ctxt_mat&);                           /**< binary serialization of Ctxt_mat type. Includes metadata information */
+    void write_raw_ctxt_vec(std::ostream& os, Ctxt_vec&);                           /**< binary serialization of Ctxt_vec type. Includes metadata information */
+    void read_raw_ctxt_mat(std::istream& is, Ctxt_mat&, helib::PubKey&);            /**< binary deserialization of Ctxt_mat type. Includes metadata information */
+    void read_raw_ctxt_vec(std::istream& is, Ctxt_vec&, helib::PubKey&);            /**< binary deserialization of Ctxt_vec type. Includes metadata information */
+
+    void write_raw_string(std::ostream& os, std::string& s);                        /**< binary serialization of string */
+    void write_raw_string_vector(std::ostream& os, std::vector<std::string>& sv);   /**< binary serialization of string vector */
+    std::string read_raw_string(std::istream& is);                                  /**< binary deserialization of string */
+    void read_raw_string_vector(std::istream& is, std::vector<std::string>& sv);    /**< binary deserialization of string vector*/
 
     /**
      * \fn setIndexParams

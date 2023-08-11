@@ -30152,3 +30152,10 @@
 [ 14:06:18 ] WARNING: KS-noise-ratio=1.549533
 [ 14:06:19 ] WARNING: KS-noise-ratio=1.612521
 [ 14:06:19 ] WARNING: KS-noise-ratio=14.574089
+[ 14:22:03 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
+[ 14:23:12 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
+[ 14:25:28 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
+[ 14:26:18 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
+[ 15:10:12 ] WARNING: ctxtPrimeSize: non-optimal targetSize
+[ 15:10:12 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
+[ 15:10:12 ] WARNING: CheckPrimes: non-FFT prime in smallPrimes
