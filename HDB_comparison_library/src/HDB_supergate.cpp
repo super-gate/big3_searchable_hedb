@@ -69,7 +69,7 @@ namespace HDB_supergate_ {
         {
             std::vector<unsigned long> new_vec{};
             new_vec.push_back(v);
-            plaintext_index.emplace_back(std::pair<long, vector<unsigned long>>(k, new_vec));
+            plaintext_index.emplace_back(std::pair(k, new_vec));
             keys.push_back(k);
             if (!c) c = 1;
         }
@@ -442,7 +442,7 @@ namespace HDB_supergate_ {
     
     void CtxtIndexFile::insert(std::string col, CtxtIndex& ctxt_index)
     {
-        IndexFile.emplace_back(pair<string, CtxtIndex>(col, ctxt_index));
+        IndexFile.emplace_back(pair(col, ctxt_index));
         cols.push_back(col);
     }
 
@@ -500,59 +500,6 @@ namespace HDB_supergate_ {
         read_raw_index_file(is, pk);
     }
 
-    void CtxtIndexFile::clear()
-    {
-        IndexFile.clear();
-        cols.clear();
-    }
-
-    template<typename T>
-    void serialize_to_file(string filename, T& s)
-    {
-        ofstream of;
-        of.open(filename, ios::out);
-        if (of.is_open()) {
-            // Write the context to a file
-            s.writeTo(of);
-            // Close the ofstream
-            of.close();
-        } else {
-            stringstream ss;
-            ss << "Cout not open file '" << filename << "'.";
-            throw std::runtime_error(ss.str());
-        }
-    }
-
-    void write_raw_ctxt_mat(std::ostream& os, Ctxt_mat& mat)
-    {
-        write_raw_int(os, mat.size());
-        write_raw_int(os, mat[0].size());
-        for (auto& v: mat)
-            for (auto& c: v) c.writeTo(os);
-    }
-
-    void write_raw_ctxt_vec(std::ostream& os, Ctxt_vec& vec)
-    {
-        write_raw_vector(os, vec);
-    }
-
-    void read_raw_ctxt_mat(std::istream& is, Ctxt_mat& mat, PubKey& pk)
-    {
-        long X = read_raw_int(is);
-        long Y = read_raw_int(is);
-        mat.resize(X);
-        Ctxt c(pk);
-        for (auto& v: mat) v.resize(Y, c);
-        for (auto& v: mat)
-            for (auto& ct: v) ct.read(is);
-    }
-
-    void read_raw_ctxt_vec(std::istream& is, Ctxt_vec& vec, PubKey& pk)
-    {
-        Ctxt c(pk);
-        read_raw_vector(is, vec, c);
-    }
-
     void write_raw_string(std::ostream& os, std::string& s)
     {
         write_raw_int(os, s.length());
@@ -606,15 +553,6 @@ namespace HDB_supergate_ {
         query.read(is);
         Q_type.first.read(is);
         Q_type.second.read(is);
-    }
-
-    void HEQuery::readFrom(istream& is, PubKey& pk)
-    {
-        source = read_raw_int(is);
-        read_raw_vector(is, dest);
-        query.readFrom(is, pk);
-        Q_type.first.readFrom(is, pk);
-        Q_type.second.readFrom(is, pk);
     }
 };
 
