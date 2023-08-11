@@ -138,6 +138,7 @@ namespace HDB_supergate_{
 
             void printIndex(std::string col);                                                       /**< debug function for printing a particular index, given column name*/
             void printIndexFile();                                                                  /**< debug function for printing the entire PtxtIndexFile*/
+            void clear();
     };
 
     /**
@@ -280,6 +281,7 @@ namespace HDB_supergate_{
             void writeTo(std::ostream& os);                                         /**< binary serialization */
             void read(std::istream& is, helib::PubKey&);                            /**< binary deserialization */
             int size() {return IndexFile.size();}                                   /**< returns the current size of indexFile*/
+            bool empty() {return IndexFile.size() == 0;}                            /**< return true if size is 0*/
             void clear();                                                           /**< clears out the indexfile*/
 
             friend std::ostream& operator<<(std::ostream&, const CtxtIndexFile&);   /**< custom serialization*/
@@ -329,6 +331,7 @@ namespace HDB_supergate_{
         friend std::ostream& operator<<(std::ostream&, const HEQuery&);     /**< custom serialization*/
         void writeTo(std::ostream& os) const;                               /**< binary serialization */
         void read(std::istream& is);                                        /**< binary serialization */
+        void readFrom(std::istream& is, helib::PubKey& pk);
     };
 
     /**
@@ -371,6 +374,8 @@ namespace HDB_supergate_{
         long r;
     };
 
+    bool operator==(const BGV_param& lhs, const BGV_param& rhs);
+
     const struct BGV_param STD128_HDB{
         167,     // p
         3,     // d
@@ -399,8 +404,25 @@ namespace HDB_supergate_{
  
     helib::Context MakeBGVContext(const struct BGV_param);                          /**< function to create a helib::Context given BGV_Param struct */
 
+    helib::Context* MakeBGVContextPtr(long, long, long, long, long, long);
+    helib::Context* MakeBGVContextPtr(const struct BGV_param);
+
     template<typename T>
-    void serialize_to_file(std::ofstream& of, std::string filename, T& s);
+    void serialize_to_file(string filename, T& s)
+    {
+        ofstream of;
+        of.open(filename, ios::out);
+        if (of.is_open()) {
+            // Write the context to a file
+            s.writeTo(of);
+            // Close the ofstream
+            of.close();
+        } else {
+            stringstream ss;
+            ss << "Cout not open file '" << filename << "'.";
+            throw std::runtime_error(ss.str());
+        }
+    }
 
     void write_raw_ctxt_mat(std::ostream& os, Ctxt_mat&);                           /**< binary serialization of Ctxt_mat type. Includes metadata information */
     void write_raw_ctxt_vec(std::ostream& os, Ctxt_vec&);                           /**< binary serialization of Ctxt_vec type. Includes metadata information */

@@ -11,6 +11,7 @@
 #include "HDB_supergate_user.hpp"
 #include <NTL/ZZX.h>
 #include <time.h>
+#include <optional>
 
 // NAMESAPCE name should be defferent from its file name...
 using namespace HDB_supergate_;
@@ -57,62 +58,42 @@ int main(int argc, char* argv[]) {
 
 	const struct BGV_param HDB_Param = std128 ? TOY_HDB : MakeBGVParam(p, d, m, bits, c, l, scale, r);
 
+	// Create Context
 	HELIB_NTIMER_START(timer_Context);
-    const Context contx = MakeBGVContext(HDB_Param); //TODO: Test Parameters
+    Context* contx = MakeBGVContextPtr(HDB_Param); //TODO: Test Parameters
 	HELIB_NTIMER_STOP(timer_Context);
-    cout << "Q size: " << contx.logOfProduct(contx.getCtxtPrimes())/log(2.0) << endl;
-    cout << "Q*P size: " << contx.logOfProduct(contx.fullPrimes())/log(2.0) << endl;
-    cout << "Security: " << contx.securityLevel() << endl;    
-    cout<<"///////////////////////////////////"<<endl;
-	contx.getZMStar().printout();
-	cout<<endl;
-	cout<<"/////////////////////////////////////"<<endl;
+    // cout << "Q size: " << contx.logOfProduct(contx.getCtxtPrimes())/log(2.0) << endl;
+    // cout << "Q*P size: " << contx.logOfProduct(contx.fullPrimes())/log(2.0) << endl;
+    // cout << "Security: " << contx.securityLevel() << endl;    
+    // cout<<"///////////////////////////////////"<<endl;
+	// contx.getZMStar().printout();
+	// cout<<endl;
+	// cout<<"/////////////////////////////////////"<<endl;
 
-	HELIB_NTIMER_START(timer_SecKey);
-    SecKey secret_key(contx); 
-    secret_key.GenSecKey();
-	
-	//automorphism
-    if (HDB_Param.expansion_len > 1)
-	{
-		if (contx.getZMStar().numOfGens() == 1)
-		{
-			std::set<long> automVals;
-			long e = 1;
-			long ord = contx.getZMStar().OrderOf(0);
-			bool native = contx.getZMStar().SameOrd(0);
-			if(!native)
-				automVals.insert(contx.getZMStar().genToPow(0, -ord));
-			while (e < HDB_Param.expansion_len){
-				long atm = contx.getZMStar().genToPow(0, ord-e);
-				automVals.insert(atm);
-				e <<=1;
-			}
-			addTheseMatrices(secret_key, automVals);
-		}
-		else
-		{
-		addSome1DMatrices(secret_key);
-		}
-	}
+	/*****************************************Storage************************************************/
+	//Create User
+	USER user(verbose);
 
-	if (HDB_Param.d>1)
-		addFrbMatrices(secret_key);
-	HELIB_NTIMER_STOP(timer_SecKey);
+	//Generate Keys
+	pair<PubKey, SecKey> keys = user.generateKeys(contx, HDB_Param);
+	PubKey pk = keys.first;
+	cout << pk.isCKKS() << endl;
 
-	// make public key
-	HELIB_NTIMER_START(timer_PubKey);
-	PubKey public_key(secret_key);
-	HELIB_NTIMER_STOP(timer_PubKey);
-	
-	CircuitType type = UNI; //Fixed at UNI
-	HELIB_NTIMER_START(timer_comparator);
-	Comparator comparator(contx, type, HDB_Param.d, HDB_Param.expansion_len, public_key, false); // secret key deleted. only public key remained
-	HELIB_NTIMER_STOP(timer_comparator);
+	//Encrypt and Save DB
+	string db_path = "../db/" + db_filename + ".csv";
+	Ctxt_mat db;
+	vector<string> headers;
+	CtxtIndexFile indFile;
+	user.EncryptData(db_path, HDB_Param, db, headers, indFile, false);
 
-	/*Secret key is contained in this class. Be carefull! */
-    USER user = USER(comparator, contx, public_key, secret_key, verbose); //pass secret key only to user
-
+	//send to REE (needs to be implemented)
+	//deserialized DB Contx, Pubkey in REE
+	//in another script where it receives the serialized DB, Context, Pubkey... and indFile if applicable
+	SERVER server(verbose);
+	cout << "created Server" << endl;
+	optional<CtxtIndexFile> indOpt = indFile.empty() ? nullopt : optional<CtxtIndexFile>(indFile);
+	//Save DB in REE
+	server.SaveDB(db_filename, HDB_Param, *contx, pk, db, indOpt);
 
 	return 1;
 }

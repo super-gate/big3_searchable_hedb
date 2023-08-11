@@ -6,5 +6,5 @@ CXX_DEFINES = -DHELIB_BOOT_THREADS -DHELIB_THREADS
 
 CXX_INCLUDES = -I/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include -I/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/lib/include -I/home/smhan/Documents/big3_searchable_hedb -isystem /home/smhan/Documents/helib_install/helib_pack/include
 
-CXX_FLAGS = -Wall -O4 -DNDEBUG -g -Wall -std=gnu++1z
+CXX_FLAGS = -Wall -O4 -DNDEBUG -g -Wall -lstdc++fs -std=gnu++1z
 

@@ -20,25 +20,24 @@ namespace HDB_supergate_user_{
     */
     class USER {
         public:
-        he_cmp::Comparator& comparator;                                                     /**< comparator object */
-        helib::Context& contx;                                                        /**< crypto-context */
-        helib::PubKey& pk;                                                                  /**< public key */
-        helib::SecKey& sk;                                                                  /**< secret key */
+        std::unique_ptr<he_cmp::Comparator> Comp;                                                     /**< comparator object */
+        std::unique_ptr<helib::Context> Contx;                                                        /**< crypto-context */
+        std::unique_ptr<helib::PubKey> PublicKey;                                                                  /**< public key */
+        std::unique_ptr<helib::SecKey> SecretKey;                                                                  /**< secret key */
 
         HDB_supergate_::PtxtIndexFile ptxt_index_file;                                      /**< the plaintext index file*/
         
-        const helib::EncryptedArray& ea = contx.getView();                                  /**< encrypted array class used to encrypt and decrypt ciphertexts*/
-        unsigned long p = contx.getP();                                                     /**< plaintext modulus p */
-        unsigned long ord_p = contx.getOrdP();                                              /**< multiplicative order of p mod m */
-        unsigned long D = comparator.m_slotDeg;                                             /**< extension field degree*/
-        unsigned long nslots = contx.getNSlots();                                           /**< number of slots for this context */
-        unsigned long exp_len = comparator.m_expansionLen;                                  /**< the expansion length l */
-        unsigned long max_packed = nslots / exp_len;                                        /**< number of data that can be packed in a single ciphertext */
-        unsigned long enc_base = (p + 1) >> 1;                                              /**< encryption base. (p+1)/2 for univariate circuit */
-        unsigned long digit_base = power_long(enc_base, comparator.m_slotDeg);              /**< the actual digit base after d*/
-        int space_bit_size = static_cast<int>(ceil(exp_len * log2(digit_base)));            /**< the bit size of the current context*/
-        unsigned long input_range = space_bit_size < 64 ? power_long(digit_base, exp_len)   /**< the maximum input current context can handle*/
-                                                        : ULONG_MAX;
+        std::unique_ptr<const helib::EncryptedArray> ea;                                  /**< encrypted array class used to encrypt and decrypt ciphertexts*/
+        unsigned long p;                                                     /**< plaintext modulus p */
+        unsigned long ord_p;                                              /**< multiplicative order of p mod m */
+        unsigned long D;                                             /**< extension field degree*/
+        unsigned long nslots;                                           /**< number of slots for this context */
+        unsigned long exp_len;                                  /**< the expansion length l */
+        unsigned long max_packed;                                        /**< number of data that can be packed in a single ciphertext */
+        unsigned long enc_base;                                              /**< encryption base. (p+1)/2 for univariate circuit */
+        unsigned long digit_base;              /**< the actual digit base after d*/
+        int space_bit_size;            /**< the bit size of the current context*/
+        unsigned long input_range;   /**< the maximum input current context can handle*/
 
         bool verbose;                                                                       /**< verbose flag */
 
@@ -52,20 +51,20 @@ namespace HDB_supergate_user_{
         void EncryptNumber(helib::Ctxt& ctxt, unsigned long i);
         void EncryptNumberPerSlot(helib::Ctxt& ctxt, long i);
 
-        public:
-        /**
-         * Constructor for the USER class
-         * @param comparator reference to comparator object
-         * @param contx reference to the crypto-context
-         * @param pk reference to the public key object
-         * @param sk reference to the secret key object
-        */
-        USER(he_cmp::Comparator& comparator,
-             helib::Context& contx,
-             helib::PubKey& pk,
-             helib::SecKey& sk,
-             bool
-        );
+        void saveInfo(HDB_supergate_::BGV_param param);                                                /**< serializes contx, pubkey, seckey */
+        void constructPathName(HDB_supergate_::BGV_param param, std::string&);
+        void HandleSecKey(HDB_supergate_::BGV_param);
+        void HandlePubKey();
+
+        int8_t loadContext(std::string);
+        int8_t loadPubKey(std::string);
+        int8_t loadComparator(HDB_supergate_::BGV_param param);
+        int8_t loadSecKey(std::string);
+        void loadRest(std::string, HDB_supergate_::BGV_param param);
+        int8_t loadEncryptionInfo(HDB_supergate_::BGV_param);
+
+        void DestroyKeys();
+        void ClearInfo();
 
         /**
          * \fn createPtxtIndexFile
@@ -92,11 +91,11 @@ namespace HDB_supergate_user_{
          * @param source the integer index of source column to be queried from
          * @param dest vector of integer indices of destination columns to be queried
         */
-        void ConstructQuery(HDB_supergate_::HEQuery& query,
-                            unsigned long input,
-                            HDB_supergate_::Q_TYPE_t type,
-                            long source, //TODO: change this to query names from just indices maybe?
-                            std::vector<long> dest);
+        HDB_supergate_::HEQuery* ConstructQuery(HDB_supergate_::BGV_param param,
+                                                unsigned long input,
+                                                HDB_supergate_::Q_TYPE_t type,
+                                                long source, //TODO: change this to query names from just indices maybe?
+                                                std::vector<long> dest);
 
         /**
          * \fn csvToDB
@@ -126,12 +125,44 @@ namespace HDB_supergate_user_{
                      std::string path, 
                      std::vector<std::string>& headers);
 
-        void saveInfo(std::string pathname);                                            /**< serializes contx, pubkey, seckey */
-        void loadInfo(std::string pathname);                                            /**< deserializes contx, pubkey, seckey, and other information needed for USER*/
+        public:
+        /**
+         * (Deprecated) Constructor for the USER class
+         * @deprecated
+         * @param comparator reference to comparator object
+         * @param contx reference to the crypto-context
+         * @param pk reference to the public key object
+         * @param sk reference to the secret key object
+         * @param verbose verbose flag
+        */
+        USER(he_cmp::Comparator& comparator,
+             helib::Context& contx,
+             helib::PubKey& pk,
+             helib::SecKey& sk,
+             bool
+        );
         
+        /**
+         * Constructor for USER class
+         * @param verbose verbose flag
+        */
+        USER(bool verbose);
+
+        std::pair<helib::PubKey, helib::SecKey> generateKeys(helib::Context* contx, HDB_supergate_::BGV_param param);
+        void EncryptData(std::string path,
+                         HDB_supergate_::BGV_param param,
+                         HDB_supergate_::Ctxt_mat& db,
+                         std::vector<std::string>& headers,
+                         HDB_supergate_::CtxtIndexFile& indFile,
+                         bool index);
+
         unsigned long max();                                                            /**< returns input_range */
 
         HDB_supergate_::PtxtIndexFile getPtxtIndexFile() {return ptxt_index_file;}      /**< returns the plaintext index file */
+        int8_t loadDecryptionInfo(HDB_supergate_::BGV_param);                           /**< ONLY FOR DEBUGGING PURPOSES */
+        void printQueryResult(HDB_supergate_::BGV_param,                                /**< main function to decrpt and print ciphertext */
+                              HDB_supergate_::Ctxt_mat&,
+                              HDB_supergate_::Q_MODE);
         void printZZXasINT(vector<ZZX>);                                                /**< debug function to print ZZX type as integer */
         void printPackedZZXasINT(vector<ZZX>);                                          /**< debug function to print extension field packed ZZX as integers*/
         void printDecryptedINT(helib::Ctxt& ctxt, bool zzx_packed = false);             /**< debug function to decrypt and print the ciphertext as integer*/

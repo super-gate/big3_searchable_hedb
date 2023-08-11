@@ -24,8 +24,6 @@ namespace HDB_supergate_server_{
             std::unique_ptr<he_cmp::Comparator> Comp;                 /**< comparator object used for performing actual queries*/
             std::unique_ptr<helib::Context> Contx;
             std::unique_ptr<helib::PubKey> PublicKey;
-            std::string currDBName = "";                    /**< Currently loaded DB name */
-            HDB_supergate_::BGV_param currParam;            /**< Currently loaded BGV parameters */
             std::unique_ptr<HDB_supergate_::Ctxt_mat> Database;                   /**< the encrypted database in Ctxt_mat form */
             std::unique_ptr<HDB_supergate_::CtxtIndexFile> IndexFile;       /**< the encrypted Index File */
             size_t Row;                                     /**< represents the number of rows in the DB */
@@ -56,6 +54,7 @@ namespace HDB_supergate_server_{
             int8_t loadDB(std::string);
             int8_t loadIndexFile(std::string);
             void loadRest(std::string, HDB_supergate_::BGV_param);
+            void ClearData();
             
             /**
              * \fn LoadData
@@ -118,7 +117,7 @@ namespace HDB_supergate_server_{
                         HDB_supergate_::Ctxt_mat& db, 
                         std::optional<HDB_supergate_::CtxtIndexFile>& indFile);
 
-            HDB_supergate_::HEQuery deserializeQuery(std::istream& is);
+            HDB_supergate_::HEQuery* deserializeQuery(std::istream& is);
             
             /**
              * \fn ProcessQuery
@@ -139,7 +138,7 @@ namespace HDB_supergate_server_{
             int8_t ProcessQuery(std::string db_name, 
                                 HDB_supergate_::BGV_param param, 
                                 HDB_supergate_::Q_MODE mode, 
-                                HDB_supergate_::HEQuery& query,
+                                std::istream& queryStream,
                                 HDB_supergate_::Ctxt_mat& result);
 
             /**

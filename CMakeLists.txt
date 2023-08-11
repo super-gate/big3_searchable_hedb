@@ -51,6 +51,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR})
 # 공통 링크 라이브러리 (-l)
 FIND_PACKAGE(helib REQUIRED)
 LINK_LIBRARIES(helib)
+LINK_LIBRARIES(stdc++fs)
 
 # 공통 링크 라이브러리 디렉토리 (-L)
 LINK_DIRECTORIES (/usr/lib )
@@ -61,28 +62,28 @@ LINK_DIRECTORIES (${CMAKE_SOURCE_DIR}${CMAKE_SOURCE_DIR}/HDB_comparison_library/
 
 
 
-# main 
-SET(MAIN_SOURCES ${CMAKE_SOURCE_DIR}/src/main_query_test.cpp)
+# # main 
+# SET(MAIN_SOURCES ${CMAKE_SOURCE_DIR}/src/main_query_test.cpp)
 
-ADD_EXECUTABLE(searchable_db 
-		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
-		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
-		${MAIN_SOURCES} 
-		)
+# ADD_EXECUTABLE(searchable_db 
+# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
+# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
+# 		${MAIN_SOURCES} 
+# 		)
 
-TARGET_LINK_LIBRARIES(searchable_db ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
-SET_TARGET_PROPERTIES(searchable_db PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+# TARGET_LINK_LIBRARIES(searchable_db ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+# SET_TARGET_PROPERTIES(searchable_db PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-#TS_test
-SET(TS ${CMAKE_SOURCE_DIR}/src/TS_test.cpp)
-ADD_EXECUTABLE(TS 
-		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
-		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
-		${TS} 
-		)
+# #TS_test
+# SET(TS ${CMAKE_SOURCE_DIR}/src/TS_test.cpp)
+# ADD_EXECUTABLE(TS 
+# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
+# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
+# 		${TS} 
+# 		)
 
-TARGET_LINK_LIBRARIES(TS ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
-SET_TARGET_PROPERTIES(TS PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+# TARGET_LINK_LIBRARIES(TS ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+# SET_TARGET_PROPERTIES(TS PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #Nslots
 SET(nslots ${CMAKE_SOURCE_DIR}/src/nslots_test.cpp)

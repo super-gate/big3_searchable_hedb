@@ -117,32 +117,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named searchable_db
-
-# Build rule for target.
-searchable_db: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 searchable_db
-.PHONY : searchable_db
-
-# fast build rule for target.
-searchable_db/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/build
-.PHONY : searchable_db/fast
-
-#=============================================================================
-# Target rules for targets named TS
-
-# Build rule for target.
-TS: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TS
-.PHONY : TS
-
-# fast build rule for target.
-TS/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/build
-.PHONY : TS/fast
-
-#=============================================================================
 # Target rules for targets named nslots
 
 # Build rule for target.
@@ -155,14 +129,40 @@ nslots/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/build
 .PHONY : nslots/fast
 
+#=============================================================================
+# Target rules for targets named save
+
+# Build rule for target.
+save: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 save
+.PHONY : save
+
+# fast build rule for target.
+save/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/build
+.PHONY : save/fast
+
+#=============================================================================
+# Target rules for targets named query
+
+# Build rule for target.
+query: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 query
+.PHONY : query
+
+# fast build rule for target.
+query/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/build
+.PHONY : query/fast
+
 HDB_comparison_library/comp_lib/comparator.o: HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.o
 
 # target to build an object file
 HDB_comparison_library/comp_lib/comparator.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.o
 
 HDB_comparison_library/comp_lib/comparator.i: HDB_comparison_library/comp_lib/comparator.cpp.i
@@ -170,9 +170,9 @@ HDB_comparison_library/comp_lib/comparator.i: HDB_comparison_library/comp_lib/co
 
 # target to preprocess a source file
 HDB_comparison_library/comp_lib/comparator.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.i
 
 HDB_comparison_library/comp_lib/comparator.s: HDB_comparison_library/comp_lib/comparator.cpp.s
@@ -180,9 +180,9 @@ HDB_comparison_library/comp_lib/comparator.s: HDB_comparison_library/comp_lib/co
 
 # target to generate assembly for a file
 HDB_comparison_library/comp_lib/comparator.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.s
 
 HDB_comparison_library/comp_lib/tools.o: HDB_comparison_library/comp_lib/tools.cpp.o
@@ -190,9 +190,9 @@ HDB_comparison_library/comp_lib/tools.o: HDB_comparison_library/comp_lib/tools.c
 
 # target to build an object file
 HDB_comparison_library/comp_lib/tools.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.o
 
 HDB_comparison_library/comp_lib/tools.i: HDB_comparison_library/comp_lib/tools.cpp.i
@@ -200,9 +200,9 @@ HDB_comparison_library/comp_lib/tools.i: HDB_comparison_library/comp_lib/tools.c
 
 # target to preprocess a source file
 HDB_comparison_library/comp_lib/tools.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.i
 
 HDB_comparison_library/comp_lib/tools.s: HDB_comparison_library/comp_lib/tools.cpp.s
@@ -210,58 +210,34 @@ HDB_comparison_library/comp_lib/tools.s: HDB_comparison_library/comp_lib/tools.c
 
 # target to generate assembly for a file
 HDB_comparison_library/comp_lib/tools.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/HDB_comparison_library/comp_lib/tools.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.s
 
-src/TS_test.o: src/TS_test.cpp.o
-.PHONY : src/TS_test.o
+src/load_query_test.o: src/load_query_test.cpp.o
+.PHONY : src/load_query_test.o
 
 # target to build an object file
-src/TS_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/src/TS_test.cpp.o
-.PHONY : src/TS_test.cpp.o
+src/load_query_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_query_test.cpp.o
+.PHONY : src/load_query_test.cpp.o
 
-src/TS_test.i: src/TS_test.cpp.i
-.PHONY : src/TS_test.i
-
-# target to preprocess a source file
-src/TS_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/src/TS_test.cpp.i
-.PHONY : src/TS_test.cpp.i
-
-src/TS_test.s: src/TS_test.cpp.s
-.PHONY : src/TS_test.s
-
-# target to generate assembly for a file
-src/TS_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TS.dir/build.make CMakeFiles/TS.dir/src/TS_test.cpp.s
-.PHONY : src/TS_test.cpp.s
-
-src/main_query_test.o: src/main_query_test.cpp.o
-.PHONY : src/main_query_test.o
-
-# target to build an object file
-src/main_query_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/src/main_query_test.cpp.o
-.PHONY : src/main_query_test.cpp.o
-
-src/main_query_test.i: src/main_query_test.cpp.i
-.PHONY : src/main_query_test.i
+src/load_query_test.i: src/load_query_test.cpp.i
+.PHONY : src/load_query_test.i
 
 # target to preprocess a source file
-src/main_query_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/src/main_query_test.cpp.i
-.PHONY : src/main_query_test.cpp.i
+src/load_query_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_query_test.cpp.i
+.PHONY : src/load_query_test.cpp.i
 
-src/main_query_test.s: src/main_query_test.cpp.s
-.PHONY : src/main_query_test.s
+src/load_query_test.s: src/load_query_test.cpp.s
+.PHONY : src/load_query_test.s
 
 # target to generate assembly for a file
-src/main_query_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/searchable_db.dir/build.make CMakeFiles/searchable_db.dir/src/main_query_test.cpp.s
-.PHONY : src/main_query_test.cpp.s
+src/load_query_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_query_test.cpp.s
+.PHONY : src/load_query_test.cpp.s
 
 src/nslots_test.o: src/nslots_test.cpp.o
 .PHONY : src/nslots_test.o
@@ -287,6 +263,30 @@ src/nslots_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/src/nslots_test.cpp.s
 .PHONY : src/nslots_test.cpp.s
 
+src/save_test.o: src/save_test.cpp.o
+.PHONY : src/save_test.o
+
+# target to build an object file
+src/save_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/save_test.cpp.o
+.PHONY : src/save_test.cpp.o
+
+src/save_test.i: src/save_test.cpp.i
+.PHONY : src/save_test.i
+
+# target to preprocess a source file
+src/save_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/save_test.cpp.i
+.PHONY : src/save_test.cpp.i
+
+src/save_test.s: src/save_test.cpp.s
+.PHONY : src/save_test.s
+
+# target to generate assembly for a file
+src/save_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/save_test.cpp.s
+.PHONY : src/save_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -295,24 +295,24 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... TS"
 	@echo "... nslots"
-	@echo "... searchable_db"
+	@echo "... query"
+	@echo "... save"
 	@echo "... HDB_comparison_library/comp_lib/comparator.o"
 	@echo "... HDB_comparison_library/comp_lib/comparator.i"
 	@echo "... HDB_comparison_library/comp_lib/comparator.s"
 	@echo "... HDB_comparison_library/comp_lib/tools.o"
 	@echo "... HDB_comparison_library/comp_lib/tools.i"
 	@echo "... HDB_comparison_library/comp_lib/tools.s"
-	@echo "... src/TS_test.o"
-	@echo "... src/TS_test.i"
-	@echo "... src/TS_test.s"
-	@echo "... src/main_query_test.o"
-	@echo "... src/main_query_test.i"
-	@echo "... src/main_query_test.s"
+	@echo "... src/load_query_test.o"
+	@echo "... src/load_query_test.i"
+	@echo "... src/load_query_test.s"
 	@echo "... src/nslots_test.o"
 	@echo "... src/nslots_test.i"
 	@echo "... src/nslots_test.s"
+	@echo "... src/save_test.o"
+	@echo "... src/save_test.i"
+	@echo "... src/save_test.s"
 .PHONY : help
 
 

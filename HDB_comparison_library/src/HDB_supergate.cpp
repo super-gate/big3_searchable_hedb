@@ -49,6 +49,36 @@ namespace HDB_supergate_ {
                     .build();
     }
 
+    Context* MakeBGVContextPtr(long p, 
+                           long m, 
+                           long nb_primes, 
+                           long c, 
+                           long scale, 
+                           long r)
+    { 
+        return ContextBuilder<BGV>()
+                    .m(m)
+                    .p(p)
+                    .r(r)
+                    .bits(nb_primes)
+                    .c(c) 
+                    .scale(scale)
+                    .buildPtr();
+                        
+    }  
+
+    Context* MakeBGVContextPtr(struct BGV_param params) 
+    {        
+        return ContextBuilder<BGV>()
+                    .m(params.m)
+                    .p(params.p)
+                    .r(params.r)
+                    .bits(params.nb_primes)
+                    .c(params.c) 
+                    .scale(params.scale)
+                    .buildPtr();
+    }
+
     istream& operator>>(istream& str, CSVRow& data)
     {
         data.readNextRow(str);
@@ -160,6 +190,12 @@ namespace HDB_supergate_ {
             ind.second.printIndex();
             std::cout << "----------------------------------------\n" << std::endl;
         }
+    }
+    
+    void PtxtIndexFile::clear()
+    {
+        IndexFile.clear();
+        cols.clear();
     }
 
     void setIndexParams(unsigned long R, 
@@ -506,23 +542,6 @@ namespace HDB_supergate_ {
         cols.clear();
     }
 
-    template<typename T>
-    void serialize_to_file(string filename, T& s)
-    {
-        ofstream of;
-        of.open(filename, ios::out);
-        if (of.is_open()) {
-            // Write the context to a file
-            s.writeTo(of);
-            // Close the ofstream
-            of.close();
-        } else {
-            stringstream ss;
-            ss << "Cout not open file '" << filename << "'.";
-            throw std::runtime_error(ss.str());
-        }
-    }
-
     void write_raw_ctxt_mat(std::ostream& os, Ctxt_mat& mat)
     {
         write_raw_int(os, mat.size());
@@ -615,6 +634,18 @@ namespace HDB_supergate_ {
         query.readFrom(is, pk);
         Q_type.first.readFrom(is, pk);
         Q_type.second.readFrom(is, pk);
+    }
+
+    bool operator==(const BGV_param& lhs, const BGV_param& rhs)
+    {
+        return lhs.c == rhs.c &&
+               lhs.d == rhs.d &&
+               lhs.expansion_len == rhs.expansion_len &&
+               lhs.m == rhs.m &&
+               lhs.nb_primes == rhs.nb_primes &&
+               lhs.p == rhs.p &&
+               lhs.r == rhs.r &&
+               lhs.scale == rhs.scale;
     }
 };
 

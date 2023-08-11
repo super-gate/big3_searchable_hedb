@@ -104,6 +104,7 @@ namespace HDB_supergate_server_{
 
     void SERVER::SaveDB(string db_name, BGV_param param, Context& contx, PubKey& pk, Ctxt_mat& db, optional<CtxtIndexFile>& indFile)
     {
+        if (verbose) cout << "Saving into HEDB..." << endl;
         string db_path;
         constructDBPath(db_name, param, db_path);
         fs::create_directories(db_path);
@@ -124,6 +125,7 @@ namespace HDB_supergate_server_{
         } else {
             throw std::runtime_error("Could not open file 'db'.");
         }
+        // cout << "db done" << endl;
 
         if (indFile)
         {
@@ -137,6 +139,7 @@ namespace HDB_supergate_server_{
                 throw std::runtime_error("Could not open file 'indFile'.");
             }
         }
+        if (verbose) cout << "Done! DB is saved safely" << endl;
     }
 
     int8_t SERVER::loadContext(string db_path)
@@ -162,12 +165,12 @@ namespace HDB_supergate_server_{
         string pubkey_filename = db_path + "/pubkey";
         inPubKeyFile.open(pubkey_filename);
         if (!inPubKeyFile.is_open()) {
-            cerr << "Could not open file 'context'." << endl;
+            cerr << "Could not open file 'pubkey'." << endl;
             return -1;
         }
         PubKey pk = PubKey::readFrom(inPubKeyFile, *Contx);
         inPubKeyFile.close();
-        PublicKey.reset(&pk);
+        PublicKey = make_unique<PubKey>(pk);
         return 0;
     }
 
@@ -182,7 +185,6 @@ namespace HDB_supergate_server_{
     int8_t SERVER::loadDB(string db_path)
     {
         if (verbose) cout << "Loading DB...\n";
-        (*Database).clear();
         ifstream inDBFile;
         string db_filename = db_path + "/db";
         inDBFile.open(db_filename);
@@ -196,13 +198,13 @@ namespace HDB_supergate_server_{
             cerr << "Could not open file 'db'." << endl;
             return -1;
         }
-        Database.reset(&db);
+        Database = make_unique<Ctxt_mat>(db);
         return 0;
     }
+    
     int8_t SERVER::loadIndexFile(string db_path)
     {
         if (verbose) cout << "Loading Index File...\n";
-        (*IndexFile).clear();
         ifstream inIndexFile;
         string ind_filename = db_path + "/indFile";
         inIndexFile.open(ind_filename);
@@ -216,22 +218,18 @@ namespace HDB_supergate_server_{
             cerr << "Could not find or open file 'indFile'." << endl;
             return -1;
         }
-        IndexFile.reset(&indFile);
+        IndexFile = make_unique<CtxtIndexFile>(indFile);
         return 0;
     }
 
     void SERVER::loadRest(string db_name, BGV_param param)
     {
-        currDBName = db_name;
-        currParam = param;
         Row = (*Database).size();
         Col = (*Database)[0].size();
         nslots = Contx->getNSlots();
         exp_len = Comp->m_expansionLen;
         max_packed = nslots / exp_len;
         D = Comp->m_slotDeg;
-        extractionMask.clear();
-        extractionMaskSize.clear();
         create_all_extraction_masks();
     }
 
@@ -244,6 +242,7 @@ namespace HDB_supergate_server_{
             cerr << "Path: " << db_path << " does not exist." << endl;
             return -1;
         }
+        if (verbose) cout << "Loading All Data..." << endl;
 
         if (loadContext(db_path) == -1) return -1;
         if (loadPubKey(db_path) == -1) return -1;
@@ -251,21 +250,41 @@ namespace HDB_supergate_server_{
         if (loadDB(db_path) == -1) return -1;
         if (index && loadIndexFile(db_path) == -1) return -1;
         loadRest(db_path, param);
+        if (verbose) cout << "Data all loaded!" << endl;
 
         return 0;
     }
 
-    HEQuery SERVER::deserializeQuery(istream& is)
+    HEQuery* SERVER::deserializeQuery(istream& is)
     {
-        HEQuery query(*PublicKey);
-        query.read(is);
+        HEQuery* query = new HEQuery(*PublicKey);
+        query->read(is);
         return query;
     }
 
-    int8_t SERVER::ProcessQuery(string db_name, BGV_param param, Q_MODE mode, HEQuery& query, Ctxt_mat& result)
+    void SERVER::ClearData()
     {
-        if (currDBName.compare(db_name) || !(currParam == param)) //if not currently loaded
-            if (LoadData(db_name, param, mode == IND) == -1) return -1;
+        Comp.reset(nullptr);
+        Contx.reset(nullptr);
+        PublicKey.reset(nullptr);
+        Database.reset(nullptr);
+        IndexFile.reset(nullptr);
+        Row = 0;
+        Col = 0;
+        extractionMask.clear();
+        extractionMaskSize.clear();
+        nslots = 0;
+        exp_len = 0;
+        max_packed = 0;
+        D = 0;
+    }
+
+    int8_t SERVER::ProcessQuery(string db_name, BGV_param param, Q_MODE mode, istream& qStream, Ctxt_mat& result)
+    {
+        if (LoadData(db_name, param, mode == IND) == -1) return -1;
+        if (verbose) cout << "Querying..." << endl;
+        HEQuery query = *(deserializeQuery(qStream));
+        cout << query.dest.size() << endl;
         switch(mode)
         {
             case NORMAL:
@@ -280,6 +299,7 @@ namespace HDB_supergate_server_{
             default:
                 break;
         }
+        ClearData();
         return 0;
     }
 					
@@ -299,7 +319,7 @@ namespace HDB_supergate_server_{
 			
             Ctxt ctxt_less = Ctxt(*PublicKey);
             Ctxt ctxt_eq = Ctxt(*PublicKey);
-            for (unsigned long iCoef = D - 1; iCoef >= 0; --iCoef)
+            for (long iCoef = D - 1; iCoef >= 0; --iCoef)
             {
                 Ctxt tmp_less = Ctxt(*PublicKey);
                 Ctxt tmp_eq = Ctxt(*PublicKey);
@@ -386,7 +406,7 @@ namespace HDB_supergate_server_{
 			
             Ctxt ctxt_less = Ctxt(*PublicKey);
             Ctxt ctxt_eq = Ctxt(*PublicKey);
-            for (unsigned long iCoef = D - 1; iCoef >= 0; --iCoef)
+            for (long iCoef = D - 1; iCoef >= 0; --iCoef)
             {
                 Ctxt tmp_less = Ctxt(*PublicKey);
                 Ctxt tmp_eq = Ctxt(*PublicKey);
@@ -447,8 +467,8 @@ namespace HDB_supergate_server_{
 				res[j][ind] += res_final;
 			}
             HELIB_NTIMER_STOP(timer_ForEachCol);
-            printNamedTimer(cout, "timer_ForEachCol");
 		}
+        printNamedTimer(cout, "timer_ForEachCol");
 	}
 
 	//can only do EQ query right now
@@ -475,8 +495,8 @@ namespace HDB_supergate_server_{
             Comp->extract_mod_p(k_mod_p, k_ctxt);
 
             Ctxt ctxt_eq(*PublicKey);
-            // for (unsigned long iCoef = 0; iCoef < D; iCoef++)
-            for (unsigned long iCoef = D-1; iCoef >= 0; iCoef--)
+            // for (long iCoef = 0; iCoef < D; iCoef++)
+            for (long iCoef = D-1; iCoef >= 0; iCoef--)
             {
                 // cout << "iCoef: " << iCoef << endl;
                 Ctxt eql = q_mod_p[iCoef];
@@ -490,7 +510,7 @@ namespace HDB_supergate_server_{
                 else ctxt_eq *= eql;
             }
             // Ctxt ctxt_eq = ctxt_eq_p[D-1];
-            // for(unsigned long iCoef = D - 2; iCoef >= 0; iCoef--)
+            // for(long iCoef = D - 2; iCoef >= 0; iCoef--)
             //     ctxt_eq *= ctxt_eq_p[iCoef];
 
             if (exp_len != 1)
@@ -555,8 +575,8 @@ namespace HDB_supergate_server_{
 
                     //process first one
                     Ctxt ctxt_eq(*PublicKey);
-                    // for (unsigned long iCoef = 0; iCoef < D; iCoef++)
-                    for (unsigned long iCoef = D-1; iCoef >= 0; iCoef--)
+                    // for (long iCoef = 0; iCoef < D; iCoef++)
+                    for (long iCoef = D-1; iCoef >= 0; iCoef--)
                     {
                         Ctxt eql = ext_p[iCoef];
                         eql -= c_uid_p[iCoef];
@@ -569,7 +589,7 @@ namespace HDB_supergate_server_{
                         else ctxt_eq *= eql;
                     }
                     // Ctxt ctxt_eq = ctxt_eq_p[D-1];
-                    // for (unsigned long iCoef = D - 2; iCoef >= 0; iCoef--)
+                    // for (long iCoef = D - 2; iCoef >= 0; iCoef--)
                     //     ctxt_eq *= ctxt_eq_p[iCoef];
                     while (sft < exp_len)
                     {
