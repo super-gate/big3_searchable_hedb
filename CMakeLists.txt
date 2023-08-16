@@ -73,16 +73,16 @@ ADD_EXECUTABLE(searchable_db
 TARGET_LINK_LIBRARIES(searchable_db ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 SET_TARGET_PROPERTIES(searchable_db PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-#TS_test
-SET(TS ${CMAKE_SOURCE_DIR}/src/TS_test.cpp)
-ADD_EXECUTABLE(TS 
+#FEF_test
+SET(fef ${CMAKE_SOURCE_DIR}/src/FEF_test.cpp)
+ADD_EXECUTABLE(fef 
 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
-		${TS} 
+		${fef} 
 		)
 
-TARGET_LINK_LIBRARIES(TS ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
-SET_TARGET_PROPERTIES(TS PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+TARGET_LINK_LIBRARIES(fef ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+SET_TARGET_PROPERTIES(fef PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #Nslots
 SET(nslots ${CMAKE_SOURCE_DIR}/src/nslots_test.cpp)

@@ -3,55 +3,62 @@
 #include <sstream>
 
 #include <helib/helib.h>
-#include <helib/ArgMap.h>
 
-#include "../HDB_comparison_library/comp_lib/comparator.h"
-#include "HDB_supergate.hpp"
-#include "HDB_supergate_server.hpp"
-#include "HDB_supergate_user.hpp"
-#include <NTL/ZZX.h>
-#include <time.h>
-
-
-// NAMESAPCE name should be defferent from its file name...
-using namespace HDB_supergate_;
-using namespace HDB_supergate_user_;
-using namespace HDB_supergate_server_;
-
+#include <fstream>
 
 /*HELIB*/
 using namespace helib;
 using namespace std;
-using namespace he_cmp;
 using namespace NTL;
 
 int main() {
-	long ns;
-	cout << "input ns: " << endl;
-	cin >> ns;
-	while (true)
+	vector<int> ms, ps, maxs;
+	for (int m = 20000; m < 40000; ++m)
+		if (phi_N(m) > 20000) ms.push_back(m);
+	
+	ps = {23, 29, 31, 41, 61, 71, 103, 131, 163, 173};
+	maxs = {71, 30, 27, 50, 57, 38, 71, 46, 55, 68};
+	auto it = maxs.begin();
+
+	ofstream params;
+	params.open("./params.txt", std::ios::out);
+	double longmax = log(ULONG_MAX);
+	int power, counter;
+	float tick = (float)100/20;
+	for (int& p: ps)
 	{
-		long p;
-		cout << "input p: " << endl;
-		cin >> p;
-		long o;
-		cout << "input o: " << endl;
-		cin >> o;
-		stringstream ss;
-		ss << "nslots_" << to_string(p) << ".txt";
-		string s = ss.str();
-		ofstream fout(s);
-		for (long m = 10000; m < 150000; ++m)
+		power = (int)(longmax / log((p+1)/2)) + 1;
+		counter = 0;
+		float percent;
+		int bar_count;
+		for (int& m: ms)
 		{
-			if (GCD(p, m) != 1) continue;
-			long ord = multOrd(p, m);
-			if (ord < o) continue;
-			long nslots = findNSlots(p, m);
-			if (nslots < ns) continue;
-			fout << "m: " << m << " ord: " << ord << " nslots: " << nslots << "\n";
+			long ordp = multOrd(p, m);
+			if (ordp < power || ordp > 40) continue;
+			printf("\rp: %d					%d/%d [", p, counter, *it);
+			percent = (float)counter/(*it) * 100;
+			bar_count = percent/tick;
+			for (int i = 0; i < 20; ++i)
+			{
+				if (bar_count > i) printf("=");
+				else printf(" ");
+			}
+			printf("] %0.2f%%", percent);
+			fflush(stdout);
+			const Context c = ContextBuilder<BGV>().p(p)
+												  .m(m)
+												  .bits(500)
+												  .c(3)
+												  .r(1)
+												  .build();
+			counter++;
+			if (c.securityLevel() < 128) continue;
+			params << p << "," << m << "\n";
 		}
-		fout.close();
+		it++;
+		cout << ", count: " << counter << endl;
 	}
+	params.close();
 
     return 0;
 }

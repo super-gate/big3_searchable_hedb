@@ -282,6 +282,7 @@ int main(int argc, char* argv[]) {
 			helib::printNamedTimer(std::cout, "nslot");
 			helib::printNamedTimer(std::cout, "timer_Query");
 			cout << "\nPerform another query? (y/n)" << endl;
+			
 			string s;
 			cin >> s;
 			if (s == "n") break;
