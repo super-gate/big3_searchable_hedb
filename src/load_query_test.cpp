@@ -58,10 +58,10 @@ int main(int argc, char* argv[]) {
 	const struct BGV_param HDB_Param = std128 ? TOY_HDB : MakeBGVParam(p, d, m, bits, c, l, scale, r);
 
 	USER user(verbose);
-	unsigned long input = 19;
+	unsigned long input = 21;
 	Q_TYPE_t type = EQ;
 	long source = 1;
-	vector<long> dest = {0, 1, 2};
+	vector<long> dest = {0, 1, 3};
 	HEQuery* query = user.ConstructQuery(HDB_Param, input, type, source, dest);
 	cout << query->source << endl;
 	cout << "\n\n" << endl;

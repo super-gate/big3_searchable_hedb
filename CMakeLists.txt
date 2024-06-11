@@ -120,27 +120,27 @@ ADD_EXECUTABLE(query
 TARGET_LINK_LIBRARIES(query ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 SET_TARGET_PROPERTIES(query PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# foreach(_target
-# eq_normal
-# eq_ext
-# eq_ind
-# lt_normal
-# lt_ext
-# lt_ind
-# leq_normal
-# leq_ext
-# leq_ind
-# )
-# 	SET(_target ${CMAKE_SOURCE_DIR}/src/for_presentation/${_target}.cpp)
-# 	ADD_EXECUTABLE(_target 
-# 			${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
-# 			${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
-# 			${_target} 
-# 			)
+foreach(_target
+eq_normal
+eq_ext
+eq_ind
+lt_normal
+lt_ext
+lt_ind
+leq_normal
+leq_ext
+leq_ind
+)
+	# SET(${_target}_src ${CMAKE_SOURCE_DIR}/src/for_pres/${_target}.cpp)
+	ADD_EXECUTABLE(${_target} 
+			${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
+			${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
+			${CMAKE_SOURCE_DIR}/src/${_target}.cpp
+			)
 	
-# 	TARGET_LINK_LIBRARIES(_target ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
-# 	SET_TARGET_PROPERTIES(_target PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
-# endforeach()
+	TARGET_LINK_LIBRARIES(${_target} ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+	SET_TARGET_PROPERTIES(${_target} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+endforeach()
 
 
 #cmake -Dhelib_DIR=/home/smhan/Documents/helib_install/helib_pack/share/cmake/helib ..

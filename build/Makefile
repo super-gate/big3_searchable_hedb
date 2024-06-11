@@ -155,6 +155,123 @@ query/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/build
 .PHONY : query/fast
 
+#=============================================================================
+# Target rules for targets named eq_normal
+
+# Build rule for target.
+eq_normal: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 eq_normal
+.PHONY : eq_normal
+
+# fast build rule for target.
+eq_normal/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/build
+.PHONY : eq_normal/fast
+
+#=============================================================================
+# Target rules for targets named eq_ext
+
+# Build rule for target.
+eq_ext: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 eq_ext
+.PHONY : eq_ext
+
+# fast build rule for target.
+eq_ext/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/build
+.PHONY : eq_ext/fast
+
+#=============================================================================
+# Target rules for targets named eq_ind
+
+# Build rule for target.
+eq_ind: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 eq_ind
+.PHONY : eq_ind
+
+# fast build rule for target.
+eq_ind/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/build
+.PHONY : eq_ind/fast
+
+#=============================================================================
+# Target rules for targets named lt_normal
+
+# Build rule for target.
+lt_normal: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lt_normal
+.PHONY : lt_normal
+
+# fast build rule for target.
+lt_normal/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/build
+.PHONY : lt_normal/fast
+
+#=============================================================================
+# Target rules for targets named lt_ext
+
+# Build rule for target.
+lt_ext: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lt_ext
+.PHONY : lt_ext
+
+# fast build rule for target.
+lt_ext/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/build
+.PHONY : lt_ext/fast
+
+#=============================================================================
+# Target rules for targets named lt_ind
+
+# Build rule for target.
+lt_ind: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lt_ind
+.PHONY : lt_ind
+
+# fast build rule for target.
+lt_ind/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/build
+.PHONY : lt_ind/fast
+
+#=============================================================================
+# Target rules for targets named leq_normal
+
+# Build rule for target.
+leq_normal: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 leq_normal
+.PHONY : leq_normal
+
+# fast build rule for target.
+leq_normal/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/build
+.PHONY : leq_normal/fast
+
+#=============================================================================
+# Target rules for targets named leq_ext
+
+# Build rule for target.
+leq_ext: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 leq_ext
+.PHONY : leq_ext
+
+# fast build rule for target.
+leq_ext/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/build
+.PHONY : leq_ext/fast
+
+#=============================================================================
+# Target rules for targets named leq_ind
+
+# Build rule for target.
+leq_ind: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 leq_ind
+.PHONY : leq_ind
+
+# fast build rule for target.
+leq_ind/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/build
+.PHONY : leq_ind/fast
+
 HDB_comparison_library/comp_lib/comparator.o: HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.o
 
@@ -163,6 +280,15 @@ HDB_comparison_library/comp_lib/comparator.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.o
 
 HDB_comparison_library/comp_lib/comparator.i: HDB_comparison_library/comp_lib/comparator.cpp.i
@@ -173,6 +299,15 @@ HDB_comparison_library/comp_lib/comparator.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.i
 
 HDB_comparison_library/comp_lib/comparator.s: HDB_comparison_library/comp_lib/comparator.cpp.s
@@ -183,6 +318,15 @@ HDB_comparison_library/comp_lib/comparator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/comparator.cpp.s
 
 HDB_comparison_library/comp_lib/tools.o: HDB_comparison_library/comp_lib/tools.cpp.o
@@ -193,6 +337,15 @@ HDB_comparison_library/comp_lib/tools.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.o
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.o
 
 HDB_comparison_library/comp_lib/tools.i: HDB_comparison_library/comp_lib/tools.cpp.i
@@ -203,6 +356,15 @@ HDB_comparison_library/comp_lib/tools.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.i
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.i
 
 HDB_comparison_library/comp_lib/tools.s: HDB_comparison_library/comp_lib/tools.cpp.s
@@ -213,6 +375,15 @@ HDB_comparison_library/comp_lib/tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.s
 
 src/construct_hedb.o: src/construct_hedb.cpp.o
@@ -239,6 +410,150 @@ src/construct_hedb.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/construct_hedb.cpp.s
 .PHONY : src/construct_hedb.cpp.s
 
+src/eq_ext.o: src/eq_ext.cpp.o
+.PHONY : src/eq_ext.o
+
+# target to build an object file
+src/eq_ext.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/src/eq_ext.cpp.o
+.PHONY : src/eq_ext.cpp.o
+
+src/eq_ext.i: src/eq_ext.cpp.i
+.PHONY : src/eq_ext.i
+
+# target to preprocess a source file
+src/eq_ext.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/src/eq_ext.cpp.i
+.PHONY : src/eq_ext.cpp.i
+
+src/eq_ext.s: src/eq_ext.cpp.s
+.PHONY : src/eq_ext.s
+
+# target to generate assembly for a file
+src/eq_ext.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/src/eq_ext.cpp.s
+.PHONY : src/eq_ext.cpp.s
+
+src/eq_ind.o: src/eq_ind.cpp.o
+.PHONY : src/eq_ind.o
+
+# target to build an object file
+src/eq_ind.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/src/eq_ind.cpp.o
+.PHONY : src/eq_ind.cpp.o
+
+src/eq_ind.i: src/eq_ind.cpp.i
+.PHONY : src/eq_ind.i
+
+# target to preprocess a source file
+src/eq_ind.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/src/eq_ind.cpp.i
+.PHONY : src/eq_ind.cpp.i
+
+src/eq_ind.s: src/eq_ind.cpp.s
+.PHONY : src/eq_ind.s
+
+# target to generate assembly for a file
+src/eq_ind.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/src/eq_ind.cpp.s
+.PHONY : src/eq_ind.cpp.s
+
+src/eq_normal.o: src/eq_normal.cpp.o
+.PHONY : src/eq_normal.o
+
+# target to build an object file
+src/eq_normal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/src/eq_normal.cpp.o
+.PHONY : src/eq_normal.cpp.o
+
+src/eq_normal.i: src/eq_normal.cpp.i
+.PHONY : src/eq_normal.i
+
+# target to preprocess a source file
+src/eq_normal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/src/eq_normal.cpp.i
+.PHONY : src/eq_normal.cpp.i
+
+src/eq_normal.s: src/eq_normal.cpp.s
+.PHONY : src/eq_normal.s
+
+# target to generate assembly for a file
+src/eq_normal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/src/eq_normal.cpp.s
+.PHONY : src/eq_normal.cpp.s
+
+src/leq_ext.o: src/leq_ext.cpp.o
+.PHONY : src/leq_ext.o
+
+# target to build an object file
+src/leq_ext.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/src/leq_ext.cpp.o
+.PHONY : src/leq_ext.cpp.o
+
+src/leq_ext.i: src/leq_ext.cpp.i
+.PHONY : src/leq_ext.i
+
+# target to preprocess a source file
+src/leq_ext.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/src/leq_ext.cpp.i
+.PHONY : src/leq_ext.cpp.i
+
+src/leq_ext.s: src/leq_ext.cpp.s
+.PHONY : src/leq_ext.s
+
+# target to generate assembly for a file
+src/leq_ext.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/src/leq_ext.cpp.s
+.PHONY : src/leq_ext.cpp.s
+
+src/leq_ind.o: src/leq_ind.cpp.o
+.PHONY : src/leq_ind.o
+
+# target to build an object file
+src/leq_ind.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/src/leq_ind.cpp.o
+.PHONY : src/leq_ind.cpp.o
+
+src/leq_ind.i: src/leq_ind.cpp.i
+.PHONY : src/leq_ind.i
+
+# target to preprocess a source file
+src/leq_ind.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/src/leq_ind.cpp.i
+.PHONY : src/leq_ind.cpp.i
+
+src/leq_ind.s: src/leq_ind.cpp.s
+.PHONY : src/leq_ind.s
+
+# target to generate assembly for a file
+src/leq_ind.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/src/leq_ind.cpp.s
+.PHONY : src/leq_ind.cpp.s
+
+src/leq_normal.o: src/leq_normal.cpp.o
+.PHONY : src/leq_normal.o
+
+# target to build an object file
+src/leq_normal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/src/leq_normal.cpp.o
+.PHONY : src/leq_normal.cpp.o
+
+src/leq_normal.i: src/leq_normal.cpp.i
+.PHONY : src/leq_normal.i
+
+# target to preprocess a source file
+src/leq_normal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/src/leq_normal.cpp.i
+.PHONY : src/leq_normal.cpp.i
+
+src/leq_normal.s: src/leq_normal.cpp.s
+.PHONY : src/leq_normal.s
+
+# target to generate assembly for a file
+src/leq_normal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/src/leq_normal.cpp.s
+.PHONY : src/leq_normal.cpp.s
+
 src/load_and_query_hedb.o: src/load_and_query_hedb.cpp.o
 .PHONY : src/load_and_query_hedb.o
 
@@ -262,6 +577,78 @@ src/load_and_query_hedb.s: src/load_and_query_hedb.cpp.s
 src/load_and_query_hedb.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_and_query_hedb.cpp.s
 .PHONY : src/load_and_query_hedb.cpp.s
+
+src/lt_ext.o: src/lt_ext.cpp.o
+.PHONY : src/lt_ext.o
+
+# target to build an object file
+src/lt_ext.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/src/lt_ext.cpp.o
+.PHONY : src/lt_ext.cpp.o
+
+src/lt_ext.i: src/lt_ext.cpp.i
+.PHONY : src/lt_ext.i
+
+# target to preprocess a source file
+src/lt_ext.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/src/lt_ext.cpp.i
+.PHONY : src/lt_ext.cpp.i
+
+src/lt_ext.s: src/lt_ext.cpp.s
+.PHONY : src/lt_ext.s
+
+# target to generate assembly for a file
+src/lt_ext.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/src/lt_ext.cpp.s
+.PHONY : src/lt_ext.cpp.s
+
+src/lt_ind.o: src/lt_ind.cpp.o
+.PHONY : src/lt_ind.o
+
+# target to build an object file
+src/lt_ind.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/src/lt_ind.cpp.o
+.PHONY : src/lt_ind.cpp.o
+
+src/lt_ind.i: src/lt_ind.cpp.i
+.PHONY : src/lt_ind.i
+
+# target to preprocess a source file
+src/lt_ind.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/src/lt_ind.cpp.i
+.PHONY : src/lt_ind.cpp.i
+
+src/lt_ind.s: src/lt_ind.cpp.s
+.PHONY : src/lt_ind.s
+
+# target to generate assembly for a file
+src/lt_ind.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/src/lt_ind.cpp.s
+.PHONY : src/lt_ind.cpp.s
+
+src/lt_normal.o: src/lt_normal.cpp.o
+.PHONY : src/lt_normal.o
+
+# target to build an object file
+src/lt_normal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/src/lt_normal.cpp.o
+.PHONY : src/lt_normal.cpp.o
+
+src/lt_normal.i: src/lt_normal.cpp.i
+.PHONY : src/lt_normal.i
+
+# target to preprocess a source file
+src/lt_normal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/src/lt_normal.cpp.i
+.PHONY : src/lt_normal.cpp.i
+
+src/lt_normal.s: src/lt_normal.cpp.s
+.PHONY : src/lt_normal.s
+
+# target to generate assembly for a file
+src/lt_normal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/src/lt_normal.cpp.s
+.PHONY : src/lt_normal.cpp.s
 
 src/nslots_test.o: src/nslots_test.cpp.o
 .PHONY : src/nslots_test.o
@@ -295,6 +682,15 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... eq_ext"
+	@echo "... eq_ind"
+	@echo "... eq_normal"
+	@echo "... leq_ext"
+	@echo "... leq_ind"
+	@echo "... leq_normal"
+	@echo "... lt_ext"
+	@echo "... lt_ind"
+	@echo "... lt_normal"
 	@echo "... nslots"
 	@echo "... query"
 	@echo "... save"
@@ -307,9 +703,36 @@ help:
 	@echo "... src/construct_hedb.o"
 	@echo "... src/construct_hedb.i"
 	@echo "... src/construct_hedb.s"
+	@echo "... src/eq_ext.o"
+	@echo "... src/eq_ext.i"
+	@echo "... src/eq_ext.s"
+	@echo "... src/eq_ind.o"
+	@echo "... src/eq_ind.i"
+	@echo "... src/eq_ind.s"
+	@echo "... src/eq_normal.o"
+	@echo "... src/eq_normal.i"
+	@echo "... src/eq_normal.s"
+	@echo "... src/leq_ext.o"
+	@echo "... src/leq_ext.i"
+	@echo "... src/leq_ext.s"
+	@echo "... src/leq_ind.o"
+	@echo "... src/leq_ind.i"
+	@echo "... src/leq_ind.s"
+	@echo "... src/leq_normal.o"
+	@echo "... src/leq_normal.i"
+	@echo "... src/leq_normal.s"
 	@echo "... src/load_and_query_hedb.o"
 	@echo "... src/load_and_query_hedb.i"
 	@echo "... src/load_and_query_hedb.s"
+	@echo "... src/lt_ext.o"
+	@echo "... src/lt_ext.i"
+	@echo "... src/lt_ext.s"
+	@echo "... src/lt_ind.o"
+	@echo "... src/lt_ind.i"
+	@echo "... src/lt_ind.s"
+	@echo "... src/lt_normal.o"
+	@echo "... src/lt_normal.i"
+	@echo "... src/lt_normal.s"
 	@echo "... src/nslots_test.o"
 	@echo "... src/nslots_test.i"
 	@echo "... src/nslots_test.s"

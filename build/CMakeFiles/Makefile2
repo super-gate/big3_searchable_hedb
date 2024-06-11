@@ -66,6 +66,15 @@ CMAKE_BINARY_DIR = /home/smhan/Documents/big3_searchable_hedb/build
 all: CMakeFiles/nslots.dir/all
 all: CMakeFiles/save.dir/all
 all: CMakeFiles/query.dir/all
+all: CMakeFiles/eq_normal.dir/all
+all: CMakeFiles/eq_ext.dir/all
+all: CMakeFiles/eq_ind.dir/all
+all: CMakeFiles/lt_normal.dir/all
+all: CMakeFiles/lt_ext.dir/all
+all: CMakeFiles/lt_ind.dir/all
+all: CMakeFiles/leq_normal.dir/all
+all: CMakeFiles/leq_ext.dir/all
+all: CMakeFiles/leq_ind.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -76,6 +85,15 @@ preinstall:
 clean: CMakeFiles/nslots.dir/clean
 clean: CMakeFiles/save.dir/clean
 clean: CMakeFiles/query.dir/clean
+clean: CMakeFiles/eq_normal.dir/clean
+clean: CMakeFiles/eq_ext.dir/clean
+clean: CMakeFiles/eq_ind.dir/clean
+clean: CMakeFiles/lt_normal.dir/clean
+clean: CMakeFiles/lt_ext.dir/clean
+clean: CMakeFiles/lt_ind.dir/clean
+clean: CMakeFiles/leq_normal.dir/clean
+clean: CMakeFiles/leq_ext.dir/clean
+clean: CMakeFiles/leq_ind.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -85,7 +103,7 @@ clean: CMakeFiles/query.dir/clean
 CMakeFiles/nslots.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=1,2,3,4 "Built target nslots"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=37,38,39,40 "Built target nslots"
 .PHONY : CMakeFiles/nslots.dir/all
 
 # Build rule for subdir invocation for target.
@@ -111,7 +129,7 @@ CMakeFiles/nslots.dir/clean:
 CMakeFiles/save.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=9,10,11,12 "Built target save"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=45,46,47,48 "Built target save"
 .PHONY : CMakeFiles/save.dir/all
 
 # Build rule for subdir invocation for target.
@@ -137,7 +155,7 @@ CMakeFiles/save.dir/clean:
 CMakeFiles/query.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=5,6,7,8 "Built target query"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=41,42,43,44 "Built target query"
 .PHONY : CMakeFiles/query.dir/all
 
 # Build rule for subdir invocation for target.
@@ -155,6 +173,240 @@ query: CMakeFiles/query.dir/rule
 CMakeFiles/query.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/clean
 .PHONY : CMakeFiles/query.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/eq_normal.dir
+
+# All Build rule for target.
+CMakeFiles/eq_normal.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=9,10,11,12 "Built target eq_normal"
+.PHONY : CMakeFiles/eq_normal.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/eq_normal.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/eq_normal.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/eq_normal.dir/rule
+
+# Convenience name for target.
+eq_normal: CMakeFiles/eq_normal.dir/rule
+.PHONY : eq_normal
+
+# clean rule for target.
+CMakeFiles/eq_normal.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_normal.dir/build.make CMakeFiles/eq_normal.dir/clean
+.PHONY : CMakeFiles/eq_normal.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/eq_ext.dir
+
+# All Build rule for target.
+CMakeFiles/eq_ext.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=1,2,3,4 "Built target eq_ext"
+.PHONY : CMakeFiles/eq_ext.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/eq_ext.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/eq_ext.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/eq_ext.dir/rule
+
+# Convenience name for target.
+eq_ext: CMakeFiles/eq_ext.dir/rule
+.PHONY : eq_ext
+
+# clean rule for target.
+CMakeFiles/eq_ext.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ext.dir/build.make CMakeFiles/eq_ext.dir/clean
+.PHONY : CMakeFiles/eq_ext.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/eq_ind.dir
+
+# All Build rule for target.
+CMakeFiles/eq_ind.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=5,6,7,8 "Built target eq_ind"
+.PHONY : CMakeFiles/eq_ind.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/eq_ind.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/eq_ind.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/eq_ind.dir/rule
+
+# Convenience name for target.
+eq_ind: CMakeFiles/eq_ind.dir/rule
+.PHONY : eq_ind
+
+# clean rule for target.
+CMakeFiles/eq_ind.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eq_ind.dir/build.make CMakeFiles/eq_ind.dir/clean
+.PHONY : CMakeFiles/eq_ind.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/lt_normal.dir
+
+# All Build rule for target.
+CMakeFiles/lt_normal.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=33,34,35,36 "Built target lt_normal"
+.PHONY : CMakeFiles/lt_normal.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/lt_normal.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/lt_normal.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/lt_normal.dir/rule
+
+# Convenience name for target.
+lt_normal: CMakeFiles/lt_normal.dir/rule
+.PHONY : lt_normal
+
+# clean rule for target.
+CMakeFiles/lt_normal.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_normal.dir/build.make CMakeFiles/lt_normal.dir/clean
+.PHONY : CMakeFiles/lt_normal.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/lt_ext.dir
+
+# All Build rule for target.
+CMakeFiles/lt_ext.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=25,26,27,28 "Built target lt_ext"
+.PHONY : CMakeFiles/lt_ext.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/lt_ext.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/lt_ext.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/lt_ext.dir/rule
+
+# Convenience name for target.
+lt_ext: CMakeFiles/lt_ext.dir/rule
+.PHONY : lt_ext
+
+# clean rule for target.
+CMakeFiles/lt_ext.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ext.dir/build.make CMakeFiles/lt_ext.dir/clean
+.PHONY : CMakeFiles/lt_ext.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/lt_ind.dir
+
+# All Build rule for target.
+CMakeFiles/lt_ind.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=29,30,31,32 "Built target lt_ind"
+.PHONY : CMakeFiles/lt_ind.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/lt_ind.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/lt_ind.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/lt_ind.dir/rule
+
+# Convenience name for target.
+lt_ind: CMakeFiles/lt_ind.dir/rule
+.PHONY : lt_ind
+
+# clean rule for target.
+CMakeFiles/lt_ind.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lt_ind.dir/build.make CMakeFiles/lt_ind.dir/clean
+.PHONY : CMakeFiles/lt_ind.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/leq_normal.dir
+
+# All Build rule for target.
+CMakeFiles/leq_normal.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=21,22,23,24 "Built target leq_normal"
+.PHONY : CMakeFiles/leq_normal.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/leq_normal.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/leq_normal.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/leq_normal.dir/rule
+
+# Convenience name for target.
+leq_normal: CMakeFiles/leq_normal.dir/rule
+.PHONY : leq_normal
+
+# clean rule for target.
+CMakeFiles/leq_normal.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_normal.dir/build.make CMakeFiles/leq_normal.dir/clean
+.PHONY : CMakeFiles/leq_normal.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/leq_ext.dir
+
+# All Build rule for target.
+CMakeFiles/leq_ext.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=13,14,15,16 "Built target leq_ext"
+.PHONY : CMakeFiles/leq_ext.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/leq_ext.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/leq_ext.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/leq_ext.dir/rule
+
+# Convenience name for target.
+leq_ext: CMakeFiles/leq_ext.dir/rule
+.PHONY : leq_ext
+
+# clean rule for target.
+CMakeFiles/leq_ext.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ext.dir/build.make CMakeFiles/leq_ext.dir/clean
+.PHONY : CMakeFiles/leq_ext.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/leq_ind.dir
+
+# All Build rule for target.
+CMakeFiles/leq_ind.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=17,18,19,20 "Built target leq_ind"
+.PHONY : CMakeFiles/leq_ind.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/leq_ind.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/leq_ind.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles 0
+.PHONY : CMakeFiles/leq_ind.dir/rule
+
+# Convenience name for target.
+leq_ind: CMakeFiles/leq_ind.dir/rule
+.PHONY : leq_ind
+
+# clean rule for target.
+CMakeFiles/leq_ind.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/leq_ind.dir/build.make CMakeFiles/leq_ind.dir/clean
+.PHONY : CMakeFiles/leq_ind.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

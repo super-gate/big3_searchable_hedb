@@ -564,6 +564,7 @@ namespace HDB_supergate_server_{
             extracted_UIDs.push_back(UID_extract);
         }
         
+        cout << "number of ciphertexts: " << extracted_UIDs.size() << endl;
         for (auto& ctxt: extracted_UIDs)
         {
             cout << "For each ciphertext..." << endl;
