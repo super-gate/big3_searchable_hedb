@@ -62,6 +62,7 @@ namespace HDB_supergate_user_{
         int8_t loadSecKey(std::string);
         void loadRest(std::string, HDB_supergate_::BGV_param param);
         int8_t loadEncryptionInfo(HDB_supergate_::BGV_param);
+        void getCSVHeaders(std::string path, std::vector<std::string>& headers);
 
         void DestroyKeys();
         void ClearInfo();

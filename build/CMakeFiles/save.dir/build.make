@@ -97,32 +97,32 @@ CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.cpp -o CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 
-CMakeFiles/save.dir/src/save_test.cpp.o: CMakeFiles/save.dir/flags.make
-CMakeFiles/save.dir/src/save_test.cpp.o: /home/smhan/Documents/big3_searchable_hedb/src/save_test.cpp
-CMakeFiles/save.dir/src/save_test.cpp.o: CMakeFiles/save.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/save.dir/src/save_test.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/save.dir/src/save_test.cpp.o -MF CMakeFiles/save.dir/src/save_test.cpp.o.d -o CMakeFiles/save.dir/src/save_test.cpp.o -c /home/smhan/Documents/big3_searchable_hedb/src/save_test.cpp
+CMakeFiles/save.dir/src/construct_hedb.cpp.o: CMakeFiles/save.dir/flags.make
+CMakeFiles/save.dir/src/construct_hedb.cpp.o: /home/smhan/Documents/big3_searchable_hedb/src/construct_hedb.cpp
+CMakeFiles/save.dir/src/construct_hedb.cpp.o: CMakeFiles/save.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/save.dir/src/construct_hedb.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/save.dir/src/construct_hedb.cpp.o -MF CMakeFiles/save.dir/src/construct_hedb.cpp.o.d -o CMakeFiles/save.dir/src/construct_hedb.cpp.o -c /home/smhan/Documents/big3_searchable_hedb/src/construct_hedb.cpp
 
-CMakeFiles/save.dir/src/save_test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/save.dir/src/save_test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smhan/Documents/big3_searchable_hedb/src/save_test.cpp > CMakeFiles/save.dir/src/save_test.cpp.i
+CMakeFiles/save.dir/src/construct_hedb.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/save.dir/src/construct_hedb.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smhan/Documents/big3_searchable_hedb/src/construct_hedb.cpp > CMakeFiles/save.dir/src/construct_hedb.cpp.i
 
-CMakeFiles/save.dir/src/save_test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/save.dir/src/save_test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smhan/Documents/big3_searchable_hedb/src/save_test.cpp -o CMakeFiles/save.dir/src/save_test.cpp.s
+CMakeFiles/save.dir/src/construct_hedb.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/save.dir/src/construct_hedb.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smhan/Documents/big3_searchable_hedb/src/construct_hedb.cpp -o CMakeFiles/save.dir/src/construct_hedb.cpp.s
 
 # Object files for target save
 save_OBJECTS = \
 "CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.o" \
 "CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.o" \
-"CMakeFiles/save.dir/src/save_test.cpp.o"
+"CMakeFiles/save.dir/src/construct_hedb.cpp.o"
 
 # External object files for target save
 save_EXTERNAL_OBJECTS =
 
 /home/smhan/Documents/big3_searchable_hedb/bin/save: CMakeFiles/save.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 /home/smhan/Documents/big3_searchable_hedb/bin/save: CMakeFiles/save.dir/HDB_comparison_library/comp_lib/tools.cpp.o
-/home/smhan/Documents/big3_searchable_hedb/bin/save: CMakeFiles/save.dir/src/save_test.cpp.o
+/home/smhan/Documents/big3_searchable_hedb/bin/save: CMakeFiles/save.dir/src/construct_hedb.cpp.o
 /home/smhan/Documents/big3_searchable_hedb/bin/save: CMakeFiles/save.dir/build.make
 /home/smhan/Documents/big3_searchable_hedb/bin/save: /home/smhan/Documents/helib_install/helib_pack/lib/libhelib.a
 /home/smhan/Documents/big3_searchable_hedb/bin/save: /home/smhan/Documents/big3_searchable_hedb/lib_HDB/bin/libHDB_supergate_lib.a

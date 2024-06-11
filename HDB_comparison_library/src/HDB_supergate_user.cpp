@@ -482,6 +482,17 @@ namespace HDB_supergate_user_{
         csvToDB(db, reader);
     }
 
+	void USER::getCSVHeaders(string path, vector<string>& headers)
+	{
+		CSVRange reader(*(new ifstream(path)));
+        for (auto& row: reader)
+        {
+            for (unsigned int i = 0; i < row.size(); ++i)
+                headers.emplace_back(row[i]);
+            break;
+        }
+	}
+
     void USER::csvToDB(Ctxt_mat& db, string path)
     {
         CSVRange reader(*(new ifstream(path)));

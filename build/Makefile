@@ -215,29 +215,53 @@ HDB_comparison_library/comp_lib/tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 .PHONY : HDB_comparison_library/comp_lib/tools.cpp.s
 
-src/load_query_test.o: src/load_query_test.cpp.o
-.PHONY : src/load_query_test.o
+src/construct_hedb.o: src/construct_hedb.cpp.o
+.PHONY : src/construct_hedb.o
 
 # target to build an object file
-src/load_query_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_query_test.cpp.o
-.PHONY : src/load_query_test.cpp.o
+src/construct_hedb.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/construct_hedb.cpp.o
+.PHONY : src/construct_hedb.cpp.o
 
-src/load_query_test.i: src/load_query_test.cpp.i
-.PHONY : src/load_query_test.i
+src/construct_hedb.i: src/construct_hedb.cpp.i
+.PHONY : src/construct_hedb.i
 
 # target to preprocess a source file
-src/load_query_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_query_test.cpp.i
-.PHONY : src/load_query_test.cpp.i
+src/construct_hedb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/construct_hedb.cpp.i
+.PHONY : src/construct_hedb.cpp.i
 
-src/load_query_test.s: src/load_query_test.cpp.s
-.PHONY : src/load_query_test.s
+src/construct_hedb.s: src/construct_hedb.cpp.s
+.PHONY : src/construct_hedb.s
 
 # target to generate assembly for a file
-src/load_query_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_query_test.cpp.s
-.PHONY : src/load_query_test.cpp.s
+src/construct_hedb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/construct_hedb.cpp.s
+.PHONY : src/construct_hedb.cpp.s
+
+src/load_and_query_hedb.o: src/load_and_query_hedb.cpp.o
+.PHONY : src/load_and_query_hedb.o
+
+# target to build an object file
+src/load_and_query_hedb.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o
+.PHONY : src/load_and_query_hedb.cpp.o
+
+src/load_and_query_hedb.i: src/load_and_query_hedb.cpp.i
+.PHONY : src/load_and_query_hedb.i
+
+# target to preprocess a source file
+src/load_and_query_hedb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_and_query_hedb.cpp.i
+.PHONY : src/load_and_query_hedb.cpp.i
+
+src/load_and_query_hedb.s: src/load_and_query_hedb.cpp.s
+.PHONY : src/load_and_query_hedb.s
+
+# target to generate assembly for a file
+src/load_and_query_hedb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/query.dir/build.make CMakeFiles/query.dir/src/load_and_query_hedb.cpp.s
+.PHONY : src/load_and_query_hedb.cpp.s
 
 src/nslots_test.o: src/nslots_test.cpp.o
 .PHONY : src/nslots_test.o
@@ -263,30 +287,6 @@ src/nslots_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nslots.dir/build.make CMakeFiles/nslots.dir/src/nslots_test.cpp.s
 .PHONY : src/nslots_test.cpp.s
 
-src/save_test.o: src/save_test.cpp.o
-.PHONY : src/save_test.o
-
-# target to build an object file
-src/save_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/save_test.cpp.o
-.PHONY : src/save_test.cpp.o
-
-src/save_test.i: src/save_test.cpp.i
-.PHONY : src/save_test.i
-
-# target to preprocess a source file
-src/save_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/save_test.cpp.i
-.PHONY : src/save_test.cpp.i
-
-src/save_test.s: src/save_test.cpp.s
-.PHONY : src/save_test.s
-
-# target to generate assembly for a file
-src/save_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/save.dir/build.make CMakeFiles/save.dir/src/save_test.cpp.s
-.PHONY : src/save_test.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -304,15 +304,15 @@ help:
 	@echo "... HDB_comparison_library/comp_lib/tools.o"
 	@echo "... HDB_comparison_library/comp_lib/tools.i"
 	@echo "... HDB_comparison_library/comp_lib/tools.s"
-	@echo "... src/load_query_test.o"
-	@echo "... src/load_query_test.i"
-	@echo "... src/load_query_test.s"
+	@echo "... src/construct_hedb.o"
+	@echo "... src/construct_hedb.i"
+	@echo "... src/construct_hedb.s"
+	@echo "... src/load_and_query_hedb.o"
+	@echo "... src/load_and_query_hedb.i"
+	@echo "... src/load_and_query_hedb.s"
 	@echo "... src/nslots_test.o"
 	@echo "... src/nslots_test.i"
 	@echo "... src/nslots_test.s"
-	@echo "... src/save_test.o"
-	@echo "... src/save_test.i"
-	@echo "... src/save_test.s"
 .PHONY : help
 
 

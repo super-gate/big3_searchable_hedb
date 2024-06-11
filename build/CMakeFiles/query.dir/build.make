@@ -97,32 +97,32 @@ CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.cpp -o CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.s
 
-CMakeFiles/query.dir/src/load_query_test.cpp.o: CMakeFiles/query.dir/flags.make
-CMakeFiles/query.dir/src/load_query_test.cpp.o: /home/smhan/Documents/big3_searchable_hedb/src/load_query_test.cpp
-CMakeFiles/query.dir/src/load_query_test.cpp.o: CMakeFiles/query.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/query.dir/src/load_query_test.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/query.dir/src/load_query_test.cpp.o -MF CMakeFiles/query.dir/src/load_query_test.cpp.o.d -o CMakeFiles/query.dir/src/load_query_test.cpp.o -c /home/smhan/Documents/big3_searchable_hedb/src/load_query_test.cpp
+CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o: CMakeFiles/query.dir/flags.make
+CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o: /home/smhan/Documents/big3_searchable_hedb/src/load_and_query_hedb.cpp
+CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o: CMakeFiles/query.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smhan/Documents/big3_searchable_hedb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o -MF CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o.d -o CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o -c /home/smhan/Documents/big3_searchable_hedb/src/load_and_query_hedb.cpp
 
-CMakeFiles/query.dir/src/load_query_test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/query.dir/src/load_query_test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smhan/Documents/big3_searchable_hedb/src/load_query_test.cpp > CMakeFiles/query.dir/src/load_query_test.cpp.i
+CMakeFiles/query.dir/src/load_and_query_hedb.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/query.dir/src/load_and_query_hedb.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smhan/Documents/big3_searchable_hedb/src/load_and_query_hedb.cpp > CMakeFiles/query.dir/src/load_and_query_hedb.cpp.i
 
-CMakeFiles/query.dir/src/load_query_test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/query.dir/src/load_query_test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smhan/Documents/big3_searchable_hedb/src/load_query_test.cpp -o CMakeFiles/query.dir/src/load_query_test.cpp.s
+CMakeFiles/query.dir/src/load_and_query_hedb.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/query.dir/src/load_and_query_hedb.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smhan/Documents/big3_searchable_hedb/src/load_and_query_hedb.cpp -o CMakeFiles/query.dir/src/load_and_query_hedb.cpp.s
 
 # Object files for target query
 query_OBJECTS = \
 "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o" \
 "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o" \
-"CMakeFiles/query.dir/src/load_query_test.cpp.o"
+"CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o"
 
 # External object files for target query
 query_EXTERNAL_OBJECTS =
 
 /home/smhan/Documents/big3_searchable_hedb/bin/query: CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o
 /home/smhan/Documents/big3_searchable_hedb/bin/query: CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o
-/home/smhan/Documents/big3_searchable_hedb/bin/query: CMakeFiles/query.dir/src/load_query_test.cpp.o
+/home/smhan/Documents/big3_searchable_hedb/bin/query: CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o
 /home/smhan/Documents/big3_searchable_hedb/bin/query: CMakeFiles/query.dir/build.make
 /home/smhan/Documents/big3_searchable_hedb/bin/query: /home/smhan/Documents/helib_install/helib_pack/lib/libhelib.a
 /home/smhan/Documents/big3_searchable_hedb/bin/query: /home/smhan/Documents/big3_searchable_hedb/lib_HDB/bin/libHDB_supergate_lib.a

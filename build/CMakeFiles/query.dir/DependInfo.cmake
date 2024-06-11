@@ -10,7 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/comparator.cpp" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o" "gcc" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o.d"
   "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.cpp" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o" "gcc" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o.d"
-  "/home/smhan/Documents/big3_searchable_hedb/src/load_query_test.cpp" "CMakeFiles/query.dir/src/load_query_test.cpp.o" "gcc" "CMakeFiles/query.dir/src/load_query_test.cpp.o.d"
+  "/home/smhan/Documents/big3_searchable_hedb/src/load_and_query_hedb.cpp" "CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o" "gcc" "CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o.d"
   )
 
 # Targets to which this target links.

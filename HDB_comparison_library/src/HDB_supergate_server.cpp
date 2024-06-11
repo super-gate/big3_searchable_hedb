@@ -302,6 +302,30 @@ namespace HDB_supergate_server_{
         ClearData();
         return 0;
     }
+
+    // int8_t SERVER::LoadAndProcessQuery(string db_name, BGV_param param, Q_MODE mode, istream& qStream, Ctxt_mat& result)
+    // {
+    //     if (LoadData(db_name, param, mode == IND) == -1) return -1;
+    //     if (verbose) cout << "Querying..." << endl;
+    //     HEQuery query = *(deserializeQuery(qStream));
+    //     cout << query.dest.size() << endl;
+    //     switch(mode)
+    //     {
+    //         case NORMAL:
+    //             Query(query, result);
+    //             break;
+    //         case EXTF:
+    //             QueryExtensionField(query, result);
+    //             break;
+    //         case IND:
+    //             QueryWithIndex(query, result);
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    //     // ClearData();
+    //     return 0;
+    // }
 					
 	void SERVER::Query(HEQuery& q, Ctxt_mat& res)
 	{

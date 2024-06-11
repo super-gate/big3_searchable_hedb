@@ -85,6 +85,7 @@ LINK_DIRECTORIES (${CMAKE_SOURCE_DIR}${CMAKE_SOURCE_DIR}/HDB_comparison_library/
 # TARGET_LINK_LIBRARIES(TS ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 # SET_TARGET_PROPERTIES(TS PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
+
 #Nslots
 SET(nslots ${CMAKE_SOURCE_DIR}/src/nslots_test.cpp)
 ADD_EXECUTABLE(nslots 
@@ -97,7 +98,8 @@ TARGET_LINK_LIBRARIES(nslots ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_li
 SET_TARGET_PROPERTIES(nslots PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #save DB
-SET(save ${CMAKE_SOURCE_DIR}/src/save_test.cpp)
+# SET(save ${CMAKE_SOURCE_DIR}/src/save_test.cpp)
+SET(save ${CMAKE_SOURCE_DIR}/src/construct_hedb.cpp)
 ADD_EXECUTABLE(save 
 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
@@ -108,7 +110,7 @@ TARGET_LINK_LIBRARIES(save ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.
 SET_TARGET_PROPERTIES(save PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #load and Query
-SET(query ${CMAKE_SOURCE_DIR}/src/load_query_test.cpp)
+SET(query ${CMAKE_SOURCE_DIR}/src/load_and_query_hedb.cpp)
 ADD_EXECUTABLE(query 
 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
@@ -117,5 +119,28 @@ ADD_EXECUTABLE(query
 
 TARGET_LINK_LIBRARIES(query ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 SET_TARGET_PROPERTIES(query PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+# foreach(_target
+# eq_normal
+# eq_ext
+# eq_ind
+# lt_normal
+# lt_ext
+# lt_ind
+# leq_normal
+# leq_ext
+# leq_ind
+# )
+# 	SET(_target ${CMAKE_SOURCE_DIR}/src/for_presentation/${_target}.cpp)
+# 	ADD_EXECUTABLE(_target 
+# 			${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
+# 			${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
+# 			${_target} 
+# 			)
+	
+# 	TARGET_LINK_LIBRARIES(_target ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+# 	SET_TARGET_PROPERTIES(_target PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+# endforeach()
+
 
 #cmake -Dhelib_DIR=/home/smhan/Documents/helib_install/helib_pack/share/cmake/helib ..
