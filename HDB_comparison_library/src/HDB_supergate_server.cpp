@@ -406,6 +406,7 @@ namespace HDB_supergate_server_{
 		res.resize(q.dest.size()); // resize result so we have #dest rows
         unsigned long ordP = Comp->m_context.getOrdP();
         unsigned long maxPerSlot = floor(float(ordP) / D);
+        cout << "ordP: " << ordP << ", D: " << D << endl;
         unsigned long reducedCol = ceil(float(Col) / maxPerSlot);
         cout << "mperslot: " << maxPerSlot << " reduced: " << reducedCol << endl;
         for (auto& row: res)

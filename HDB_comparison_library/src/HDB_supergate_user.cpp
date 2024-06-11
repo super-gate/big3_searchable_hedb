@@ -168,7 +168,8 @@ namespace HDB_supergate_user_{
 			}
 			if (mod == exp_len - 1)
 			{
-				cout << "[" << data << "], ";
+				if (data == ZZ(0)) continue;
+				cout << data << ", ";
 				data = ZZ(0);
 			}
 		}
@@ -179,6 +180,7 @@ namespace HDB_supergate_user_{
 		vector<ZZ> data(ord_p/D, ZZ(0));
 		for (unsigned long i = 0; i < nslots; ++i)
 		{
+			unsigned long mod = i % exp_len;
 			for (auto& d: data) d = ZZ(0);
 			vec_ZZ polyRep = decrypted[i].rep;
 			for (long j = 0; j < polyRep.length(); ++j)
@@ -188,13 +190,14 @@ namespace HDB_supergate_user_{
 				elem *= pow(enc_base, exp);
 				data[j/D] += elem;
 			}
-			cout << "[";
-			for (auto & d: data) 
+			if (mod == exp_len - 1)
 			{
-				if (d == ZZ(0)) continue;
-				cout << d << ", ";
+				for (auto & d: data) 
+				{
+					if (d == ZZ(0)) continue;
+					cout << d << ", ";
+				}
 			}
-			cout << "]";
 		}
 	}
 
@@ -215,10 +218,10 @@ namespace HDB_supergate_user_{
         vector<ZZX> decrypted_cipher(nslots);
         ea->decrypt(ctxt, *SecretKey, decrypted_cipher);
 
-		cout << "Enc( ";
+		// cout << "Enc( ";
         if (zzx_packed) printPackedZZXasINT(decrypted_cipher);
 		else printZZXasINT(decrypted_cipher);
-		cout << " ), ";
+		// cout << " ), ";
     };
 
 	void USER::printCtxtVecINT(Ctxt_vec& v, bool zzx_packed)

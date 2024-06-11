@@ -62,13 +62,13 @@ int main(int argc, char* argv[]) {
 	HELIB_NTIMER_START(timer_Context);
     Context* contx = MakeBGVContextPtr(HDB_Param); //TODO: Test Parameters
 	HELIB_NTIMER_STOP(timer_Context);
-    // cout << "Q size: " << contx.logOfProduct(contx.getCtxtPrimes())/log(2.0) << endl;
-    // cout << "Q*P size: " << contx.logOfProduct(contx.fullPrimes())/log(2.0) << endl;
-    // cout << "Security: " << contx.securityLevel() << endl;    
-    // cout<<"///////////////////////////////////"<<endl;
-	// contx.getZMStar().printout();
-	// cout<<endl;
-	// cout<<"/////////////////////////////////////"<<endl;
+    cout << "Q size: " << contx->logOfProduct(contx->getCtxtPrimes())/log(2.0) << endl;
+    cout << "Q*P size: " << contx->logOfProduct(contx->fullPrimes())/log(2.0) << endl;
+    cout << "Security: " << contx->securityLevel() << endl;    
+    cout<<"///////////////////////////////////"<<endl;
+	contx->getZMStar().printout();
+	cout<<endl;
+	cout<<"/////////////////////////////////////"<<endl;
 
 	/*****************************************Storage************************************************/
 	//Create User
