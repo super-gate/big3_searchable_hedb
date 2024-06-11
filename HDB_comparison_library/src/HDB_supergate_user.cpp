@@ -175,28 +175,38 @@ namespace HDB_supergate_user_{
 		}
 	}
 
+	/**
+	 * For every explen, 
+	 * 1. gather all data packed
+	 * 2. both come up with equation and the calculated value
+	 */
 	void USER::printPackedZZXasINT(vector<ZZX> decrypted)
 	{
 		vector<ZZ> data(ord_p/D, ZZ(0));
+		vector<stringstream> datastring(ord_p/D);
 		for (unsigned long i = 0; i < nslots; ++i)
 		{
 			unsigned long mod = i % exp_len;
-			for (auto& d: data) d = ZZ(0);
 			vec_ZZ polyRep = decrypted[i].rep;
 			for (long j = 0; j < polyRep.length(); ++j)
 			{
-				unsigned long exp = j % D;
+				unsigned long exp = (j % D) + (mod * (D-1)); // if D == 3 [0, 1, 2, 0, 1, 2, ...], [3, 4, 5, 3, 4, 5, ...]
 				ZZ elem = polyRep[j];
+				if (elem == ZZ(0)) continue;
+				datastring[j/D] << elem << "*"
 				elem *= pow(enc_base, exp);
 				data[j/D] += elem;
+				datastring[j/D] << enc_base << "^" << exp << " + ";
 			}
 			if (mod == exp_len - 1)
 			{
-				for (auto & d: data) 
+				for (int c = 0; c < data.size(); ++c) 
 				{
-					if (d == ZZ(0)) continue;
-					cout << d << ", ";
+					if (data[c] == ZZ(0)) continue;
+					cout << "[" << datastring[c] << "= " << data[c] << "], ";
 				}
+				for (auto& d: data) d = ZZ(0);
+				for (auto& s: datastring) s.clear();
 			}
 		}
 	}
