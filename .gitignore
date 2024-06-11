@@ -1,4 +1,3 @@
 latex/
 html/
-bin/HEDB/*
-bin/KEY_STORAGE/*
+bin/*
