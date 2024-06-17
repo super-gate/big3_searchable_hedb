@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/smhan/Documents/big3_searchable_hedb/bin/eq_ind"
-  "/home/smhan/Documents/big3_searchable_hedb/bin/eq_ind.pdb"
+  "../bin/eq_ind"
+  "../bin/eq_ind.pdb"
   "CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.o"
   "CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/comparator.cpp.o.d"
   "CMakeFiles/eq_ind.dir/HDB_comparison_library/comp_lib/tools.cpp.o"

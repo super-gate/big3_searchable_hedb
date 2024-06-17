@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/comparator.cpp" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o" "gcc" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o.d"
-  "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.cpp" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o" "gcc" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o.d"
-  "/home/smhan/Documents/big3_searchable_hedb/src/load_and_query_hedb.cpp" "CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o" "gcc" "CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o.d"
+  "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/comp_lib/comparator.cpp" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o" "gcc" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/comparator.cpp.o.d"
+  "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/comp_lib/tools.cpp" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o" "gcc" "CMakeFiles/query.dir/HDB_comparison_library/comp_lib/tools.cpp.o.d"
+  "/root/cis3800/big3_searchable_hedb/src/load_and_query_hedb.cpp" "CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o" "gcc" "CMakeFiles/query.dir/src/load_and_query_hedb.cpp.o.d"
   )
 
 # Targets to which this target links.

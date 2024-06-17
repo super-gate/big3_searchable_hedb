@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/smhan/Documents/big3_searchable_hedb/bin/lt_ext"
-  "/home/smhan/Documents/big3_searchable_hedb/bin/lt_ext.pdb"
+  "../bin/lt_ext"
+  "../bin/lt_ext.pdb"
   "CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.o"
   "CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/comparator.cpp.o.d"
   "CMakeFiles/lt_ext.dir/HDB_comparison_library/comp_lib/tools.cpp.o"

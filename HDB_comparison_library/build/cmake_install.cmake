@@ -1,4 +1,4 @@
-# Install script for directory: /home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library
+# Install script for directory: /root/cis3800/big3_searchable_hedb/HDB_comparison_library
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -42,31 +42,31 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/llvm-objdump")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/bin/libHDB_supergate_lib.a")
+   "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/bin/libHDB_supergate_lib.a")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/bin" TYPE STATIC_LIBRARY FILES "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/build/libHDB_supergate_lib.a")
+  file(INSTALL DESTINATION "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/bin" TYPE STATIC_LIBRARY FILES "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/build/libHDB_supergate_lib.a")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate.hpp;/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate_server.hpp;/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate_user.hpp")
+   "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate.hpp;/root/cis3800/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate_server.hpp;/root/cis3800/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include/HDB_supergate_user.hpp")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include" TYPE FILE FILES
-    "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate.hpp"
-    "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate_server.hpp"
-    "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate_user.hpp"
+  file(INSTALL DESTINATION "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/../lib_HDB/include" TYPE FILE FILES
+    "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate.hpp"
+    "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate_server.hpp"
+    "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/include/HDB_supergate_user.hpp"
     )
 endif()
 
@@ -78,5 +78,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/smhan/Documents/big3_searchable_hedb/HDB_comparison_library/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/root/cis3800/big3_searchable_hedb/HDB_comparison_library/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

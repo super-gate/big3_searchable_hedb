@@ -365,27 +365,33 @@ namespace HDB_supergate_server_{
                 }
             }
 			Ctxt eq_final = ctxt_eq;
-            unsigned long sft = 1;
-            while (sft < exp_len)
-			{
-				Ctxt pos_shift = eq_final;
-				Comp->batch_shift_for_mul(pos_shift, 0, sft);
-				eq_final *= pos_shift;
-				Ctxt neg_shift = eq_final;
-				Comp->batch_shift_for_mul(neg_shift, 0, -sft);
-				eq_final *= neg_shift;
-				sft <<= 1;
-			}
-
+            Ctxt less_final = ctxt_less;
 			if(exp_len != 1)
 			{
 				Comp->shift_and_mul(ctxt_eq, 0);
 				Comp->batch_shift_for_mul(ctxt_eq, 0, -1);
 
-				ctxt_less *= ctxt_eq;
-				Comp->shift_and_add(ctxt_less, 0);
+				// ctxt_less *= ctxt_eq;
+                less_final = ctxt_eq;
+                less_final.multiplyBy(ctxt_less);
+				Comp->shift_and_add(less_final, 0);
 			}
-			Ctxt less_final = ctxt_less;
+            unsigned long sft = 1;
+            while (sft < exp_len)
+			{
+				Ctxt eq_pos_shift = eq_final;
+				Comp->batch_shift_for_mul(eq_pos_shift, 0, sft);
+				eq_final *= eq_pos_shift;
+				Ctxt eq_neg_shift = eq_final;
+				Comp->batch_shift_for_mul(eq_neg_shift, 0, -sft);
+				eq_final *= eq_neg_shift;
+                
+                Ctxt less_pos_shift = less_final;
+				Comp->batch_shift(less_pos_shift, 0, sft);
+				less_final += less_pos_shift;
+				sft <<= 1;
+			}
+			
 			eq_final *= q.Q_type.first;
 			less_final *= q.Q_type.second;
 
@@ -394,6 +400,7 @@ namespace HDB_supergate_server_{
 
 			for (unsigned long j = 0; j < q.dest.size(); ++j)
 			{
+                // Ctxt res_final = less_final;
 				Ctxt res_final = query_final;
 				res_final *= (*Database)[q.dest[j]][i];
 				res[j].emplace_back(res_final);
@@ -454,16 +461,16 @@ namespace HDB_supergate_server_{
             }
 			Ctxt eq_final = ctxt_eq;
             unsigned long sft = 1;
-            while (sft < exp_len)
-			{
-				Ctxt pos_shift = eq_final;
-				Comp->batch_shift_for_mul(pos_shift, 0, sft);
-				eq_final *= pos_shift;
-				Ctxt neg_shift = eq_final;
-				Comp->batch_shift_for_mul(neg_shift, 0, -sft);
-				eq_final *= neg_shift;
-				sft <<= 1;
-			}
+            // while (sft < exp_len)
+			// {
+			// 	Ctxt pos_shift = eq_final;
+			// 	Comp->batch_shift_for_mul(pos_shift, 0, sft);
+			// 	eq_final *= pos_shift;
+			// 	Ctxt neg_shift = eq_final;
+			// 	Comp->batch_shift_for_mul(neg_shift, 0, -sft);
+			// 	eq_final *= neg_shift;
+			// 	sft <<= 1;
+			// }
 
 			if(exp_len != 1)
 			{
@@ -474,6 +481,17 @@ namespace HDB_supergate_server_{
 				Comp->shift_and_add(ctxt_less, 0);
 			}
 			Ctxt less_final = ctxt_less;
+            // Ctxt less_final = Ctxt(*PublicKey);
+            // Comp->compare(less_final, (*Database)[q.source][i], q.query);
+            sft = 1;
+            while (sft < exp_len)
+			{
+				Ctxt pos_shift = less_final;
+				Comp->batch_shift(pos_shift, 0, sft);
+				less_final += pos_shift;
+				sft <<= 1;
+			}
+
 			eq_final *= q.Q_type.first;
 			less_final *= q.Q_type.second;
 
@@ -565,10 +583,10 @@ namespace HDB_supergate_server_{
             extracted_UIDs.push_back(UID_extract);
         }
         
-        cout << "number of ciphertexts: " << extracted_UIDs.size() << endl;
+        // cout << "number of ciphertexts: " << extracted_UIDs.size() << endl;
         for (auto& ctxt: extracted_UIDs)
         {
-            cout << "For each ciphertext..." << endl;
+            // cout << "For each ciphertext..." << endl;
             Ctxt_vec final_res;
             for (uint i = 0; i < max_packed; ++i) 
             {
@@ -648,9 +666,9 @@ namespace HDB_supergate_server_{
                     final_res = DEST_Extract;
                 else
                     for (uint k = 0; k < q.dest.size(); ++k) final_res[k] += DEST_Extract[k];
-                cout << "  capacity: " << final_res[0].bitCapacity() << ", iscorrect: " << final_res[0].isCorrect() << endl;
+                // cout << "  capacity: " << final_res[0].bitCapacity() << ", iscorrect: " << final_res[0].isCorrect() << endl;
                 HELIB_NTIMER_STOP(nslot);
-                helib::printNamedTimer(cout, "nslot");
+                // helib::printNamedTimer(cout, "nslot");
             }
             // helib::printNamedTimer(cout, "nslot");
             

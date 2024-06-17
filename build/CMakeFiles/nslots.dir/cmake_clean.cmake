@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/smhan/Documents/big3_searchable_hedb/bin/nslots"
-  "/home/smhan/Documents/big3_searchable_hedb/bin/nslots.pdb"
+  "../bin/nslots"
+  "../bin/nslots.pdb"
   "CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.o"
   "CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/comparator.cpp.o.d"
   "CMakeFiles/nslots.dir/HDB_comparison_library/comp_lib/tools.cpp.o"
