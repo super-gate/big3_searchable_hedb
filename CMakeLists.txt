@@ -123,7 +123,7 @@ LINK_DIRECTORIES (${CMAKE_SOURCE_DIR}${CMAKE_SOURCE_DIR}/HDB_comparison_library/
 foreach(_target
 eq_normal
 eq_ext
-eq_ind
+# eq_ind
 lt_normal
 lt_ext
 # lt_ind

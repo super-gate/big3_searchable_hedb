@@ -46,7 +46,6 @@ int main(int argc, char* argv[]) {
 	SERVER server(verbose);
 	Ctxt_mat result;
 	server.ProcessQuery(db_filename, HDB_Param, mode, qstream, result);
-	cout << "\n\n" << endl;
 	
 	//send result to user
 	user.printQueryResult(HDB_Param, result, mode);

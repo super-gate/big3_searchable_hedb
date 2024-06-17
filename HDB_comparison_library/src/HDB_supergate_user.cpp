@@ -184,7 +184,7 @@ namespace HDB_supergate_user_{
 	void USER::printPackedZZXasINT(vector<ZZX> decrypted)
 	{
 		vector<ZZ> data(ord_p/D, ZZ(0));
-		vector<stringstream> datastring(ord_p/D);
+		// vector<stringstream> datastring(ord_p/D);
 		// cout << "nslots: " << nslots << ", exp_len: " << exp_len << ", D: " << D << ", enc_base: " << enc_base << ", digit_base: " << digit_base << endl;
 		for (unsigned long i = 0; i < nslots; ++i)
 		{
@@ -196,20 +196,21 @@ namespace HDB_supergate_user_{
 				unsigned long exp = mod * D + (j % D); // if D == 3 [0, 1, 2, 0, 1, 2, ...], [3, 4, 5, 3, 4, 5, ...]
 				ZZ elem = polyRep[j];
 				if (elem == ZZ(0)) continue;
-				datastring[j/D] << elem << "*";
+				// datastring[j/D] << elem << "*";
 				elem *= pow(enc_base, exp);
 				data[j/D] += elem;
-				datastring[j/D] << enc_base << "%" << exp << " + ";
+				// datastring[j/D] << enc_base << "%" << exp << " + ";
 			}
 			if (mod == exp_len - 1)
 			{
 				for (int c = 0; c < data.size(); ++c) 
 				{
 					if (data[c] == ZZ(0)) continue;
-					cout << "[" << datastring[c].str() << "= " << data[c] << "], ";
+					// cout << "[" << datastring[c].str() << "= " << data[c] << "], ";
+					cout << data[c] << ", ";
 				}
 				for (auto& d: data) d = ZZ(0);
-				for (auto& s: datastring) s.str(string());
+				// for (auto& s: datastring) s.str(string());
 			}
 		}
 	}

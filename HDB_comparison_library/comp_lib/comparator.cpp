@@ -112,7 +112,7 @@ map<unsigned long, vector<vector<long>>> fcoefs {
 
 DoubleCRT Comparator::create_shift_mask(double& size, long shift)
 {
-	cout << "Mask for shift " << shift << " is being created" << endl;
+	// cout << "Mask for shift " << shift << " is being created" << endl;
 	// get EncryptedArray
   	const EncryptedArray& ea = m_context.getEA();
 
@@ -180,7 +180,7 @@ void Comparator::create_all_shift_masks()
 
 	    shift <<=1;
 	}
-	cout << "All masks are created" << endl;
+	// cout << "All masks are created" << endl;
 }
 
 void Comparator::compute_poly_params()
@@ -351,7 +351,7 @@ void Comparator::compute_poly_params()
 
 void Comparator::create_poly()
 {
-	cout << "Creating comparison polynomial" << endl;
+	// cout << "Creating comparison polynomial" << endl;
 	// get p
 	unsigned long p = m_context.getP();;
 
@@ -464,7 +464,7 @@ void Comparator::create_poly()
 		}
 	}
 
-	cout << "Comparison polynomial is created" << endl;
+	// cout << "Comparison polynomial is created" << endl;
 }
 
 void Comparator::find_prim_root(ZZ_pE& root) const

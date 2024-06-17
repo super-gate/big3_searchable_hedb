@@ -284,7 +284,7 @@ namespace HDB_supergate_server_{
         if (LoadData(db_name, param, mode == IND) == -1) return -1;
         if (verbose) cout << "Querying..." << endl;
         HEQuery query = *(deserializeQuery(qStream));
-        cout << query.dest.size() << endl;
+        // cout << query.dest.size() << endl;
         switch(mode)
         {
             case NORMAL:
@@ -413,9 +413,9 @@ namespace HDB_supergate_server_{
 		res.resize(q.dest.size()); // resize result so we have #dest rows
         unsigned long ordP = Comp->m_context.getOrdP();
         unsigned long maxPerSlot = floor(float(ordP) / D);
-        cout << "ordP: " << ordP << ", D: " << D << endl;
+        // cout << "ordP: " << ordP << ", D: " << D << endl;
         unsigned long reducedCol = ceil(float(Col) / maxPerSlot);
-        cout << "mperslot: " << maxPerSlot << " reduced: " << reducedCol << endl;
+        // cout << "mperslot: " << maxPerSlot << " reduced: " << reducedCol << endl;
         for (auto& row: res)
             for (uint i = 0; i < reducedCol; ++i) row.emplace_back(*PublicKey);
 		
@@ -461,16 +461,16 @@ namespace HDB_supergate_server_{
             }
 			Ctxt eq_final = ctxt_eq;
             unsigned long sft = 1;
-            // while (sft < exp_len)
-			// {
-			// 	Ctxt pos_shift = eq_final;
-			// 	Comp->batch_shift_for_mul(pos_shift, 0, sft);
-			// 	eq_final *= pos_shift;
-			// 	Ctxt neg_shift = eq_final;
-			// 	Comp->batch_shift_for_mul(neg_shift, 0, -sft);
-			// 	eq_final *= neg_shift;
-			// 	sft <<= 1;
-			// }
+            while (sft < exp_len)
+			{
+				Ctxt pos_shift = eq_final;
+				Comp->batch_shift_for_mul(pos_shift, 0, sft);
+				eq_final *= pos_shift;
+				Ctxt neg_shift = eq_final;
+				Comp->batch_shift_for_mul(neg_shift, 0, -sft);
+				eq_final *= neg_shift;
+				sft <<= 1;
+			}
 
 			if(exp_len != 1)
 			{
@@ -511,7 +511,7 @@ namespace HDB_supergate_server_{
 			}
             HELIB_NTIMER_STOP(timer_ForEachCol);
 		}
-        printNamedTimer(cout, "timer_ForEachCol");
+        // printNamedTimer(cout, "timer_ForEachCol");
 	}
 
 	//can only do EQ query right now
