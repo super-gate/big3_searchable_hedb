@@ -97,17 +97,17 @@ LINK_DIRECTORIES (${CMAKE_SOURCE_DIR}${CMAKE_SOURCE_DIR}/HDB_comparison_library/
 # TARGET_LINK_LIBRARIES(nslots ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
 # SET_TARGET_PROPERTIES(nslots PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# #save DB
-# # SET(save ${CMAKE_SOURCE_DIR}/src/save_test.cpp)
-# SET(save ${CMAKE_SOURCE_DIR}/src/construct_hedb.cpp)
-# ADD_EXECUTABLE(save 
-# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
-# 		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
-# 		${save} 
-# 		)
+#save DB
+# SET(save ${CMAKE_SOURCE_DIR}/src/save_test.cpp)
+SET(save ${CMAKE_SOURCE_DIR}/src/construct_hedb.cpp)
+ADD_EXECUTABLE(save 
+		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/comparator.cpp
+		${CMAKE_SOURCE_DIR}/HDB_comparison_library/comp_lib/tools.cpp
+		${save} 
+		)
 
-# TARGET_LINK_LIBRARIES(save ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
-# SET_TARGET_PROPERTIES(save PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+TARGET_LINK_LIBRARIES(save ${CMAKE_SOURCE_DIR}/lib_HDB/bin/libHDB_supergate_lib.a)
+SET_TARGET_PROPERTIES(save PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # #load and Query
 # SET(query ${CMAKE_SOURCE_DIR}/src/load_and_query_hedb.cpp)
